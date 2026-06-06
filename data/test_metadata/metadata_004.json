@@ -2,13 +2,25 @@
   "query": "List all segment audiences connected to the destination named 'Person: Birthday today', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
   "normalized_query": "List all segment audiences connected to the destination named 'Person: Birthday today', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
   "query_analysis": {
-    "complexity": "simple",
-    "confidence": 1.0,
-    "reason": "The query asks for a single set of attributes (audienceId, name, totalProfiles, createdTime, updatedTime, used in other audience count) related to a specific destination ('Person: Birthday today'). This can be handled by one focused lookup.",
+    "complexity": "complex",
+    "confidence": 0.9,
+    "reason": "The query requires first identifying a specific destination, finding all segment audiences connected to it, retrieving their metadata, and then determining how many other audiences reference each of those audiences.",
     "subqueries": [
       {
-        "query": "List all segment audiences connected to the destination named 'Person: Birthday today', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
-        "purpose": "other"
+        "query": "Find the destination with the name 'Person: Birthday today' to get its identifier.",
+        "purpose": "entity_lookup"
+      },
+      {
+        "query": "Retrieve all segment audiences connected to the destination 'Person: Birthday today'.",
+        "purpose": "relationship_lookup"
+      },
+      {
+        "query": "Get the details (audienceId, name, totalProfiles, createdTime, updatedTime) for the connected segment audiences.",
+        "purpose": "detail_lookup"
+      },
+      {
+        "query": "Get the count of other audiences that use or reference each of these segment audiences.",
+        "purpose": "count_lookup"
       }
     ]
   },
@@ -24,16 +36,17 @@
   "route": {
     "selected": "SQL_PLUS_API",
     "votes": {
-      "SQL_PLUS_API": 0.5223,
-      "SQL_PLUS_API_CHAIN": 0.4777
+      "SQL_PLUS_API": 0.5531,
+      "SQL_PLUS_API_CHAIN": 0.4469
     },
     "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides."
   },
   "domain": {
     "selected": "segment",
     "votes": {
-      "segment": 0.758,
-      "dataset": 0.242
+      "segment": 0.7721,
+      "dataset": 0.1502,
+      "destination": 0.0778
     },
     "reason": "Selected from top retrieved examples and domain votes."
   },
@@ -881,11 +894,30 @@
       "route": "SQL_PLUS_API_CHAIN",
       "domain": "segment",
       "intent": "count",
-      "score": 0.8632,
+      "score": 2.7902,
       "retrieval_sources": [
-        "original_query"
+        "original_query",
+        "subquery_2",
+        "subquery_3",
+        "subquery_4"
       ],
-      "matched_subqueries": [],
+      "matched_subqueries": [
+        {
+          "subquery": "Retrieve all segment audiences connected to the destination 'Person: Birthday today'.",
+          "purpose": "relationship_lookup",
+          "score": 0.6142043471336365
+        },
+        {
+          "subquery": "Get the details (audienceId, name, totalProfiles, createdTime, updatedTime) for the connected segment audiences.",
+          "purpose": "detail_lookup",
+          "score": 0.6517832279205322
+        },
+        {
+          "subquery": "Get the count of other audiences that use or reference each of these segment audiences.",
+          "purpose": "count_lookup",
+          "score": 0.6610914468765259
+        }
+      ],
       "sql_tables": [
         "dim_segment",
         "dim_target",
@@ -910,11 +942,30 @@
       "route": "SQL_PLUS_API",
       "domain": "segment",
       "intent": "list",
-      "score": 0.5065,
+      "score": 2.0305,
       "retrieval_sources": [
-        "original_query"
+        "original_query",
+        "subquery_2",
+        "subquery_3",
+        "subquery_4"
       ],
-      "matched_subqueries": [],
+      "matched_subqueries": [
+        {
+          "subquery": "Retrieve all segment audiences connected to the destination 'Person: Birthday today'.",
+          "purpose": "relationship_lookup",
+          "score": 0.5177266597747803
+        },
+        {
+          "subquery": "Get the details (audienceId, name, totalProfiles, createdTime, updatedTime) for the connected segment audiences.",
+          "purpose": "detail_lookup",
+          "score": 0.4890892803668976
+        },
+        {
+          "subquery": "Get the count of other audiences that use or reference each of these segment audiences.",
+          "purpose": "count_lookup",
+          "score": 0.5171459317207336
+        }
+      ],
       "sql_tables": [
         "dim_segment",
         "dim_target",
@@ -937,11 +988,18 @@
       "route": "SQL_PLUS_API",
       "domain": "dataset",
       "intent": "field_lookup",
-      "score": 0.4373,
+      "score": 0.9376,
       "retrieval_sources": [
-        "original_query"
+        "original_query",
+        "subquery_1"
       ],
-      "matched_subqueries": [],
+      "matched_subqueries": [
+        {
+          "subquery": "Find the destination with the name 'Person: Birthday today' to get its identifier.",
+          "purpose": "entity_lookup",
+          "score": 0.5003159642219543
+        }
+      ],
       "sql_tables": [
         "dim_segment",
         "hkg_br_segment_property"
@@ -957,11 +1015,43 @@
       "gold_api": [
         "GET /data/foundation/catalog/datasets?limit=20&filter=name:SG AND name:non loyalty"
       ]
+    },
+    {
+      "query": "Export a list of all destinations in the b2b-prod sandbox, sorted by most recently modified, including all columns associated with each destination, and include the 'modified' column for validation.",
+      "route": "SQL_PLUS_API",
+      "domain": "destination",
+      "intent": "time_lookup",
+      "score": 0.4856,
+      "retrieval_sources": [
+        "subquery_1"
+      ],
+      "matched_subqueries": [
+        {
+          "subquery": "Find the destination with the name 'Person: Birthday today' to get its identifier.",
+          "purpose": "entity_lookup",
+          "score": 0.48555800318717957
+        }
+      ],
+      "sql_tables": [
+        "dim_target"
+      ],
+      "api_endpoints": [
+        "GET /data/foundation/flowservice/flows"
+      ],
+      "api_params": [
+        "limit",
+        "property",
+        "sort"
+      ],
+      "gold_sql": "SELECT D.targetId AS target_id,\n       D.dataflowName AS dataflow_name,\n       D.name AS target_name,\n       D.description,\n       D.state,\n       D.connectionSpecId AS connection_spec_id,\n       D.createdTime AS created_time,\n       D.updatedTime AS modified,\n       D.interval,\n       D.frequency\nFROM dim_target AS D\nORDER BY D.updatedTime DESC\nLIMIT 50",
+      "gold_api": [
+        "GET /data/foundation/flowservice/flows?limit=50&sort=updatedTime:desc&property=inheritedAttributes.properties.isDestinationFlow==true"
+      ]
     }
   ],
   "tool_budget": {
-    "max_sql_calls": 1,
-    "max_api_calls": 1,
+    "max_sql_calls": 2,
+    "max_api_calls": 3,
     "expected_steps": [
       "sql_query",
       "api_call"

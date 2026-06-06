@@ -1,0 +1,894 @@
+{
+  "query": "List all datasets that use the schema 'Journey Inbound'.",
+  "normalized_query": "List all datasets that use the schema 'Journey Inbound'.",
+  "query_analysis": {
+    "complexity": "simple",
+    "confidence": 0.95,
+    "reason": "The query is a straightforward request to find datasets associated with a specific schema, which can be resolved in a single lookup step.",
+    "subqueries": [
+      {
+        "query": "List all datasets that use the schema 'Journey Inbound'.",
+        "purpose": "other"
+      }
+    ]
+  },
+  "intent": "list",
+  "entities": [
+    "Journey Inbound"
+  ],
+  "filters": {
+    "quoted_entities": [
+      "Journey Inbound"
+    ]
+  },
+  "route": {
+    "selected": "SQL_PLUS_API",
+    "votes": {
+      "SQL_PLUS_API": 0.6132,
+      "SQL_PLUS_API_CHAIN": 0.3868
+    },
+    "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides."
+  },
+  "domain": {
+    "selected": "schema",
+    "votes": {
+      "schema": 0.3868,
+      "journey": 0.3163,
+      "dataset": 0.2969
+    },
+    "reason": "Selected from top retrieved examples and domain votes."
+  },
+  "allowed_tables": {
+    "dim_blueprint": {
+      "kind": "dimension",
+      "domain": "schema",
+      "row_count": 74,
+      "id_columns": [
+        "BLUEPRINTID",
+        "CREATEDCLIENTID",
+        "UPDATEDCLIENTID"
+      ],
+      "columns": [
+        {
+          "name": "BLUEPRINTTYPE",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "EXTENDS",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "UPDATEDCLIENTID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LABELSBLUEPRINT",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "CLASS",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "BLUEPRINTID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "IMMUTABLETAGS",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "TENANT",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ISPROFILEENABLED",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "NAME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ISBEHAVIORTIMESERIESTYPE",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "DESCRIPTION",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ETAG",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "REQUIREDFIELDS",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ISBEHAVIORRECORDTYPE",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "UPDATEDBY",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "CREATEDBY",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "CREATEDCLIENTID",
+          "type": "VARCHAR"
+        }
+      ]
+    },
+    "dim_collection": {
+      "kind": "dimension",
+      "domain": "dataset",
+      "row_count": 37,
+      "id_columns": [
+        "COLLECTIONID",
+        "CREATEDCLIENTID"
+      ],
+      "columns": [
+        {
+          "name": "ISIDENTITYENABLED",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "ROWCOUNT",
+          "type": "BIGINT"
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "STORAGESIZEINBYTES",
+          "type": "BIGINT"
+        },
+        {
+          "name": "ISPROFILEENABLED",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "NAME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "COLLECTIONID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ISSYSTEM",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "STORAGESIZEINMEGABYTES",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "ISTTLSET",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "UPDATEDBY",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "TTLVALUE",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "CREATEDBY",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "CREATEDCLIENTID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LABELSCOLLECTION",
+          "type": "VARCHAR"
+        }
+      ]
+    },
+    "hkg_br_blueprint_collection": {
+      "kind": "bridge",
+      "domain": "dataset",
+      "row_count": 27,
+      "id_columns": [
+        "BLUEPRINTID",
+        "COLLECTIONID"
+      ],
+      "columns": [
+        {
+          "name": "COLLECTIONID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LABELSBLUEPRINT",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "BLUEPRINTID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LABELSCOLLECTION",
+          "type": "VARCHAR"
+        }
+      ]
+    }
+  },
+  "join_candidates": [],
+  "allowed_api_endpoints": [
+    {
+      "endpoint": "GET /data/foundation/catalog/dataSets",
+      "method": "GET",
+      "path": "/data/foundation/catalog/dataSets",
+      "domain": "schema",
+      "param_names": [
+        "filter",
+        "limit",
+        "property"
+      ],
+      "observed_params": {
+        "limit": [
+          "25",
+          "3"
+        ],
+        "property": [
+          "schema.name"
+        ],
+        "filter": [
+          "schemaName==\"WF HEMI Account Attribute Retail Fiserv Schema\""
+        ]
+      },
+      "routes_seen": [
+        "SQL_PLUS_API_CHAIN"
+      ],
+      "source": "gold_examples+openapi",
+      "openapi": {
+        "summary": "Retrieve a list of datasets",
+        "description": "This request lets you retrieve a list of datasets which are the building blocks for data transformation and tracking in Catalog Service.",
+        "operation_id": "listDatasets",
+        "query_params": [
+          {
+            "name": "version",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Filter by Semantic version of the account. Updated when the object is modified."
+          },
+          {
+            "name": "created",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "type": null,
+            "description": "Filter by the Unix timestamp (in milliseconds) when this object was persisted."
+          },
+          {
+            "name": "updated",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "type": null,
+            "description": "Filter by the Unix timestamp (in milliseconds) for the time of last modification."
+          },
+          {
+            "name": "createdClient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Filter by the ID of the IMS client that created this object."
+          },
+          {
+            "name": "createdUser",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Filter by the ID of the user who created this object."
+          },
+          {
+            "name": "updatedUser",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Filter by the ID of the user who changed this object."
+          },
+          {
+            "name": "name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Filter on the name of the dataset."
+          },
+          {
+            "name": "description",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Filter on the description of the dataset."
+          },
+          {
+            "name": "enableErrorDiagnostics",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "type": null,
+            "description": "A field that provides the ability to opt in to generating diagnostic files for the errors while ingesting data."
+          },
+          {
+            "name": "orderBy",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Sort parameter and direction for sorting the response. Ex. orderBy=asc:created,updated. This was previously called sort."
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "type": null,
+            "description": "Limit response to a specified positive number of objects. The maximum number of objects that can be returned is 100."
+          },
+          {
+            "name": "start",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "type": null,
+            "description": "Specifies the offset of the pages of results. To get the first page of results, set the value to `start=0`."
+          },
+          {
+            "name": "property",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Regex used to filter objects in the response."
+          },
+          {
+            "name": "properties",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "A comma separated allowlist of top-level object properties to be returned in the response. Used to cut down the number of properties and amount of data returned in the response bodies."
+          },
+          {
+            "name": "tags",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Filter response by the specified tags."
+          }
+        ],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer\". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The name of the sandbox in which the operation will take place. See the [sandboxes overview documentation](https://adobe.com/go/sandbox-overview-en) for more information."
+          },
+          {
+            "name": "accept-encoding",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Used to signal the intent to consume compressed response bodies. Supported encodings: gzip."
+          }
+        ],
+        "query_param_names": [
+          "created",
+          "createdClient",
+          "createdUser",
+          "description",
+          "enableErrorDiagnostics",
+          "limit",
+          "name",
+          "orderBy",
+          "properties",
+          "property",
+          "start",
+          "tags",
+          "updated",
+          "updatedUser",
+          "version"
+        ],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "accept-encoding",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [],
+          "schema": {}
+        },
+        "response_codes": [
+          "200",
+          "400",
+          "403",
+          "404",
+          "500",
+          "default"
+        ],
+        "source_file": "catalog.yaml"
+      }
+    },
+    {
+      "endpoint": "GET /data/foundation/schemaregistry/global/behaviors",
+      "method": "GET",
+      "path": "/data/foundation/schemaregistry/global/behaviors",
+      "domain": "schema",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "List behaviors",
+        "description": ">**NOTE**: For more information on using this operation, see the [behaviors endpoint guide](https://experienceleague.adobe.com/docs/experience-platform/xdm/api/behaviors.html) on Experience League.",
+        "operation_id": "listBehaviors",
+        "query_params": [],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {},
+            "type": "string",
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {},
+            "type": "string",
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {},
+            "type": "string",
+            "description": "The IMS Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {},
+            "type": "string",
+            "description": "The name of the sandbox in which the operation will take place. See the [sandboxes overview](https://adobe.com/go/sandbox-overview-en) for more information."
+          },
+          {
+            "name": "Accept",
+            "required": true,
+            "schema": {},
+            "type": "string",
+            "description": "The desired response format. For listing calls, the following `Accept` header values are permitted: \n<table><thead><tr><th>Accept</th><th>Description</th></tr></thead><tbody><tr><td><code>application/vnd.adobe.xed-id+json</code></td><td>Returns a short summary of each resource, generally the preferred header for listing.</td></tr><tr><td><code>application/vnd.adobe.xed+json</code></td><td>Returns full JSON for each resource, with the original <code>$ref</code> and <code>allOf</code> attributes included.</td></tr></tbody></table>"
+          }
+        ],
+        "query_param_names": [],
+        "path_param_names": [],
+        "header_param_names": [
+          "Accept",
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Accept",
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [],
+          "schema": {}
+        },
+        "response_codes": [
+          "200",
+          "400"
+        ],
+        "source_file": "schema-registry.yaml"
+      }
+    },
+    {
+      "endpoint": "GET /data/foundation/schemaregistry/stats",
+      "method": "GET",
+      "path": "/data/foundation/schemaregistry/stats",
+      "domain": "schema",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "Retrieve your tenant ID and other usage information related to the Schema Registry.",
+        "description": "",
+        "operation_id": "retrieveStats",
+        "query_params": [],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {},
+            "type": "string",
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {},
+            "type": "string",
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {},
+            "type": "string",
+            "description": "The IMS Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {},
+            "type": "string",
+            "description": "The name of the sandbox in which the operation will take place. See the [sandboxes overview](https://adobe.com/go/sandbox-overview-en) for more information."
+          }
+        ],
+        "query_param_names": [],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [],
+          "schema": {}
+        },
+        "response_codes": [
+          "200",
+          "400"
+        ],
+        "source_file": "schema-registry.yaml"
+      }
+    },
+    {
+      "endpoint": "GET /data/foundation/schemaregistry/tenant/schemas",
+      "method": "GET",
+      "path": "/data/foundation/schemaregistry/tenant/schemas",
+      "domain": "schema",
+      "param_names": [
+        "filter",
+        "limit"
+      ],
+      "observed_params": {
+        "limit": [
+          "25"
+        ],
+        "filter": [
+          "class==ExperienceEvent;isProfileEnabled==true"
+        ]
+      },
+      "routes_seen": [
+        "SQL_PLUS_API"
+      ],
+      "source": "gold_examples",
+      "openapi": null
+    },
+    {
+      "endpoint": "GET /data/foundation/schemaregistry/tenant/unions",
+      "method": "GET",
+      "path": "/data/foundation/schemaregistry/tenant/unions",
+      "domain": "schema",
+      "param_names": [
+        "limit",
+        "orderby",
+        "property",
+        "start"
+      ],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "List union schemas",
+        "description": ">**NOTE**: For more information on using this operation, see the [unions endpoint guide](https://experienceleague.adobe.com/docs/experience-platform/xdm/api/unions.html) on Experience League.",
+        "operation_id": "listUnionSchemas",
+        "query_params": [
+          {
+            "name": "property",
+            "required": false,
+            "schema": {},
+            "type": "string",
+            "description": "A comma-separated list of top-level object properties to be returned in the response. For example, `property=meta:intendedToExtend==https://ns.adobe.com/xdm/context/profile` returns only field groups that are compatible with the XDM Individual Profile class."
+          },
+          {
+            "name": "orderby",
+            "required": false,
+            "schema": {},
+            "type": "string",
+            "description": "Sort the listed resources by specified fields. For example `orderby=title` sorts results by title in ascending order (A-Z). Adding a `-` before the field name (`orderby=-title`) sorts items in descending order (Z-A). Multiple fields can also be included to denote primary and secondary sort orders (for example, `orderby=title,description`)."
+          },
+          {
+            "name": "start",
+            "required": false,
+            "schema": {},
+            "type": "string",
+            "description": "When used in conjunction with an `orderby` parameter, `start` specifies where the paginated list of items should begin. This parameter cannot be used without an `orderby` parameter present.\n\nTypically, this parameter is omitted in order to obtain the first page of results. After that, `start` should be set to the maximum value of the primary sort property of the `orderby` field received in the previous page. The API response then returns entries beginning with those that have a primary sort property from `orderby` strictly greater than (for ascending) or strictly less than (for descending) the specified value.\n\nFor example, if the `orderby` parameter is set to `orderby=name,firstname`, the `start` parameter would contain a value for the `name` property. In this case, if you wanted to show the next 20 entries of a resource immediately following the name \"Miller\", you would use: `?orderby=name,firstname&start=Miller&limit=20`."
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {},
+            "type": "number",
+            "description": "When used in conjunction with an `orderby` parameter, `limit` restricts the maximum number of items that should be returned for a given request. This parameter cannot be used without an `orderby` parameter present.\n\nThe `limit` parameter specifies a positive integer (between `0` and `500`) as a *hint* as to the maximum number of items that should be returned. For example, `limit=5` returns only five resources in the list. However, this value is not strictly honored. The actual response size may be smaller or larger as constrained by the need to provide the reliable operation of the `start` parameter, if one is provided."
+          }
+        ],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Accept",
+            "required": true,
+            "schema": {},
+            "type": "string",
+            "description": "The desired response format. For listing calls, the following `Accept` header values are permitted: \n<table><thead><tr><th>Accept</th><th>Description</th></tr></thead><tbody><tr><td><code>application/vnd.adobe.xed-id+json</code></td><td>Returns a short summary of each resource, generally the preferred header for listing.</td></tr><tr><td><code>application/vnd.adobe.xed+json</code></td><td>Returns full JSON for each resource, with the original <code>$ref</code> and <code>allOf</code> attributes included.</td></tr></tbody></table>"
+          },
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {},
+            "type": "string",
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {},
+            "type": "string",
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {},
+            "type": "string",
+            "description": "The IMS Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {},
+            "type": "string",
+            "description": "The name of the sandbox in which the operation will take place. See the [sandboxes overview](https://adobe.com/go/sandbox-overview-en) for more information."
+          }
+        ],
+        "query_param_names": [
+          "limit",
+          "orderby",
+          "property",
+          "start"
+        ],
+        "path_param_names": [],
+        "header_param_names": [
+          "Accept",
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Accept",
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [],
+          "schema": {}
+        },
+        "response_codes": [
+          "200",
+          "400"
+        ],
+        "source_file": "schema-registry.yaml"
+      }
+    }
+  ],
+  "similar_examples": [
+    {
+      "query": "List all datasets that use the schema 'hkg_adls_profile_count_history'.",
+      "route": "SQL_PLUS_API_CHAIN",
+      "domain": "schema",
+      "intent": "list",
+      "score": 0.6571,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [
+        "dim_blueprint",
+        "dim_collection",
+        "hkg_br_blueprint_collection"
+      ],
+      "api_endpoints": [
+        "GET /data/foundation/catalog/dataSets",
+        "GET /data/foundation/schemaregistry/tenant/schemas/{schema_id}"
+      ],
+      "api_params": [
+        "filter",
+        "limit"
+      ],
+      "gold_sql": "SELECT DISTINCT D.collectionid AS collection_id,\n       D.name AS collection_name\nFROM hkg_br_blueprint_collection AS SD\nJOIN dim_collection AS D ON SD.collectionid = D.collectionid\nJOIN dim_blueprint AS S ON SD.blueprintid = S.blueprintid\nWHERE S.name = 'hkg_adls_profile_count_history'\nLIMIT 3",
+      "gold_api": [
+        "GET /data/foundation/catalog/dataSets?limit=3&filter=schemaName==\"WF HEMI Account Attribute Retail Fiserv Schema\"",
+        "GET /data/foundation/schemaregistry/tenant/schemas/{schema_id}"
+      ]
+    },
+    {
+      "query": "List all journeys",
+      "route": "SQL_PLUS_API",
+      "domain": "journey",
+      "intent": "list",
+      "score": 0.5373,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [
+        "dim_campaign"
+      ],
+      "api_endpoints": [
+        "GET /ajo/journey"
+      ],
+      "api_params": [
+        "pageSize"
+      ],
+      "gold_sql": "SELECT CAMPAIGN.NAME AS CAMPAIGNNAME,\n       CAMPAIGN.CAMPAIGNID\nFROM DIM_CAMPAIGN AS CAMPAIGN\nLIMIT 10",
+      "gold_api": [
+        "GET /ajo/journey?pageSize=10"
+      ]
+    },
+    {
+      "query": "Show recent changes in datasets.",
+      "route": "SQL_PLUS_API",
+      "domain": "dataset",
+      "intent": "time_lookup",
+      "score": 0.5045,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [
+        "dim_collection"
+      ],
+      "api_endpoints": [
+        "GET /audit/events"
+      ],
+      "api_params": [
+        "limit",
+        "orderBy",
+        "property"
+      ],
+      "gold_sql": "SELECT DISTINCT D.COLLECTIONID AS collection_id,\n       D.NAME AS collection_name,\n       D.UPDATEDTIME AS updated_time\nFROM DIM_COLLECTION AS D\nWHERE D.UPDATEDTIME >= DATEADD(DAY, -90, CURRENT_DATE)\nORDER BY D.UPDATEDTIME DESC\nLIMIT 50",
+      "gold_api": [
+        "GET /audit/events?property=assetType==dataset&orderBy=-timestamp&limit=50"
+      ]
+    }
+  ],
+  "tool_budget": {
+    "max_sql_calls": 1,
+    "max_api_calls": 1,
+    "expected_steps": [
+      "sql_query",
+      "api_call"
+    ]
+  },
+  "answer_constraints": [
+    "Use only verified SQL/API outputs as evidence.",
+    "Do not invent IDs, timestamps, counts, statuses, or names.",
+    "If SQL and API disagree, mention the discrepancy clearly.",
+    "For list questions, return concise rows/items with relevant identifiers.",
+    "If API returns an error or empty result, state that clearly."
+  ]
+}

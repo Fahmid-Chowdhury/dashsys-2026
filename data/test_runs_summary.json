@@ -3,20 +3,65 @@
     "id": 1,
     "query": "When was the journey 'Gold Tier Welcome Email' published?",
     "status": "success",
-    "route": "SQL_ONLY",
+    "route": "SQL_PLUS_API",
     "domain": "journey",
     "intent": "time_lookup",
     "complexity": "simple",
     "subquery_count": 1,
     "sql_calls": 1,
-    "api_calls": 0,
-    "trace_steps": 1,
+    "api_calls": 1,
+    "trace_steps": 2,
     "debug_event_counts": {
-      "llm_output": 2,
-      "tool_executed": 1
+      "llm_output": 3,
+      "tool_executed": 2
     },
-    "answer_preview": "The last deployed time for the journey 'Gold Tier Welcome Email' is null.\n\nSQL returned 1 row(s):\n\n- LASTDEPLOYEDTIME: None",
-    "elapsed_seconds": 76.568,
+    "per_query_budget": {
+      "allowed": {
+        "max_sql_calls": 1,
+        "max_api_calls": 1,
+        "max_total_tool_calls": 2,
+        "max_agent_steps": 8,
+        "max_repair_attempts": 3,
+        "expected_steps": [
+          "sql_query",
+          "api_call"
+        ],
+        "expected_sql_calls": 1,
+        "expected_api_calls": 1
+      },
+      "used": {
+        "sql_calls": 1,
+        "api_calls": 1,
+        "total_tool_calls": 2,
+        "successful_sql_calls": 1,
+        "successful_api_calls": 1,
+        "successful_total_tool_calls": 2,
+        "trace_steps": 2
+      },
+      "remaining": {
+        "sql_calls": 0,
+        "api_calls": 0,
+        "total_tool_calls": 0,
+        "agent_steps": 6
+      },
+      "ratios": {
+        "sql_budget_used_ratio": 1.0,
+        "api_budget_used_ratio": 1.0,
+        "total_tool_budget_used_ratio": 1.0,
+        "agent_step_used_ratio": 0.25
+      },
+      "flags": {
+        "within_sql_budget": true,
+        "within_api_budget": true,
+        "within_total_tool_budget": true,
+        "expected_sql_satisfied": true,
+        "expected_api_satisfied": true,
+        "expected_tool_steps_satisfied": true
+      }
+    },
+    "answer_preview": "Based on the database records, the journey 'Gold Tier Welcome Email' has not been published yet. Its status is 'created' (created on 2026-03-31T15:35:12.042188843Z) and its last deployed time is null. Additionally, the API search for this journey returned no results.\n\nSQL returned 1 row(s):\n\n- Gold Tier Welcome Email — status/state: created\n\nAPI GET /ajo/journey returned HTTP 200 with totalCount=0",
+    "elapsed_seconds": 271.865,
+    "failure_reason": "none",
     "metadata_path": "data\\test_metadata\\metadata_001.json",
     "run_path": "data\\test_runs\\run_001.json"
   },
@@ -24,20 +69,65 @@
     "id": 2,
     "query": "List all segment audiences connected to the destination named 'Lives on East Coast', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
     "status": "success",
-    "route": "SQL_PLUS_API_CHAIN",
+    "route": "SQL_PLUS_API",
     "domain": "segment",
     "intent": "count",
-    "complexity": "simple",
-    "subquery_count": 1,
-    "sql_calls": 1,
-    "api_calls": 0,
-    "trace_steps": 1,
+    "complexity": "complex",
+    "subquery_count": 4,
+    "sql_calls": 2,
+    "api_calls": 2,
+    "trace_steps": 4,
     "debug_event_counts": {
-      "llm_output": 2,
-      "tool_executed": 1
+      "llm_output": 5,
+      "tool_executed": 4
     },
-    "answer_preview": "The SQL snapshot returned no rows.",
-    "elapsed_seconds": 34.363,
+    "per_query_budget": {
+      "allowed": {
+        "max_sql_calls": 2,
+        "max_api_calls": 3,
+        "max_total_tool_calls": 5,
+        "max_agent_steps": 8,
+        "max_repair_attempts": 3,
+        "expected_steps": [
+          "sql_query",
+          "api_call"
+        ],
+        "expected_sql_calls": 1,
+        "expected_api_calls": 1
+      },
+      "used": {
+        "sql_calls": 2,
+        "api_calls": 2,
+        "total_tool_calls": 4,
+        "successful_sql_calls": 2,
+        "successful_api_calls": 2,
+        "successful_total_tool_calls": 4,
+        "trace_steps": 4
+      },
+      "remaining": {
+        "sql_calls": 0,
+        "api_calls": 1,
+        "total_tool_calls": 1,
+        "agent_steps": 4
+      },
+      "ratios": {
+        "sql_budget_used_ratio": 1.0,
+        "api_budget_used_ratio": 0.6667,
+        "total_tool_budget_used_ratio": 0.8,
+        "agent_step_used_ratio": 0.5
+      },
+      "flags": {
+        "within_sql_budget": true,
+        "within_api_budget": true,
+        "within_total_tool_budget": true,
+        "expected_sql_satisfied": true,
+        "expected_api_satisfied": true,
+        "expected_tool_steps_satisfied": true
+      }
+    },
+    "answer_preview": "The SQL snapshot returned 1 row(s).\n\nThe API call to GET /data/foundation/flowservice/flows returned 1 preview item(s).\n\nThe API call to GET /data/core/ups/audiences returned 2 preview item(s).",
+    "elapsed_seconds": 87.452,
+    "failure_reason": "none",
     "metadata_path": "data\\test_metadata\\metadata_002.json",
     "run_path": "data\\test_runs\\run_002.json"
   },
@@ -45,21 +135,65 @@
     "id": 3,
     "query": "List all segment audiences connected to the destination named 'Lives on West Coast', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
     "status": "success",
-    "route": "SQL_PLUS_API_CHAIN",
+    "route": "SQL_PLUS_API",
     "domain": "segment",
     "intent": "count",
-    "complexity": "simple",
-    "subquery_count": 1,
-    "sql_calls": 1,
-    "api_calls": 0,
-    "trace_steps": 1,
+    "complexity": "complex",
+    "subquery_count": 3,
+    "sql_calls": 2,
+    "api_calls": 1,
+    "trace_steps": 3,
     "debug_event_counts": {
-      "llm_output": 3,
-      "verifier_rejected": 1,
-      "tool_executed": 1
+      "llm_output": 4,
+      "tool_executed": 3
     },
-    "answer_preview": "The SQL snapshot returned no rows.",
-    "elapsed_seconds": 36.205,
+    "per_query_budget": {
+      "allowed": {
+        "max_sql_calls": 2,
+        "max_api_calls": 3,
+        "max_total_tool_calls": 5,
+        "max_agent_steps": 8,
+        "max_repair_attempts": 3,
+        "expected_steps": [
+          "sql_query",
+          "api_call"
+        ],
+        "expected_sql_calls": 1,
+        "expected_api_calls": 1
+      },
+      "used": {
+        "sql_calls": 2,
+        "api_calls": 1,
+        "total_tool_calls": 3,
+        "successful_sql_calls": 2,
+        "successful_api_calls": 1,
+        "successful_total_tool_calls": 3,
+        "trace_steps": 3
+      },
+      "remaining": {
+        "sql_calls": 0,
+        "api_calls": 2,
+        "total_tool_calls": 2,
+        "agent_steps": 5
+      },
+      "ratios": {
+        "sql_budget_used_ratio": 1.0,
+        "api_budget_used_ratio": 0.3333,
+        "total_tool_budget_used_ratio": 0.6,
+        "agent_step_used_ratio": 0.375
+      },
+      "flags": {
+        "within_sql_budget": true,
+        "within_api_budget": true,
+        "within_total_tool_budget": true,
+        "expected_sql_satisfied": true,
+        "expected_api_satisfied": true,
+        "expected_tool_steps_satisfied": true
+      }
+    },
+    "answer_preview": "The SQL snapshot returned no rows.\n\nThe API call to GET /data/foundation/flowservice/flows returned 35 preview item(s).",
+    "elapsed_seconds": 56.139,
+    "failure_reason": "none",
     "metadata_path": "data\\test_metadata\\metadata_003.json",
     "run_path": "data\\test_runs\\run_003.json"
   },
@@ -70,19 +204,262 @@
     "route": "SQL_PLUS_API",
     "domain": "segment",
     "intent": "count",
+    "complexity": "complex",
+    "subquery_count": 4,
+    "sql_calls": 2,
+    "api_calls": 2,
+    "trace_steps": 4,
+    "debug_event_counts": {
+      "llm_output": 5,
+      "tool_executed": 4
+    },
+    "per_query_budget": {
+      "allowed": {
+        "max_sql_calls": 2,
+        "max_api_calls": 3,
+        "max_total_tool_calls": 5,
+        "max_agent_steps": 8,
+        "max_repair_attempts": 3,
+        "expected_steps": [
+          "sql_query",
+          "api_call"
+        ],
+        "expected_sql_calls": 1,
+        "expected_api_calls": 1
+      },
+      "used": {
+        "sql_calls": 2,
+        "api_calls": 2,
+        "total_tool_calls": 4,
+        "successful_sql_calls": 2,
+        "successful_api_calls": 2,
+        "successful_total_tool_calls": 4,
+        "trace_steps": 4
+      },
+      "remaining": {
+        "sql_calls": 0,
+        "api_calls": 1,
+        "total_tool_calls": 1,
+        "agent_steps": 4
+      },
+      "ratios": {
+        "sql_budget_used_ratio": 1.0,
+        "api_budget_used_ratio": 0.6667,
+        "total_tool_budget_used_ratio": 0.8,
+        "agent_step_used_ratio": 0.5
+      },
+      "flags": {
+        "within_sql_budget": true,
+        "within_api_budget": true,
+        "within_total_tool_budget": true,
+        "expected_sql_satisfied": true,
+        "expected_api_satisfied": true,
+        "expected_tool_steps_satisfied": true
+      }
+    },
+    "answer_preview": "The SQL snapshot returned no rows.\n\nThe API call to GET /data/foundation/flowservice/flows returned 35 preview item(s).\n\nThe API call to GET /data/core/ups/audiences returned 2 preview item(s).",
+    "elapsed_seconds": 66.217,
+    "failure_reason": "none",
+    "metadata_path": "data\\test_metadata\\metadata_004.json",
+    "run_path": "data\\test_runs\\run_004.json"
+  },
+  {
+    "id": 5,
+    "query": "List all segment audiences connected to the destination named 'Person: Birthday within 7 days', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
+    "status": "success",
+    "route": "SQL_PLUS_API",
+    "domain": "segment",
+    "intent": "count",
+    "complexity": "complex",
+    "subquery_count": 3,
+    "sql_calls": 2,
+    "api_calls": 2,
+    "trace_steps": 4,
+    "debug_event_counts": {
+      "llm_output": 5,
+      "tool_executed": 4
+    },
+    "per_query_budget": {
+      "allowed": {
+        "max_sql_calls": 2,
+        "max_api_calls": 3,
+        "max_total_tool_calls": 5,
+        "max_agent_steps": 8,
+        "max_repair_attempts": 3,
+        "expected_steps": [
+          "sql_query",
+          "api_call"
+        ],
+        "expected_sql_calls": 1,
+        "expected_api_calls": 1
+      },
+      "used": {
+        "sql_calls": 2,
+        "api_calls": 2,
+        "total_tool_calls": 4,
+        "successful_sql_calls": 2,
+        "successful_api_calls": 2,
+        "successful_total_tool_calls": 4,
+        "trace_steps": 4
+      },
+      "remaining": {
+        "sql_calls": 0,
+        "api_calls": 1,
+        "total_tool_calls": 1,
+        "agent_steps": 4
+      },
+      "ratios": {
+        "sql_budget_used_ratio": 1.0,
+        "api_budget_used_ratio": 0.6667,
+        "total_tool_budget_used_ratio": 0.8,
+        "agent_step_used_ratio": 0.5
+      },
+      "flags": {
+        "within_sql_budget": true,
+        "within_api_budget": true,
+        "within_total_tool_budget": true,
+        "expected_sql_satisfied": true,
+        "expected_api_satisfied": true,
+        "expected_tool_steps_satisfied": true
+      }
+    },
+    "answer_preview": "The SQL snapshot returned no rows.\n\nThe API call to GET /data/foundation/flowservice/flows returned 1 preview item(s).\n\nThe API call to GET /data/core/ups/audiences returned 2 preview item(s).",
+    "elapsed_seconds": 65.416,
+    "failure_reason": "none",
+    "metadata_path": "data\\test_metadata\\metadata_005.json",
+    "run_path": "data\\test_runs\\run_005.json"
+  },
+  {
+    "id": 6,
+    "query": "List all datasets that use the schema 'Journey Inbound'.",
+    "status": "success",
+    "route": "SQL_PLUS_API",
+    "domain": "schema",
+    "intent": "list",
     "complexity": "simple",
     "subquery_count": 1,
     "sql_calls": 1,
-    "api_calls": 0,
-    "trace_steps": 1,
+    "api_calls": 1,
+    "trace_steps": 2,
+    "debug_event_counts": {
+      "llm_output": 4,
+      "tool_executed": 2,
+      "verifier_rejected": 1
+    },
+    "per_query_budget": {
+      "allowed": {
+        "max_sql_calls": 1,
+        "max_api_calls": 1,
+        "max_total_tool_calls": 2,
+        "max_agent_steps": 8,
+        "max_repair_attempts": 3,
+        "expected_steps": [
+          "sql_query",
+          "api_call"
+        ],
+        "expected_sql_calls": 1,
+        "expected_api_calls": 1
+      },
+      "used": {
+        "sql_calls": 1,
+        "api_calls": 1,
+        "total_tool_calls": 2,
+        "successful_sql_calls": 1,
+        "successful_api_calls": 1,
+        "successful_total_tool_calls": 2,
+        "trace_steps": 2
+      },
+      "remaining": {
+        "sql_calls": 0,
+        "api_calls": 0,
+        "total_tool_calls": 0,
+        "agent_steps": 6
+      },
+      "ratios": {
+        "sql_budget_used_ratio": 1.0,
+        "api_budget_used_ratio": 1.0,
+        "total_tool_budget_used_ratio": 1.0,
+        "agent_step_used_ratio": 0.25
+      },
+      "flags": {
+        "within_sql_budget": true,
+        "within_api_budget": true,
+        "within_total_tool_budget": true,
+        "expected_sql_satisfied": true,
+        "expected_api_satisfied": true,
+        "expected_tool_steps_satisfied": true
+      }
+    },
+    "answer_preview": "The local SQL snapshot returned no schema records.\n\nThe live API call to GET /data/foundation/catalog/dataSets succeeded with HTTP 200 and returned 0 preview item(s).",
+    "elapsed_seconds": 29.012,
+    "failure_reason": "none",
+    "metadata_path": "data\\test_metadata\\metadata_006.json",
+    "run_path": "data\\test_runs\\run_006.json"
+  },
+  {
+    "id": 7,
+    "query": "List all datasets that use the schema 'weRetail: CRM'.",
+    "status": "success",
+    "route": "SQL_PLUS_API",
+    "domain": "dataset",
+    "intent": "list",
+    "complexity": "simple",
+    "subquery_count": 1,
+    "sql_calls": 1,
+    "api_calls": 1,
+    "trace_steps": 2,
     "debug_event_counts": {
       "llm_output": 3,
-      "verifier_rejected": 1,
-      "tool_executed": 1
+      "tool_executed": 2
     },
-    "answer_preview": "The SQL snapshot returned no rows.",
-    "elapsed_seconds": 60.414,
-    "metadata_path": "data\\test_metadata\\metadata_004.json",
-    "run_path": "data\\test_runs\\run_004.json"
+    "per_query_budget": {
+      "allowed": {
+        "max_sql_calls": 1,
+        "max_api_calls": 1,
+        "max_total_tool_calls": 2,
+        "max_agent_steps": 8,
+        "max_repair_attempts": 3,
+        "expected_steps": [
+          "sql_query",
+          "api_call"
+        ],
+        "expected_sql_calls": 1,
+        "expected_api_calls": 1
+      },
+      "used": {
+        "sql_calls": 1,
+        "api_calls": 1,
+        "total_tool_calls": 2,
+        "successful_sql_calls": 1,
+        "successful_api_calls": 1,
+        "successful_total_tool_calls": 2,
+        "trace_steps": 2
+      },
+      "remaining": {
+        "sql_calls": 0,
+        "api_calls": 0,
+        "total_tool_calls": 0,
+        "agent_steps": 6
+      },
+      "ratios": {
+        "sql_budget_used_ratio": 1.0,
+        "api_budget_used_ratio": 1.0,
+        "total_tool_budget_used_ratio": 1.0,
+        "agent_step_used_ratio": 0.25
+      },
+      "flags": {
+        "within_sql_budget": true,
+        "within_api_budget": true,
+        "within_total_tool_budget": true,
+        "expected_sql_satisfied": true,
+        "expected_api_satisfied": true,
+        "expected_tool_steps_satisfied": true
+      }
+    },
+    "answer_preview": "From the local SQL snapshot, I found 1 dataset record(s):\n\n- weRetail: CRM\n\nThe live API call to GET /data/foundation/catalog/datasets succeeded with HTTP 200 and returned 38 preview item(s).\n\nAPI preview items:\n\n- Decision Object Repository - Fallback Offers — ID: 69c8d6b0494ee9dc83b67874\n- Decision Object Repository - Placements — ID: 69c8d6b094a54c8d91aa2dca\n- Decision Object Repository - Perso",
+    "elapsed_seconds": 32.546,
+    "failure_reason": "none",
+    "metadata_path": "data\\test_metadata\\metadata_007.json",
+    "run_path": "data\\test_runs\\run_007.json"
   }
 ]

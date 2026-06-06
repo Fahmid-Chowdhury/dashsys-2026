@@ -3,8 +3,8 @@
   "normalized_query": "When was the journey 'Gold Tier Welcome Email' published?",
   "query_analysis": {
     "complexity": "simple",
-    "confidence": 1.0,
-    "reason": "The query asks for a single piece of information (publication date) related to one specific entity ('Gold Tier Welcome Email'). This can be retrieved with a single lookup.",
+    "confidence": 0.95,
+    "reason": "The query is a straightforward lookup of the publication date for a specific journey entity.",
     "subqueries": [
       {
         "query": "When was the journey 'Gold Tier Welcome Email' published?",
@@ -23,11 +23,11 @@
     ]
   },
   "route": {
-    "selected": "SQL_ONLY",
+    "selected": "SQL_PLUS_API",
     "votes": {
       "SQL_PLUS_API": 1.0
     },
-    "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides. Forced to SQL_ONLY because query analysis indicates local KG evidence is sufficient."
+    "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides."
   },
   "domain": {
     "selected": "journey",
@@ -135,7 +135,151 @@
     }
   },
   "join_candidates": [],
-  "allowed_api_endpoints": [],
+  "allowed_api_endpoints": [
+    {
+      "endpoint": "GET /ajo/journey",
+      "method": "GET",
+      "path": "/ajo/journey",
+      "domain": "journey",
+      "param_names": [
+        "filter",
+        "pageSize"
+      ],
+      "observed_params": {
+        "filter": [
+          "name==Birthday Message",
+          "status!=live"
+        ],
+        "pageSize": [
+          "10"
+        ]
+      },
+      "routes_seen": [
+        "SQL_PLUS_API"
+      ],
+      "source": "gold_examples+openapi",
+      "openapi": {
+        "summary": "Get a list of journeys",
+        "description": "Returns a list of journeys based on the provided filters.",
+        "operation_id": "getJourneys",
+        "query_params": [
+          {
+            "name": "filter",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Search filters in URL-encoded format. Supports &-separated fields with basic operators '=', '>', '<', '>=', '<='."
+          },
+          {
+            "name": "page",
+            "required": false,
+            "schema": {
+              "minimum": 0,
+              "type": "integer",
+              "default": 0
+            },
+            "type": null,
+            "description": "Page number for pagination (0-based). Used to navigate through multiple pages of results."
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "default": 100
+            },
+            "type": null,
+            "description": "Number of items per page. Controls how many journeys are returned in a single response."
+          },
+          {
+            "name": "fields",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Comma-separated list of fields to include in the response. Allows selective field retrieval for performance optimization."
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Sort criteria in format 'field=direction'. Multiple sorts can be comma-separated. Direction can be 'asc' or 'desc'."
+          }
+        ],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "829495afa589475ab56850a702359cf9"
+            },
+            "type": null,
+            "description": "The API key belonging to the calling client. Use the client id from Developer Console."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "0A7F574EBB4C6E1423973F52@AdobeOrg"
+            },
+            "type": null,
+            "description": "The IMS org id for which the action is being taken."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "prod"
+            },
+            "type": null,
+            "description": "Provides the platform sandbox name."
+          }
+        ],
+        "query_param_names": [
+          "fields",
+          "filter",
+          "page",
+          "pageSize",
+          "sort"
+        ],
+        "path_param_names": [],
+        "header_param_names": [
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [],
+          "schema": {}
+        },
+        "response_codes": [
+          "200",
+          "400",
+          "401",
+          "500"
+        ],
+        "source_file": "journey-retrieve.yaml"
+      }
+    }
+  ],
   "similar_examples": [
     {
       "query": "When was the journey 'Birthday Message' published?",
@@ -212,14 +356,16 @@
   ],
   "tool_budget": {
     "max_sql_calls": 1,
-    "max_api_calls": 0,
+    "max_api_calls": 1,
     "expected_steps": [
-      "sql_query"
+      "sql_query",
+      "api_call"
     ]
   },
   "answer_constraints": [
     "Use only verified SQL/API outputs as evidence.",
     "Do not invent IDs, timestamps, counts, statuses, or names.",
-    "If SQL and API disagree, mention the discrepancy clearly."
+    "If SQL and API disagree, mention the discrepancy clearly.",
+    "If API returns an error or empty result, state that clearly."
   ]
 }

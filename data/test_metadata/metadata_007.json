@@ -1,0 +1,402 @@
+{
+  "query": "List all datasets that use the schema 'weRetail: CRM'.",
+  "normalized_query": "List all datasets that use the schema 'weRetail: CRM'.",
+  "query_analysis": {
+    "complexity": "simple",
+    "confidence": 0.95,
+    "reason": "The query is a straightforward lookup of datasets based on a specific schema name, requiring only a single retrieval step.",
+    "subqueries": [
+      {
+        "query": "List all datasets that use the schema 'weRetail: CRM'.",
+        "purpose": "other"
+      }
+    ]
+  },
+  "intent": "list",
+  "entities": [
+    "weRetail: CRM"
+  ],
+  "filters": {
+    "quoted_entities": [
+      "weRetail: CRM"
+    ]
+  },
+  "route": {
+    "selected": "SQL_PLUS_API",
+    "votes": {
+      "SQL_PLUS_API": 0.6056,
+      "SQL_PLUS_API_CHAIN": 0.3944
+    },
+    "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides."
+  },
+  "domain": {
+    "selected": "dataset",
+    "votes": {
+      "dataset": 0.6056,
+      "schema": 0.3944
+    },
+    "reason": "Selected from top retrieved examples and domain votes."
+  },
+  "allowed_tables": {
+    "dim_collection": {
+      "kind": "dimension",
+      "domain": "dataset",
+      "row_count": 37,
+      "id_columns": [
+        "COLLECTIONID",
+        "CREATEDCLIENTID"
+      ],
+      "columns": [
+        {
+          "name": "ISIDENTITYENABLED",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "ROWCOUNT",
+          "type": "BIGINT"
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "STORAGESIZEINBYTES",
+          "type": "BIGINT"
+        },
+        {
+          "name": "ISPROFILEENABLED",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "NAME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "COLLECTIONID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ISSYSTEM",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "STORAGESIZEINMEGABYTES",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "ISTTLSET",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "UPDATEDBY",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "TTLVALUE",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "CREATEDBY",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "CREATEDCLIENTID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LABELSCOLLECTION",
+          "type": "VARCHAR"
+        }
+      ]
+    }
+  },
+  "join_candidates": [],
+  "allowed_api_endpoints": [
+    {
+      "endpoint": "GET /data/foundation/audit/events",
+      "method": "GET",
+      "path": "/data/foundation/audit/events",
+      "domain": "segment",
+      "param_names": [
+        "limit",
+        "property"
+      ],
+      "observed_params": {
+        "property": [
+          "assetType==destination",
+          "action==create"
+        ],
+        "limit": [
+          "3",
+          "20"
+        ]
+      },
+      "routes_seen": [
+        "SQL_PLUS_API"
+      ],
+      "source": "gold_examples",
+      "openapi": null
+    },
+    {
+      "endpoint": "GET /audit/events",
+      "method": "GET",
+      "path": "/audit/events",
+      "domain": "dataset",
+      "param_names": [
+        "limit",
+        "orderBy",
+        "property"
+      ],
+      "observed_params": {
+        "property": [
+          "assetType==dataset"
+        ],
+        "orderBy": [
+          "-timestamp"
+        ],
+        "limit": [
+          "50"
+        ]
+      },
+      "routes_seen": [
+        "SQL_PLUS_API"
+      ],
+      "source": "gold_examples",
+      "openapi": null
+    },
+    {
+      "endpoint": "GET /data/foundation/catalog/datasets",
+      "method": "GET",
+      "path": "/data/foundation/catalog/datasets",
+      "domain": "dataset",
+      "param_names": [
+        "filter",
+        "limit"
+      ],
+      "observed_params": {
+        "limit": [
+          "20"
+        ],
+        "filter": [
+          "name:SG AND name:non loyalty"
+        ]
+      },
+      "routes_seen": [
+        "SQL_PLUS_API"
+      ],
+      "source": "gold_examples",
+      "openapi": null
+    },
+    {
+      "endpoint": "POST /data/foundation/catalog/dataSets",
+      "method": "POST",
+      "path": "/data/foundation/catalog/dataSets",
+      "domain": "dataset",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "Create a new dataset",
+        "description": "This request creates a new dataset.",
+        "operation_id": "createDataset",
+        "query_params": [],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer\". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The name of the sandbox in which the operation will take place. See the [sandboxes overview documentation](https://adobe.com/go/sandbox-overview-en) for more information."
+          },
+          {
+            "name": "accept-encoding",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Used to signal the intent to consume compressed response bodies. Supported encodings: gzip."
+          },
+          {
+            "name": "content-type",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/json"
+              ]
+            },
+            "type": null,
+            "description": "Specifies the media type of the request body. Required for requests with a payload, such as POST, PUT, and PATCH. When sending a JSON payload, this must be set to `application/json`."
+          }
+        ],
+        "query_param_names": [],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "accept-encoding",
+          "content-type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "content-type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": true,
+          "content_types": [
+            "application/json"
+          ],
+          "schema": {
+            "$ref": "#/components/schemas/dataSetRequest"
+          }
+        },
+        "response_codes": [
+          "201",
+          "400",
+          "403",
+          "500",
+          "default"
+        ],
+        "source_file": "catalog.yaml"
+      }
+    }
+  ],
+  "similar_examples": [
+    {
+      "query": "List all datasets that use the schema 'hkg_adls_profile_count_history'.",
+      "route": "SQL_PLUS_API_CHAIN",
+      "domain": "schema",
+      "intent": "list",
+      "score": 0.6419,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [
+        "dim_blueprint",
+        "dim_collection",
+        "hkg_br_blueprint_collection"
+      ],
+      "api_endpoints": [
+        "GET /data/foundation/catalog/dataSets",
+        "GET /data/foundation/schemaregistry/tenant/schemas/{schema_id}"
+      ],
+      "api_params": [
+        "filter",
+        "limit"
+      ],
+      "gold_sql": "SELECT DISTINCT D.collectionid AS collection_id,\n       D.name AS collection_name\nFROM hkg_br_blueprint_collection AS SD\nJOIN dim_collection AS D ON SD.collectionid = D.collectionid\nJOIN dim_blueprint AS S ON SD.blueprintid = S.blueprintid\nWHERE S.name = 'hkg_adls_profile_count_history'\nLIMIT 3",
+      "gold_api": [
+        "GET /data/foundation/catalog/dataSets?limit=3&filter=schemaName==\"WF HEMI Account Attribute Retail Fiserv Schema\"",
+        "GET /data/foundation/schemaregistry/tenant/schemas/{schema_id}"
+      ]
+    },
+    {
+      "query": "Show me all entities created by download",
+      "route": "SQL_PLUS_API",
+      "domain": "dataset",
+      "intent": "time_lookup",
+      "score": 0.4931,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [
+        "dim_collection"
+      ],
+      "api_endpoints": [
+        "GET /data/foundation/audit/events"
+      ],
+      "api_params": [
+        "limit",
+        "property"
+      ],
+      "gold_sql": "SELECT DISTINCT collectionid AS collection_id, name AS collection_name, createdtime AS created_time\nFROM dim_collection\nWHERE createdby ILIKE '%download%'\nLIMIT 20",
+      "gold_api": [
+        "GET /data/foundation/audit/events?property=action==create&limit=20"
+      ]
+    },
+    {
+      "query": "Show recent changes in datasets.",
+      "route": "SQL_PLUS_API",
+      "domain": "dataset",
+      "intent": "time_lookup",
+      "score": 0.4927,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [
+        "dim_collection"
+      ],
+      "api_endpoints": [
+        "GET /audit/events"
+      ],
+      "api_params": [
+        "limit",
+        "orderBy",
+        "property"
+      ],
+      "gold_sql": "SELECT DISTINCT D.COLLECTIONID AS collection_id,\n       D.NAME AS collection_name,\n       D.UPDATEDTIME AS updated_time\nFROM DIM_COLLECTION AS D\nWHERE D.UPDATEDTIME >= DATEADD(DAY, -90, CURRENT_DATE)\nORDER BY D.UPDATEDTIME DESC\nLIMIT 50",
+      "gold_api": [
+        "GET /audit/events?property=assetType==dataset&orderBy=-timestamp&limit=50"
+      ]
+    }
+  ],
+  "tool_budget": {
+    "max_sql_calls": 1,
+    "max_api_calls": 1,
+    "expected_steps": [
+      "sql_query",
+      "api_call"
+    ]
+  },
+  "answer_constraints": [
+    "Use only verified SQL/API outputs as evidence.",
+    "Do not invent IDs, timestamps, counts, statuses, or names.",
+    "If SQL and API disagree, mention the discrepancy clearly.",
+    "For list questions, return concise rows/items with relevant identifiers.",
+    "If API returns an error or empty result, state that clearly."
+  ]
+}

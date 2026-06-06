@@ -1,5 +1,6 @@
 from importlib import metadata
 import json
+import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 from collections import Counter
@@ -10,6 +11,7 @@ from src.route_policy import (
 )
 
 MAX_EXAMPLES = 6
+ROUTE_CONFIDENCE_MIN_SCORE = float(os.getenv("ROUTE_CONFIDENCE_MIN_SCORE", 0.40))
 
 
 def get_selected_route(metadata: Dict[str, Any]) -> str:
@@ -67,7 +69,7 @@ def get_route_confidence_stats(metadata: Dict[str, Any]) -> Dict[str, float]:
 
 def is_route_confident(
     metadata: Dict[str, Any],
-    min_score: float = 0.60,
+    min_score: float = ROUTE_CONFIDENCE_MIN_SCORE,
     min_margin: float = 0.15,
 ) -> bool:
     stats = get_route_confidence_stats(metadata)
@@ -446,6 +448,10 @@ Rules:
 - Do not explain outside JSON.
 - Do not call tools not allowed by the route.
 - Do not exceed the tool budget.
+- Do not repeat any SQL/API call already shown in CURRENT VERIFIED TOOL RESULTS.
+- If a previous SQL returned empty rows, do not retry the exact same SQL.
+- If a previous API call returned empty/error, do not retry the exact same API call.
+- A second SQL/API call is allowed only if it is meaningfully different.
 - Do not invent table names.
 - Do not invent column names.
 - Do not invent API endpoints.
@@ -475,6 +481,9 @@ Important behavior:
 - Use verified tool results as the only evidence for the final answer.
 - If SQL and API results disagree, mention the discrepancy in the final answer.
 - Prefer the minimum number of tool calls.
+- Never repeat the exact same SQL query or API call.
+- If a tool result is empty, either change strategy, use another allowed tool, or return final_answer if enough evidence exists.
+- Tool budget is dynamic: every executed SQL/API call consumes one budget slot.
 - For list questions, return concise items with relevant IDs.
 - For count questions, return the count clearly.
 - For status/time questions, return the exact status/time if available.

@@ -1,5 +1,6 @@
 import argparse
 import json
+import os
 import re
 from dataclasses import asdict
 from pathlib import Path
@@ -11,6 +12,8 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 from src.models import ExampleRecord, IndexedExample, ParsedApiCall, ToolStep
+
+EMBEDDING_MODEL_NAME = os.getenv("EMBEDDING_MODEL_NAME", "BAAI/bge-small-en-v1.5")
 
 
 SQL_TABLE_PATTERN = re.compile(
@@ -497,7 +500,7 @@ def main() -> None:
 
     parser.add_argument(
         "--embedding-model",
-        default="BAAI/bge-small-en-v1.5",
+        default=EMBEDDING_MODEL_NAME,
         help="Dense embedding model from sentence-transformers.",
     )
 

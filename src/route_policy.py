@@ -1,5 +1,8 @@
 from collections import Counter
+import os
 from typing import Any, Dict, List, Optional
+
+ROUTE_CONFIDENCE_MIN_SCORE = float(os.getenv("ROUTE_CONFIDENCE_MIN_SCORE", 0.40))
 
 
 def get_selected_route(metadata: Dict[str, Any]) -> str:
@@ -59,7 +62,7 @@ def get_route_confidence_stats(metadata: Dict[str, Any]) -> Dict[str, float]:
 
 def is_route_confident(
     metadata: Dict[str, Any],
-    min_score: float = 0.60,
+    min_score: float = ROUTE_CONFIDENCE_MIN_SCORE,
     min_margin: float = 0.15,
 ) -> bool:
     stats = get_route_confidence_stats(metadata)
@@ -121,36 +124,90 @@ def count_completed_tool_actions(trace: Optional[List[Dict[str, Any]]]) -> Count
     return counts
 
 
+def count_executed_tool_actions(trace: Optional[List[Dict[str, Any]]]) -> Counter:
+    """
+    Counts executed tool calls, regardless of whether the tool returned rows.
+
+    This is used for budget consumption.
+    If a SQL/API call was executed, it consumed budget.
+    """
+
+    counts = Counter()
+
+    for step in trace or []:
+        action = step.get("action")
+
+        if action == "sql_query":
+            counts["sql_query"] += 1
+
+        elif action == "api_call":
+            counts["api_call"] += 1
+
+    return counts
+
+
 def get_required_action_counts(
     metadata: Dict[str, Any],
     route_confident: bool,
 ) -> Counter:
+    """
+    Defines minimum route coverage.
+
+    This does NOT force a fixed sequence like:
+        SQL first, then API.
+
+    It only says:
+    - SQL_ONLY needs SQL coverage.
+    - API_ONLY/API_CHAIN needs API coverage.
+    - SQL_PLUS_API / SQL_PLUS_API_CHAIN need both SQL and API coverage
+      when the route is confident and the budget allows them.
+
+    Coverage means the agent must at least attempt that tool type.
+    Exact number of calls is still controlled by the dynamic tool budget.
+    """
+
     route = get_selected_route(metadata)
+    budget = metadata.get("tool_budget", {}) or {}
+
+    max_sql = int(budget.get("max_sql_calls", 0) or 0)
+    max_api = int(budget.get("max_api_calls", 0) or 0)
+
     expected_steps = get_expected_tool_steps(metadata)
 
     required = Counter()
 
-    if route == "API_ONLY":
-        required["api_call"] = 1
-        return required
-
     if route == "SQL_ONLY":
-        required["sql_query"] = 1
-        return required
-
-    if route in {"SQL_PLUS_API", "SQL_PLUS_API_CHAIN"} and route_confident:
-        if expected_steps:
-            required.update(expected_steps)
-        else:
+        if max_sql > 0:
             required["sql_query"] = 1
-            required["api_call"] = 1
-
         return required
 
-    if route == "API_CHAIN" and route_confident:
+    if route in {"API_ONLY", "API_CHAIN"}:
+        if max_api > 0:
+            required["api_call"] = 1
+        return required
+
+    if route in {"SQL_PLUS_API", "SQL_PLUS_API_CHAIN"}:
+        if not route_confident:
+            return required
+
+        # Prefer metadata expected_steps when available.
+        # But cap by available budget so the policy does not demand impossible calls.
         if expected_steps:
-            required.update(expected_steps)
-        else:
+            expected_counts = Counter(expected_steps)
+
+            if max_sql > 0 and expected_counts.get("sql_query", 0) > 0:
+                required["sql_query"] = min(expected_counts["sql_query"], max_sql)
+
+            if max_api > 0 and expected_counts.get("api_call", 0) > 0:
+                required["api_call"] = min(expected_counts["api_call"], max_api)
+
+            return required
+
+        # Fallback: mixed route requires both tool types, if budget allows.
+        if max_sql > 0:
+            required["sql_query"] = 1
+
+        if max_api > 0:
             required["api_call"] = 1
 
         return required
@@ -198,26 +255,49 @@ def get_remaining_tool_actions(
     trace: Optional[List[Dict[str, Any]]],
 ) -> List[str]:
     allowed = get_allowed_tool_actions(metadata)
-    completed = count_completed_tool_actions(trace)
+    executed = count_executed_tool_actions(trace)
     budget = metadata.get("tool_budget", {}) or {}
 
     remaining: List[str] = []
 
     if "sql_query" in allowed:
-        if completed.get("sql_query", 0) < budget.get("max_sql_calls", 0):
+        if executed.get("sql_query", 0) < budget.get("max_sql_calls", 0):
             remaining.append("sql_query")
 
     if "api_call" in allowed:
-        if completed.get("api_call", 0) < budget.get("max_api_calls", 0):
+        if executed.get("api_call", 0) < budget.get("max_api_calls", 0):
             remaining.append("api_call")
 
     return remaining
 
 
+def get_remaining_tool_budget(
+    metadata: Dict[str, Any],
+    trace: Optional[List[Dict[str, Any]]],
+) -> Dict[str, int]:
+    budget = metadata.get("tool_budget", {}) or {}
+    executed = count_executed_tool_actions(trace)
+
+    max_sql = int(budget.get("max_sql_calls", 0) or 0)
+    max_api = int(budget.get("max_api_calls", 0) or 0)
+
+    used_sql = int(executed.get("sql_query", 0))
+    used_api = int(executed.get("api_call", 0))
+
+    return {
+        "max_sql_calls": max_sql,
+        "used_sql_calls": used_sql,
+        "remaining_sql_calls": max(0, max_sql - used_sql),
+        "max_api_calls": max_api,
+        "used_api_calls": used_api,
+        "remaining_api_calls": max(0, max_api - used_api),
+    }
+
+
 def get_prompt_allowed_actions(
     metadata: Dict[str, Any],
     trace: Optional[List[Dict[str, Any]]],
-    min_score: float = 0.60,
+    min_score: float = ROUTE_CONFIDENCE_MIN_SCORE,
     min_margin: float = 0.15,
     min_tools_before_final_when_uncertain: int = 1,
 ) -> List[str]:
@@ -227,6 +307,7 @@ def get_prompt_allowed_actions(
         min_margin=min_margin,
     )
 
+    executed = count_executed_tool_actions(trace)
     completed = count_completed_tool_actions(trace)
     remaining_tools = get_remaining_tool_actions(metadata, trace)
 
@@ -236,20 +317,23 @@ def get_prompt_allowed_actions(
     )
 
     if required:
+        # Use executed counts for route coverage so a failed API attempt still consumes budget
+        # and does not trap the agent forever.
         missing_base = get_missing_required_base_actions(
             required=required,
-            completed=completed,
+            completed=executed,
         )
 
-        if missing_base:
-            return [
-                action for action in missing_base
-                if action in remaining_tools
-            ]
+        missing_with_budget = [
+            action for action in missing_base
+            if action in remaining_tools
+        ]
 
-        # Minimum required evidence is collected.
-        # Now the model can either make optional extra calls within budget
-        # or finish with final_answer.
+        if missing_with_budget:
+            return missing_with_budget
+
+        # Required tool type was attempted, or no budget remains for it.
+        # The model may continue with optional remaining tools or finish.
         return remaining_tools + ["final_answer"]
 
     total_completed = sum(completed.values())
@@ -264,7 +348,7 @@ def check_route_aware_policy(
     action: Dict[str, Any],
     metadata: Dict[str, Any],
     trace: Optional[List[Dict[str, Any]]],
-    min_score: float = 0.60,
+    min_score: float = ROUTE_CONFIDENCE_MIN_SCORE,
     min_margin: float = 0.15,
     min_tools_before_final_when_uncertain: int = 1,
 ) -> Optional[Dict[str, Any]]:
@@ -294,9 +378,11 @@ def check_route_aware_policy(
         route_confident=route_confident,
     )
 
+    executed = count_executed_tool_actions(trace)
+
     missing_required = get_missing_required_actions(
         required=required,
-        completed=completed,
+        completed=executed,
     )
 
     if action_name in {"sql_query", "api_call"}:
@@ -315,19 +401,20 @@ def check_route_aware_policy(
             }
 
         budget = metadata.get("tool_budget", {}) or {}
+        executed = count_executed_tool_actions(trace)
 
         if action_name == "sql_query":
             max_allowed = budget.get("max_sql_calls", 0)
         else:
             max_allowed = budget.get("max_api_calls", 0)
 
-        if completed.get(action_name, 0) >= max_allowed:
+        if executed.get(action_name, 0) >= max_allowed:
             return {
                 "ok": False,
                 "target": "route_policy",
                 "errors": [
                     f"Tool budget exhausted for {action_name}.",
-                    f"Completed {completed.get(action_name, 0)} out of allowed {max_allowed}.",
+                    f"Executed {executed.get(action_name, 0)} out of allowed {max_allowed}.",
                 ],
                 "repair_hint": (
                     "Use another allowed tool action if needed, "
@@ -358,17 +445,25 @@ def check_route_aware_policy(
 
     if action_name == "final_answer":
         if required and missing_required:
-            return {
-                "ok": False,
-                "target": "route_policy",
-                "errors": [
-                    f"Cannot return final_answer yet. Missing required tool action(s): {missing_required}."
-                ],
-                "repair_hint": (
-                    f"Complete the missing required action(s): {missing_required}. "
-                    "Then return final_answer."
-                ),
-            }
+            remaining_tools = get_remaining_tool_actions(metadata, trace)
+
+            blocking_missing = [
+                action for action in get_missing_required_base_actions(required, executed)
+                if action in remaining_tools
+            ]
+
+            if blocking_missing:
+                return {
+                    "ok": False,
+                    "target": "route_policy",
+                    "errors": [
+                        f"Cannot return final_answer yet. Missing required tool action(s): {blocking_missing}."
+                    ],
+                    "repair_hint": (
+                        f"Complete one of the missing required action(s): {blocking_missing}. "
+                        "Then return final_answer."
+                    ),
+                }
 
         if not required and allowed_tools:
             total_completed = sum(completed.values())
@@ -394,7 +489,7 @@ def check_route_aware_policy(
 def build_route_policy_guidance(
     metadata: Dict[str, Any],
     trace: Optional[List[Dict[str, Any]]],
-    min_score: float = 0.60,
+    min_score: float = ROUTE_CONFIDENCE_MIN_SCORE,
     min_margin: float = 0.15,
     min_tools_before_final_when_uncertain: int = 1,
 ) -> str:
@@ -410,6 +505,8 @@ def build_route_policy_guidance(
 
     allowed_tools = get_allowed_tool_actions(metadata)
     completed = count_completed_tool_actions(trace)
+    executed = count_executed_tool_actions(trace)
+    remaining_budget = get_remaining_tool_budget(metadata, trace)
 
     required = get_required_action_counts(
         metadata=metadata,
@@ -437,7 +534,9 @@ def build_route_policy_guidance(
         f"second_score={stats['second_score']:.4f}, "
         f"margin={stats['margin']:.4f}, confident={confident}"
     )
+    lines.append(f"Executed tool actions: {dict(executed)}")
     lines.append(f"Completed successful tool actions: {dict(completed)}")
+    lines.append(f"Remaining tool budget: {remaining_budget}")
     lines.append(f"Allowed tool actions: {allowed_tools}")
     lines.append(f"Allowed next actions now: {prompt_allowed}")
 
@@ -457,8 +556,9 @@ def build_route_policy_guidance(
             )
     else:
         lines.append(
-            "Route is flexible or uncertain. Choose the most useful allowed tool action. "
-            "Do not return final_answer before at least one verified tool result."
+            "Route is flexible. Choose the most useful allowed tool action within the remaining budget. "
+            "Do not repeat an already executed SQL/API call. "
+            "If enough evidence is available, return final_answer."
         )
 
     return "\n".join(lines)

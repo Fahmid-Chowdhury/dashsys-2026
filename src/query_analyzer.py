@@ -1,7 +1,8 @@
 import json
 import os
-from typing import Any, Dict, List
+from typing import Any, Dict, List, cast
 
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "ollama")
 MODEL = os.getenv("MODEL", "gemma4:latest")
 
 
@@ -121,6 +122,49 @@ def normalize_analysis(query: str, analysis: Dict[str, Any]) -> Dict[str, Any]:
         "reason": str(analysis.get("reason", "")).strip(),
         "subqueries": clean_subqueries,
     }
+    
+    
+def analyze_query_with_gemini(
+    query: str,
+    model: str | None = None,
+) -> Dict[str, Any]:
+    from google import genai
+
+    model = model or MODEL
+    client = genai.Client()
+
+    prompt = f"""
+You are a query decomposition assistant for a SQL/API data agent.
+
+Your job:
+- Decide whether the user query is simple or complex.
+- If simple, return one subquery equal to the original query.
+- If complex, split it into 2 to 4 smaller subqueries that can act as independent queries on its own.
+- Do not write SQL.
+- Do not invent API endpoints.
+- Do not answer the user query.
+- Keep subqueries short and retrieval-friendly.
+
+Return only JSON.
+
+Query:
+{query}
+""".strip()
+
+    response = client.models.generate_content(
+        model=model,
+        contents=prompt,
+        config={
+            "temperature": 0.0,
+            "response_mime_type": "application/json",
+            "response_json_schema": QUERY_ANALYSIS_SCHEMA,
+        },
+    )
+
+    raw = response.text or ""
+    analysis = safe_json_loads(raw)
+
+    return normalize_analysis(query, analysis)
 
 
 def analyze_query_with_ollama(
@@ -168,7 +212,7 @@ Analyze this query:
         format=QUERY_ANALYSIS_SCHEMA,
         options={
             "temperature": 0.0,
-            "num_ctx": 4096,
+            "num_ctx": 32768,
         },
         stream=False,
     )
@@ -188,6 +232,7 @@ def analyze_query(
     query: str,
     use_llm: bool = True,
     model: str | None = None,
+    provider: str | None = None,
 ) -> Dict[str, Any]:
     if not use_llm:
         return normalize_analysis(
@@ -205,7 +250,12 @@ def analyze_query(
             },
         )
 
+    provider = (provider or LLM_PROVIDER).lower().strip()
+
     try:
+        if provider == "gemini":
+            return analyze_query_with_gemini(query=query, model=model)
+
         return analyze_query_with_ollama(query=query, model=model)
 
     except Exception as e:

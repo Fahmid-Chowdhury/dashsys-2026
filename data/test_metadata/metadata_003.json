@@ -2,13 +2,21 @@
   "query": "List all segment audiences connected to the destination named 'Lives on West Coast', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
   "normalized_query": "List all segment audiences connected to the destination named 'Lives on West Coast', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
   "query_analysis": {
-    "complexity": "simple",
-    "confidence": 1.0,
-    "reason": "The query asks for a single set of details (audienceId, name, totalProfiles, etc.) related to one specific destination ('Lives on West Coast'). This can be handled by a single lookup/retrieval operation.",
+    "complexity": "complex",
+    "confidence": 0.9,
+    "reason": "The query requires first identifying a specific destination by name, then finding all segment audiences connected to that destination, and finally retrieving detailed attributes and usage metrics for each of those audiences.",
     "subqueries": [
       {
-        "query": "List all segment audiences connected to the destination named 'Lives on West Coast', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
-        "purpose": "other"
+        "query": "Find the destination ID for the destination named 'Lives on West Coast'",
+        "purpose": "entity_lookup"
+      },
+      {
+        "query": "Retrieve all segment audiences connected to the destination ID",
+        "purpose": "relationship_lookup"
+      },
+      {
+        "query": "Get audienceId, name, totalProfiles, createdTime, updatedTime, and the count of other audiences using each retrieved audience",
+        "purpose": "detail_lookup"
       }
     ]
   },
@@ -23,19 +31,21 @@
     ]
   },
   "route": {
-    "selected": "SQL_PLUS_API_CHAIN",
+    "selected": "SQL_PLUS_API",
     "votes": {
-      "SQL_PLUS_API_CHAIN": 0.4782,
-      "SQL_PLUS_API": 0.2819,
-      "API_ONLY": 0.2398
+      "SQL_PLUS_API": 0.4802,
+      "SQL_PLUS_API_CHAIN": 0.4363,
+      "API_ONLY": 0.0835
     },
     "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides."
   },
   "domain": {
     "selected": "segment",
     "votes": {
-      "segment": 0.7602,
-      "segment_definition": 0.2398
+      "segment": 0.7337,
+      "destination": 0.0977,
+      "schema": 0.0851,
+      "segment_definition": 0.0835
     },
     "reason": "Selected from top retrieved examples and domain votes."
   },
@@ -883,11 +893,24 @@
       "route": "SQL_PLUS_API_CHAIN",
       "domain": "segment",
       "intent": "count",
-      "score": 0.8598,
+      "score": 2.2529,
       "retrieval_sources": [
-        "original_query"
+        "original_query",
+        "subquery_2",
+        "subquery_3"
       ],
-      "matched_subqueries": [],
+      "matched_subqueries": [
+        {
+          "subquery": "Retrieve all segment audiences connected to the destination ID",
+          "purpose": "relationship_lookup",
+          "score": 0.6483746767044067
+        },
+        {
+          "subquery": "Get audienceId, name, totalProfiles, createdTime, updatedTime, and the count of other audiences using each retrieved audience",
+          "purpose": "detail_lookup",
+          "score": 0.7447240948677063
+        }
+      ],
       "sql_tables": [
         "dim_segment",
         "dim_target",
@@ -912,11 +935,24 @@
       "route": "SQL_PLUS_API",
       "domain": "segment",
       "intent": "list",
-      "score": 0.5068,
+      "score": 1.536,
       "retrieval_sources": [
-        "original_query"
+        "original_query",
+        "subquery_2",
+        "subquery_3"
       ],
-      "matched_subqueries": [],
+      "matched_subqueries": [
+        {
+          "subquery": "Retrieve all segment audiences connected to the destination ID",
+          "purpose": "relationship_lookup",
+          "score": 0.5269189476966858
+        },
+        {
+          "subquery": "Get audienceId, name, totalProfiles, createdTime, updatedTime, and the count of other audiences using each retrieved audience",
+          "purpose": "detail_lookup",
+          "score": 0.5022070407867432
+        }
+      ],
       "sql_tables": [
         "dim_segment",
         "dim_target",
@@ -932,6 +968,71 @@
       "gold_sql": "SELECT DISTINCT A.segmentid AS segment_id, A.name AS segment_name, D.targetId AS target_id, D.name AS target_name\nFROM dim_segment AS A\nJOIN hkg_br_segment_target AS AD ON A.segmentid = AD.segmentid\nJOIN dim_target AS D ON AD.targetId = D.targetId\nWHERE D.createdTime >= DATEADD(MONTH, -3, CURRENT_DATE)\nLIMIT 3",
       "gold_api": [
         "GET /data/foundation/audit/events?property=assetType==destination&limit=3"
+      ]
+    },
+    {
+      "query": "Export a list of all destinations in the b2b-prod sandbox, sorted by most recently modified, including all columns associated with each destination, and include the 'modified' column for validation.",
+      "route": "SQL_PLUS_API",
+      "domain": "destination",
+      "intent": "time_lookup",
+      "score": 0.5044,
+      "retrieval_sources": [
+        "subquery_1"
+      ],
+      "matched_subqueries": [
+        {
+          "subquery": "Find the destination ID for the destination named 'Lives on West Coast'",
+          "purpose": "entity_lookup",
+          "score": 0.504356324672699
+        }
+      ],
+      "sql_tables": [
+        "dim_target"
+      ],
+      "api_endpoints": [
+        "GET /data/foundation/flowservice/flows"
+      ],
+      "api_params": [
+        "limit",
+        "property",
+        "sort"
+      ],
+      "gold_sql": "SELECT D.targetId AS target_id,\n       D.dataflowName AS dataflow_name,\n       D.name AS target_name,\n       D.description,\n       D.state,\n       D.connectionSpecId AS connection_spec_id,\n       D.createdTime AS created_time,\n       D.updatedTime AS modified,\n       D.interval,\n       D.frequency\nFROM dim_target AS D\nORDER BY D.updatedTime DESC\nLIMIT 50",
+      "gold_api": [
+        "GET /data/foundation/flowservice/flows?limit=50&sort=updatedTime:desc&property=inheritedAttributes.properties.isDestinationFlow==true"
+      ]
+    },
+    {
+      "query": "Provide more details for the schema 'weRetail: Customer Actions'",
+      "route": "SQL_PLUS_API",
+      "domain": "schema",
+      "intent": "lookup",
+      "score": 0.4396,
+      "retrieval_sources": [
+        "subquery_1"
+      ],
+      "matched_subqueries": [
+        {
+          "subquery": "Find the destination ID for the destination named 'Lives on West Coast'",
+          "purpose": "entity_lookup",
+          "score": 0.43959784507751465
+        }
+      ],
+      "sql_tables": [
+        "dim_blueprint",
+        "hkg_br_blueprint_collection",
+        "hkg_br_blueprint_property"
+      ],
+      "api_endpoints": [
+        "GET /schemas"
+      ],
+      "api_params": [
+        "filter",
+        "limit"
+      ],
+      "gold_sql": "SELECT S.BLUEPRINTID AS blueprint_id,\n       S.NAME,\n       S.CLASS,\n       S.ISPROFILEENABLED,\n       S.UPDATEDTIME AS updated_time,\n       S.REQUIREDFIELDS AS required_fields,\n       COUNT(DISTINCT SD.COLLECTIONID) AS collection_count,\n       COUNT(DISTINCT SA.PROPERTY) AS property_count\nFROM DIM_BLUEPRINT AS S\nLEFT JOIN HKG_BR_BLUEPRINT_COLLECTION AS SD ON S.BLUEPRINTID = SD.BLUEPRINTID\nLEFT JOIN HKG_BR_BLUEPRINT_PROPERTY AS SA ON S.BLUEPRINTID = SA.BLUEPRINTID\nWHERE LOWER(S.NAME) = LOWER('weRetail: Customer Actions')\nGROUP BY S.BLUEPRINTID,\n         S.NAME,\n         S.CLASS,\n         S.ISPROFILEENABLED,\n         S.UPDATEDTIME,\n         S.REQUIREDFIELDS\nLIMIT 3",
+      "gold_api": [
+        "GET /schemas?limit=5&filter=name==weRetail: Customer Actions"
       ]
     },
     {
@@ -958,8 +1059,8 @@
     }
   ],
   "tool_budget": {
-    "max_sql_calls": 1,
-    "max_api_calls": 2,
+    "max_sql_calls": 2,
+    "max_api_calls": 3,
     "expected_steps": [
       "sql_query",
       "api_call"

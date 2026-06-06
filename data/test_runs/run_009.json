@@ -1,0 +1,55 @@
+{
+  "query": "List all datasets that use the schema 'hkg_adls_segment_profile_history'.",
+  "trace": [
+    {
+      "step": 1,
+      "action": "sql_query",
+      "sql": "SELECT * FROM dim_collection WHERE name = 'hkg_adls_segment_profile_history'",
+      "results": [
+        {
+          "ISIDENTITYENABLED": true,
+          "ROWCOUNT": 128,
+          "UPDATEDTIME": "2026-04-14T21:08:54.000+00:00",
+          "STORAGESIZEINBYTES": 168286,
+          "ISPROFILEENABLED": false,
+          "NAME": "hkg_adls_segment_profile_history",
+          "COLLECTIONID": "69c8d9c4e592a9df81deb244",
+          "ISSYSTEM": false,
+          "STORAGESIZEINMEGABYTES": 0.1604900360107422,
+          "ISTTLSET": false,
+          "CREATEDTIME": "2026-03-29T07:50:28.000+00:00",
+          "UPDATEDBY": "acp_foundation_dataTracker@AdobeID",
+          "TTLVALUE": "",
+          "CREATEDBY": "acp_foundation_queryService@AdobeID",
+          "CREATEDCLIENTID": "acp_foundation_queryService",
+          "LABELSCOLLECTION": "[]"
+        }
+      ],
+      "status": "success",
+      "warnings": [
+        "Skipped hkg_br_property_property.parquet: Invalid Input Error: Failed to read Parquet file 'DBSnapshot/hkg_br_property_property.parquet': Need at least one non-root column in the file"
+      ],
+      "error": null
+    }
+  ],
+  "answer": "From the local SQL snapshot, I found 1 dataset record(s):\n\n- hkg_adls_segment_profile_history",
+  "status": "success",
+  "debug_events": [
+    {
+      "step": 1,
+      "event": "llm_output",
+      "raw_output": "{\n  \"action\": \"sql_query\",\n  \"sql\": \"SELECT * FROM dim_collection WHERE name = 'hkg_adls_segment_profile_history'\"\n}"
+    },
+    {
+      "step": 1,
+      "event": "tool_executed",
+      "action": "sql_query",
+      "status": "success"
+    },
+    {
+      "step": 2,
+      "event": "llm_output",
+      "raw_output": "{\"action\": \"final_answer\", \"answer\": \"The dataset using the schema 'hkg_adls_segment_profile_history' is listed below:\\n\\n*   **Collection ID:** 69c8d9c4e592a9df81deb244\\n*   **Name:** hkg_adls_segment_profile_history\"}"
+    }
+  ]
+}

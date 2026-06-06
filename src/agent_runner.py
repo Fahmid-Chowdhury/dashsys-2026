@@ -1,6 +1,8 @@
 import json
 from collections import Counter
 from dataclasses import dataclass
+import os
+import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -13,6 +15,7 @@ from src.verifier import (
     validate_tool_call,
 )
 
+ROUTE_CONFIDENCE_MIN_SCORE = float(os.getenv("ROUTE_CONFIDENCE_MIN_SCORE", 0.40))
 
 @dataclass
 class AgentRunConfig:
@@ -25,7 +28,7 @@ class AgentRunConfig:
     prompt_output_dir: str = "data/agent_prompts"
     use_answer_builder: bool = True
     
-    route_confidence_min_score: float = 0.60
+    route_confidence_min_score: float = ROUTE_CONFIDENCE_MIN_SCORE
     route_confidence_min_margin: float = 0.15
     min_tools_before_final_when_uncertain: int = 1
 
@@ -84,7 +87,7 @@ class OllamaLLMClient(BaseLLMClient):
         self,
         model: str,
         temperature: float = 0.0,
-        num_ctx: int = 8192,
+        num_ctx: int = 32768,
         use_json_schema: bool = True,
     ):
         self.model = model
@@ -117,6 +120,54 @@ class OllamaLLMClient(BaseLLMClient):
             return response["message"]["content"]
 
         return response.message.content
+    
+
+class GeminiLLMClient(BaseLLMClient):
+    def __init__(
+        self,
+        model: str,
+        temperature: float = 0.0,
+        use_json_schema: bool = True,
+    ):
+        self.model = model
+        self.temperature = temperature
+        self.use_json_schema = use_json_schema
+
+    def _messages_to_prompt(self, messages: List[Dict[str, str]]) -> str:
+        parts = []
+
+        for message in messages:
+            role = message.get("role", "user").upper()
+            content = message.get("content", "")
+            parts.append(f"{role}:\n{content}")
+
+        parts.append(
+            "Return only valid JSON. Do not include markdown, comments, or explanations."
+        )
+
+        return "\n\n".join(parts)
+
+    def generate(self, messages: List[Dict[str, str]]) -> str:
+        from google import genai
+
+        client = genai.Client()
+        prompt = self._messages_to_prompt(messages)
+
+        config = {
+            "temperature": self.temperature,
+            "response_mime_type": "application/json",
+        }
+
+        if self.use_json_schema:
+            config["response_json_schema"] = ACTION_JSON_SCHEMA
+
+        response = client.models.generate_content(
+            model=self.model,
+            contents=prompt,
+            config=config,  # type: ignore[arg-type]
+        )
+
+        return response.text or ""
 
 
 class StaticLLMClient(BaseLLMClient):
@@ -142,6 +193,33 @@ class StaticLLMClient(BaseLLMClient):
         action = self.actions[self.index]
         self.index += 1
         return json.dumps(action, ensure_ascii=False)
+    
+    
+def create_llm_client(
+    provider: str,
+    model: str,
+    temperature: float = 0.0,
+) -> BaseLLMClient:
+    provider = provider.lower().strip()
+
+    if provider == "ollama":
+        return OllamaLLMClient(
+            model=model,
+            temperature=temperature,
+            num_ctx=32768,
+            use_json_schema=True,
+        )
+
+    if provider == "gemini":
+        return GeminiLLMClient(
+            model=model,
+            temperature=temperature,
+            use_json_schema=True,
+        )
+
+    raise ValueError(
+        f"Unknown LLM provider: {provider}. Use 'ollama' or 'gemini'."
+    )
 
 
 def save_json(data: Any, path: str | Path) -> None:
@@ -265,7 +343,7 @@ def get_route_confidence_stats(metadata: Dict[str, Any]) -> Dict[str, float]:
 
 def is_route_confident(
     metadata: Dict[str, Any],
-    min_score: float = 0.60,
+    min_score: float = ROUTE_CONFIDENCE_MIN_SCORE,
     min_margin: float = 0.15,
 ) -> bool:
     stats = get_route_confidence_stats(metadata)
@@ -431,6 +509,126 @@ def normalize_api_action(action: Dict[str, Any]) -> Dict[str, Any]:
 
 def count_trace_actions(trace: List[Dict[str, Any]], action_name: str) -> int:
     return sum(1 for step in trace if step.get("action") == action_name)
+
+
+def normalize_sql_for_signature(sql: str) -> str:
+    """
+    Normalizes SQL so exact duplicate queries are easier to detect.
+
+    This does not try to detect semantic duplicates.
+    It only catches the same SQL with whitespace/case differences.
+    """
+
+    sql = str(sql or "").strip()
+    sql = sql.rstrip(";")
+    sql = re.sub(r"\s+", " ", sql)
+    return sql.lower()
+
+
+def stable_json_dumps(value: Any) -> str:
+    """
+    Stable JSON string for comparing params/body safely.
+    """
+
+    return json.dumps(
+        value or {},
+        sort_keys=True,
+        ensure_ascii=False,
+        default=str,
+    )
+
+
+def build_tool_call_signature(action: Dict[str, Any]) -> Optional[str]:
+    """
+    Creates a stable signature for SQL/API actions.
+
+    Same SQL => same signature.
+    Same API method + URL + params + body => same signature.
+    """
+
+    action_name = action.get("action")
+
+    if action_name == "sql_query":
+        return f"sql_query::{normalize_sql_for_signature(action.get('sql', ''))}"
+
+    if action_name == "api_call":
+        method = str(action.get("method", "GET")).upper().strip()
+        url = str(action.get("url", "")).strip()
+        params = stable_json_dumps(action.get("params", {}) or {})
+        body = stable_json_dumps(action.get("body", {}) or {})
+
+        return f"api_call::{method}::{url}::params={params}::body={body}"
+
+    return None
+
+
+def build_executed_step_signature(step: Dict[str, Any]) -> Optional[str]:
+    """
+    Builds a signature from a previously executed trace step.
+    """
+
+    action_name = step.get("action")
+
+    if action_name == "sql_query":
+        return f"sql_query::{normalize_sql_for_signature(step.get('sql', ''))}"
+
+    if action_name == "api_call":
+        api_call = step.get("api_call", {}) or {}
+
+        method = str(api_call.get("method", "GET")).upper().strip()
+        url = str(api_call.get("url", "")).strip()
+        params = stable_json_dumps(api_call.get("params", {}) or {})
+        body = stable_json_dumps(api_call.get("body", {}) or {})
+
+        return f"api_call::{method}::{url}::params={params}::body={body}"
+
+    return None
+
+
+def check_duplicate_tool_call(
+    action: Dict[str, Any],
+    trace: List[Dict[str, Any]],
+) -> Optional[Dict[str, Any]]:
+    """
+    Rejects an exact duplicate SQL/API call before execution.
+
+    This prevents:
+    SQL A -> empty result -> same SQL A again
+
+    It still allows:
+    SQL A -> SQL B
+    SQL A -> API A
+    API A -> API B
+    """
+
+    action_name = action.get("action")
+
+    if action_name not in {"sql_query", "api_call"}:
+        return None
+
+    proposed_signature = build_tool_call_signature(action)
+
+    if not proposed_signature:
+        return None
+
+    for previous_step in trace:
+        previous_signature = build_executed_step_signature(previous_step)
+
+        if proposed_signature == previous_signature:
+            return {
+                "ok": False,
+                "target": "duplicate_tool_call",
+                "errors": [
+                    f"Duplicate {action_name} detected. This exact tool call was already executed."
+                ],
+                "repair_hint": (
+                    "Do not repeat the same SQL/API call. "
+                    "Choose a different SQL query, call a different valid API endpoint, "
+                    "or return final_answer using the verified results already available."
+                ),
+            }
+
+    return None
 
 
 class TraceRouterAgent:
@@ -699,6 +897,31 @@ class TraceRouterAgent:
                     break
 
                 continue
+
+
+            duplicate_error = check_duplicate_tool_call(
+                action=action,
+                trace=trace,
+            )
+
+            if duplicate_error:
+                verifier_feedback = duplicate_error
+                debug_events.append(
+                    {
+                        "step": step,
+                        "event": "duplicate_tool_call_rejected",
+                        "proposed_action": action,
+                        "feedback": verifier_feedback,
+                    }
+                )
+
+                repair_attempts += 1
+
+                if repair_attempts > self.config.max_repair_attempts:
+                    break
+
+                continue
+
 
             verification = validate_tool_call(
                 tool_call=action,

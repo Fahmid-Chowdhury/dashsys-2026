@@ -2,13 +2,25 @@
   "query": "List all segment audiences connected to the destination named 'Lives on East Coast', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
   "normalized_query": "List all segment audiences connected to the destination named 'Lives on East Coast', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
   "query_analysis": {
-    "complexity": "simple",
-    "confidence": 1.0,
-    "reason": "The query asks for a single set of attributes (audienceId, name, totalProfiles, createdTime, updatedTime, used in other audience count) related to a specific destination ('Lives on East Coast'). This can be handled by one focused lookup.",
+    "complexity": "complex",
+    "confidence": 0.95,
+    "reason": "The query requires resolving a destination by name, finding its connected segment audiences, retrieving detailed metadata for those audiences, and determining how many other audiences reference each of them.",
     "subqueries": [
       {
-        "query": "List all segment audiences connected to the destination named 'Lives on East Coast', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
-        "purpose": "other"
+        "query": "Find the destination ID for the destination named 'Lives on East Coast'",
+        "purpose": "entity_lookup"
+      },
+      {
+        "query": "List segment audiences connected to the destination 'Lives on East Coast'",
+        "purpose": "relationship_lookup"
+      },
+      {
+        "query": "Retrieve audienceId, name, totalProfiles, createdTime, and updatedTime for the connected audiences",
+        "purpose": "detail_lookup"
+      },
+      {
+        "query": "Get the count of other audiences that reference or use each connected audience",
+        "purpose": "count_lookup"
       }
     ]
   },
@@ -23,19 +35,21 @@
     ]
   },
   "route": {
-    "selected": "SQL_PLUS_API_CHAIN",
+    "selected": "SQL_PLUS_API",
     "votes": {
-      "SQL_PLUS_API_CHAIN": 0.4788,
-      "SQL_PLUS_API": 0.2814,
-      "API_ONLY": 0.2398
+      "SQL_PLUS_API": 0.4841,
+      "SQL_PLUS_API_CHAIN": 0.447,
+      "API_ONLY": 0.0689
     },
     "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides."
   },
   "domain": {
     "selected": "segment",
     "votes": {
-      "segment": 0.7602,
-      "segment_definition": 0.2398
+      "segment": 0.7807,
+      "destination": 0.0805,
+      "schema": 0.0699,
+      "segment_definition": 0.0689
     },
     "reason": "Selected from top retrieved examples and domain votes."
   },
@@ -883,11 +897,30 @@
       "route": "SQL_PLUS_API_CHAIN",
       "domain": "segment",
       "intent": "count",
-      "score": 0.864,
+      "score": 2.8073,
       "retrieval_sources": [
-        "original_query"
+        "original_query",
+        "subquery_2",
+        "subquery_3",
+        "subquery_4"
       ],
-      "matched_subqueries": [],
+      "matched_subqueries": [
+        {
+          "subquery": "List segment audiences connected to the destination 'Lives on East Coast'",
+          "purpose": "relationship_lookup",
+          "score": 0.6019725799560547
+        },
+        {
+          "subquery": "Retrieve audienceId, name, totalProfiles, createdTime, and updatedTime for the connected audiences",
+          "purpose": "detail_lookup",
+          "score": 0.6517460942268372
+        },
+        {
+          "subquery": "Get the count of other audiences that reference or use each connected audience",
+          "purpose": "count_lookup",
+          "score": 0.6896173357963562
+        }
+      ],
       "sql_tables": [
         "dim_segment",
         "dim_target",
@@ -912,11 +945,30 @@
       "route": "SQL_PLUS_API",
       "domain": "segment",
       "intent": "list",
-      "score": 0.5079,
+      "score": 2.0956,
       "retrieval_sources": [
-        "original_query"
+        "original_query",
+        "subquery_2",
+        "subquery_3",
+        "subquery_4"
       ],
-      "matched_subqueries": [],
+      "matched_subqueries": [
+        {
+          "subquery": "List segment audiences connected to the destination 'Lives on East Coast'",
+          "purpose": "relationship_lookup",
+          "score": 0.5703688859939575
+        },
+        {
+          "subquery": "Retrieve audienceId, name, totalProfiles, createdTime, and updatedTime for the connected audiences",
+          "purpose": "detail_lookup",
+          "score": 0.5013778209686279
+        },
+        {
+          "subquery": "Get the count of other audiences that reference or use each connected audience",
+          "purpose": "count_lookup",
+          "score": 0.5160223245620728
+        }
+      ],
       "sql_tables": [
         "dim_segment",
         "dim_target",
@@ -932,6 +984,71 @@
       "gold_sql": "SELECT DISTINCT A.segmentid AS segment_id, A.name AS segment_name, D.targetId AS target_id, D.name AS target_name\nFROM dim_segment AS A\nJOIN hkg_br_segment_target AS AD ON A.segmentid = AD.segmentid\nJOIN dim_target AS D ON AD.targetId = D.targetId\nWHERE D.createdTime >= DATEADD(MONTH, -3, CURRENT_DATE)\nLIMIT 3",
       "gold_api": [
         "GET /data/foundation/audit/events?property=assetType==destination&limit=3"
+      ]
+    },
+    {
+      "query": "Export a list of all destinations in the b2b-prod sandbox, sorted by most recently modified, including all columns associated with each destination, and include the 'modified' column for validation.",
+      "route": "SQL_PLUS_API",
+      "domain": "destination",
+      "intent": "time_lookup",
+      "score": 0.5055,
+      "retrieval_sources": [
+        "subquery_1"
+      ],
+      "matched_subqueries": [
+        {
+          "subquery": "Find the destination ID for the destination named 'Lives on East Coast'",
+          "purpose": "entity_lookup",
+          "score": 0.5054847002029419
+        }
+      ],
+      "sql_tables": [
+        "dim_target"
+      ],
+      "api_endpoints": [
+        "GET /data/foundation/flowservice/flows"
+      ],
+      "api_params": [
+        "limit",
+        "property",
+        "sort"
+      ],
+      "gold_sql": "SELECT D.targetId AS target_id,\n       D.dataflowName AS dataflow_name,\n       D.name AS target_name,\n       D.description,\n       D.state,\n       D.connectionSpecId AS connection_spec_id,\n       D.createdTime AS created_time,\n       D.updatedTime AS modified,\n       D.interval,\n       D.frequency\nFROM dim_target AS D\nORDER BY D.updatedTime DESC\nLIMIT 50",
+      "gold_api": [
+        "GET /data/foundation/flowservice/flows?limit=50&sort=updatedTime:desc&property=inheritedAttributes.properties.isDestinationFlow==true"
+      ]
+    },
+    {
+      "query": "Provide more details for the schema 'weRetail: Customer Actions'",
+      "route": "SQL_PLUS_API",
+      "domain": "schema",
+      "intent": "lookup",
+      "score": 0.4391,
+      "retrieval_sources": [
+        "subquery_1"
+      ],
+      "matched_subqueries": [
+        {
+          "subquery": "Find the destination ID for the destination named 'Lives on East Coast'",
+          "purpose": "entity_lookup",
+          "score": 0.439074844121933
+        }
+      ],
+      "sql_tables": [
+        "dim_blueprint",
+        "hkg_br_blueprint_collection",
+        "hkg_br_blueprint_property"
+      ],
+      "api_endpoints": [
+        "GET /schemas"
+      ],
+      "api_params": [
+        "filter",
+        "limit"
+      ],
+      "gold_sql": "SELECT S.BLUEPRINTID AS blueprint_id,\n       S.NAME,\n       S.CLASS,\n       S.ISPROFILEENABLED,\n       S.UPDATEDTIME AS updated_time,\n       S.REQUIREDFIELDS AS required_fields,\n       COUNT(DISTINCT SD.COLLECTIONID) AS collection_count,\n       COUNT(DISTINCT SA.PROPERTY) AS property_count\nFROM DIM_BLUEPRINT AS S\nLEFT JOIN HKG_BR_BLUEPRINT_COLLECTION AS SD ON S.BLUEPRINTID = SD.BLUEPRINTID\nLEFT JOIN HKG_BR_BLUEPRINT_PROPERTY AS SA ON S.BLUEPRINTID = SA.BLUEPRINTID\nWHERE LOWER(S.NAME) = LOWER('weRetail: Customer Actions')\nGROUP BY S.BLUEPRINTID,\n         S.NAME,\n         S.CLASS,\n         S.ISPROFILEENABLED,\n         S.UPDATEDTIME,\n         S.REQUIREDFIELDS\nLIMIT 3",
+      "gold_api": [
+        "GET /schemas?limit=5&filter=name==weRetail: Customer Actions"
       ]
     },
     {
@@ -958,8 +1075,8 @@
     }
   ],
   "tool_budget": {
-    "max_sql_calls": 1,
-    "max_api_calls": 2,
+    "max_sql_calls": 2,
+    "max_api_calls": 3,
     "expected_steps": [
       "sql_query",
       "api_call"

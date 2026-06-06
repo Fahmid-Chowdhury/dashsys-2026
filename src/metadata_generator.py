@@ -225,60 +225,6 @@ def normalize_retrieval_result(result: Dict[str, Any]) -> Dict[str, Any]:
     }
     
 
-def should_force_sql_only(
-    query: str,
-    analysis: Dict[str, Any],
-    route: str,
-    domain: str,
-    allowed_tables: Dict[str, Any],
-) -> bool:
-    if "SQL" not in route:
-        return False
-
-    if not allowed_tables:
-        return False
-
-    q = query.lower()
-    complexity = analysis.get("complexity", "simple")
-    purposes = {
-        item.get("purpose")
-        for item in analysis.get("subqueries", [])
-        if isinstance(item, dict)
-    }
-
-    local_kg_domains = {
-        "journey",
-        "segment",
-        "destination",
-        "dataset",
-        "schema",
-        "property",
-        "dataflow",
-    }
-
-    # Relationship/count/detail questions over KG snapshot should usually be SQL-only.
-    if domain in local_kg_domains:
-        if complexity == "complex":
-            return True
-
-        if purposes & {
-            "relationship_lookup",
-            "detail_lookup",
-            "count_lookup",
-            "entity_lookup",
-        }:
-            return True
-
-    # Time lookup for a named journey/campaign can be answered from dim_campaign.
-    if domain == "journey" and any(
-        word in q
-        for word in ["when", "published", "created", "updated", "modified"]
-    ):
-        return True
-
-    return False
-
-
 def endpoint_has_path_placeholder(endpoint_record: Dict[str, Any]) -> bool:
     path = endpoint_record.get("path", "") or ""
     return "{" in path and "}" in path
@@ -840,17 +786,6 @@ def generate_metadata(
         schema_index=schema_index,
         query=normalized_query,
     )
-    
-    if should_force_sql_only(
-        query=normalized_query,
-        analysis=analysis,
-        route=route,
-        domain=domain,
-        allowed_tables=allowed_tables,
-    ):
-        route = "SQL_ONLY"
-        route_info["selected"] = "SQL_ONLY"
-        route_info["reason"] += " Forced to SQL_ONLY because query analysis indicates local KG evidence is sufficient."
 
     join_candidates = select_join_candidates(
         allowed_tables=allowed_tables,
