@@ -1,0 +1,2996 @@
+{
+  "query": "List all audiences used by live journeys with 'paid' in the journey name.",
+  "trace": [
+    {
+      "step": 1,
+      "action": "api_call",
+      "api_call": {
+        "method": "GET",
+        "url": "/data/foundation/flowservice/flows",
+        "params": {
+          "limit": "50"
+        },
+        "status": "success",
+        "status_code": 200,
+        "result_preview": {
+          "items": [
+            {
+              "id": "a51ac2ea-f3f6-4d7e-965b-792cd1050913",
+              "createdAt": 1774771241774,
+              "updatedAt": 1780773804053,
+              "createdBy": "acp_foundation_connectors@AdobeID",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "acp_foundation_connectors",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "Flow for datasetId = a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "description": "Flow for datasetId = a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "flowSpec": {
+                "id": "65b03347-a49f-41b5-905a-4e3af924a8fb",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"f901b4fb-0000-0200-0000-6a2473ac0000\"",
+              "etag": "\"f901b4fb-0000-0200-0000-6a2473ac0000\"",
+              "sourceConnectionIds": [
+                "facfac56-c7d5-4bea-8f4d-5a2a5bd92a65"
+              ],
+              "targetConnectionIds": [
+                "8df6faca-d3d0-4661-9d4c-9d2707b9c991"
+              ],
+              "inheritedAttributes": {
+                "sourceConnections": [
+                  {
+                    "id": "facfac56-c7d5-4bea-8f4d-5a2a5bd92a65",
+                    "connectionSpec": {
+                      "id": "8a9c3494-9708-43d7-ae3f-cda01e5030e1",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileFragments",
+                      "id": "ups"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "8df6faca-d3d0-4661-9d4c-9d2707b9c991",
+                    "connectionSpec": {
+                      "id": "11c5c50a-1538-11ec-82a8-0242ac130003",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileSegments",
+                      "id": "ups"
+                    }
+                  }
+                ]
+              },
+              "options": null,
+              "scheduleParams": null,
+              "runs": "/runs?property=flowId==a51ac2ea-f3f6-4d7e-965b-792cd1050913",
+              "providerRefId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "lastOperation": {
+                "started": 1774771241774,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "ae834aae-9c03-44d6-a94b-71852ac2427c",
+                "state": "inProgress",
+                "startedAtUTC": 1780772400000
+              },
+              "labels": []
+            },
+            {
+              "id": "139bece0-5266-46bd-8ed3-fc1dd5eb5dd4",
+              "createdAt": 1774770853226,
+              "updatedAt": 1780762106904,
+              "createdBy": "CCBE21E6693750D80A495FBC@techacct.adobe.com",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "6c4ddfb5459c477ba86b3790550fa592",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "Activate segments to S3 Feed",
+              "description": "This operation creates a dataflow S3 Feed",
+              "flowSpec": {
+                "id": "bc463881-c428-4ae6-b0e2-9bbb92a8c366",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"f4016bc4-0000-0200-0000-6a2445fa0000\"",
+              "etag": "\"f4016bc4-0000-0200-0000-6a2445fa0000\"",
+              "sourceConnectionIds": [
+                "efd8fa4a-01cd-4448-960a-7050ed0e9a8c"
+              ],
+              "targetConnectionIds": [
+                "0f0d4404-fa7f-4f20-ba78-d693ac060de1"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isDestinationFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "efd8fa4a-01cd-4448-960a-7050ed0e9a8c",
+                    "connectionSpec": {
+                      "id": "8a9c3494-9708-43d7-ae3f-cda01e5030e1",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "f58e2926-fa08-4664-a0ed-57e1a6cb15a7",
+                      "connectionSpec": {
+                        "id": "8a9c3494-9708-43d7-ae3f-cda01e5030e1",
+                        "version": "1.0"
+                      }
+                    },
+                    "typeInfo": {
+                      "type": "ProfileFragments",
+                      "id": "ups"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "0f0d4404-fa7f-4f20-ba78-d693ac060de1",
+                    "connectionSpec": {
+                      "id": "4890fc95-5a1f-4983-94bb-e060c08e3f81",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "2816f8dc-e40d-4047-ba0a-787e1a8cabbd",
+                      "connectionSpec": {
+                        "id": "4890fc95-5a1f-4983-94bb-e060c08e3f81",
+                        "version": "1.0"
+                      }
+                    }
+                  }
+                ]
+              },
+              "transformations": [
+                {
+                  "name": "GeneralTransform",
+                  "params": {
+                    "segmentSelectors": {
+                      "selectors": [
+                        {
+                          "type": "PLATFORM_SEGMENT",
+                          "value": {
+                            "id": "f6b93428-c021-4058-a1a2-77c277aab564",
+                            "name": "Gender: Male",
+                            "filenameTemplate": "%DESTINATION_NAME%_%SEGMENT_ID%_%DATETIME(YYYYMMdd_HHmmss)%",
+                            "exportMode": "DAILY_FULL_EXPORT",
+                            "schedule": {
+                              "frequency": "DAILY",
+                              "triggerType": "SCHEDULED",
+                              "startDate": "2026-03-29",
+                              "startTime": "16:00"
+                            },
+                            "createTime": "1774770856",
+                            "updateTime": "1774770856"
+                          }
+                        }
+                      ]
+                    },
+                    "profileSelectors": {
+                      "selectors": [
+                        {
+                          "type": "JSON_PATH",
+                          "value": {
+                            "path": "person.name.firstName",
+                            "operator": "EXISTS",
+                            "mapping": {
+                              "sourceType": "text/x.schema-path",
+                              "source": "person.name.firstName",
+                              "destination": "person.name.firstName",
+                              "identity": false,
+                              "primaryIdentity": false,
+                              "functionVersion": 0,
+                              "sourceAttribute": "person.name.firstName",
+                              "destinationXdmPath": "person.name.firstName"
+                            }
+                          }
+                        },
+                        {
+                          "type": "JSON_PATH",
+                          "value": {
+                            "path": "personalEmail.address",
+                            "operator": "EXISTS",
+                            "mapping": {
+                              "sourceType": "text/x.schema-path",
+                              "source": "personalEmail.address",
+                              "destination": "personalEmail.address",
+                              "identity": false,
+                              "primaryIdentity": false,
+                              "functionVersion": 0,
+                              "sourceAttribute": "personalEmail.address",
+                              "destinationXdmPath": "personalEmail.address"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ],
+              "runs": "/runs?property=flowId==139bece0-5266-46bd-8ed3-fc1dd5eb5dd4",
+              "lastOperation": {
+                "started": 1774770855957,
+                "updated": 1774770868256,
+                "percentCompleted": 100.0,
+                "status": {
+                  "value": "completed",
+                  "properties": null,
+                  "errors": []
+                },
+                "ops": [
+                  {
+                    "op": "add",
+                    "path": "/transformations/0/params/segmentSelectors/selectors/-",
+                    "value": {
+                      "type": "PLATFORM_SEGMENT",
+                      "value": {
+                        "id": "f6b93428-c021-4058-a1a2-77c277aab564",
+                        "name": "Gender: Male",
+                        "filenameTemplate": "%DESTINATION_NAME%_%SEGMENT_ID%_%DATETIME(YYYYMMdd_HHmmss)%",
+                        "exportMode": "DAILY_FULL_EXPORT",
+                        "schedule": {
+                          "frequency": "DAILY",
+                          "startDate": "2026-03-29",
+                          "startTime": "16:00"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "op": "add",
+                    "path": "/transformations/0/params/profileSelectors/selectors/-",
+                    "value": {
+                      "type": "JSON_PATH",
+                      "value": {
+                        "operator": "EXISTS",
+                        "path": "person.name.firstName"
+                      }
+                    }
+                  },
+                  {
+                    "op": "add",
+                    "path": "/transformations/0/params/profileSelectors/selectors/-",
+                    "value": {
+                      "type": "JSON_PATH",
+                      "value": {
+                        "operator": "EXISTS",
+                        "path": "personalEmail.address"
+                      }
+                    }
+                  }
+                ],
+                "operation": "update"
+              },
+              "lastRunDetails": {
+                "id": "c76f14d1-ea92-4d62-a3d8-f0a2a5353898",
+                "state": "failed",
+                "startedAtUTC": 1780761980818,
+                "completedAtUTC": 1780762028336
+              },
+              "labels": []
+            },
+            {
+              "id": "24ec6023-c405-4cd4-99cb-e54dd8f0be62",
+              "createdAt": 1774857261390,
+              "updatedAt": 1780734030638,
+              "createdBy": "ups-dim-adapter@AdobeID",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "ups-dim-adapter",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "UPS Segmentation flow",
+              "description": "ups Segmentation flow",
+              "flowSpec": {
+                "id": "b443044a-1539-11ec-82a8-0242ac130003",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"e901982a-0000-0200-0000-6a23d84e0000\"",
+              "etag": "\"e901982a-0000-0200-0000-6a23d84e0000\"",
+              "sourceConnectionIds": [
+                "ab2b219a-8bba-4977-9a7b-5b34f19d0cf7"
+              ],
+              "targetConnectionIds": [
+                "fa917303-1b63-4f43-83c5-759dc207dad6"
+              ],
+              "inheritedAttributes": {
+                "sourceConnections": [
+                  {
+                    "id": "ab2b219a-8bba-4977-9a7b-5b34f19d0cf7",
+                    "connectionSpec": {
+                      "id": "8a9c3494-9708-43d7-ae3f-cda01e5030e1",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileFragments",
+                      "id": "ups"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "fa917303-1b63-4f43-83c5-759dc207dad6",
+                    "connectionSpec": {
+                      "id": "11c5c50a-1538-11ec-82a8-0242ac130003",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileSegments",
+                      "id": "ups"
+                    }
+                  }
+                ]
+              },
+              "options": null,
+              "scheduleParams": null,
+              "runs": "/runs?property=flowId==24ec6023-c405-4cd4-99cb-e54dd8f0be62",
+              "providerRefId": "87891E4066602D250A495F91@AdobeOrg:a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "lastOperation": {
+                "started": 1774857261390,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "6f16d40c-8311-4504-a8aa-8cba6c828b34",
+                "state": "success",
+                "startedAtUTC": 1780732380000,
+                "completedAtUTC": 1780733904000
+              },
+              "labels": []
+            },
+            {
+              "id": "89dd2400-2ac0-4660-a0c2-dcb9e15a66b6",
+              "createdAt": 1774770802827,
+              "updatedAt": 1780566146649,
+              "createdBy": "CCBE21E6693750D80A495FBC@techacct.adobe.com",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "6c4ddfb5459c477ba86b3790550fa592",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "Dataflow for Actions Computed Data via AWS S3 - 2026",
+              "description": "Dataflow for Actions Computed Data via AWS S3 - 2026",
+              "flowSpec": {
+                "id": "9753525b-82c7-4dce-8a9b-5ccfce2b9876",
+                "version": "1.0"
+              },
+              "state": "disabled",
+              "version": "\"b8017db4-0000-0200-0000-6a2148d70000\"",
+              "etag": "\"b8017db4-0000-0200-0000-6a2148d70000\"",
+              "sourceConnectionIds": [
+                "f1372172-3772-4059-a94e-d45b0b4e8c6e"
+              ],
+              "targetConnectionIds": [
+                "e24636da-fa15-4bc5-85be-78a9e9fc97bd"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "f1372172-3772-4059-a94e-d45b0b4e8c6e",
+                    "connectionSpec": {
+                      "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "184498ca-6481-4d6d-9d74-125084ce25fa",
+                      "connectionSpec": {
+                        "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                        "version": "1.0"
+                      }
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "e24636da-fa15-4bc5-85be-78a9e9fc97bd",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "scheduleParams": {
+                "startTime": "1774770822",
+                "frequency": "minute",
+                "interval": "15",
+                "backfill": true
+              },
+              "transformations": [
+                {
+                  "name": "Mapping",
+                  "params": {
+                    "mappingVersion": 0,
+                    "mappingId": "d4d3299532dc46b392c3c7030b66a164"
+                  }
+                }
+              ],
+              "runs": "/runs?property=flowId==89dd2400-2ac0-4660-a0c2-dcb9e15a66b6",
+              "lastOperation": {
+                "started": 1774770802827,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "e542f8f2-0ddc-4a1f-b715-addf934d59f0",
+                "state": "failed",
+                "startedAtUTC": 1780565941179,
+                "completedAtUTC": 1780566129012
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "experienceevent",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "a18b8831-2b89-4a0f-bdfe-5d5f66555d43",
+              "createdAt": 1774771038458,
+              "updatedAt": 1780565503015,
+              "createdBy": "CCBE21E6693750D80A495FBC@techacct.adobe.com",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "6c4ddfb5459c477ba86b3790550fa592",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "weRetail Events - May 2026",
+              "flowSpec": {
+                "id": "9753525b-82c7-4dce-8a9b-5ccfce2b9876",
+                "version": "1.0"
+              },
+              "state": "disabled",
+              "version": "\"b8010cb5-0000-0200-0000-6a2148e20000\"",
+              "etag": "\"b8010cb5-0000-0200-0000-6a2148e20000\"",
+              "sourceConnectionIds": [
+                "0675108f-da37-4d6c-a4a2-e9c8edf3de65"
+              ],
+              "targetConnectionIds": [
+                "1a037467-9e81-48b4-9115-18f6dc3808f8"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "0675108f-da37-4d6c-a4a2-e9c8edf3de65",
+                    "connectionSpec": {
+                      "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "184498ca-6481-4d6d-9d74-125084ce25fa",
+                      "connectionSpec": {
+                        "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                        "version": "1.0"
+                      }
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "1a037467-9e81-48b4-9115-18f6dc3808f8",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "scheduleParams": {
+                "startTime": "1774771058",
+                "frequency": "minute",
+                "interval": "15",
+                "backfill": true
+              },
+              "transformations": [
+                {
+                  "name": "Mapping",
+                  "params": {
+                    "mappingId": "17627e5fe2d14aa28e6644dc50f5b0b9",
+                    "mappingVersion": 0
+                  }
+                }
+              ],
+              "runs": "/runs?property=flowId==a18b8831-2b89-4a0f-bdfe-5d5f66555d43",
+              "lastOperation": {
+                "started": 1774771038458,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "543e37a4-0b98-4274-880f-7f59417a2fe9",
+                "state": "failed",
+                "startedAtUTC": 1780565277136,
+                "completedAtUTC": 1780565474962
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "experienceevent",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "5a776f0c-3e68-45de-a14e-1713df4ab980",
+              "createdAt": 1774771027820,
+              "updatedAt": 1780564598040,
+              "createdBy": "CCBE21E6693750D80A495FBC@techacct.adobe.com",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "6c4ddfb5459c477ba86b3790550fa592",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "weRetail CRM - May 2026",
+              "flowSpec": {
+                "id": "9753525b-82c7-4dce-8a9b-5ccfce2b9876",
+                "version": "1.0"
+              },
+              "state": "disabled",
+              "version": "\"b801d776-0000-0200-0000-6a2144540000\"",
+              "etag": "\"b801d776-0000-0200-0000-6a2144540000\"",
+              "sourceConnectionIds": [
+                "ddb0210a-d592-4e5f-abae-092cd61d6ec5"
+              ],
+              "targetConnectionIds": [
+                "fab28110-5467-4860-93e9-6f74f44730f8"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "ddb0210a-d592-4e5f-abae-092cd61d6ec5",
+                    "connectionSpec": {
+                      "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "184498ca-6481-4d6d-9d74-125084ce25fa",
+                      "connectionSpec": {
+                        "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                        "version": "1.0"
+                      }
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "fab28110-5467-4860-93e9-6f74f44730f8",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "scheduleParams": {
+                "startTime": "1774771047",
+                "frequency": "minute",
+                "interval": "15",
+                "backfill": true
+              },
+              "transformations": [
+                {
+                  "name": "Mapping",
+                  "params": {
+                    "mappingId": "5021ac3ee2604889972da4e401530dfe",
+                    "mappingVersion": 0
+                  }
+                }
+              ],
+              "runs": "/runs?property=flowId==5a776f0c-3e68-45de-a14e-1713df4ab980",
+              "lastOperation": {
+                "started": 1774771027820,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "4ad12553-b601-451f-bc8d-dd431b0e063e",
+                "state": "failed",
+                "startedAtUTC": 1780564376835,
+                "completedAtUTC": 1780564576346
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "profile",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "d02b782b-e586-454a-82df-7927d4d27a7c",
+              "createdAt": 1774771013847,
+              "updatedAt": 1780564583819,
+              "createdBy": "CCBE21E6693750D80A495FBC@techacct.adobe.com",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "6c4ddfb5459c477ba86b3790550fa592",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "weRetail Events - Apr 2026",
+              "flowSpec": {
+                "id": "9753525b-82c7-4dce-8a9b-5ccfce2b9876",
+                "version": "1.0"
+              },
+              "state": "disabled",
+              "version": "\"b8013d76-0000-0200-0000-6a2144480000\"",
+              "etag": "\"b8013d76-0000-0200-0000-6a2144480000\"",
+              "sourceConnectionIds": [
+                "e7d9a1a4-5155-4317-85ae-03962acd9fc9"
+              ],
+              "targetConnectionIds": [
+                "06858175-3e8d-4c6a-bf4c-a14fb5d28364"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "e7d9a1a4-5155-4317-85ae-03962acd9fc9",
+                    "connectionSpec": {
+                      "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "184498ca-6481-4d6d-9d74-125084ce25fa",
+                      "connectionSpec": {
+                        "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                        "version": "1.0"
+                      }
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "06858175-3e8d-4c6a-bf4c-a14fb5d28364",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "scheduleParams": {
+                "startTime": "1774771033",
+                "frequency": "minute",
+                "interval": "15",
+                "backfill": true
+              },
+              "transformations": [
+                {
+                  "name": "Mapping",
+                  "params": {
+                    "mappingId": "68badcd72b6145bfbe5a291b909e0471",
+                    "mappingVersion": 0
+                  }
+                }
+              ],
+              "runs": "/runs?property=flowId==d02b782b-e586-454a-82df-7927d4d27a7c",
+              "lastOperation": {
+                "started": 1774771013847,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "52bd61e4-b468-4e95-966e-741d46e0455b",
+                "state": "failed",
+                "startedAtUTC": 1780564353440,
+                "completedAtUTC": 1780564563103
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "experienceevent",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "ad0f30ac-1d5b-45bb-88db-7ce357b59dc0",
+              "createdAt": 1774770996628,
+              "updatedAt": 1780564559322,
+              "createdBy": "CCBE21E6693750D80A495FBC@techacct.adobe.com",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "6c4ddfb5459c477ba86b3790550fa592",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "weRetail CRM - Apr 2026",
+              "flowSpec": {
+                "id": "9753525b-82c7-4dce-8a9b-5ccfce2b9876",
+                "version": "1.0"
+              },
+              "state": "disabled",
+              "version": "\"b801a775-0000-0200-0000-6a21443c0000\"",
+              "etag": "\"b801a775-0000-0200-0000-6a21443c0000\"",
+              "sourceConnectionIds": [
+                "6fcbcfc3-c838-46f6-bf83-d92e065a049a"
+              ],
+              "targetConnectionIds": [
+                "b571c9f1-81d9-4251-9a8c-e353d6871d57"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "6fcbcfc3-c838-46f6-bf83-d92e065a049a",
+                    "connectionSpec": {
+                      "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "184498ca-6481-4d6d-9d74-125084ce25fa",
+                      "connectionSpec": {
+                        "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                        "version": "1.0"
+                      }
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "b571c9f1-81d9-4251-9a8c-e353d6871d57",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "scheduleParams": {
+                "startTime": "1774771016",
+                "frequency": "minute",
+                "interval": "15",
+                "backfill": true
+              },
+              "transformations": [
+                {
+                  "name": "Mapping",
+                  "params": {
+                    "mappingId": "c55813b98cbb4bb485d89ba0c700763e",
+                    "mappingVersion": 0
+                  }
+                }
+              ],
+              "runs": "/runs?property=flowId==ad0f30ac-1d5b-45bb-88db-7ce357b59dc0",
+              "lastOperation": {
+                "started": 1774770996628,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "998f9fea-5ee5-4676-bb1e-f3938ad729ba",
+                "state": "failed",
+                "startedAtUTC": 1780564337986,
+                "completedAtUTC": 1780564542913
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "profile",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "96dbf952-6ecd-4728-ab92-188a2e77abb0",
+              "createdAt": 1774770984991,
+              "updatedAt": 1780564557161,
+              "createdBy": "CCBE21E6693750D80A495FBC@techacct.adobe.com",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "6c4ddfb5459c477ba86b3790550fa592",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "weRetail Events - Mar 2026",
+              "flowSpec": {
+                "id": "9753525b-82c7-4dce-8a9b-5ccfce2b9876",
+                "version": "1.0"
+              },
+              "state": "disabled",
+              "version": "\"b801e274-0000-0200-0000-6a21442e0000\"",
+              "etag": "\"b801e274-0000-0200-0000-6a21442e0000\"",
+              "sourceConnectionIds": [
+                "2f7b56ab-21d6-4c01-9a89-b8dcc20394b7"
+              ],
+              "targetConnectionIds": [
+                "891ffffa-1267-4bfb-a60b-2f872b1fc5b1"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "2f7b56ab-21d6-4c01-9a89-b8dcc20394b7",
+                    "connectionSpec": {
+                      "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "184498ca-6481-4d6d-9d74-125084ce25fa",
+                      "connectionSpec": {
+                        "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                        "version": "1.0"
+                      }
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "891ffffa-1267-4bfb-a60b-2f872b1fc5b1",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "scheduleParams": {
+                "startTime": "1774771004",
+                "frequency": "minute",
+                "interval": "15",
+                "backfill": true
+              },
+              "transformations": [
+                {
+                  "name": "Mapping",
+                  "params": {
+                    "mappingId": "80966eb2727d4f61a2adcf895851cfea",
+                    "mappingVersion": 0
+                  }
+                }
+              ],
+              "runs": "/runs?property=flowId==96dbf952-6ecd-4728-ab92-188a2e77abb0",
+              "lastOperation": {
+                "started": 1774770984991,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "e51aadcd-fa3d-4505-8205-2b41ca1de621",
+                "state": "failed",
+                "startedAtUTC": 1780564323971,
+                "completedAtUTC": 1780564536087
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "experienceevent",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "920a46e3-003b-436f-81df-4a4e2aa398df",
+              "createdAt": 1774770974300,
+              "updatedAt": 1780564545016,
+              "createdBy": "CCBE21E6693750D80A495FBC@techacct.adobe.com",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "6c4ddfb5459c477ba86b3790550fa592",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "weRetail CRM - Mar 2026",
+              "flowSpec": {
+                "id": "9753525b-82c7-4dce-8a9b-5ccfce2b9876",
+                "version": "1.0"
+              },
+              "state": "disabled",
+              "version": "\"b8013074-0000-0200-0000-6a2144220000\"",
+              "etag": "\"b8013074-0000-0200-0000-6a2144220000\"",
+              "sourceConnectionIds": [
+                "c2bf77ce-e543-48f5-bb29-ba4c54f39e0d"
+              ],
+              "targetConnectionIds": [
+                "3ff4fd93-24f8-434b-9c16-a89c2539090f"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "c2bf77ce-e543-48f5-bb29-ba4c54f39e0d",
+                    "connectionSpec": {
+                      "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "184498ca-6481-4d6d-9d74-125084ce25fa",
+                      "connectionSpec": {
+                        "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                        "version": "1.0"
+                      }
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "3ff4fd93-24f8-434b-9c16-a89c2539090f",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "scheduleParams": {
+                "startTime": "1774770993",
+                "frequency": "minute",
+                "interval": "15",
+                "backfill": true
+              },
+              "transformations": [
+                {
+                  "name": "Mapping",
+                  "params": {
+                    "mappingId": "9cc1ff713e7c4986b6ec294a302e1186",
+                    "mappingVersion": 0
+                  }
+                }
+              ],
+              "runs": "/runs?property=flowId==920a46e3-003b-436f-81df-4a4e2aa398df",
+              "lastOperation": {
+                "started": 1774770974300,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "e8813ccf-af09-4bc3-8aff-b2c03a5e6ccb",
+                "state": "failed",
+                "startedAtUTC": 1780564312358,
+                "completedAtUTC": 1780564523903
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "profile",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "f971dedc-8837-4234-94c9-8074f372636e",
+              "createdAt": 1774770963098,
+              "updatedAt": 1780564542922,
+              "createdBy": "CCBE21E6693750D80A495FBC@techacct.adobe.com",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "6c4ddfb5459c477ba86b3790550fa592",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "weRetail Events - Feb 2026",
+              "flowSpec": {
+                "id": "9753525b-82c7-4dce-8a9b-5ccfce2b9876",
+                "version": "1.0"
+              },
+              "state": "disabled",
+              "version": "\"b8017b73-0000-0200-0000-6a2144160000\"",
+              "etag": "\"b8017b73-0000-0200-0000-6a2144160000\"",
+              "sourceConnectionIds": [
+                "98ae3d50-5c5f-440f-8759-76df4d0d39b8"
+              ],
+              "targetConnectionIds": [
+                "d9760bed-d80b-4c65-9fea-16cc04773ed6"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "98ae3d50-5c5f-440f-8759-76df4d0d39b8",
+                    "connectionSpec": {
+                      "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "184498ca-6481-4d6d-9d74-125084ce25fa",
+                      "connectionSpec": {
+                        "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                        "version": "1.0"
+                      }
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "d9760bed-d80b-4c65-9fea-16cc04773ed6",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "scheduleParams": {
+                "startTime": "1774770982",
+                "frequency": "minute",
+                "interval": "15",
+                "backfill": true
+              },
+              "transformations": [
+                {
+                  "name": "Mapping",
+                  "params": {
+                    "mappingId": "9cba6001f7d04e1c94f0fc3e7519811c",
+                    "mappingVersion": 0
+                  }
+                }
+              ],
+              "runs": "/runs?property=flowId==f971dedc-8837-4234-94c9-8074f372636e",
+              "lastOperation": {
+                "started": 1774770963098,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "459f6dfc-0053-4840-b132-a0ae003b607f",
+                "state": "failed",
+                "startedAtUTC": 1780564307573,
+                "completedAtUTC": 1780564520902
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "experienceevent",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "f115f216-cfcd-4601-8824-424bcc3b2a3d",
+              "createdAt": 1774770952538,
+              "updatedAt": 1780564530690,
+              "createdBy": "CCBE21E6693750D80A495FBC@techacct.adobe.com",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "6c4ddfb5459c477ba86b3790550fa592",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "weRetail CRM - Feb 2026",
+              "flowSpec": {
+                "id": "9753525b-82c7-4dce-8a9b-5ccfce2b9876",
+                "version": "1.0"
+              },
+              "state": "disabled",
+              "version": "\"b801e972-0000-0200-0000-6a21440b0000\"",
+              "etag": "\"b801e972-0000-0200-0000-6a21440b0000\"",
+              "sourceConnectionIds": [
+                "b8a294a3-65c0-4b65-b624-2f3cd3a717e9"
+              ],
+              "targetConnectionIds": [
+                "c18ecf8d-aade-4ca3-b358-d7f1d31bdc36"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "b8a294a3-65c0-4b65-b624-2f3cd3a717e9",
+                    "connectionSpec": {
+                      "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "184498ca-6481-4d6d-9d74-125084ce25fa",
+                      "connectionSpec": {
+                        "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                        "version": "1.0"
+                      }
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "c18ecf8d-aade-4ca3-b358-d7f1d31bdc36",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "scheduleParams": {
+                "startTime": "1774770972",
+                "frequency": "minute",
+                "interval": "15",
+                "backfill": true
+              },
+              "transformations": [
+                {
+                  "name": "Mapping",
+                  "params": {
+                    "mappingId": "86f94fe7dfdf4080b8a0a581d6567725",
+                    "mappingVersion": 0
+                  }
+                }
+              ],
+              "runs": "/runs?property=flowId==f115f216-cfcd-4601-8824-424bcc3b2a3d",
+              "lastOperation": {
+                "started": 1774770952538,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "26ad85c5-6f6b-4164-8c70-f5f46a227a66",
+                "state": "failed",
+                "startedAtUTC": 1780564291704,
+                "completedAtUTC": 1780564514693
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "profile",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "6fa00cbc-9fe9-41e7-82d9-84329b3d3c95",
+              "createdAt": 1774770942339,
+              "updatedAt": 1780564522341,
+              "createdBy": "CCBE21E6693750D80A495FBC@techacct.adobe.com",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "6c4ddfb5459c477ba86b3790550fa592",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "weRetail Events - Jan 2026",
+              "flowSpec": {
+                "id": "9753525b-82c7-4dce-8a9b-5ccfce2b9876",
+                "version": "1.0"
+              },
+              "state": "disabled",
+              "version": "\"b8013a72-0000-0200-0000-6a2143fe0000\"",
+              "etag": "\"b8013a72-0000-0200-0000-6a2143fe0000\"",
+              "sourceConnectionIds": [
+                "a9c8c667-f2ec-479c-922e-17378a200fec"
+              ],
+              "targetConnectionIds": [
+                "548f761b-7d72-4c64-b586-c529a3e8abc0"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "a9c8c667-f2ec-479c-922e-17378a200fec",
+                    "connectionSpec": {
+                      "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "184498ca-6481-4d6d-9d74-125084ce25fa",
+                      "connectionSpec": {
+                        "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                        "version": "1.0"
+                      }
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "548f761b-7d72-4c64-b586-c529a3e8abc0",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "scheduleParams": {
+                "startTime": "1774770962",
+                "frequency": "minute",
+                "interval": "15",
+                "backfill": true
+              },
+              "transformations": [
+                {
+                  "name": "Mapping",
+                  "params": {
+                    "mappingId": "37d94dfe778e4e968a9fe48d3a9ede5e",
+                    "mappingVersion": 0
+                  }
+                }
+              ],
+              "runs": "/runs?property=flowId==6fa00cbc-9fe9-41e7-82d9-84329b3d3c95",
+              "lastOperation": {
+                "started": 1774770942339,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "63e06da8-ec00-4117-885e-2e9e8a6a70b9",
+                "state": "failed",
+                "startedAtUTC": 1780564284817,
+                "completedAtUTC": 1780564496880
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "experienceevent",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "70bad5c9-87b3-4c85-a0eb-8f2e830eb439",
+              "createdAt": 1774770918613,
+              "updatedAt": 1780564494151,
+              "createdBy": "CCBE21E6693750D80A495FBC@techacct.adobe.com",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "6c4ddfb5459c477ba86b3790550fa592",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "weRetail Events - Dec 2025",
+              "flowSpec": {
+                "id": "9753525b-82c7-4dce-8a9b-5ccfce2b9876",
+                "version": "1.0"
+              },
+              "state": "disabled",
+              "version": "\"b8010371-0000-0200-0000-6a2143e80000\"",
+              "etag": "\"b8010371-0000-0200-0000-6a2143e80000\"",
+              "sourceConnectionIds": [
+                "44db84aa-079a-4868-bb7f-1be11f3f235b"
+              ],
+              "targetConnectionIds": [
+                "0fda1911-952a-4599-b7e4-72eb5c791922"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "44db84aa-079a-4868-bb7f-1be11f3f235b",
+                    "connectionSpec": {
+                      "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "184498ca-6481-4d6d-9d74-125084ce25fa",
+                      "connectionSpec": {
+                        "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                        "version": "1.0"
+                      }
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "0fda1911-952a-4599-b7e4-72eb5c791922",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "scheduleParams": {
+                "startTime": "1774770938",
+                "frequency": "minute",
+                "interval": "15",
+                "backfill": true
+              },
+              "transformations": [
+                {
+                  "name": "Mapping",
+                  "params": {
+                    "mappingId": "f4039f6946dc41e28163bd012bb8a9e0",
+                    "mappingVersion": 0
+                  }
+                }
+              ],
+              "runs": "/runs?property=flowId==70bad5c9-87b3-4c85-a0eb-8f2e830eb439",
+              "lastOperation": {
+                "started": 1774770918613,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "6ea78ccf-2012-4d3e-94d3-45abbe0deb7a",
+                "state": "failed",
+                "startedAtUTC": 1780564260170,
+                "completedAtUTC": 1780564472724
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "experienceevent",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "5a161a32-2af2-455a-80b8-64e3d4316dc7",
+              "createdAt": 1774770929374,
+              "updatedAt": 1780564494046,
+              "createdBy": "CCBE21E6693750D80A495FBC@techacct.adobe.com",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "6c4ddfb5459c477ba86b3790550fa592",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "weRetail CRM - Jan 2026",
+              "flowSpec": {
+                "id": "9753525b-82c7-4dce-8a9b-5ccfce2b9876",
+                "version": "1.0"
+              },
+              "state": "disabled",
+              "version": "\"b8018d71-0000-0200-0000-6a2143f20000\"",
+              "etag": "\"b8018d71-0000-0200-0000-6a2143f20000\"",
+              "sourceConnectionIds": [
+                "499cbb3f-5545-47f2-8790-2e1a30caf50d"
+              ],
+              "targetConnectionIds": [
+                "ce68b838-2dab-49ce-b821-22d645f2b8c3"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "499cbb3f-5545-47f2-8790-2e1a30caf50d",
+                    "connectionSpec": {
+                      "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "184498ca-6481-4d6d-9d74-125084ce25fa",
+                      "connectionSpec": {
+                        "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                        "version": "1.0"
+                      }
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "ce68b838-2dab-49ce-b821-22d645f2b8c3",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "scheduleParams": {
+                "startTime": "1774770949",
+                "frequency": "minute",
+                "interval": "15",
+                "backfill": true
+              },
+              "transformations": [
+                {
+                  "name": "Mapping",
+                  "params": {
+                    "mappingId": "c790c64a77ad49779ac5e7cf4bad92c7",
+                    "mappingVersion": 0
+                  }
+                }
+              ],
+              "runs": "/runs?property=flowId==5a161a32-2af2-455a-80b8-64e3d4316dc7",
+              "lastOperation": {
+                "started": 1774770929374,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "5ef5450e-a0bf-4362-a986-63ea0c43ddd3",
+                "state": "failed",
+                "startedAtUTC": 1780564269446,
+                "completedAtUTC": 1780564474560
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "profile",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "d3f36c87-88dc-4e94-999e-242928b76d9b",
+              "createdAt": 1774770907496,
+              "updatedAt": 1780564469814,
+              "createdBy": "CCBE21E6693750D80A495FBC@techacct.adobe.com",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "6c4ddfb5459c477ba86b3790550fa592",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "weRetail CRM - Dec 2025",
+              "flowSpec": {
+                "id": "9753525b-82c7-4dce-8a9b-5ccfce2b9876",
+                "version": "1.0"
+              },
+              "state": "disabled",
+              "version": "\"b8017770-0000-0200-0000-6a2143dd0000\"",
+              "etag": "\"b8017770-0000-0200-0000-6a2143dd0000\"",
+              "sourceConnectionIds": [
+                "fa9d5e71-cbad-499a-be11-1f4786b6ac53"
+              ],
+              "targetConnectionIds": [
+                "130d264a-f96c-49c9-9980-9fd8177b8816"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "fa9d5e71-cbad-499a-be11-1f4786b6ac53",
+                    "connectionSpec": {
+                      "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "184498ca-6481-4d6d-9d74-125084ce25fa",
+                      "connectionSpec": {
+                        "id": "ecadc60c-7455-4d87-84dc-2a0e293d997b",
+                        "version": "1.0"
+                      }
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "130d264a-f96c-49c9-9980-9fd8177b8816",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "scheduleParams": {
+                "startTime": "1774770927",
+                "frequency": "minute",
+                "interval": "15",
+                "backfill": true
+              },
+              "transformations": [
+                {
+                  "name": "Mapping",
+                  "params": {
+                    "mappingId": "38f40d3655d8415795d94a0516c8be4a",
+                    "mappingVersion": 0
+                  }
+                }
+              ],
+              "runs": "/runs?property=flowId==d3f36c87-88dc-4e94-999e-242928b76d9b",
+              "lastOperation": {
+                "started": 1774770907496,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "d4b02385-f778-4827-8fe6-a47dba925a50",
+                "state": "failed",
+                "startedAtUTC": 1780564249162,
+                "completedAtUTC": 1780564453560
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "profile",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "fed0bbc2-2210-4f3b-a6f0-59cfcb93083e",
+              "createdAt": 1774797721932,
+              "updatedAt": 1780474541756,
+              "createdBy": "ups-dim-adapter@AdobeID",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "ups-dim-adapter",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "UPS Export flow",
+              "description": "ups Export flow",
+              "flowSpec": {
+                "id": "7f7a0a52-435f-11ec-81d3-0242ac130003",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"a0017a99-0000-0200-0000-6a1fe2ad0000\"",
+              "etag": "\"a0017a99-0000-0200-0000-6a1fe2ad0000\"",
+              "sourceConnectionIds": [
+                "ad0eaefb-f7cd-4137-914a-a6e065501b70"
+              ],
+              "targetConnectionIds": [
+                "87089e4a-2c78-4f28-bb65-8d6a98ba005f"
+              ],
+              "inheritedAttributes": {
+                "sourceConnections": [
+                  {
+                    "id": "ad0eaefb-f7cd-4137-914a-a6e065501b70",
+                    "connectionSpec": {
+                      "id": "8a9c3494-9708-43d7-ae3f-cda01e5030e1",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileFragments",
+                      "id": "ups"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "87089e4a-2c78-4f28-bb65-8d6a98ba005f",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "options": null,
+              "scheduleParams": null,
+              "runs": "/runs?property=flowId==fed0bbc2-2210-4f3b-a6f0-59cfcb93083e",
+              "providerRefId": "87891E4066602D250A495F91@AdobeOrg:a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "lastOperation": {
+                "started": 1774797721932,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "5095fa4e-2a7e-404d-a412-f251e4c28ffa",
+                "state": "queued",
+                "startedAtUTC": 1780474533905
+              },
+              "labels": []
+            },
+            {
+              "id": "cc74e797-54e2-4a5f-ae56-24abb70af9e5",
+              "createdAt": 1774895714913,
+              "updatedAt": 1780111598121,
+              "createdBy": "aep-lakehouse-ttl@AdobeID",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "aep-lakehouse-ttl",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "Lakehouse TTL Flow",
+              "flowSpec": {
+                "id": "65443671-9435-4c44-8ee2-1e72cbd321d0",
+                "version": "1"
+              },
+              "state": "enabled",
+              "version": "\"3e015246-0000-0200-0000-6a1a58ee0000\"",
+              "etag": "\"3e015246-0000-0200-0000-6a1a58ee0000\"",
+              "sourceConnectionIds": [
+                "aba2dc46-c9cb-4e45-a65d-3c37dc36c1e1"
+              ],
+              "targetConnectionIds": [
+                "ca08c413-4a6d-42d0-ad70-013ce5660b96"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "aba2dc46-c9cb-4e45-a65d-3c37dc36c1e1",
+                    "connectionSpec": {
+                      "id": "ffe128a4-5e79-46e0-ae48-84537e60bd8c",
+                      "version": "1"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "ca08c413-4a6d-42d0-ad70-013ce5660b96",
+                    "connectionSpec": {
+                      "id": "ffe128a4-5e79-46e0-ae48-84537e60bd8c",
+                      "version": "1"
+                    }
+                  }
+                ]
+              },
+              "runs": "/runs?property=flowId==cc74e797-54e2-4a5f-ae56-24abb70af9e5",
+              "providerRefId": "69c8d6c05a734aa755eb63cc",
+              "lastOperation": {
+                "started": 1774895714913,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "112fd89e-e1bd-4aca-a206-74e7aa8a3a93",
+                "state": "success",
+                "startedAtUTC": 1780111590201,
+                "completedAtUTC": 1780111595169
+              },
+              "labels": []
+            },
+            {
+              "id": "d1841419-7002-4a52-989f-84eebb4cc819",
+              "createdAt": 1774836401501,
+              "updatedAt": 1777090329895,
+              "createdBy": "acp_foundation_connectors@AdobeID",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "acp_foundation_connectors",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "Datalake to UPS Flow",
+              "description": "ups flow",
+              "flowSpec": {
+                "id": "8fa66a4c-ab08-4da9-8a89-ef5be0dad9dc",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"c8005bef-0000-0200-0000-69ec3f190000\"",
+              "etag": "\"c8005bef-0000-0200-0000-69ec3f190000\"",
+              "sourceConnectionIds": [
+                "c895f456-6df1-4853-8538-3824d6d746f7"
+              ],
+              "targetConnectionIds": [
+                "5b667fbd-c65c-4208-acf7-147d90eed536",
+                "ba306b78-699b-43ba-935d-4b2e29d3245a"
+              ],
+              "inheritedAttributes": {
+                "sourceConnections": [
+                  {
+                    "id": "c895f456-6df1-4853-8538-3824d6d746f7",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "5b667fbd-c65c-4208-acf7-147d90eed536",
+                    "connectionSpec": {
+                      "id": "8a9c3494-9708-43d7-ae3f-cda01e5030e1",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileFragments",
+                      "id": "ups"
+                    }
+                  },
+                  {
+                    "id": "ba306b78-699b-43ba-935d-4b2e29d3245a",
+                    "connectionSpec": {
+                      "id": "aa27ae5d-f0ac-4f87-ab76-9c3dc8de182b",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileFragmentsAtlas",
+                      "id": "upsAtlas"
+                    }
+                  }
+                ]
+              },
+              "runs": "/runs?property=flowId==d1841419-7002-4a52-989f-84eebb4cc819",
+              "providerRefId": "69c8da5b3a32a2f0b3544b0d",
+              "lastOperation": {
+                "started": 1774836401501,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "afa5357b-a2d5-4d2b-9dd3-6fb76e1bcab7",
+                "state": "success",
+                "startedAtUTC": 1777083900225,
+                "completedAtUTC": 1777090312926
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "profile",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "162a0a20-fe6c-46cd-90d1-4d4aab4d0c7f",
+              "createdAt": 1774836400944,
+              "updatedAt": 1777086529506,
+              "createdBy": "acp_foundation_connectors@AdobeID",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "acp_foundation_connectors",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "Datalake to UIS Flow",
+              "description": "UIS flow",
+              "flowSpec": {
+                "id": "09ecd1cf-979f-4a8e-ba4c-b119e5fc144e",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"c80024c2-0000-0200-0000-69ec30410000\"",
+              "etag": "\"c80024c2-0000-0200-0000-69ec30410000\"",
+              "sourceConnectionIds": [
+                "4271f2bd-db42-4f56-a1d8-b5947cd03c6d"
+              ],
+              "targetConnectionIds": [
+                "3435e67b-cbad-43be-819f-01d7e5bc8b14",
+                "431f7b82-fff3-4d50-a8e1-1b566b3d787d"
+              ],
+              "inheritedAttributes": {
+                "sourceConnections": [
+                  {
+                    "id": "4271f2bd-db42-4f56-a1d8-b5947cd03c6d",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "3435e67b-cbad-43be-819f-01d7e5bc8b14",
+                    "connectionSpec": {
+                      "id": "d7231b5f-2575-4b03-a02c-79b43155fbd5",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "IdentityGraphs",
+                      "id": "graphs"
+                    }
+                  },
+                  {
+                    "id": "431f7b82-fff3-4d50-a8e1-1b566b3d787d",
+                    "connectionSpec": {
+                      "id": "9d0bb460-1525-41c8-b897-5581dc45e333",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "Identities",
+                      "id": "identities"
+                    }
+                  }
+                ]
+              },
+              "runs": "/runs?property=flowId==162a0a20-fe6c-46cd-90d1-4d4aab4d0c7f",
+              "providerRefId": "69c8da5b3a32a2f0b3544b0d",
+              "lastOperation": {
+                "started": 1774836400944,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "ed2a7011-8d80-4d24-8a17-973997c1061a",
+                "state": "success",
+                "startedAtUTC": 1777083900278,
+                "completedAtUTC": 1777086522000
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "profile",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "01445ce5-737c-4b28-a5d6-11dfde07e091",
+              "createdAt": 1774770838809,
+              "updatedAt": 1776560486455,
+              "createdBy": "CCBE21E6693750D80A495FBC@techacct.adobe.com",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "6c4ddfb5459c477ba86b3790550fa592",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "Custom Events Streaming flow",
+              "description": "Custom Events Streaming flow description",
+              "flowSpec": {
+                "id": "d8a6f005-7eaf-4153-983e-e8574508b877",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"5204973e-0000-0200-0000-69e429660000\"",
+              "etag": "\"5204973e-0000-0200-0000-69e429660000\"",
+              "sourceConnectionIds": [
+                "cf357dd2-5306-4188-85b9-351d01b7ddf2"
+              ],
+              "targetConnectionIds": [
+                "9f818410-57f2-4fea-9b50-cbc9ad399e3f"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "cf357dd2-5306-4188-85b9-351d01b7ddf2",
+                    "connectionSpec": {
+                      "id": "bc7b00d6-623a-4dfc-9fdb-f1240aeadaeb",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "11530b40-ac8c-45f7-802f-6dd61215a8d7",
+                      "connectionSpec": {
+                        "id": "bc7b00d6-623a-4dfc-9fdb-f1240aeadaeb",
+                        "version": "1.0"
+                      }
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "9f818410-57f2-4fea-9b50-cbc9ad399e3f",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "runs": "/runs?property=flowId==01445ce5-737c-4b28-a5d6-11dfde07e091",
+              "providerRefId": "9c5081fb-2001-48ca-8889-7e17a7eda0f4",
+              "lastOperation": {
+                "started": 0,
+                "updated": 0,
+                "operation": "enable"
+              },
+              "lastRunDetails": {
+                "id": "599f5b57-aa00-46ff-a3a5-81436bef24fb",
+                "state": "partialSuccess",
+                "startedAtUTC": 1776414600000,
+                "completedAtUTC": 1776416381141
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "experienceevent",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "ae1380c4-5bd5-4701-b649-c15bffddda46",
+              "createdAt": 1774770827000,
+              "updatedAt": 1776559999512,
+              "createdBy": "CCBE21E6693750D80A495FBC@techacct.adobe.com",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "6c4ddfb5459c477ba86b3790550fa592",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "CRM Streaming flow",
+              "description": "CRM Streaming flow description",
+              "flowSpec": {
+                "id": "d8a6f005-7eaf-4153-983e-e8574508b877",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"52048222-0000-0200-0000-69e4277f0000\"",
+              "etag": "\"52048222-0000-0200-0000-69e4277f0000\"",
+              "sourceConnectionIds": [
+                "b8be7022-a695-440c-83a5-cb119dd460c8"
+              ],
+              "targetConnectionIds": [
+                "3c9adbbc-9fec-48ef-aa63-2377a32d0a7f"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "b8be7022-a695-440c-83a5-cb119dd460c8",
+                    "connectionSpec": {
+                      "id": "bc7b00d6-623a-4dfc-9fdb-f1240aeadaeb",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "db2e2d8c-6a87-4260-9a75-848c54ce7251",
+                      "connectionSpec": {
+                        "id": "bc7b00d6-623a-4dfc-9fdb-f1240aeadaeb",
+                        "version": "1.0"
+                      }
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "3c9adbbc-9fec-48ef-aa63-2377a32d0a7f",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "runs": "/runs?property=flowId==ae1380c4-5bd5-4701-b649-c15bffddda46",
+              "providerRefId": "38945b4c-0561-48a1-9f42-0e50ce0e0ac7",
+              "lastOperation": {
+                "started": 0,
+                "updated": 0,
+                "operation": "enable"
+              },
+              "lastRunDetails": {
+                "id": "2ae8da94-b72f-4b43-ab74-b30df1bc35aa",
+                "state": "success",
+                "startedAtUTC": 1776414600000,
+                "completedAtUTC": 1776416559369
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "profile",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "0f5c722d-346b-4c91-a847-f65bcdf03804",
+              "createdAt": 1774770909371,
+              "updatedAt": 1776542860316,
+              "createdBy": "acp_foundation_connectors@AdobeID",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "acp_foundation_connectors",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "Datalake to UPS Flow",
+              "description": "ups flow",
+              "flowSpec": {
+                "id": "8fa66a4c-ab08-4da9-8a89-ef5be0dad9dc",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"450460bb-0000-0200-0000-69e3e48c0000\"",
+              "etag": "\"450460bb-0000-0200-0000-69e3e48c0000\"",
+              "sourceConnectionIds": [
+                "16c0b8ff-6ab3-418d-8903-91269454224d"
+              ],
+              "targetConnectionIds": [
+                "36e9ac1c-54f1-44db-83ed-ffdbe06b2395",
+                "688777e5-d561-48f7-bcc3-1badca09fd12"
+              ],
+              "inheritedAttributes": {
+                "sourceConnections": [
+                  {
+                    "id": "16c0b8ff-6ab3-418d-8903-91269454224d",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "36e9ac1c-54f1-44db-83ed-ffdbe06b2395",
+                    "connectionSpec": {
+                      "id": "8a9c3494-9708-43d7-ae3f-cda01e5030e1",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileFragments",
+                      "id": "ups"
+                    }
+                  },
+                  {
+                    "id": "688777e5-d561-48f7-bcc3-1badca09fd12",
+                    "connectionSpec": {
+                      "id": "aa27ae5d-f0ac-4f87-ab76-9c3dc8de182b",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileFragmentsAtlas",
+                      "id": "upsAtlas"
+                    }
+                  }
+                ]
+              },
+              "runs": "/runs?property=flowId==0f5c722d-346b-4c91-a847-f65bcdf03804",
+              "providerRefId": "69c8d9e7cba5deaa7974b00b",
+              "lastOperation": {
+                "started": 1774770909371,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "d3db6700-c542-406c-82b9-c43d758916d7",
+                "state": "success",
+                "startedAtUTC": 1776537605879,
+                "completedAtUTC": 1776542850556
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "experienceevent",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "9108b90b-e7ce-4aa6-91cc-c50c69c8a0b2",
+              "createdAt": 1774770908691,
+              "updatedAt": 1776539166814,
+              "createdBy": "acp_foundation_connectors@AdobeID",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "acp_foundation_connectors",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "Datalake to UIS Flow",
+              "description": "UIS flow",
+              "flowSpec": {
+                "id": "09ecd1cf-979f-4a8e-ba4c-b119e5fc144e",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"44041270-0000-0200-0000-69e3d61e0000\"",
+              "etag": "\"44041270-0000-0200-0000-69e3d61e0000\"",
+              "sourceConnectionIds": [
+                "93e70946-0e7f-4ac9-9b3c-91f0d9097896"
+              ],
+              "targetConnectionIds": [
+                "b98dedf7-c520-45dc-b07c-972b0053a163",
+                "7cbe00ba-2269-41d1-b7dc-6b5aa68e5cff"
+              ],
+              "inheritedAttributes": {
+                "sourceConnections": [
+                  {
+                    "id": "93e70946-0e7f-4ac9-9b3c-91f0d9097896",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "b98dedf7-c520-45dc-b07c-972b0053a163",
+                    "connectionSpec": {
+                      "id": "d7231b5f-2575-4b03-a02c-79b43155fbd5",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "IdentityGraphs",
+                      "id": "graphs"
+                    }
+                  },
+                  {
+                    "id": "7cbe00ba-2269-41d1-b7dc-6b5aa68e5cff",
+                    "connectionSpec": {
+                      "id": "9d0bb460-1525-41c8-b897-5581dc45e333",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "Identities",
+                      "id": "identities"
+                    }
+                  }
+                ]
+              },
+              "runs": "/runs?property=flowId==9108b90b-e7ce-4aa6-91cc-c50c69c8a0b2",
+              "providerRefId": "69c8d9e7cba5deaa7974b00b",
+              "lastOperation": {
+                "started": 1774770908691,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "024ee25a-7720-47be-a955-349f7207a513",
+                "state": "success",
+                "startedAtUTC": 1776537605947,
+                "completedAtUTC": 1776539153000
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "experienceevent",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "45613b02-dd69-4d61-ba6a-db1d68e3d5dc",
+              "createdAt": 1774771053118,
+              "updatedAt": 1776523964371,
+              "createdBy": "acp_foundation_connectors@AdobeID",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "acp_foundation_connectors",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "Datalake to UPS Flow",
+              "description": "ups flow",
+              "flowSpec": {
+                "id": "8fa66a4c-ab08-4da9-8a89-ef5be0dad9dc",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"2a04b905-0000-0200-0000-69e39abc0000\"",
+              "etag": "\"2a04b905-0000-0200-0000-69e39abc0000\"",
+              "sourceConnectionIds": [
+                "3e2b77f5-3f39-41a3-b770-b1c4c9aa1b91"
+              ],
+              "targetConnectionIds": [
+                "55bb98a7-4106-4f96-b65d-9a1271b22ecf",
+                "2764153e-b53b-4e23-a258-6e3b578bffb5"
+              ],
+              "inheritedAttributes": {
+                "sourceConnections": [
+                  {
+                    "id": "3e2b77f5-3f39-41a3-b770-b1c4c9aa1b91",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "55bb98a7-4106-4f96-b65d-9a1271b22ecf",
+                    "connectionSpec": {
+                      "id": "8a9c3494-9708-43d7-ae3f-cda01e5030e1",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileFragments",
+                      "id": "ups"
+                    }
+                  },
+                  {
+                    "id": "2764153e-b53b-4e23-a258-6e3b578bffb5",
+                    "connectionSpec": {
+                      "id": "aa27ae5d-f0ac-4f87-ab76-9c3dc8de182b",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileFragmentsAtlas",
+                      "id": "upsAtlas"
+                    }
+                  }
+                ]
+              },
+              "runs": "/runs?property=flowId==45613b02-dd69-4d61-ba6a-db1d68e3d5dc",
+              "providerRefId": "69c8d9c5c58ebc1ebef442e3",
+              "lastOperation": {
+                "started": 1774771053118,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "3f87a72b-b648-466c-a4a3-9bd7e133a000",
+                "state": "success",
+                "startedAtUTC": 1776518897559,
+                "completedAtUTC": 1776523962279
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "profile",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "ad7183c1-0c21-4258-8931-25412012e9bf",
+              "createdAt": 1774771057202,
+              "updatedAt": 1776521523184,
+              "createdBy": "acp_foundation_connectors@AdobeID",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "acp_foundation_connectors",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "Datalake to UIS Flow",
+              "description": "UIS flow",
+              "flowSpec": {
+                "id": "09ecd1cf-979f-4a8e-ba4c-b119e5fc144e",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"2604b259-0000-0200-0000-69e391330000\"",
+              "etag": "\"2604b259-0000-0200-0000-69e391330000\"",
+              "sourceConnectionIds": [
+                "4e0f4d0a-0d4d-45f1-a67c-dcacbf8caf18"
+              ],
+              "targetConnectionIds": [
+                "40a09feb-aa6e-4a67-a324-dca920115905",
+                "4da979f4-e430-47d1-9f3a-9f8bdf407271"
+              ],
+              "inheritedAttributes": {
+                "sourceConnections": [
+                  {
+                    "id": "4e0f4d0a-0d4d-45f1-a67c-dcacbf8caf18",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "40a09feb-aa6e-4a67-a324-dca920115905",
+                    "connectionSpec": {
+                      "id": "d7231b5f-2575-4b03-a02c-79b43155fbd5",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "IdentityGraphs",
+                      "id": "graphs"
+                    }
+                  },
+                  {
+                    "id": "4da979f4-e430-47d1-9f3a-9f8bdf407271",
+                    "connectionSpec": {
+                      "id": "9d0bb460-1525-41c8-b897-5581dc45e333",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "Identities",
+                      "id": "identities"
+                    }
+                  }
+                ]
+              },
+              "runs": "/runs?property=flowId==ad7183c1-0c21-4258-8931-25412012e9bf",
+              "providerRefId": "69c8d9c5c58ebc1ebef442e3",
+              "lastOperation": {
+                "started": 1774771057202,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "95f2161f-5d35-42f4-a919-97b4e13513ac",
+                "state": "success",
+                "startedAtUTC": 1776518897845,
+                "completedAtUTC": 1776521513000
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "profile",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "0105cd2c-6593-4896-aaf6-7341da8eb994",
+              "createdAt": 1776375173161,
+              "updatedAt": 1776418372728,
+              "createdBy": "acp_foundation_connectors@AdobeID",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "acp_foundation_connectors",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "Flow for datasetId = 69c8d9c5c58ebc1ebef442e3",
+              "description": "Flow for datasetId = 69c8d9c5c58ebc1ebef442e3",
+              "flowSpec": {
+                "id": "029b0033-f9b8-412d-869f-eebd1048fd98",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"8a0376ff-0000-0200-0000-69e1fe440000\"",
+              "etag": "\"8a0376ff-0000-0200-0000-69e1fe440000\"",
+              "sourceConnectionIds": [
+                "6347547d-8581-4afc-956a-e0e4490d3cdf"
+              ],
+              "targetConnectionIds": [
+                "67b6d62f-0559-4242-ad3f-dd7088518566"
+              ],
+              "inheritedAttributes": {
+                "sourceConnections": [
+                  {
+                    "id": "6347547d-8581-4afc-956a-e0e4490d3cdf",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "67b6d62f-0559-4242-ad3f-dd7088518566",
+                    "connectionSpec": {
+                      "id": "8a9c3494-9708-43d7-ae3f-cda01e5030e1",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileFragments",
+                      "id": "ups"
+                    }
+                  }
+                ]
+              },
+              "options": null,
+              "scheduleParams": null,
+              "runs": "/runs?property=flowId==0105cd2c-6593-4896-aaf6-7341da8eb994",
+              "providerRefId": "69c8d9c5c58ebc1ebef442e3",
+              "lastOperation": {
+                "started": 1776375173161,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "46080d55-4b20-4ae4-80ee-ba40bbd5b4ef",
+                "state": "success",
+                "startedAtUTC": 1776414600000,
+                "completedAtUTC": 1776415500000
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "profile",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "1ddb4167-2fec-419b-8596-897f0fd660e8",
+              "createdAt": 1776375246952,
+              "updatedAt": 1776418372646,
+              "createdBy": "acp_foundation_connectors@AdobeID",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "acp_foundation_connectors",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "Flow for datasetId = 69c8d9c5c58ebc1ebef442e3",
+              "description": "Flow for datasetId = 69c8d9c5c58ebc1ebef442e3",
+              "flowSpec": {
+                "id": "78c39458-44c2-43d0-84f9-9e98854ee109",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"8a0373ff-0000-0200-0000-69e1fe440000\"",
+              "etag": "\"8a0373ff-0000-0200-0000-69e1fe440000\"",
+              "sourceConnectionIds": [
+                "725847e8-3b78-4386-ba9d-f6c4f21096bd"
+              ],
+              "targetConnectionIds": [
+                "18ec1f47-0e08-44ca-8b5f-73082d7ce5c8"
+              ],
+              "inheritedAttributes": {
+                "sourceConnections": [
+                  {
+                    "id": "725847e8-3b78-4386-ba9d-f6c4f21096bd",
+                    "connectionSpec": {
+                      "id": "8a9c3494-9708-43d7-ae3f-cda01e5030e1",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileFragments",
+                      "id": "ups"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "18ec1f47-0e08-44ca-8b5f-73082d7ce5c8",
+                    "connectionSpec": {
+                      "id": "11c5c50a-1538-11ec-82a8-0242ac130003",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileSegments",
+                      "id": "ups"
+                    }
+                  }
+                ]
+              },
+              "options": null,
+              "scheduleParams": null,
+              "runs": "/runs?property=flowId==1ddb4167-2fec-419b-8596-897f0fd660e8",
+              "providerRefId": "69c8d9c5c58ebc1ebef442e3",
+              "lastOperation": {
+                "started": 1776375246952,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "0a8b74c6-641d-4544-98ca-ca00265ad41b",
+                "state": "success",
+                "startedAtUTC": 1776414600000,
+                "completedAtUTC": 1776415500000
+              },
+              "labels": []
+            },
+            {
+              "id": "3c8213c5-8785-445a-962b-59264926ba64",
+              "createdAt": 1776375197734,
+              "updatedAt": 1776418372561,
+              "createdBy": "acp_foundation_connectors@AdobeID",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "acp_foundation_connectors",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "Flow for datasetId = 69c8d9e7cba5deaa7974b00b",
+              "description": "Flow for datasetId = 69c8d9e7cba5deaa7974b00b",
+              "flowSpec": {
+                "id": "029b0033-f9b8-412d-869f-eebd1048fd98",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"8a036eff-0000-0200-0000-69e1fe440000\"",
+              "etag": "\"8a036eff-0000-0200-0000-69e1fe440000\"",
+              "sourceConnectionIds": [
+                "b7d7aaaa-ada3-4a9b-8ec6-ac1dd881f4d0"
+              ],
+              "targetConnectionIds": [
+                "cab75dfb-e1bf-44df-a1a7-3cadfe7c9b84"
+              ],
+              "inheritedAttributes": {
+                "sourceConnections": [
+                  {
+                    "id": "b7d7aaaa-ada3-4a9b-8ec6-ac1dd881f4d0",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "cab75dfb-e1bf-44df-a1a7-3cadfe7c9b84",
+                    "connectionSpec": {
+                      "id": "8a9c3494-9708-43d7-ae3f-cda01e5030e1",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileFragments",
+                      "id": "ups"
+                    }
+                  }
+                ]
+              },
+              "options": null,
+              "scheduleParams": null,
+              "runs": "/runs?property=flowId==3c8213c5-8785-445a-962b-59264926ba64",
+              "providerRefId": "69c8d9e7cba5deaa7974b00b",
+              "lastOperation": {
+                "started": 1776375197734,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "a27b51de-b1df-4050-a627-0c36d885adad",
+                "state": "success",
+                "startedAtUTC": 1776414600000,
+                "completedAtUTC": 1776415500000
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "experienceevent",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "491e01c2-446c-47e2-9d7a-974bd7136a56",
+              "createdAt": 1776400340489,
+              "updatedAt": 1776400340826,
+              "createdBy": "8AC21FE266602DE40A495FC7@8ac11fe266602de4495fc7.e",
+              "updatedBy": "acp_core_zen@AdobeID",
+              "createdClient": "exc_app",
+              "updatedClient": "acp_core_zen",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "Streaming dataflow - 04/17/2026, 12:32 AM",
+              "description": "",
+              "flowSpec": {
+                "id": "d8a6f005-7eaf-4153-983e-e8574508b877",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"710387b7-0000-0200-0000-69e1b7d40000\"",
+              "etag": "\"710387b7-0000-0200-0000-69e1b7d40000\"",
+              "sourceConnectionIds": [
+                "00aa9181-f81f-41d2-ab5c-1ba2ed0131a1"
+              ],
+              "targetConnectionIds": [
+                "484e2320-886f-4c62-8172-6a1e720df891"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "00aa9181-f81f-41d2-ab5c-1ba2ed0131a1",
+                    "connectionSpec": {
+                      "id": "bc7b00d6-623a-4dfc-9fdb-f1240aeadaeb",
+                      "version": "1.0"
+                    },
+                    "baseConnection": {
+                      "id": "b5c05043-0476-4493-9116-107fd63a8a97",
+                      "connectionSpec": {
+                        "id": "bc7b00d6-623a-4dfc-9fdb-f1240aeadaeb",
+                        "version": "1.0"
+                      }
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "484e2320-886f-4c62-8172-6a1e720df891",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "options": {},
+              "runs": "/runs?property=flowId==491e01c2-446c-47e2-9d7a-974bd7136a56",
+              "providerRefId": "d14fcd98-84d5-4b33-bf58-96253812b41c",
+              "lastOperation": {
+                "started": 0,
+                "updated": 0,
+                "operation": "enable"
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "experienceevent",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "3dd1d871-8552-4e3d-96ea-f250dbe5fe43",
+              "createdAt": 1774771239065,
+              "updatedAt": 1776400283434,
+              "createdBy": "acp_foundation_connectors@AdobeID",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "acp_foundation_connectors",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "Flow for datasetId = 87891E4066602D250A495F91_a30a9c4e-327a-4d60-8a9c-4e327a6d60dd_ups_1774769859000_segment_definition_ingestion",
+              "description": "Flow for datasetId = 87891E4066602D250A495F91_a30a9c4e-327a-4d60-8a9c-4e327a6d60dd_ups_1774769859000_segment_definition_ingestion",
+              "flowSpec": {
+                "id": "029b0033-f9b8-412d-869f-eebd1048fd98",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"710316b3-0000-0200-0000-69e1b79b0000\"",
+              "etag": "\"710316b3-0000-0200-0000-69e1b79b0000\"",
+              "sourceConnectionIds": [
+                "0a162126-d447-4bbe-8d46-9e5c144232db"
+              ],
+              "targetConnectionIds": [
+                "e3e46abf-c5bc-45b8-ab77-1d06754e42dd"
+              ],
+              "inheritedAttributes": {
+                "sourceConnections": [
+                  {
+                    "id": "0a162126-d447-4bbe-8d46-9e5c144232db",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "e3e46abf-c5bc-45b8-ab77-1d06754e42dd",
+                    "connectionSpec": {
+                      "id": "8a9c3494-9708-43d7-ae3f-cda01e5030e1",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileFragments",
+                      "id": "ups"
+                    }
+                  }
+                ]
+              },
+              "options": null,
+              "scheduleParams": null,
+              "runs": "/runs?property=flowId==3dd1d871-8552-4e3d-96ea-f250dbe5fe43",
+              "providerRefId": "87891E4066602D250A495F91_a30a9c4e-327a-4d60-8a9c-4e327a6d60dd_ups_1774769859000_segment_definition_ingestion",
+              "lastOperation": {
+                "started": 1774771239065,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "06f3fce9-3dbb-46b0-a225-debd80b6d5c7",
+                "state": "enabled",
+                "startedAtUTC": 1776396031982
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "segmentdefinition",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "dd5ea6d3-2803-4836-b9ed-b66cfde215f9",
+              "createdAt": 1776367219262,
+              "updatedAt": 1776386370130,
+              "createdBy": "acp_foundation_connectors@AdobeID",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "acp_foundation_connectors",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "File Upload Flow",
+              "description": "File Upload for dataset = 69e0fd236f068eb6d31f2a44",
+              "flowSpec": {
+                "id": "20b3f8c4-9ac0-4fda-abee-849ca1a92042",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"670321d9-0000-0200-0000-69e181420000\"",
+              "etag": "\"670321d9-0000-0200-0000-69e181420000\"",
+              "sourceConnectionIds": [
+                "d59ae275-6cd7-4e7b-bcab-fd0e02495cc0"
+              ],
+              "targetConnectionIds": [
+                "045c453f-12c1-45ba-a9c6-5d37dadf7937"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "d59ae275-6cd7-4e7b-bcab-fd0e02495cc0",
+                    "connectionSpec": {
+                      "id": "f73b9b4e-fcce-45b5-b44b-da130413573d",
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "045c453f-12c1-45ba-a9c6-5d37dadf7937",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "runs": "/runs?property=flowId==dd5ea6d3-2803-4836-b9ed-b66cfde215f9",
+              "providerRefId": "69e0fd236f068eb6d31f2a44",
+              "lastOperation": {
+                "started": 1776367219262,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "ac685723-a548-49b1-89c1-cff8160e7cc2",
+                "state": "success",
+                "startedAtUTC": 1776385940453,
+                "completedAtUTC": 1776386364357
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "experienceevent",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "1c0e92d4-a1ef-4c1a-97c1-319a30dcbc20",
+              "createdAt": 1776386031116,
+              "updatedAt": 1776386069836,
+              "createdBy": "acp_foundation_connectors@AdobeID",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "acp_foundation_connectors",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "File Upload Flow",
+              "description": "File Upload for dataset = 69c8d9c5c58ebc1ebef442e3",
+              "flowSpec": {
+                "id": "20b3f8c4-9ac0-4fda-abee-849ca1a92042",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"6703abc0-0000-0200-0000-69e180150000\"",
+              "etag": "\"6703abc0-0000-0200-0000-69e180150000\"",
+              "sourceConnectionIds": [
+                "6f9bd792-e1f2-4adf-b09f-b246358a3ce6"
+              ],
+              "targetConnectionIds": [
+                "de86a513-cd10-4b48-a74c-a1b5027105fe"
+              ],
+              "inheritedAttributes": {
+                "properties": {
+                  "isSourceFlow": true
+                },
+                "sourceConnections": [
+                  {
+                    "id": "6f9bd792-e1f2-4adf-b09f-b246358a3ce6",
+                    "connectionSpec": {
+                      "id": "f73b9b4e-fcce-45b5-b44b-da130413573d",
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "de86a513-cd10-4b48-a74c-a1b5027105fe",
+                    "connectionSpec": {
+                      "id": "c604ff05-7f1a-43c0-8e18-33bf874cb11c",
+                      "version": "1.0"
+                    }
+                  }
+                ]
+              },
+              "runs": "/runs?property=flowId==1c0e92d4-a1ef-4c1a-97c1-319a30dcbc20",
+              "providerRefId": "69c8d9c5c58ebc1ebef442e3",
+              "lastOperation": {
+                "started": 1776386031116,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "568c9c0e-77d8-4aac-866f-fa75e1ff6c59",
+                "state": "failed",
+                "startedAtUTC": 1776386028369,
+                "completedAtUTC": 1776386038039
+              },
+              "labels": [],
+              "recordTypes": [
+                {
+                  "type": "profile",
+                  "extensions": {}
+                }
+              ]
+            },
+            {
+              "id": "85f132ad-d0c5-4cae-bc15-026f09467e2d",
+              "createdAt": 1776375172187,
+              "updatedAt": 1776378737457,
+              "createdBy": "acp_foundation_connectors@AdobeID",
+              "updatedBy": "acp_foundation_connectors@AdobeID",
+              "createdClient": "acp_foundation_connectors",
+              "updatedClient": "acp_foundation_connectors",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "Flow for datasetId = 69c8d9e7cba5deaa7974b00b",
+              "description": "Flow for datasetId = 69c8d9e7cba5deaa7974b00b",
+              "flowSpec": {
+                "id": "78c39458-44c2-43d0-84f9-9e98854ee109",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"61039661-0000-0200-0000-69e163710000\"",
+              "etag": "\"61039661-0000-0200-0000-69e163710000\"",
+              "sourceConnectionIds": [
+                "f300dd42-b80f-46eb-89e5-334973a2db2b"
+              ],
+              "targetConnectionIds": [
+                "a006f13e-513d-4683-a8e6-72132d70efb4"
+              ],
+              "inheritedAttributes": {
+                "sourceConnections": [
+                  {
+                    "id": "f300dd42-b80f-46eb-89e5-334973a2db2b",
+                    "connectionSpec": {
+                      "id": "8a9c3494-9708-43d7-ae3f-cda01e5030e1",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileFragments",
+                      "id": "ups"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "a006f13e-513d-4683-a8e6-72132d70efb4",
+                    "connectionSpec": {
+                      "id": "11c5c50a-1538-11ec-82a8-0242ac130003",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileSegments",
+                      "id": "ups"
+                    }
+                  }
+                ]
+              },
+              "options": null,
+              "scheduleParams": null,
+              "runs": "/runs?property=flowId==85f132ad-d0c5-4cae-bc15-026f09467e2d",
+              "providerRefId": "69c8d9e7cba5deaa7974b00b",
+              "lastOperation": {
+                "started": 1776375172187,
+                "updated": 0,
+                "operation": "create"
+              },
+              "lastRunDetails": {
+                "id": "46a86544-53d3-4681-a4cf-c2762d22ae50",
+                "state": "partialSuccess",
+                "startedAtUTC": 1776374100000,
+                "completedAtUTC": 1776375900000
+              },
+              "labels": []
+            },
+            {
+              "id": "d5f57095-b587-4925-ac06-c8e58a1b4901",
+              "createdAt": 1774769843566,
+              "updatedAt": 1774769843584,
+              "createdBy": "universal-segmentation-provisioning@AdobeService",
+              "updatedBy": "universal-segmentation-provisioning@AdobeService",
+              "createdClient": "universal-segmentation-provisioning",
+              "updatedClient": "universal-segmentation-provisioning",
+              "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+              "sandboxName": "external-benchmarking",
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "name": "A Batch Evaluation flow for Account Segmentation",
+              "description": "A Batch Evaluation flow for Account Segmentation",
+              "flowSpec": {
+                "id": "8d33b160-9818-11ee-b9d1-0242ac120002",
+                "version": "1.0"
+              },
+              "state": "enabled",
+              "version": "\"2700f69d-0000-0200-0000-69c8d6b30000\"",
+              "etag": "\"2700f69d-0000-0200-0000-69c8d6b30000\"",
+              "sourceConnectionIds": [
+                "4e01c1bc-d4e6-482d-bc27-21db96bc8ac4"
+              ],
+              "targetConnectionIds": [
+                "be7af7db-eb45-4b41-a2bb-f318d398beaa"
+              ],
+              "inheritedAttributes": {
+                "sourceConnections": [
+                  {
+                    "id": "4e01c1bc-d4e6-482d-bc27-21db96bc8ac4",
+                    "connectionSpec": {
+                      "id": "8a9c3494-9708-43d7-ae3f-cda01e5030e1",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileFragments",
+                      "id": "ups"
+                    }
+                  }
+                ],
+                "targetConnections": [
+                  {
+                    "id": "be7af7db-eb45-4b41-a2bb-f318d398beaa",
+                    "connectionSpec": {
+                      "id": "11c5c50a-1538-11ec-82a8-0242ac130003",
+                      "version": "1.0"
+                    },
+                    "typeInfo": {
+                      "type": "ProfileSegments",
+                      "id": "ups"
+                    }
+                  }
+                ]
+              },
+              "runs": "/runs?property=flowId==d5f57095-b587-4925-ac06-c8e58a1b4901",
+              "lastOperation": {
+                "started": 1774769843566,
+                "updated": 0,
+                "operation": "create"
+              },
+              "labels": []
+            }
+          ],
+          "_links": {}
+        },
+        "error": null
+      }
+    },
+    {
+      "step": 2,
+      "action": "sql_query",
+      "sql": "SELECT s.SEGMENTID AS audience_id, s.NAME AS audience_name, t.TARGETID AS journey_id, t.NAME AS journey_name, t.STATE AS journey_state FROM dim_segment s JOIN hkg_br_segment_target bt ON s.SEGMENTID = bt.SEGMENTID JOIN dim_target t ON bt.TARGETID = t.TARGETID WHERE LOWER(t.NAME) LIKE '%paid%'",
+      "results": [],
+      "status": "success",
+      "warnings": [
+        "Skipped hkg_br_property_property.parquet: Invalid Input Error: Failed to read Parquet file 'DBSnapshot/hkg_br_property_property.parquet': Need at least one non-root column in the file"
+      ],
+      "error": null
+    }
+  ],
+  "answer": "No audiences were found that are used by live journeys with 'paid' in the journey name.",
+  "status": "success",
+  "debug_events": [
+    {
+      "step": 1,
+      "event": "llm_output",
+      "raw_output": "{\n  \"action\": \"api_call\",\n  \"method\": \"GET\",\n  \"url\": \"/data/foundation/flowservice/flows\",\n  \"params\": {\n    \"limit\": \"50\"\n  }\n}"
+    },
+    {
+      "step": 1,
+      "event": "tool_executed",
+      "action": "api_call",
+      "status": "success"
+    },
+    {
+      "step": 2,
+      "event": "llm_output",
+      "raw_output": "{\n  \"action\": \"sql_query\",\n  \"sql\": \"SELECT s.SEGMENTID AS audience_id, s.NAME AS audience_name, t.TARGETID AS journey_id, t.NAME AS journey_name, t.STATE AS journey_state FROM dim_segment s JOIN hkg_br_segment_target bt ON s.SEGMENTID = bt.SEGMENTID JOIN dim_target t ON bt.TARGETID = t.TARGETID WHERE LOWER(t.NAME) LIKE '%paid%'\"\n}"
+    },
+    {
+      "step": 2,
+      "event": "tool_executed",
+      "action": "sql_query",
+      "status": "success"
+    },
+    {
+      "step": 3,
+      "event": "llm_output",
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"Based on the verified query results, no live journeys (or targets) with 'paid' in their name were found in the database, and no corresponding flows were identified in the API results. Consequently, there are no audiences used by live journeys with 'paid' in their name.\"\n}"
+    },
+    {
+      "event": "answer_agent_output",
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"No audiences were found that are used by live journeys with 'paid' in the journey name.\"\n}",
+      "parsed": {
+        "action": "final_answer",
+        "answer": "No audiences were found that are used by live journeys with 'paid' in the journey name."
+      }
+    }
+  ]
+}

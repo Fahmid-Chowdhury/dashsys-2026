@@ -4,7 +4,7 @@
     {
       "step": 1,
       "action": "sql_query",
-      "sql": "SELECT * FROM dim_campaign WHERE name = 'Journey schema with Journey Fields for Journey Orchestration' LIMIT 1",
+      "sql": "SELECT CAMPAIGNID, NAME, STATUS, CREATEDTIME, UPDATEDTIME, STATE FROM dim_campaign WHERE LOWER(NAME) = LOWER('Journey schema with Journey Fields for Journey Orchestration') OR LOWER(NAME) LIKE '%journey schema%' LIMIT 10",
       "results": [],
       "status": "success",
       "warnings": [
@@ -36,13 +36,13 @@
       }
     }
   ],
-  "answer": "Based on the available metadata and executed queries, no details were found for the schema 'Journey schema with Journey Fields for Journey Orchestration' in either the SQL database or the Adobe API.\n\nAPI GET /ajo/journey returned HTTP 200 with totalCount=0.",
+  "answer": "No details could be found for the schema 'Journey schema with Journey Fields for Journey Orchestration'. Both the database query and the API request returned no results.",
   "status": "success",
   "debug_events": [
     {
       "step": 1,
       "event": "llm_output",
-      "raw_output": "{\n  \"action\": \"sql_query\",\n  \"sql\": \"SELECT * FROM dim_campaign WHERE name = 'Journey schema with Journey Fields for Journey Orchestration' LIMIT 1\"\n}"
+      "raw_output": "{\n  \"action\": \"sql_query\",\n  \"sql\": \"SELECT CAMPAIGNID, NAME, STATUS, CREATEDTIME, UPDATEDTIME, STATE FROM dim_campaign WHERE LOWER(NAME) = LOWER('Journey schema with Journey Fields for Journey Orchestration') OR LOWER(NAME) LIKE '%journey schema%' LIMIT 10\"\n}"
     },
     {
       "step": 1,
@@ -64,7 +64,15 @@
     {
       "step": 3,
       "event": "llm_output",
-      "raw_output": "{\"action\": \"final_answer\", \"answer\": \"Based on the available metadata and executed queries, no details were found for the schema 'Journey schema with Journey Fields for Journey Orchestration' in either the SQL database or the Adobe API.\"}"
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"I was unable to find any details for the schema 'Journey schema with Journey Fields for Journey Orchestration'. Both the database query and the API call to retrieve the journey details returned no results.\"\n}"
+    },
+    {
+      "event": "answer_agent_output",
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"No details could be found for the schema 'Journey schema with Journey Fields for Journey Orchestration'. Both the database query and the API request returned no results.\"\n}",
+      "parsed": {
+        "action": "final_answer",
+        "answer": "No details could be found for the schema 'Journey schema with Journey Fields for Journey Orchestration'. Both the database query and the API request returned no results."
+      }
     }
   ]
 }

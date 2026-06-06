@@ -9,6 +9,7 @@ from typing import Any, Dict, List, Optional
 from src.route_policy import check_route_aware_policy as route_policy_check
 from src.prompt_builder import build_prompt_messages
 from src.answer_builder import build_final_answer
+from src.answer_agent import ANSWER_JSON_SCHEMA, generate_answer_with_llm
 from src.tool_executor import ToolExecutor
 from src.verifier import (
     load_api_index_if_available,
@@ -26,7 +27,9 @@ class AgentRunConfig:
     mock_api: bool = True
     save_prompts: bool = True
     prompt_output_dir: str = "data/agent_prompts"
+    
     use_answer_builder: bool = True
+    use_answer_agent: bool = True
     
     route_confidence_min_score: float = ROUTE_CONFIDENCE_MIN_SCORE
     route_confidence_min_margin: float = 0.15
@@ -89,11 +92,13 @@ class OllamaLLMClient(BaseLLMClient):
         temperature: float = 0.0,
         num_ctx: int = 32768,
         use_json_schema: bool = True,
+        json_schema: Optional[Dict[str, Any]] = None,
     ):
         self.model = model
         self.temperature = temperature
         self.num_ctx = num_ctx
         self.use_json_schema = use_json_schema
+        self.json_schema = json_schema or ACTION_JSON_SCHEMA
 
     def generate(self, messages: List[Dict[str, str]]) -> str:
         import ollama
@@ -109,13 +114,12 @@ class OllamaLLMClient(BaseLLMClient):
         }
 
         if self.use_json_schema:
-            kwargs["format"] = ACTION_JSON_SCHEMA
+            kwargs["format"] = self.json_schema
         else:
             kwargs["format"] = "json"
 
         response = ollama.chat(**kwargs)
 
-        # Supports both dict-style and object-style responses.
         if isinstance(response, dict):
             return response["message"]["content"]
 
@@ -128,10 +132,12 @@ class GeminiLLMClient(BaseLLMClient):
         model: str,
         temperature: float = 0.0,
         use_json_schema: bool = True,
+        json_schema: Optional[Dict[str, Any]] = None,
     ):
         self.model = model
         self.temperature = temperature
         self.use_json_schema = use_json_schema
+        self.json_schema = json_schema or ACTION_JSON_SCHEMA
 
     def _messages_to_prompt(self, messages: List[Dict[str, str]]) -> str:
         parts = []
@@ -159,7 +165,7 @@ class GeminiLLMClient(BaseLLMClient):
         }
 
         if self.use_json_schema:
-            config["response_json_schema"] = ACTION_JSON_SCHEMA
+            config["response_json_schema"] = self.json_schema
 
         response = client.models.generate_content(
             model=self.model,
@@ -199,6 +205,8 @@ def create_llm_client(
     provider: str,
     model: str,
     temperature: float = 0.0,
+    use_json_schema: bool = True,
+    json_schema: Optional[Dict[str, Any]] = None,
 ) -> BaseLLMClient:
     provider = provider.lower().strip()
 
@@ -207,20 +215,42 @@ def create_llm_client(
             model=model,
             temperature=temperature,
             num_ctx=32768,
-            use_json_schema=True,
+            use_json_schema=use_json_schema,
+            json_schema=json_schema or ACTION_JSON_SCHEMA,
         )
 
     if provider == "gemini":
         return GeminiLLMClient(
             model=model,
             temperature=temperature,
-            use_json_schema=True,
+            use_json_schema=use_json_schema,
+            json_schema=json_schema or ACTION_JSON_SCHEMA,
         )
 
     raise ValueError(
         f"Unknown LLM provider: {provider}. Use 'ollama' or 'gemini'."
     )
+    
+    
+def create_answer_llm_client(
+    provider: str,
+    model: str,
+    temperature: float = 0.0,
+) -> BaseLLMClient:
+    """
+    Creates the dedicated answer agent LLM.
 
+    It uses the answer schema, not the SQL/API action schema.
+    """
+
+    return create_llm_client(
+        provider=provider,
+        model=model,
+        temperature=temperature,
+        use_json_schema=True,
+        json_schema=ANSWER_JSON_SCHEMA,
+    )
+    
 
 def save_json(data: Any, path: str | Path) -> None:
     path = Path(path)
@@ -631,14 +661,87 @@ def check_duplicate_tool_call(
     return None
 
 
+def is_successful_tool_step(step: Dict[str, Any]) -> bool:
+    action = step.get("action")
+
+    if action == "sql_query":
+        return step.get("status") == "success"
+
+    if action == "api_call":
+        api_call = step.get("api_call", {}) or {}
+        return api_call.get("status") in {"success", "mock_success"}
+
+    return True
+
+
+def collect_failed_tool_steps(trace: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    failed_steps: List[Dict[str, Any]] = []
+
+    for step in trace:
+        action = step.get("action")
+
+        if action not in {"sql_query", "api_call"}:
+            continue
+
+        if is_successful_tool_step(step):
+            continue
+
+        if action == "sql_query":
+            failed_steps.append(
+                {
+                    "step": step.get("step"),
+                    "action": "sql_query",
+                    "status": step.get("status"),
+                    "error": step.get("error"),
+                    "sql": step.get("sql"),
+                }
+            )
+
+        elif action == "api_call":
+            api_call = step.get("api_call", {}) or {}
+
+            failed_steps.append(
+                {
+                    "step": step.get("step"),
+                    "action": "api_call",
+                    "status": api_call.get("status"),
+                    "status_code": api_call.get("status_code"),
+                    "error": api_call.get("error"),
+                    "method": api_call.get("method"),
+                    "url": api_call.get("url"),
+                    "params": api_call.get("params", {}),
+                }
+            )
+
+    return failed_steps
+
+
+def determine_run_status(trace: List[Dict[str, Any]]) -> str:
+    """
+    Outer run status.
+
+    The run should not be marked success if any executed SQL/API tool failed.
+    Output format remains the same; only the status value becomes accurate.
+    """
+
+    failed_steps = collect_failed_tool_steps(trace)
+
+    if failed_steps:
+        return "failed"
+
+    return "success"
+
+
 class TraceRouterAgent:
     def __init__(
         self,
         llm_client: BaseLLMClient,
+        answer_llm_client: Optional[BaseLLMClient] = None,
         executor: Optional[ToolExecutor] = None,
         config: Optional[AgentRunConfig] = None,
     ):
         self.llm_client = llm_client
+        self.answer_llm_client = answer_llm_client
         self.config = config or AgentRunConfig()
 
         self.executor = executor or ToolExecutor(
@@ -767,6 +870,51 @@ class TraceRouterAgent:
             }
 
         raise ValueError(f"Unsupported executable action: {action.get('action')}")
+    
+    def generate_final_answer(
+        self,
+        query: str,
+        metadata: Dict[str, Any],
+        trace: List[Dict[str, Any]],
+        action_agent_draft: str,
+        debug_events: List[Dict[str, Any]],
+    ) -> str:
+        """
+        Final answer generation.
+
+        Output format of the outer agent remains unchanged.
+        Only the answer text is generated by the dedicated answer agent.
+        """
+
+        if self.config.use_answer_agent and self.answer_llm_client is not None:
+            try:
+                answer, answer_debug = generate_answer_with_llm(
+                    llm_client=self.answer_llm_client,
+                    query=query,
+                    metadata=metadata,
+                    trace=trace,
+                )
+
+                debug_events.append(answer_debug)
+                return answer
+
+            except Exception as e:
+                debug_events.append(
+                    {
+                        "event": "answer_agent_failed",
+                        "error": str(e),
+                    }
+                )
+
+        if self.config.use_answer_builder:
+            return build_final_answer(
+                query=query,
+                metadata=metadata,
+                trace=trace,
+                llm_answer=action_agent_draft,
+            )
+
+        return action_agent_draft or "No final answer could be generated."
 
     def run(
         self,
@@ -854,23 +1002,32 @@ class TraceRouterAgent:
                 continue
 
             if action.get("action") == "final_answer":
-                llm_answer = action.get("answer", "")
+                action_agent_draft = action.get("answer", "")
 
-                if self.config.use_answer_builder:
-                    answer = build_final_answer(
-                        query=query,
-                        metadata=metadata,
-                        trace=trace,
-                        llm_answer=llm_answer,
+                answer = self.generate_final_answer(
+                    query=query,
+                    metadata=metadata,
+                    trace=trace,
+                    action_agent_draft=action_agent_draft,
+                    debug_events=debug_events,
+                )
+
+                failed_tool_steps = collect_failed_tool_steps(trace)
+                run_status = determine_run_status(trace)
+
+                if failed_tool_steps:
+                    debug_events.append(
+                        {
+                            "event": "tool_failure_detected_before_final_answer",
+                            "failed_tool_steps": failed_tool_steps,
+                        }
                     )
-                else:
-                    answer = llm_answer
 
                 return {
                     "query": query,
                     "trace": trace,
                     "answer": answer,
-                    "status": "success",
+                    "status": run_status,
                     "debug_events": debug_events,
                 }
 

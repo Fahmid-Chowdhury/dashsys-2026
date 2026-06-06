@@ -1,8 +1,0 @@
-{
-  "id": 1,
-  "query": "When was the journey 'Gold Tier Welcome Email' published?",
-  "status": "failed_exception",
-  "error": "1 validation error for GenerateContentConfig\nresponse_format\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'text': {'mime_type': 'a...nalProperties': False}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",
-  "elapsed_seconds": 13.6,
-  "failure_reason": "exception"
-}

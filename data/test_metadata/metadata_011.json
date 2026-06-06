@@ -3,8 +3,8 @@
   "normalized_query": "show me the field for Campaign: 25% Off Purchase Offer Reminder",
   "query_analysis": {
     "complexity": "simple",
-    "confidence": 1.0,
-    "reason": "The user is asking for a single piece of information (a 'field') related to a specific entity ('Campaign: 25% Off Purchase Offer Reminder'). This can be retrieved with one direct lookup.",
+    "confidence": 0.95,
+    "reason": "The query is a straightforward request to retrieve fields or details for a specific campaign entity by its name.",
     "subqueries": [
       {
         "query": "show me the field for Campaign: 25% Off Purchase Offer Reminder",

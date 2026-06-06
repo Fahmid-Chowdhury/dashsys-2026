@@ -1,0 +1,485 @@
+{
+  "query": "What are the daily 'timeseries.ingestion.dataset.size' values between '2026-02-01' and '2026-04-14'?",
+  "normalized_query": "What are the daily 'timeseries.ingestion.dataset.size' values between '2026-02-01' and '2026-04-14'?",
+  "query_analysis": {
+    "complexity": "simple",
+    "confidence": 0.95,
+    "reason": "The query requests a single metric over a specific time range, which can be resolved with a single data retrieval operation.",
+    "subqueries": [
+      {
+        "query": "What are the daily 'timeseries.ingestion.dataset.size' values between '2026-02-01' and '2026-04-14'?",
+        "purpose": "other"
+      }
+    ]
+  },
+  "intent": "lookup",
+  "entities": [
+    "2026-02-01",
+    "2026-04-14",
+    "timeseries.ingestion.dataset.size"
+  ],
+  "filters": {
+    "quoted_entities": [
+      "2026-02-01",
+      "2026-04-14",
+      "timeseries.ingestion.dataset.size"
+    ]
+  },
+  "route": {
+    "selected": "SQL_PLUS_API",
+    "votes": {
+      "SQL_PLUS_API": 0.598,
+      "API_ONLY": 0.402
+    },
+    "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides."
+  },
+  "domain": {
+    "selected": "dataset",
+    "votes": {
+      "dataset": 0.598,
+      "metric": 0.402
+    },
+    "reason": "Selected from top retrieved examples and domain votes."
+  },
+  "allowed_tables": {
+    "dim_segment": {
+      "kind": "dimension",
+      "domain": "segment",
+      "row_count": 13,
+      "id_columns": [
+        "MERGEPOLICYID",
+        "SEGMENTID"
+      ],
+      "columns": [
+        {
+          "name": "DEFINITION",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "SEGMENTID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ISEDGE",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "TTLINDAYS",
+          "type": "BIGINT"
+        },
+        {
+          "name": "SEGMENTBLUEPRINTCLASS",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "DEFINITIONHASH",
+          "type": "BIGINT"
+        },
+        {
+          "name": "ISPEOPLESEGMENT",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "ISACCOUNTSEGMENT",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "NAME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "EVALUATIONCOMPLETEDTIME",
+          "type": "\"NULL\""
+        },
+        {
+          "name": "TOTALMEMBERS",
+          "type": "BIGINT"
+        },
+        {
+          "name": "LABELSSEGMENT",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ISSTREAMING",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "LIFECYCLESTATUS",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ISBATCH",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "TYPE",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "MERGEPOLICYID",
+          "type": "VARCHAR"
+        }
+      ]
+    },
+    "hkg_br_segment_property": {
+      "kind": "bridge",
+      "domain": "segment",
+      "row_count": 19,
+      "id_columns": [
+        "SEGMENTID"
+      ],
+      "columns": [
+        {
+          "name": "SEGMENTID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "PROPERTY",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LABELSSEGMENT",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LABELSPROPERTY",
+          "type": "VARCHAR"
+        }
+      ]
+    },
+    "dim_collection": {
+      "kind": "dimension",
+      "domain": "dataset",
+      "row_count": 37,
+      "id_columns": [
+        "COLLECTIONID",
+        "CREATEDCLIENTID"
+      ],
+      "columns": [
+        {
+          "name": "ISIDENTITYENABLED",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "ROWCOUNT",
+          "type": "BIGINT"
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "STORAGESIZEINBYTES",
+          "type": "BIGINT"
+        },
+        {
+          "name": "ISPROFILEENABLED",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "NAME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "COLLECTIONID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ISSYSTEM",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "STORAGESIZEINMEGABYTES",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "ISTTLSET",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "UPDATEDBY",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "TTLVALUE",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "CREATEDBY",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "CREATEDCLIENTID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LABELSCOLLECTION",
+          "type": "VARCHAR"
+        }
+      ]
+    }
+  },
+  "join_candidates": [],
+  "allowed_api_endpoints": [
+    {
+      "endpoint": "GET /data/foundation/catalog/datasets",
+      "method": "GET",
+      "path": "/data/foundation/catalog/datasets",
+      "domain": "dataset",
+      "param_names": [
+        "filter",
+        "limit"
+      ],
+      "observed_params": {
+        "limit": [
+          "20"
+        ],
+        "filter": [
+          "name:SG AND name:non loyalty"
+        ]
+      },
+      "routes_seen": [
+        "SQL_PLUS_API"
+      ],
+      "source": "gold_examples",
+      "openapi": null
+    },
+    {
+      "endpoint": "GET /audit/events",
+      "method": "GET",
+      "path": "/audit/events",
+      "domain": "dataset",
+      "param_names": [
+        "limit",
+        "orderBy",
+        "property"
+      ],
+      "observed_params": {
+        "property": [
+          "assetType==dataset"
+        ],
+        "orderBy": [
+          "-timestamp"
+        ],
+        "limit": [
+          "50"
+        ]
+      },
+      "routes_seen": [
+        "SQL_PLUS_API"
+      ],
+      "source": "gold_examples",
+      "openapi": null
+    },
+    {
+      "endpoint": "POST /data/foundation/catalog/dataSets",
+      "method": "POST",
+      "path": "/data/foundation/catalog/dataSets",
+      "domain": "dataset",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "Create a new dataset",
+        "description": "This request creates a new dataset.",
+        "operation_id": "createDataset",
+        "query_params": [],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer\". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The name of the sandbox in which the operation will take place. See the [sandboxes overview documentation](https://adobe.com/go/sandbox-overview-en) for more information."
+          },
+          {
+            "name": "accept-encoding",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Used to signal the intent to consume compressed response bodies. Supported encodings: gzip."
+          },
+          {
+            "name": "content-type",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/json"
+              ]
+            },
+            "type": null,
+            "description": "Specifies the media type of the request body. Required for requests with a payload, such as POST, PUT, and PATCH. When sending a JSON payload, this must be set to `application/json`."
+          }
+        ],
+        "query_param_names": [],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "accept-encoding",
+          "content-type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "content-type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": true,
+          "content_types": [
+            "application/json"
+          ],
+          "schema": {
+            "$ref": "#/components/schemas/dataSetRequest"
+          }
+        },
+        "response_codes": [
+          "201",
+          "400",
+          "403",
+          "500",
+          "default"
+        ],
+        "source_file": "catalog.yaml"
+      }
+    }
+  ],
+  "similar_examples": [
+    {
+      "query": "What are the daily 'timeseries.ingestion.dataset.recordsuccess.count' values between '2026-03-15' and '2026-03-31'?",
+      "route": "API_ONLY",
+      "domain": "metric",
+      "intent": "count",
+      "score": 0.6512,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [],
+      "api_endpoints": [
+        "POST /data/infrastructure/observability/insights/metrics"
+      ],
+      "api_params": [],
+      "gold_sql": "",
+      "gold_api": [
+        "POST /data/infrastructure/observability/insights/metrics body={\"start\":\"2026-03-15T00:00:00.000Z\",\"end\":\"2026-03-31T23:59:59.000Z\",\"granularity\":\"day\",\"metrics\":[{\"name\":\"timeseries.ingestion.dataset.recordsuccess.count\",\"filters\":[],\"aggregator\":\"sum\"}]}"
+      ]
+    },
+    {
+      "query": "show me the field for Person: Birthday Today 001",
+      "route": "SQL_PLUS_API",
+      "domain": "dataset",
+      "intent": "field_lookup",
+      "score": 0.4856,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [
+        "dim_segment",
+        "hkg_br_segment_property"
+      ],
+      "api_endpoints": [
+        "GET /data/foundation/catalog/datasets"
+      ],
+      "api_params": [
+        "filter",
+        "limit"
+      ],
+      "gold_sql": "SELECT DISTINCT aa.property AS property_name, a.name AS segment_name\nFROM hkg_br_segment_property aa\nJOIN dim_segment a ON aa.segmentid = a.segmentid\nWHERE a.name = 'Person: Birthday Today 001'\nLIMIT 20",
+      "gold_api": [
+        "GET /data/foundation/catalog/datasets?limit=20&filter=name:SG AND name:non loyalty"
+      ]
+    },
+    {
+      "query": "Show recent changes in datasets.",
+      "route": "SQL_PLUS_API",
+      "domain": "dataset",
+      "intent": "time_lookup",
+      "score": 0.4833,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [
+        "dim_collection"
+      ],
+      "api_endpoints": [
+        "GET /audit/events"
+      ],
+      "api_params": [
+        "limit",
+        "orderBy",
+        "property"
+      ],
+      "gold_sql": "SELECT DISTINCT D.COLLECTIONID AS collection_id,\n       D.NAME AS collection_name,\n       D.UPDATEDTIME AS updated_time\nFROM DIM_COLLECTION AS D\nWHERE D.UPDATEDTIME >= DATEADD(DAY, -90, CURRENT_DATE)\nORDER BY D.UPDATEDTIME DESC\nLIMIT 50",
+      "gold_api": [
+        "GET /audit/events?property=assetType==dataset&orderBy=-timestamp&limit=50"
+      ]
+    }
+  ],
+  "tool_budget": {
+    "max_sql_calls": 1,
+    "max_api_calls": 1,
+    "expected_steps": [
+      "sql_query",
+      "api_call"
+    ]
+  },
+  "answer_constraints": [
+    "Use only verified SQL/API outputs as evidence.",
+    "Do not invent IDs, timestamps, counts, statuses, or names.",
+    "If SQL and API disagree, mention the discrepancy clearly.",
+    "If API returns an error or empty result, state that clearly."
+  ]
+}

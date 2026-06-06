@@ -2101,11 +2101,11 @@
           },
           "69c9e8c280780d73541f8a38": {
             "id": "69c9e8c280780d73541f8a38",
-            "version": "2.0.86",
+            "version": "2.0.87",
             "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
             "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
             "created": 1774840002339,
-            "updated": 1780706421046,
+            "updated": 1780770164820,
             "createdClient": "aep_reporting_destinations",
             "createdUser": "aep_reporting_destinations@AdobeID",
             "updatedUser": "acp_foundation_dataTracker@AdobeID",
@@ -2152,9 +2152,9 @@
             "extensions": {
               "adobe_lakeHouse": {
                 "metrics": {
-                  "storageSize": 298109,
+                  "storageSize": 302730,
                   "rowCount": 1,
-                  "asOf": 1780706420893
+                  "asOf": 1780770164653
                 },
                 "eventDistributionMetrics": {
                   "distributions": [
@@ -2163,7 +2163,7 @@
                       "count": 0
                     }
                   ],
-                  "asOf": 1780706420893
+                  "asOf": 1780770164653
                 }
               }
             },
@@ -2251,11 +2251,11 @@
           },
           "69c9e92176c73d7f59fdbc55": {
             "id": "69c9e92176c73d7f59fdbc55",
-            "version": "2.0.86",
+            "version": "2.0.87",
             "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
             "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
             "created": 1774840097005,
-            "updated": 1780695213637,
+            "updated": 1780769605968,
             "createdClient": "aep_reporting_destinations",
             "createdUser": "aep_reporting_destinations@AdobeID",
             "updatedUser": "acp_foundation_dataTracker@AdobeID",
@@ -2302,9 +2302,9 @@
             "extensions": {
               "adobe_lakeHouse": {
                 "metrics": {
-                  "storageSize": 68927,
+                  "storageSize": 69944,
                   "rowCount": 0,
-                  "asOf": 1780695213474
+                  "asOf": 1780769605801
                 },
                 "eventDistributionMetrics": {
                   "distributions": [
@@ -2333,7 +2333,7 @@
                       "count": 0
                     }
                   ],
-                  "asOf": 1780695213474
+                  "asOf": 1780769605801
                 }
               }
             },
@@ -2549,7 +2549,7 @@
       "error": null
     }
   ],
-  "answer": "From the local SQL snapshot, I found 1 dataset record(s):\n\n- weRetail: CRM\n\nThe live API call to GET /data/foundation/catalog/datasets succeeded with HTTP 200 and returned 38 preview item(s).\n\nAPI preview items:\n\n- Decision Object Repository - Fallback Offers — ID: 69c8d6b0494ee9dc83b67874\n- Decision Object Repository - Placements — ID: 69c8d6b094a54c8d91aa2dca\n- Decision Object Repository - Personalized Offers — ID: 69c8d6b0d780f4fae2346a55\n- Decision Object Repository - Activities — ID: 69c8d6b185b23d11eb7b904a\n- Experience Decisioning Object Repository - Personalized Offer Items — ID: 69c8d6b361abc6f187f9f8f5\n- ODE DecisionEvents - external-benchmarking decisioning — ID: 69c8d6b5494ee9dc83b67875\n- Journey Step Events — ID: 69c8d6c05a734aa755eb63cc\n- Journeys — ID: 69c8d6c06a9c8527e93c0a0b\n- Journey Inbound — ID: 69c8d6c10ea0107706fbc09c\n- Profile-Snapshot-Export-486e2a5e-dc46-4ab6-ad5f-9cdd16db869d — ID: 69c8d6c810c39fb1068f65b5\n- ... and 28 more rows.",
+  "answer": "Based on the catalog data, there is 1 dataset that uses the 'weRetail: CRM' schema:\n\n* **Name**: weRetail: CRM\n* **ID**: 69c8d9c5c58ebc1ebef442e3\n* **Schema Reference ID**: `https://ns.adobe.com/adobepeakprogram/schemas/69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af`",
   "status": "success",
   "debug_events": [
     {
@@ -2577,7 +2577,15 @@
     {
       "step": 3,
       "event": "llm_output",
-      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"Based on the retrieved catalog and collection metadata, there is 1 dataset that uses the schema 'weRetail: CRM':\\n\\n- **Dataset Name**: weRetail: CRM\\n- **Dataset ID**: 69c8d9c5c58ebc1ebef442e3\\n- **Schema ID**: https://ns.adobe.com/adobepeakprogram/schemas/69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af\"\n}"
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"Based on the catalog datasets and collection metadata, there is 1 dataset that uses the schema 'weRetail: CRM':\\n\\n- **weRetail: CRM** (ID: `69c8d9c5c58ebc1ebef442e3`)\"\n}"
+    },
+    {
+      "event": "answer_agent_output",
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"Based on the catalog data, there is 1 dataset that uses the 'weRetail: CRM' schema:\\n\\n* **Name**: weRetail: CRM\\n* **ID**: 69c8d9c5c58ebc1ebef442e3\\n* **Schema Reference ID**: `https://ns.adobe.com/adobepeakprogram/schemas/69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af`\"\n}",
+      "parsed": {
+        "action": "final_answer",
+        "answer": "Based on the catalog data, there is 1 dataset that uses the 'weRetail: CRM' schema:\n\n* **Name**: weRetail: CRM\n* **ID**: 69c8d9c5c58ebc1ebef442e3\n* **Schema Reference ID**: `https://ns.adobe.com/adobepeakprogram/schemas/69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af`"
+      }
     }
   ]
 }

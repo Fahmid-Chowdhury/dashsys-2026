@@ -3,45 +3,18 @@
   "trace": [
     {
       "step": 1,
-      "action": "api_call",
-      "api_call": {
-        "method": "GET",
-        "url": "/schemas",
-        "params": {
-          "filter": "name==weRetail: CRM"
-        },
-        "status": "error",
-        "status_code": 404,
-        "result_preview": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>openresty</center>\r\n</body>\r\n</html>\r\n",
-        "error": null
-      }
-    },
-    {
-      "step": 2,
       "action": "sql_query",
-      "sql": "SELECT * FROM dim_blueprint WHERE LOWER(NAME) = LOWER('weRetail: CRM') LIMIT 1",
+      "sql": "SELECT S.BLUEPRINTID AS blueprint_id, S.NAME, S.CLASS, S.ISPROFILEENABLED, S.UPDATEDTIME AS updated_time, S.REQUIREDFIELDS AS required_fields, COUNT(DISTINCT SD.COLLECTIONID) AS collection_count, COUNT(DISTINCT SA.PROPERTY) AS property_count FROM DIM_BLUEPRINT AS S LEFT JOIN HKG_BR_BLUEPRINT_COLLECTION AS SD ON S.BLUEPRINTID = SD.BLUEPRINTID LEFT JOIN HKG_BR_BLUEPRINT_PROPERTY AS SA ON S.BLUEPRINTID = SA.BLUEPRINTID WHERE LOWER(S.NAME) = LOWER('weRetail: CRM') GROUP BY S.BLUEPRINTID, S.NAME, S.CLASS, S.ISPROFILEENABLED, S.UPDATEDTIME, S.REQUIREDFIELDS LIMIT 3",
       "results": [
         {
-          "BLUEPRINTTYPE": "object",
-          "EXTENDS": "[\"https://ns.adobe.com/xdm/context/profile-directmarketing\", \"https://ns.adobe.com/adobepeakprogram/mixins/5800f5913fbc06f304c5692ed7262bd6ff4deaf9e65b04c4\", \"https://ns.adobe.com/adobepeakprogram/mixins/b69834160d67655ad6b86616e36bc5d8bdd8065ab019056\", \"https://ns.adobe.com/adobepeakprogram/mixins/fcc178a2d3dc9b1f8875525b98b196394add27e953424a4a\", \"https://ns.adobe.com/adobepeakprogram/mixins/29e96d0be225b62756fe96233a2bfff83ebaaf2d281b317b\", \"https://ns.adobe.com/xdm/common/auditable\", \"https://ns.adobe.com/adobepeakprogram/mixins/52ac2bdb10049fa5180f797fd7bb86c935a8804b7c47eb84\", \"https://ns.adobe.com/adobepeakprogram/mixins/836c4233b019f2e7f39f467a71ffe7da69588358c458448d\", \"https://ns.adobe.com/xdm/mixins/profile-consents\", \"https://ns.adobe.com/adobepeakprogram/mixins/e40bd9fe0425818932e200e1340c63604e9a41a3db897d3a\", \"https://ns.adobe.com/xdm/context/profile-person-details\", \"https://ns.adobe.com/adobepeakprogram/mixins/e979f4ac2c497dd97c8e8af9747da0b35046ba28b110a078\", \"https://ns.adobe.com/xdm/context/profile-personal-details\", \"https://ns.adobe.com/adobepeakprogram/mixins/3516516b5dda3afedb3770774ec32c04ca5034d03b9b00fb\", \"https://ns.adobe.com/xdm/data/record\", \"https://ns.adobe.com/xdm/context/identitymap\", \"https://ns.adobe.com/xdm/context/profile\", \"https://ns.adobe.com/xdm/context/profile-preferences-details\", \"https://ns.adobe.com/adobepeakprogram/mixins/7721d96756097e28ef3c47adc9919bd3b66f59fe96cf7cc9\", \"https://ns.adobe.com/adobepeakprogram/mixins/c94528de0c38a331d6126c9afcba2d63b7c0874b950b5bf9\", \"https://ns.adobe.com/adobepeakprogram/mixins/204b06f980c88eaa767d0755bddf9a95b1cb385f169c304f\"]",
-          "UPDATEDCLIENTID": "acp_foundation_queryService",
-          "LABELSBLUEPRINT": "[]",
-          "UPDATEDTIME": "2026-03-29T07:50:21.000+00:00",
-          "CLASS": "https://ns.adobe.com/xdm/context/profile",
-          "BLUEPRINTID": "69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af",
-          "IMMUTABLETAGS": "[\"union\"]",
-          "TENANT": "adobepeakprogram",
-          "ISPROFILEENABLED": true,
+          "blueprint_id": "69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af",
           "NAME": "weRetail: CRM",
-          "ISBEHAVIORTIMESERIESTYPE": false,
-          "DESCRIPTION": "weRetail: CRM",
-          "ETAG": "7e59154e2bf334a8906881057ff1065da262922e3aec029d96beba927f0a372d",
-          "REQUIREDFIELDS": "[]",
-          "ISBEHAVIORRECORDTYPE": true,
-          "CREATEDTIME": "2026-03-29T07:50:04.000+00:00",
-          "UPDATEDBY": "acp_foundation_queryService@AdobeID",
-          "CREATEDBY": "acp_foundation_queryService@AdobeID",
-          "CREATEDCLIENTID": "acp_foundation_queryService"
+          "CLASS": "https://ns.adobe.com/xdm/context/profile",
+          "ISPROFILEENABLED": true,
+          "updated_time": "2026-03-29T07:50:21.000+00:00",
+          "required_fields": "[]",
+          "collection_count": 1,
+          "property_count": 21
         }
       ],
       "status": "success",
@@ -49,128 +22,79 @@
         "Skipped hkg_br_property_property.parquet: Invalid Input Error: Failed to read Parquet file 'DBSnapshot/hkg_br_property_property.parquet': Need at least one non-root column in the file"
       ],
       "error": null
+    },
+    {
+      "step": 2,
+      "action": "api_call",
+      "api_call": {
+        "method": "GET",
+        "url": "/schemas",
+        "params": {
+          "limit": "5",
+          "filter": "name==weRetail: CRM"
+        },
+        "status": "error",
+        "status_code": 404,
+        "result_preview": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>openresty</center>\r\n</body>\r\n</html>\r\n",
+        "error": null
+      }
     }
   ],
-  "answer": "Unable to complete the query within the allowed agent steps.",
+  "answer": "Here are the details for the schema 'weRetail: CRM':\n\n- **Blueprint ID**: 69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af\n- **Class**: https://ns.adobe.com/xdm/context/profile\n- **Profile Enabled**: Yes (true)\n- **Updated Time**: 2026-03-29T07:50:21.000+00:00\n- **Required Fields**: None\n- **Collection Count**: 1\n- **Property Count**: 21\n\n*(Note: An API request to fetch schema details returned a 404 error, but the database records provided the details above.)*",
   "status": "failed",
   "debug_events": [
     {
       "step": 1,
       "event": "llm_output",
-      "raw_output": "{\n  \"action\": \"api_call\",\n  \"method\": \"GET\",\n  \"url\": \"/schemas\",\n  \"params\": {\n    \"filter\": \"name==weRetail: CRM\"\n  }\n}"
+      "raw_output": "{\n  \"action\": \"sql_query\",\n  \"sql\": \"SELECT S.BLUEPRINTID AS blueprint_id, S.NAME, S.CLASS, S.ISPROFILEENABLED, S.UPDATEDTIME AS updated_time, S.REQUIREDFIELDS AS required_fields, COUNT(DISTINCT SD.COLLECTIONID) AS collection_count, COUNT(DISTINCT SA.PROPERTY) AS property_count FROM DIM_BLUEPRINT AS S LEFT JOIN HKG_BR_BLUEPRINT_COLLECTION AS SD ON S.BLUEPRINTID = SD.BLUEPRINTID LEFT JOIN HKG_BR_BLUEPRINT_PROPERTY AS SA ON S.BLUEPRINTID = SA.BLUEPRINTID WHERE LOWER(S.NAME) = LOWER('weRetail: CRM') GROUP BY S.BLUEPRINTID, S.NAME, S.CLASS, S.ISPROFILEENABLED, S.UPDATEDTIME, S.REQUIREDFIELDS LIMIT 3\"\n}"
     },
     {
       "step": 1,
-      "event": "tool_executed",
-      "action": "api_call",
-      "status": "error"
-    },
-    {
-      "step": 2,
-      "event": "llm_output",
-      "raw_output": "{\n  \"action\": \"sql_query\",\n  \"sql\": \"SELECT * FROM dim_blueprint WHERE LOWER(NAME) = LOWER('weRetail: CRM') LIMIT 1\"\n}"
-    },
-    {
-      "step": 2,
       "event": "tool_executed",
       "action": "sql_query",
       "status": "success"
     },
     {
+      "step": 2,
+      "event": "llm_output",
+      "raw_output": "{\n  \"action\": \"api_call\",\n  \"method\": \"GET\",\n  \"url\": \"/schemas\",\n  \"params\": {\n    \"limit\": \"5\",\n    \"filter\": \"name==weRetail: CRM\"\n  }\n}"
+    },
+    {
+      "step": 2,
+      "event": "tool_executed",
+      "action": "api_call",
+      "status": "error"
+    },
+    {
       "step": 3,
       "event": "llm_output",
-      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"The schema 'weRetail: CRM' was found using SQL query on `dim_blueprint`. Details include:\\n\\n*   **Blueprint ID:** 69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af\\n*   **Name:** weRetail: CRM\\n*   **Class:** https://ns.adobe.com/xdm/context/profile\\n*   **Is Profile Enabled:** True\\n*   **Description:** weRetail: CRM\\n*   **Created Time:** 2026-03-29T07:50:04.000+00:00\"\n}"
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"Based on the local database, here are the details for the schema 'weRetail: CRM':\\n- **Blueprint ID**: 69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af\\n- **Class**: https://ns.adobe.com/xdm/context/profile\\n- **Profile Enabled**: True\\n- **Updated Time**: 2026-03-29T07:50:21.000+00:00\\n- **Required Fields**: None (empty list)\\n- **Associated Collections**: 1\\n- **Properties Count**: 21\\n\\nNote: An API call to retrieve details from `/schemas` returned a 404 Not Found error.\"\n}"
     },
     {
-      "step": 3,
-      "event": "route_policy_rejected",
-      "proposed_action": {
+      "event": "answer_agent_output",
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"Here are the details for the schema 'weRetail: CRM':\\n\\n- **Blueprint ID**: 69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af\\n- **Class**: https://ns.adobe.com/xdm/context/profile\\n- **Profile Enabled**: Yes (true)\\n- **Updated Time**: 2026-03-29T07:50:21.000+00:00\\n- **Required Fields**: None\\n- **Collection Count**: 1\\n- **Property Count**: 21\\n\\n*(Note: An API request to fetch schema details returned a 404 error, but the database records provided the details above.)*\"\n}",
+      "parsed": {
         "action": "final_answer",
-        "answer": "The schema 'weRetail: CRM' was found using SQL query on `dim_blueprint`. Details include:\n\n*   **Blueprint ID:** 69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af\n*   **Name:** weRetail: CRM\n*   **Class:** https://ns.adobe.com/xdm/context/profile\n*   **Is Profile Enabled:** True\n*   **Description:** weRetail: CRM\n*   **Created Time:** 2026-03-29T07:50:04.000+00:00"
-      },
-      "feedback": {
-        "ok": false,
-        "target": "route_policy",
-        "errors": [
-          "Cannot return final_answer yet. Missing required tool action(s): ['api_call']."
-        ],
-        "repair_hint": "Complete the missing required action(s): ['api_call']. Then return final_answer."
+        "answer": "Here are the details for the schema 'weRetail: CRM':\n\n- **Blueprint ID**: 69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af\n- **Class**: https://ns.adobe.com/xdm/context/profile\n- **Profile Enabled**: Yes (true)\n- **Updated Time**: 2026-03-29T07:50:21.000+00:00\n- **Required Fields**: None\n- **Collection Count**: 1\n- **Property Count**: 21\n\n*(Note: An API request to fetch schema details returned a 404 error, but the database records provided the details above.)*"
       }
     },
     {
-      "step": 4,
-      "event": "llm_output",
-      "raw_output": "{\n  \"action\": \"api_call\",\n  \"method\": \"GET\",\n  \"url\": \"/schemas\",\n  \"params\": {\n    \"filter\": \"name==weRetail: CRM\"\n  }\n}"
-    },
-    {
-      "step": 4,
-      "event": "budget_rejected",
-      "proposed_action": {
-        "action": "api_call",
-        "method": "GET",
-        "url": "/schemas",
-        "params": {
-          "filter": "name==weRetail: CRM"
-        },
-        "headers": {},
-        "body": null
-      },
-      "feedback": {
-        "ok": false,
-        "target": "api",
-        "errors": [
-          "API budget exceeded. Used 1, max allowed 1."
-        ],
-        "repair_hint": "Do not call API again. Use available results or produce final_answer."
-      }
-    },
-    {
-      "step": 5,
-      "event": "llm_output",
-      "raw_output": "{\"action\": \"final_answer\", \"answer\": \"The schema 'weRetail: CRM' was found using SQL query results. Details include:\\n\\n*   **Blueprint ID:** 69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af\\n*   **Name:** weRetail: CRM\\n*   **Class:** https://ns.adobe.com/xdm/context/profile\\n*   **Description:** weRetail: CRM\\n*   **Is Profile Enabled:** True\\n*   **Blueprint Type:** object\\n*   **Created Time:** 2026-03-29T07:50:04.000+00:00\\n*   **Updated Time:** 2026-03-29T07:50:21.000+00:00\"}"
-    },
-    {
-      "step": 5,
-      "event": "route_policy_rejected",
-      "proposed_action": {
-        "action": "final_answer",
-        "answer": "The schema 'weRetail: CRM' was found using SQL query results. Details include:\n\n*   **Blueprint ID:** 69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af\n*   **Name:** weRetail: CRM\n*   **Class:** https://ns.adobe.com/xdm/context/profile\n*   **Description:** weRetail: CRM\n*   **Is Profile Enabled:** True\n*   **Blueprint Type:** object\n*   **Created Time:** 2026-03-29T07:50:04.000+00:00\n*   **Updated Time:** 2026-03-29T07:50:21.000+00:00"
-      },
-      "feedback": {
-        "ok": false,
-        "target": "route_policy",
-        "errors": [
-          "Cannot return final_answer yet. Missing required tool action(s): ['api_call']."
-        ],
-        "repair_hint": "Complete the missing required action(s): ['api_call']. Then return final_answer."
-      }
-    },
-    {
-      "step": 6,
-      "event": "llm_output",
-      "raw_output": "{\n  \"action\": \"api_call\",\n  \"method\": \"GET\",\n  \"url\": \"/schemas\",\n  \"params\": {\n    \"filter\": \"name==weRetail: CRM\"\n  }\n}"
-    },
-    {
-      "step": 6,
-      "event": "budget_rejected",
-      "proposed_action": {
-        "action": "api_call",
-        "method": "GET",
-        "url": "/schemas",
-        "params": {
-          "filter": "name==weRetail: CRM"
-        },
-        "headers": {},
-        "body": null
-      },
-      "feedback": {
-        "ok": false,
-        "target": "api",
-        "errors": [
-          "API budget exceeded. Used 1, max allowed 1."
-        ],
-        "repair_hint": "Do not call API again. Use available results or produce final_answer."
-      }
+      "event": "tool_failure_detected_before_final_answer",
+      "failed_tool_steps": [
+        {
+          "step": 2,
+          "action": "api_call",
+          "status": "error",
+          "status_code": 404,
+          "error": null,
+          "method": "GET",
+          "url": "/schemas",
+          "params": {
+            "limit": "5",
+            "filter": "name==weRetail: CRM"
+          }
+        }
+      ]
     }
   ]
 }

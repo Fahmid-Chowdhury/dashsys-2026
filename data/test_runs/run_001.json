@@ -45,7 +45,7 @@
       }
     }
   ],
-  "answer": "Based on the database records, the journey 'Gold Tier Welcome Email' has not been published yet. Its status is 'created' (created on 2026-03-31T15:35:12.042188843Z) and its last deployed time is null. Additionally, the API search for this journey returned no results.\n\nSQL returned 1 row(s):\n\n- Gold Tier Welcome Email — status/state: created\n\nAPI GET /ajo/journey returned HTTP 200 with totalCount=0.",
+  "answer": "The journey 'Gold Tier Welcome Email' has not been published yet. Its current state and status are 'created', and the last deployed time is not set (null).",
   "status": "success",
   "debug_events": [
     {
@@ -74,6 +74,14 @@
       "step": 3,
       "event": "llm_output",
       "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"Based on the database records, the journey 'Gold Tier Welcome Email' has not been published yet. Its status is 'created' (created on 2026-03-31T15:35:12.042188843Z) and its last deployed time is null. Additionally, the API search for this journey returned no results.\"\n}"
+    },
+    {
+      "event": "answer_agent_output",
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"The journey 'Gold Tier Welcome Email' has not been published yet. Its current state and status are 'created', and the last deployed time is not set (null).\"\n}",
+      "parsed": {
+        "action": "final_answer",
+        "answer": "The journey 'Gold Tier Welcome Email' has not been published yet. Its current state and status are 'created', and the last deployed time is not set (null)."
+      }
     }
   ]
 }

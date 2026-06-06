@@ -1,0 +1,65 @@
+{
+  "query": "Show all segment jobs with status 'CANCELLED'.",
+  "trace": [
+    {
+      "step": 1,
+      "action": "api_call",
+      "api_call": {
+        "method": "GET",
+        "url": "/data/core/ups/segment/jobs",
+        "params": {
+          "limit": 100
+        },
+        "status": "error",
+        "status_code": null,
+        "result_preview": [],
+        "error": "('Connection broken: IncompleteRead(967450 bytes read, 295242 more expected)', IncompleteRead(967450 bytes read, 295242 more expected))"
+      }
+    }
+  ],
+  "answer": "I was unable to retrieve the segment jobs because the API request to `/data/core/ups/segment/jobs` failed due to a connection error (IncompleteRead).",
+  "status": "failed",
+  "debug_events": [
+    {
+      "step": 1,
+      "event": "llm_output",
+      "raw_output": "{\n  \"action\": \"api_call\",\n  \"method\": \"GET\",\n  \"url\": \"/data/core/ups/segment/jobs\",\n  \"params\": {\n    \"limit\": 100\n  }\n}"
+    },
+    {
+      "step": 1,
+      "event": "tool_executed",
+      "action": "api_call",
+      "status": "error"
+    },
+    {
+      "step": 2,
+      "event": "llm_output",
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"I was unable to retrieve the segment jobs because the API call to GET /data/core/ups/segment/jobs failed with a connection error (IncompleteRead).\"\n}"
+    },
+    {
+      "event": "answer_agent_output",
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"I was unable to retrieve the segment jobs because the API request to `/data/core/ups/segment/jobs` failed due to a connection error (IncompleteRead).\"\n}",
+      "parsed": {
+        "action": "final_answer",
+        "answer": "I was unable to retrieve the segment jobs because the API request to `/data/core/ups/segment/jobs` failed due to a connection error (IncompleteRead)."
+      }
+    },
+    {
+      "event": "tool_failure_detected_before_final_answer",
+      "failed_tool_steps": [
+        {
+          "step": 1,
+          "action": "api_call",
+          "status": "error",
+          "status_code": null,
+          "error": "('Connection broken: IncompleteRead(967450 bytes read, 295242 more expected)', IncompleteRead(967450 bytes read, 295242 more expected))",
+          "method": "GET",
+          "url": "/data/core/ups/segment/jobs",
+          "params": {
+            "limit": 100
+          }
+        }
+      ]
+    }
+  ]
+}

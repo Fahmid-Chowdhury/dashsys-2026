@@ -1,0 +1,586 @@
+{
+  "query": "Show me the details of the tag named 'AI-Generated'.",
+  "normalized_query": "Show me the details of the tag named 'AI-Generated'.",
+  "query_analysis": {
+    "complexity": "simple",
+    "confidence": 1.0,
+    "reason": "The query requests details for a single specific tag, which can be resolved with a single entity lookup.",
+    "subqueries": [
+      {
+        "query": "Show me the details of the tag named 'AI-Generated'.",
+        "purpose": "other"
+      }
+    ]
+  },
+  "intent": "list",
+  "entities": [
+    "AI-Generated"
+  ],
+  "filters": {
+    "quoted_entities": [
+      "AI-Generated"
+    ]
+  },
+  "route": {
+    "selected": "API_ONLY",
+    "votes": {
+      "API_ONLY": 0.7175,
+      "API_CHAIN": 0.2825
+    },
+    "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides."
+  },
+  "domain": {
+    "selected": "tag",
+    "votes": {
+      "tag": 1.0
+    },
+    "reason": "Selected from top retrieved examples and domain votes."
+  },
+  "allowed_tables": {},
+  "join_candidates": [],
+  "allowed_api_endpoints": [
+    {
+      "endpoint": "GET /unifiedtags/tags/51175a7f-aa60-4533-bef1-717b3cef7818",
+      "method": "GET",
+      "path": "/unifiedtags/tags/51175a7f-aa60-4533-bef1-717b3cef7818",
+      "domain": "tag",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [
+        "API_ONLY"
+      ],
+      "source": "gold_examples",
+      "openapi": null
+    },
+    {
+      "endpoint": "GET /unifiedtags/tags",
+      "method": "GET",
+      "path": "/unifiedtags/tags",
+      "domain": "tag",
+      "param_names": [
+        "limit",
+        "tagCategoryId"
+      ],
+      "observed_params": {
+        "limit": [
+          "20",
+          "25",
+          "100"
+        ],
+        "tagCategoryId": [
+          "Uncategorized-87891E4066602D250A495F91@AdobeOrg"
+        ]
+      },
+      "routes_seen": [
+        "API_ONLY",
+        "API_CHAIN"
+      ],
+      "source": "gold_examples+openapi",
+      "openapi": {
+        "summary": "Retrieve tags",
+        "description": "",
+        "operation_id": "listTags",
+        "query_params": [
+          {
+            "name": "start",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The location where the list of results starts from. You can use this to indicate the starting index for pagination of results."
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The number of tags you want displayed per page."
+          },
+          {
+            "name": "property",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The attribute you want to filter by when retrieving tags. Supported values include `name`, `archived`, and `tagCategoryId`."
+          },
+          {
+            "name": "sortBy",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The attribute that is used to determine the sort order for the tags. Supported values include `name`, `createdAt`, and `modifiedAt`."
+          },
+          {
+            "name": "sortOrder",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The direction in which the tags are sorted by. Supported values include `asc` and `desc`."
+          }
+        ],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The type of content being sent in the body of the request. This value should be `application/json`."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          }
+        ],
+        "query_param_names": [
+          "limit",
+          "property",
+          "sortBy",
+          "sortOrder",
+          "start"
+        ],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id"
+        ],
+        "required_params": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [],
+          "schema": {}
+        },
+        "response_codes": [
+          "200"
+        ],
+        "source_file": "unified-tags.yaml"
+      }
+    },
+    {
+      "endpoint": "GET /unifiedtags/tagCategory",
+      "method": "GET",
+      "path": "/unifiedtags/tagCategory",
+      "domain": "tag",
+      "param_names": [
+        "limit"
+      ],
+      "observed_params": {
+        "limit": [
+          "100"
+        ]
+      },
+      "routes_seen": [
+        "API_CHAIN"
+      ],
+      "source": "gold_examples+openapi",
+      "openapi": {
+        "summary": "List tag categories",
+        "description": "",
+        "operation_id": "listTagCategories",
+        "query_params": [
+          {
+            "name": "start",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The location where the list of results starts from. You can use this to indicate the starting index for pagination of results."
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The maximum number of tag categories you want retrieved per page."
+          },
+          {
+            "name": "property",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The attribute you want to filter by when retrieving tag categories."
+          },
+          {
+            "name": "sortBy",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The order in which the tag categories are sorted by. Supported values include `name`, `createdAt`, and `modifiedAt`."
+          },
+          {
+            "name": "sortOrder",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The direction in which the tag categories are sorted by. Supported values include `asc` and `desc`."
+          }
+        ],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The type of content being sent in the body of the request. This value should be `application/json`."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          }
+        ],
+        "query_param_names": [
+          "limit",
+          "property",
+          "sortBy",
+          "sortOrder",
+          "start"
+        ],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id"
+        ],
+        "required_params": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [],
+          "schema": {}
+        },
+        "response_codes": [
+          "200"
+        ],
+        "source_file": "unified-tags.yaml"
+      }
+    },
+    {
+      "endpoint": "POST /unifiedtags/tagCategory",
+      "method": "POST",
+      "path": "/unifiedtags/tagCategory",
+      "domain": "tag",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "Create a new tag category",
+        "description": "",
+        "operation_id": "createTagCategory",
+        "query_params": [],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The type of content being sent in the body of the request. This value should be `application/json`."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          }
+        ],
+        "query_param_names": [],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id"
+        ],
+        "required_params": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id"
+        ],
+        "request_body": {
+          "required": true,
+          "content_types": [
+            "*/*"
+          ],
+          "schema": {
+            "$ref": "#/components/schemas/createTagCategoryBody"
+          }
+        },
+        "response_codes": [
+          "200"
+        ],
+        "source_file": "unified-tags.yaml"
+      }
+    },
+    {
+      "endpoint": "POST /unifiedtags/tags",
+      "method": "POST",
+      "path": "/unifiedtags/tags",
+      "domain": "tag",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "Create a new tag",
+        "description": "",
+        "operation_id": "createTag",
+        "query_params": [],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The type of content being sent in the body of the request. This value should be `application/json`."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          }
+        ],
+        "query_param_names": [],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id"
+        ],
+        "required_params": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id"
+        ],
+        "request_body": {
+          "required": true,
+          "content_types": [
+            "*/*"
+          ],
+          "schema": {
+            "$ref": "#/components/schemas/createTagBody"
+          }
+        },
+        "response_codes": [
+          "201"
+        ],
+        "source_file": "unified-tags.yaml"
+      }
+    }
+  ],
+  "similar_examples": [
+    {
+      "query": "Show me the details of the tag named 'cool'.",
+      "route": "API_ONLY",
+      "domain": "tag",
+      "intent": "list",
+      "score": 0.798,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /unifiedtags/tags/51175a7f-aa60-4533-bef1-717b3cef7818"
+      ],
+      "api_params": [],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /unifiedtags/tags/51175a7f-aa60-4533-bef1-717b3cef7818"
+      ]
+    },
+    {
+      "query": "List all tags in this sandbox.",
+      "route": "API_ONLY",
+      "domain": "tag",
+      "intent": "list",
+      "score": 0.5848,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /unifiedtags/tags"
+      ],
+      "api_params": [
+        "limit"
+      ],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /unifiedtags/tags?limit=25"
+      ]
+    },
+    {
+      "query": "Which tags belong to the category 'Uncategorized'?",
+      "route": "API_CHAIN",
+      "domain": "tag",
+      "intent": "list",
+      "score": 0.5445,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /unifiedtags/tagCategory",
+        "GET /unifiedtags/tags"
+      ],
+      "api_params": [
+        "limit",
+        "tagCategoryId"
+      ],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /unifiedtags/tagCategory?limit=100",
+        "GET /unifiedtags/tags?limit=100&tagCategoryId=Uncategorized-87891E4066602D250A495F91@AdobeOrg"
+      ]
+    }
+  ],
+  "tool_budget": {
+    "max_sql_calls": 0,
+    "max_api_calls": 1,
+    "expected_steps": [
+      "api_call"
+    ]
+  },
+  "answer_constraints": [
+    "Use only verified SQL/API outputs as evidence.",
+    "Do not invent IDs, timestamps, counts, statuses, or names.",
+    "If SQL and API disagree, mention the discrepancy clearly.",
+    "For list questions, return concise rows/items with relevant identifiers.",
+    "If API returns an error or empty result, state that clearly."
+  ]
+}

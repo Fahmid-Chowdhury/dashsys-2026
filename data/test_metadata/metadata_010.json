@@ -3,8 +3,8 @@
   "normalized_query": "show me the field for Person: Birthday today",
   "query_analysis": {
     "complexity": "simple",
-    "confidence": 1.0,
-    "reason": "The user is asking for a specific piece of information (Birthday) related to an entity type (Person) on a specific date (today). This can be treated as a single lookup.",
+    "confidence": 0.95,
+    "reason": "The query is a straightforward request to retrieve Person records whose birthday matches the current date.",
     "subqueries": [
       {
         "query": "show me the field for Person: Birthday today",

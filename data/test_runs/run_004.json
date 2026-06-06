@@ -39,7 +39,7 @@
             {
               "id": "a51ac2ea-f3f6-4d7e-965b-792cd1050913",
               "createdAt": 1774771241774,
-              "updatedAt": 1780766615163,
+              "updatedAt": 1780772831306,
               "createdBy": "acp_foundation_connectors@AdobeID",
               "updatedBy": "acp_foundation_connectors@AdobeID",
               "createdClient": "acp_foundation_connectors",
@@ -54,8 +54,8 @@
                 "version": "1.0"
               },
               "state": "enabled",
-              "version": "\"f60180d3-0000-0200-0000-6a2457970000\"",
-              "etag": "\"f60180d3-0000-0200-0000-6a2457970000\"",
+              "version": "\"f9013d90-0000-0200-0000-6a246fdf0000\"",
+              "etag": "\"f9013d90-0000-0200-0000-6a246fdf0000\"",
               "sourceConnectionIds": [
                 "facfac56-c7d5-4bea-8f4d-5a2a5bd92a65"
               ],
@@ -100,9 +100,9 @@
                 "operation": "create"
               },
               "lastRunDetails": {
-                "id": "3ec1b311-471f-47a3-88b9-2667dbdbf619",
+                "id": "abda7876-f789-4f6a-9db6-8691a7856d45",
                 "state": "inProgress",
-                "startedAtUTC": 1780765200000
+                "startedAtUTC": 1780768800000
               },
               "labels": []
             },
@@ -7279,7 +7279,7 @@
       }
     }
   ],
-  "answer": "The SQL snapshot returned no rows.\n\nThe API call to GET /data/foundation/flowservice/flows returned 35 preview item(s).\n\nThe API call to GET /data/core/ups/audiences returned 2 preview item(s).",
+  "answer": "No segment audiences connected to the destination named 'Person: Birthday today' were found in the database or API results.",
   "status": "success",
   "debug_events": [
     {
@@ -7329,7 +7329,15 @@
     {
       "step": 5,
       "event": "llm_output",
-      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"No destination named 'Person: Birthday today' was found in the system (checked via both local database query and Flow Service API), and therefore no connected segment audiences exist.\"\n}"
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"No destination named 'Person: Birthday today' was found in the system (neither in the local database `dim_target` nor in the active flows retrieved via the Flow Service API). Consequently, there are no connected segment audiences to list.\"\n}"
+    },
+    {
+      "event": "answer_agent_output",
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"No segment audiences connected to the destination named 'Person: Birthday today' were found in the database or API results.\"\n}",
+      "parsed": {
+        "action": "final_answer",
+        "answer": "No segment audiences connected to the destination named 'Person: Birthday today' were found in the database or API results."
+      }
     }
   ]
 }

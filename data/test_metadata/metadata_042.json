@@ -1,0 +1,512 @@
+{
+  "query": "Show the default merge policy for schema class '_xdm.context.segmentdefinition'.",
+  "normalized_query": "Show the default merge policy for schema class '_xdm.context.segmentdefinition'.",
+  "query_analysis": {
+    "complexity": "simple",
+    "confidence": 0.9,
+    "reason": "The request is a direct lookup for the default merge policy associated with a specific schema class, which can be resolved in a single query.",
+    "subqueries": [
+      {
+        "query": "Show the default merge policy for schema class '_xdm.context.segmentdefinition'.",
+        "purpose": "other"
+      }
+    ]
+  },
+  "intent": "list",
+  "entities": [
+    "_xdm.context.segmentdefinition"
+  ],
+  "filters": {
+    "quoted_entities": [
+      "_xdm.context.segmentdefinition"
+    ]
+  },
+  "route": {
+    "selected": "SQL_PLUS_API",
+    "votes": {
+      "API_ONLY": 1.0
+    },
+    "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides."
+  },
+  "domain": {
+    "selected": "merge_policy",
+    "votes": {
+      "merge_policy": 1.0
+    },
+    "reason": "Selected from top retrieved examples and domain votes."
+  },
+  "allowed_tables": {},
+  "join_candidates": [],
+  "allowed_api_endpoints": [
+    {
+      "endpoint": "GET /data/core/ups/config/mergePolicies",
+      "method": "GET",
+      "path": "/data/core/ups/config/mergePolicies",
+      "domain": "merge_policy",
+      "param_names": [
+        "limit"
+      ],
+      "observed_params": {
+        "limit": [
+          "10",
+          "5"
+        ]
+      },
+      "routes_seen": [
+        "API_ONLY"
+      ],
+      "source": "gold_examples+openapi",
+      "openapi": {
+        "summary": "List merge policies",
+        "description": "",
+        "operation_id": "getMany",
+        "query_params": [
+          {
+            "name": "start",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Page offset - As per created time of resource"
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "type": null,
+            "description": "Page Size"
+          },
+          {
+            "name": "orderby",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The model attribute which will be using for ordering"
+          },
+          {
+            "name": "schema.name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Schema class ID"
+          },
+          {
+            "name": "default",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "type": null,
+            "description": "default flag"
+          }
+        ],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "All resources in Experience Platform are isolated to specific virtual sandboxes. Requests to Platform APIs require a header that specifies the name of the sandbox in which the operation will take place. See the [sandboxes overview](https://adobe.com/go/sandbox-overview-en) for more information."
+          },
+          {
+            "name": "x-request-id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Request ID"
+          }
+        ],
+        "query_param_names": [
+          "default",
+          "limit",
+          "orderby",
+          "schema.name",
+          "start"
+        ],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-request-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [],
+          "schema": {}
+        },
+        "response_codes": [
+          "200",
+          "500",
+          "503"
+        ],
+        "source_file": "profile.yaml"
+      }
+    },
+    {
+      "endpoint": "POST /data/core/ups/config/mergePolicies",
+      "method": "POST",
+      "path": "/data/core/ups/config/mergePolicies",
+      "domain": "merge_policy",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "Create a merge policy",
+        "description": "",
+        "operation_id": "createMergePolicy",
+        "query_params": [],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "All resources in Experience Platform are isolated to specific virtual sandboxes. Requests to Platform APIs require a header that specifies the name of the sandbox in which the operation will take place. See the [sandboxes overview](https://adobe.com/go/sandbox-overview-en) for more information."
+          },
+          {
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Type of content being sent in the body of the request. Should be 'application/json'."
+          },
+          {
+            "name": "x-profile-instance-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Profile Instance ID"
+          },
+          {
+            "name": "x-request-id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Request ID"
+          }
+        ],
+        "query_param_names": [],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-profile-instance-id",
+          "x-request-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-profile-instance-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": true,
+          "content_types": [
+            "application/json"
+          ],
+          "schema": {
+            "$ref": "#/components/schemas/PostMergePolicy"
+          }
+        },
+        "response_codes": [
+          "200",
+          "400",
+          "403",
+          "429",
+          "500",
+          "503"
+        ],
+        "source_file": "profile.yaml"
+      }
+    },
+    {
+      "endpoint": "POST /data/core/ups/config/mergePolicies/bulk-get",
+      "method": "POST",
+      "path": "/data/core/ups/config/mergePolicies/bulk-get",
+      "domain": "merge_policy",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "Retrieve multiple merge policies using multiple merge policy IDs",
+        "description": "",
+        "operation_id": "bulkGetMergePolicies",
+        "query_params": [],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "All resources in Experience Platform are isolated to specific virtual sandboxes. Requests to Platform APIs require a header that specifies the name of the sandbox in which the operation will take place. See the [sandboxes overview](https://adobe.com/go/sandbox-overview-en) for more information."
+          },
+          {
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Type of content being sent in the body of the request. Should be 'application/json'."
+          }
+        ],
+        "query_param_names": [],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": true,
+          "content_types": [
+            "application/json"
+          ],
+          "schema": {
+            "type": "object",
+            "properties": {
+              "ids": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "10648288-cda5-11e8-a8d5-f2801f1b9fd1"
+                    }
+                  }
+                }
+              }
+            },
+            "example": {
+              "ids": [
+                {
+                  "id": "10648288-cda5-11e8-a8d5-f2801f1b9fd1"
+                },
+                {
+                  "id": "42d4a596-b1c6-46c0-994e-ca5ef1f85130"
+                }
+              ]
+            }
+          }
+        },
+        "response_codes": [
+          "207"
+        ],
+        "source_file": "profile.yaml"
+      }
+    }
+  ],
+  "similar_examples": [
+    {
+      "query": "Show the default merge policy for schema class '_xdm.context.profile'.",
+      "route": "API_ONLY",
+      "domain": "merge_policy",
+      "intent": "list",
+      "score": 0.8918,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /data/core/ups/config/mergePolicies"
+      ],
+      "api_params": [
+        "limit"
+      ],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /data/core/ups/config/mergePolicies?limit=5"
+      ]
+    },
+    {
+      "query": "List all merge policies in this sandbox.",
+      "route": "API_ONLY",
+      "domain": "merge_policy",
+      "intent": "list",
+      "score": 0.6006,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /data/core/ups/config/mergePolicies"
+      ],
+      "api_params": [
+        "limit"
+      ],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /data/core/ups/config/mergePolicies?limit=10"
+      ]
+    },
+    {
+      "query": "How many merge policies are configured in this sandbox?",
+      "route": "API_ONLY",
+      "domain": "merge_policy",
+      "intent": "count",
+      "score": 0.5164,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /data/core/ups/config/mergePolicies"
+      ],
+      "api_params": [
+        "limit"
+      ],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /data/core/ups/config/mergePolicies?limit=10"
+      ]
+    }
+  ],
+  "tool_budget": {
+    "max_sql_calls": 1,
+    "max_api_calls": 1,
+    "expected_steps": [
+      "sql_query",
+      "api_call"
+    ]
+  },
+  "answer_constraints": [
+    "Use only verified SQL/API outputs as evidence.",
+    "Do not invent IDs, timestamps, counts, statuses, or names.",
+    "If SQL and API disagree, mention the discrepancy clearly.",
+    "For list questions, return concise rows/items with relevant identifiers.",
+    "If API returns an error or empty result, state that clearly."
+  ]
+}

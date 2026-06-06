@@ -1,0 +1,176 @@
+{
+  "query": "Show ingestion record counts and batch success counts for the last 7 days.",
+  "normalized_query": "Show ingestion record counts and batch success counts for the last 7 days.",
+  "query_analysis": {
+    "complexity": "complex",
+    "confidence": 0.95,
+    "reason": "The query asks for two distinct metrics (ingestion record counts and batch success counts) over a specific time range (last 7 days), which can be retrieved via separate subqueries.",
+    "subqueries": [
+      {
+        "query": "Retrieve ingestion record counts for the last 7 days",
+        "purpose": "count_lookup"
+      },
+      {
+        "query": "Retrieve batch success counts for the last 7 days",
+        "purpose": "count_lookup"
+      }
+    ]
+  },
+  "intent": "count",
+  "entities": [],
+  "filters": {
+    "status_or_state": "success"
+  },
+  "route": {
+    "selected": "API_ONLY",
+    "votes": {
+      "API_ONLY": 0.8917,
+      "SQL_PLUS_API": 0.1083
+    },
+    "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides."
+  },
+  "domain": {
+    "selected": "metric",
+    "votes": {
+      "metric": 0.4892,
+      "batch": 0.4025,
+      "schema": 0.1083
+    },
+    "reason": "Selected from top retrieved examples and domain votes."
+  },
+  "allowed_tables": {},
+  "join_candidates": [],
+  "allowed_api_endpoints": [],
+  "similar_examples": [
+    {
+      "query": "Show ingestion record counts and batch success counts for the last 90 days.",
+      "route": "API_ONLY",
+      "domain": "metric",
+      "intent": "status_lookup",
+      "score": 2.0733,
+      "retrieval_sources": [
+        "original_query",
+        "subquery_1",
+        "subquery_2"
+      ],
+      "matched_subqueries": [
+        {
+          "subquery": "Retrieve ingestion record counts for the last 7 days",
+          "purpose": "count_lookup",
+          "score": 0.6120390295982361
+        },
+        {
+          "subquery": "Retrieve batch success counts for the last 7 days",
+          "purpose": "count_lookup",
+          "score": 0.6797847747802734
+        }
+      ],
+      "sql_tables": [],
+      "api_endpoints": [
+        "POST /data/infrastructure/observability/insights/metrics"
+      ],
+      "api_params": [],
+      "gold_sql": "",
+      "gold_api": [
+        "POST /data/infrastructure/observability/insights/metrics body={\"start\":\"2026-03-01T00:00:00.000Z\",\"end\":\"2026-04-01T23:59:59.000Z\",\"granularity\":\"day\",\"metrics\":[{\"name\":\"timeseries.ingestion.dataset.recordsuccess.count\",\"filters\":[],\"aggregator\":\"sum\"},{\"name\":\"timeseries.ingestion.dataset.batchsuccess.count\",\"filters\":[],\"aggregator\":\"sum\"}]}"
+      ]
+    },
+    {
+      "query": "Show failed files for batch 01KP6MNQ3X71RP6MNH6FHWGHVE.",
+      "route": "API_ONLY",
+      "domain": "batch",
+      "intent": "status_lookup",
+      "score": 1.1845,
+      "retrieval_sources": [
+        "original_query",
+        "subquery_2"
+      ],
+      "matched_subqueries": [
+        {
+          "subquery": "Retrieve batch success counts for the last 7 days",
+          "purpose": "count_lookup",
+          "score": 0.6076400279998779
+        }
+      ],
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /data/foundation/export/batches/01KP6MNQ3X71RP6MNH6FHWGHVE/failed"
+      ],
+      "api_params": [],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /data/foundation/export/batches/01KP6MNQ3X71RP6MNH6FHWGHVE/failed"
+      ]
+    },
+    {
+      "query": "How many batches have status 'success'?",
+      "route": "API_ONLY",
+      "domain": "batch",
+      "intent": "count",
+      "score": 0.5211,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /data/foundation/catalog/batches"
+      ],
+      "api_params": [
+        "limit",
+        "status"
+      ],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /data/foundation/catalog/batches?limit=10&status=success"
+      ]
+    },
+    {
+      "query": "Provide more details for the schema 'weRetail: Customer Actions'",
+      "route": "SQL_PLUS_API",
+      "domain": "schema",
+      "intent": "lookup",
+      "score": 0.4591,
+      "retrieval_sources": [
+        "subquery_1"
+      ],
+      "matched_subqueries": [
+        {
+          "subquery": "Retrieve ingestion record counts for the last 7 days",
+          "purpose": "count_lookup",
+          "score": 0.4591342806816101
+        }
+      ],
+      "sql_tables": [
+        "dim_blueprint",
+        "hkg_br_blueprint_collection",
+        "hkg_br_blueprint_property"
+      ],
+      "api_endpoints": [
+        "GET /schemas"
+      ],
+      "api_params": [
+        "filter",
+        "limit"
+      ],
+      "gold_sql": "SELECT S.BLUEPRINTID AS blueprint_id,\n       S.NAME,\n       S.CLASS,\n       S.ISPROFILEENABLED,\n       S.UPDATEDTIME AS updated_time,\n       S.REQUIREDFIELDS AS required_fields,\n       COUNT(DISTINCT SD.COLLECTIONID) AS collection_count,\n       COUNT(DISTINCT SA.PROPERTY) AS property_count\nFROM DIM_BLUEPRINT AS S\nLEFT JOIN HKG_BR_BLUEPRINT_COLLECTION AS SD ON S.BLUEPRINTID = SD.BLUEPRINTID\nLEFT JOIN HKG_BR_BLUEPRINT_PROPERTY AS SA ON S.BLUEPRINTID = SA.BLUEPRINTID\nWHERE LOWER(S.NAME) = LOWER('weRetail: Customer Actions')\nGROUP BY S.BLUEPRINTID,\n         S.NAME,\n         S.CLASS,\n         S.ISPROFILEENABLED,\n         S.UPDATEDTIME,\n         S.REQUIREDFIELDS\nLIMIT 3",
+      "gold_api": [
+        "GET /schemas?limit=5&filter=name==weRetail: Customer Actions"
+      ]
+    }
+  ],
+  "tool_budget": {
+    "max_sql_calls": 0,
+    "max_api_calls": 2,
+    "expected_steps": [
+      "api_call"
+    ]
+  },
+  "answer_constraints": [
+    "Use only verified SQL/API outputs as evidence.",
+    "Do not invent IDs, timestamps, counts, statuses, or names.",
+    "If SQL and API disagree, mention the discrepancy clearly.",
+    "For count questions, prefer explicit total/count fields when available.",
+    "If API returns an error or empty result, state that clearly."
+  ]
+}

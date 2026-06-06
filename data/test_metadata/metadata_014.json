@@ -3,8 +3,8 @@
   "normalized_query": "Provide more details for the schema 'Journey schema with Journey Fields for Journey Orchestration'",
   "query_analysis": {
     "complexity": "simple",
-    "confidence": 1.0,
-    "reason": "The user is asking for details about a specific named schema, which requires only one lookup.",
+    "confidence": 0.95,
+    "reason": "The query is a straightforward request for details about a specific schema by its exact name, which can be resolved in a single lookup.",
     "subqueries": [
       {
         "query": "Provide more details for the schema 'Journey schema with Journey Fields for Journey Orchestration'",

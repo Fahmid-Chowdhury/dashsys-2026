@@ -2,7 +2,6 @@ import argparse
 import csv
 import inspect
 import json
-from logging import config
 import os
 import time
 from collections import Counter
@@ -14,14 +13,21 @@ from typing import Any, Dict, List, Optional, Sequence
 from src.agent_runner import (
     AgentRunConfig,
     create_llm_client,
+    create_answer_llm_client,
     TraceRouterAgent,
     save_agent_run,
 )
 
 LLM_PROVIDER = os.getenv("LLM_PROVIDER", "ollama")
 MODEL = os.getenv("MODEL", "gemma4:latest")
-print(f"Using provider: {LLM_PROVIDER}")
-print(f"Using model: {MODEL}")
+
+ANSWER_LLM_PROVIDER = os.getenv("ANSWER_LLM_PROVIDER", LLM_PROVIDER)
+ANSWER_MODEL = os.getenv("ANSWER_MODEL", MODEL)
+
+print(f"Using action provider: {LLM_PROVIDER}")
+print(f"Using action model: {MODEL}")
+print(f"Using answer provider: {ANSWER_LLM_PROVIDER}")
+print(f"Using answer model: {ANSWER_MODEL}")
 
 @dataclass
 class BatchRunConfig:
@@ -39,8 +45,10 @@ class BatchRunConfig:
     
     llm_provider: str = LLM_PROVIDER
     model: str = MODEL
-
-    model: str = MODEL
+    
+    answer_llm_provider: str = ANSWER_LLM_PROVIDER
+    answer_model: str = ANSWER_MODEL
+    
     max_steps: int = 8
     max_repair_attempts: int = 3
     mock_api: bool = True
@@ -313,6 +321,8 @@ def infer_failure_reason(summary: Dict[str, Any]) -> str:
     debug_counts = summary.get("debug_event_counts", {}) or {}
 
     for event_name in [
+        "tool_failure_detected_before_final_answer",
+        "answer_agent_failed",
         "json_parse_failed",
         "route_policy_rejected",
         "budget_rejected",
@@ -527,6 +537,33 @@ def save_metrics_csv(summaries: List[Dict[str, Any]], path: str | Path) -> None:
         writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
         writer.writeheader()
         writer.writerows(rows)
+        
+
+def create_answer_llm_client_safely(
+    provider: str,
+    model: str,
+    temperature: float = 0.0,
+):
+    """
+    Creates the answer-agent LLM.
+
+    The answer agent should NOT be forced to use the SQL/API action schema.
+    If create_llm_client supports use_json_schema, disable it.
+    If not, fall back to the normal signature.
+    """
+
+    try:
+        return create_llm_client(
+            provider=provider,
+            model=model,
+            temperature=temperature,
+        )
+    except TypeError:
+        return create_llm_client(
+            provider=provider,
+            model=model,
+            temperature=temperature,
+        )
 
 
 def run_batch(config: BatchRunConfig) -> List[Dict[str, Any]]:
@@ -548,6 +585,12 @@ def run_batch(config: BatchRunConfig) -> List[Dict[str, Any]]:
         temperature=0.0,
     )
 
+    answer_llm = create_answer_llm_client_safely(
+        provider=config.answer_llm_provider,
+        model=config.answer_model,
+        temperature=0.0,
+    )
+
     agent_config = AgentRunConfig(
         max_steps=config.max_steps,
         max_repair_attempts=config.max_repair_attempts,
@@ -556,10 +599,12 @@ def run_batch(config: BatchRunConfig) -> List[Dict[str, Any]]:
         mock_api=config.mock_api,
         save_prompts=True,
         use_answer_builder=True,
+        use_answer_agent=True,
     )
 
     agent = TraceRouterAgent(
         llm_client=llm,
+        answer_llm_client=answer_llm,
         config=agent_config,
     )
 
@@ -690,9 +735,10 @@ def parse_args() -> BatchRunConfig:
 
     parser.add_argument("--max-steps", type=int, default=8)
     parser.add_argument("--max-repair-attempts", type=int, default=3)
-    
-    parser.add_argument("--metrics-path", default="data/test_runs_metrics.json")
-    parser.add_argument("--metrics-csv-path", default="data/test_runs_metrics.csv")
+    parser.add_argument("--answer-llm-provider", default=ANSWER_LLM_PROVIDER)
+    parser.add_argument("--answer-model", default=ANSWER_MODEL)
+    parser.add_argument("--metrics-path", default="data/metrics/test_runs_metrics.json")
+    parser.add_argument("--metrics-csv-path", default="data/metrics/test_runs_metrics.csv")
 
     parser.add_argument(
         "--real-api",
@@ -711,6 +757,8 @@ def parse_args() -> BatchRunConfig:
         metrics_csv_path=args.metrics_csv_path,
         llm_provider=args.llm_provider,
         model=args.model,
+        answer_llm_provider=args.answer_llm_provider,
+        answer_model=args.answer_model,
         limit=args.limit,
         start=args.start,
         max_steps=args.max_steps,

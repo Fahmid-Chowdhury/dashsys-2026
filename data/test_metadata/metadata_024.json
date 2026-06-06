@@ -1,0 +1,475 @@
+{
+  "query": "Is the audience 'Person: Birthday within 7 days' referenced in more than one journey simultaneously?",
+  "normalized_query": "Is the audience 'Person: Birthday within 7 days' referenced in more than one journey simultaneously?",
+  "query_analysis": {
+    "complexity": "complex",
+    "confidence": 0.9,
+    "reason": "The query requires first identifying the specific audience, then finding all journeys referencing this audience, and finally checking if multiple of these journeys are active simultaneously.",
+    "subqueries": [
+      {
+        "query": "Find the audience with the name 'Person: Birthday within 7 days'",
+        "purpose": "entity_lookup"
+      },
+      {
+        "query": "List all journeys referencing the audience 'Person: Birthday within 7 days'",
+        "purpose": "relationship_lookup"
+      },
+      {
+        "query": "Get the status of the journeys referencing the audience 'Person: Birthday within 7 days' to check if they are active simultaneously",
+        "purpose": "status_lookup"
+      }
+    ]
+  },
+  "intent": "lookup",
+  "entities": [
+    "Person: Birthday within 7 days"
+  ],
+  "filters": {
+    "quoted_entities": [
+      "Person: Birthday within 7 days"
+    ]
+  },
+  "route": {
+    "selected": "SQL_PLUS_API",
+    "votes": {
+      "SQL_PLUS_API": 0.8953,
+      "SQL_PLUS_API_CHAIN": 0.1047
+    },
+    "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides."
+  },
+  "domain": {
+    "selected": "journey",
+    "votes": {
+      "journey": 0.7999,
+      "segment": 0.2001
+    },
+    "reason": "Selected from top retrieved examples and domain votes."
+  },
+  "allowed_tables": {
+    "dim_campaign": {
+      "kind": "dimension",
+      "domain": "journey",
+      "row_count": 2,
+      "id_columns": [
+        "CAMPAIGNID",
+        "IMSORGID",
+        "SANDBOXID"
+      ],
+      "columns": [
+        {
+          "name": "_ACP_SYSTEM_METADATA",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "STARTDATE",
+          "type": "\"NULL\""
+        },
+        {
+          "name": "LABELSCAMPAIGN",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "IMSORGID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LASTDEPLOYEDTIME",
+          "type": "\"NULL\""
+        },
+        {
+          "name": "STATE",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ISSCHEDULED",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "ISRECURRING",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "CAMPAIGNTYPE",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "STOPPEDTIME",
+          "type": "\"NULL\""
+        },
+        {
+          "name": "FINISHEDTIME",
+          "type": "\"NULL\""
+        },
+        {
+          "name": "SEMANTICLABELS",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "SANDBOXNAME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "NAME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "SANDBOXID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "STATUS",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "INTEST",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "CAMPAIGNID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "CAMPAIGNACTIVITYCOUNT",
+          "type": "BIGINT"
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR"
+        }
+      ]
+    }
+  },
+  "join_candidates": [],
+  "allowed_api_endpoints": [
+    {
+      "endpoint": "GET /ajo/journey",
+      "method": "GET",
+      "path": "/ajo/journey",
+      "domain": "journey",
+      "param_names": [
+        "filter",
+        "pageSize"
+      ],
+      "observed_params": {
+        "filter": [
+          "name==Birthday Message",
+          "status!=live"
+        ],
+        "pageSize": [
+          "10"
+        ]
+      },
+      "routes_seen": [
+        "SQL_PLUS_API"
+      ],
+      "source": "gold_examples+openapi",
+      "openapi": {
+        "summary": "Get a list of journeys",
+        "description": "Returns a list of journeys based on the provided filters.",
+        "operation_id": "getJourneys",
+        "query_params": [
+          {
+            "name": "filter",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Search filters in URL-encoded format. Supports &-separated fields with basic operators '=', '>', '<', '>=', '<='."
+          },
+          {
+            "name": "page",
+            "required": false,
+            "schema": {
+              "minimum": 0,
+              "type": "integer",
+              "default": 0
+            },
+            "type": null,
+            "description": "Page number for pagination (0-based). Used to navigate through multiple pages of results."
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "default": 100
+            },
+            "type": null,
+            "description": "Number of items per page. Controls how many journeys are returned in a single response."
+          },
+          {
+            "name": "fields",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Comma-separated list of fields to include in the response. Allows selective field retrieval for performance optimization."
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Sort criteria in format 'field=direction'. Multiple sorts can be comma-separated. Direction can be 'asc' or 'desc'."
+          }
+        ],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "829495afa589475ab56850a702359cf9"
+            },
+            "type": null,
+            "description": "The API key belonging to the calling client. Use the client id from Developer Console."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "0A7F574EBB4C6E1423973F52@AdobeOrg"
+            },
+            "type": null,
+            "description": "The IMS org id for which the action is being taken."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "prod"
+            },
+            "type": null,
+            "description": "Provides the platform sandbox name."
+          }
+        ],
+        "query_param_names": [
+          "fields",
+          "filter",
+          "page",
+          "pageSize",
+          "sort"
+        ],
+        "path_param_names": [],
+        "header_param_names": [
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [],
+          "schema": {}
+        },
+        "response_codes": [
+          "200",
+          "400",
+          "401",
+          "500"
+        ],
+        "source_file": "journey-retrieve.yaml"
+      }
+    }
+  ],
+  "similar_examples": [
+    {
+      "query": "When was the journey 'Birthday Message' published?",
+      "route": "SQL_PLUS_API",
+      "domain": "journey",
+      "intent": "time_lookup",
+      "score": 1.6839,
+      "retrieval_sources": [
+        "original_query",
+        "subquery_2",
+        "subquery_3"
+      ],
+      "matched_subqueries": [
+        {
+          "subquery": "List all journeys referencing the audience 'Person: Birthday within 7 days'",
+          "purpose": "relationship_lookup",
+          "score": 0.5505393147468567
+        },
+        {
+          "subquery": "Get the status of the journeys referencing the audience 'Person: Birthday within 7 days' to check if they are active simultaneously",
+          "purpose": "status_lookup",
+          "score": 0.5447900891304016
+        }
+      ],
+      "sql_tables": [
+        "dim_campaign"
+      ],
+      "api_endpoints": [
+        "GET /ajo/journey"
+      ],
+      "api_params": [
+        "filter"
+      ],
+      "gold_sql": "SELECT name AS campaign_name,\n       lastdeployedtime AS published_time\nFROM dim_campaign\nWHERE name IN ('Birthday Message', 'Gold Tier Welcome Email')\nLIMIT 50",
+      "gold_api": [
+        "GET /ajo/journey?filter=name==Birthday Message"
+      ]
+    },
+    {
+      "query": "List all journeys",
+      "route": "SQL_PLUS_API",
+      "domain": "journey",
+      "intent": "list",
+      "score": 1.1857,
+      "retrieval_sources": [
+        "original_query",
+        "subquery_2"
+      ],
+      "matched_subqueries": [
+        {
+          "subquery": "List all journeys referencing the audience 'Person: Birthday within 7 days'",
+          "purpose": "relationship_lookup",
+          "score": 0.6722422242164612
+        }
+      ],
+      "sql_tables": [
+        "dim_campaign"
+      ],
+      "api_endpoints": [
+        "GET /ajo/journey"
+      ],
+      "api_params": [
+        "pageSize"
+      ],
+      "gold_sql": "SELECT CAMPAIGN.NAME AS CAMPAIGNNAME,\n       CAMPAIGN.CAMPAIGNID\nFROM DIM_CAMPAIGN AS CAMPAIGN\nLIMIT 10",
+      "gold_api": [
+        "GET /ajo/journey?pageSize=10"
+      ]
+    },
+    {
+      "query": "Give me inactive journeys",
+      "route": "SQL_PLUS_API",
+      "domain": "journey",
+      "intent": "status_lookup",
+      "score": 1.1198,
+      "retrieval_sources": [
+        "original_query",
+        "subquery_3"
+      ],
+      "matched_subqueries": [
+        {
+          "subquery": "Get the status of the journeys referencing the audience 'Person: Birthday within 7 days' to check if they are active simultaneously",
+          "purpose": "status_lookup",
+          "score": 0.6033457517623901
+        }
+      ],
+      "sql_tables": [
+        "dim_campaign"
+      ],
+      "api_endpoints": [
+        "GET /ajo/journey"
+      ],
+      "api_params": [
+        "filter"
+      ],
+      "gold_sql": "SELECT J.CAMPAIGNID AS campaign_id,\n       J.NAME AS campaign_name,\n       J.STATE AS campaign_state,\n       J.UPDATEDTIME AS updated_time\nFROM DIM_CAMPAIGN AS J\nWHERE LOWER(J.STATE) NOT IN ('deployed', 'redeployed')\nLIMIT 50",
+      "gold_api": [
+        "GET /ajo/journey?filter=status!=live"
+      ]
+    },
+    {
+      "query": "List all segment audiences connected to the destination named 'SMS Opt-In', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
+      "route": "SQL_PLUS_API_CHAIN",
+      "domain": "segment",
+      "intent": "count",
+      "score": 0.5222,
+      "retrieval_sources": [
+        "subquery_1"
+      ],
+      "matched_subqueries": [
+        {
+          "subquery": "Find the audience with the name 'Person: Birthday within 7 days'",
+          "purpose": "entity_lookup",
+          "score": 0.5222287774085999
+        }
+      ],
+      "sql_tables": [
+        "dim_segment",
+        "dim_target",
+        "hkg_br_segment_target"
+      ],
+      "api_endpoints": [
+        "GET /data/core/ups/audiences",
+        "GET /data/foundation/flowservice/flows"
+      ],
+      "api_params": [
+        "limit",
+        "property"
+      ],
+      "gold_sql": "SELECT \n    a.segmentid AS segment_id,\n    a.name AS segment_name,\n    a.totalmembers AS total_profiles,\n    a.createdTime AS created_time,\n    a.updatedTime AS updated_time\nFROM dim_segment a\nJOIN hkg_br_segment_target ad ON a.segmentid = ad.segmentid\nJOIN dim_target d ON ad.targetId = d.targetId\nWHERE d.dataflowName = 'SMS Opt-In'\nORDER BY a.name",
+      "gold_api": [
+        "GET /data/core/ups/audiences?property=destinationId==<destination_id>&limit=5",
+        "GET /data/foundation/flowservice/flows?property=inheritedAttributes.properties.isDestinationFlow==true&limit=5"
+      ]
+    },
+    {
+      "query": "List all audiences in the sandbox that have been mapped to new destinations in the last 3 months.",
+      "route": "SQL_PLUS_API",
+      "domain": "segment",
+      "intent": "list",
+      "score": 0.4758,
+      "retrieval_sources": [
+        "subquery_1"
+      ],
+      "matched_subqueries": [
+        {
+          "subquery": "Find the audience with the name 'Person: Birthday within 7 days'",
+          "purpose": "entity_lookup",
+          "score": 0.4758407473564148
+        }
+      ],
+      "sql_tables": [
+        "dim_segment",
+        "dim_target",
+        "hkg_br_segment_target"
+      ],
+      "api_endpoints": [
+        "GET /data/foundation/audit/events"
+      ],
+      "api_params": [
+        "limit",
+        "property"
+      ],
+      "gold_sql": "SELECT DISTINCT A.segmentid AS segment_id, A.name AS segment_name, D.targetId AS target_id, D.name AS target_name\nFROM dim_segment AS A\nJOIN hkg_br_segment_target AS AD ON A.segmentid = AD.segmentid\nJOIN dim_target AS D ON AD.targetId = D.targetId\nWHERE D.createdTime >= DATEADD(MONTH, -3, CURRENT_DATE)\nLIMIT 3",
+      "gold_api": [
+        "GET /data/foundation/audit/events?property=assetType==destination&limit=3"
+      ]
+    }
+  ],
+  "tool_budget": {
+    "max_sql_calls": 2,
+    "max_api_calls": 3,
+    "expected_steps": [
+      "sql_query",
+      "api_call"
+    ]
+  },
+  "answer_constraints": [
+    "Use only verified SQL/API outputs as evidence.",
+    "Do not invent IDs, timestamps, counts, statuses, or names.",
+    "If SQL and API disagree, mention the discrepancy clearly.",
+    "If API returns an error or empty result, state that clearly."
+  ]
+}

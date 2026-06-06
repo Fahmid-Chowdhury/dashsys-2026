@@ -1,0 +1,920 @@
+{
+  "query": "For the audience 'Gender: Female', what is its profile count, is it batch or streaming, and how many audiences share the same rule definition?",
+  "normalized_query": "For the audience 'Gender: Female', what is its profile count, is it batch or streaming, and how many audiences share the same rule definition?",
+  "query_analysis": {
+    "complexity": "complex",
+    "confidence": 0.95,
+    "reason": "The query requires first retrieving details (profile count, evaluation type, and rule definition) for a specific audience, and then using the retrieved rule definition to count other audiences sharing it.",
+    "subqueries": [
+      {
+        "query": "Retrieve the profile count, evaluation type, and rule definition for the audience 'Gender: Female'",
+        "purpose": "detail_lookup"
+      },
+      {
+        "query": "Count the number of audiences that share the same rule definition as the audience 'Gender: Female'",
+        "purpose": "count_lookup"
+      }
+    ]
+  },
+  "intent": "count",
+  "entities": [
+    "Gender: Female"
+  ],
+  "filters": {
+    "quoted_entities": [
+      "Gender: Female"
+    ]
+  },
+  "route": {
+    "selected": "SQL_PLUS_API_CHAIN",
+    "votes": {
+      "SQL_PLUS_API_CHAIN": 0.6089,
+      "SQL_PLUS_API": 0.2654,
+      "API_ONLY": 0.1257
+    },
+    "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides."
+  },
+  "domain": {
+    "selected": "segment",
+    "votes": {
+      "segment": 0.4833,
+      "schema": 0.391,
+      "segment_definition": 0.1257
+    },
+    "reason": "Selected from top retrieved examples and domain votes."
+  },
+  "allowed_tables": {
+    "dim_segment": {
+      "kind": "dimension",
+      "domain": "segment",
+      "row_count": 13,
+      "id_columns": [
+        "MERGEPOLICYID",
+        "SEGMENTID"
+      ],
+      "columns": [
+        {
+          "name": "DEFINITION",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "SEGMENTID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ISEDGE",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "TTLINDAYS",
+          "type": "BIGINT"
+        },
+        {
+          "name": "SEGMENTBLUEPRINTCLASS",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "DEFINITIONHASH",
+          "type": "BIGINT"
+        },
+        {
+          "name": "ISPEOPLESEGMENT",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "ISACCOUNTSEGMENT",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "NAME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "EVALUATIONCOMPLETEDTIME",
+          "type": "\"NULL\""
+        },
+        {
+          "name": "TOTALMEMBERS",
+          "type": "BIGINT"
+        },
+        {
+          "name": "LABELSSEGMENT",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ISSTREAMING",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "LIFECYCLESTATUS",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ISBATCH",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "TYPE",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "MERGEPOLICYID",
+          "type": "VARCHAR"
+        }
+      ]
+    },
+    "dim_target": {
+      "kind": "dimension",
+      "domain": "destination",
+      "row_count": 1,
+      "id_columns": [
+        "CONNECTIONSPECID",
+        "TARGETID"
+      ],
+      "columns": [
+        {
+          "name": "DATAFLOWNAME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "INTERVAL",
+          "type": "BIGINT"
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "DESCRIPTION",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "FREQUENCY",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LABELSTARGET",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "STATE",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "TARGETID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "CONNECTIONSPECID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "NAME",
+          "type": "VARCHAR"
+        }
+      ]
+    },
+    "hkg_br_segment_target": {
+      "kind": "bridge",
+      "domain": "segment",
+      "row_count": 1,
+      "id_columns": [
+        "SEGMENTID",
+        "TARGETID"
+      ],
+      "columns": [
+        {
+          "name": "SEGMENTID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LABELSSEGMENT",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LABELSTARGET",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "TARGETID",
+          "type": "VARCHAR"
+        }
+      ]
+    }
+  },
+  "join_candidates": [],
+  "allowed_api_endpoints": [
+    {
+      "endpoint": "GET /data/core/ups/audiences",
+      "method": "GET",
+      "path": "/data/core/ups/audiences",
+      "domain": "segment",
+      "param_names": [
+        "limit",
+        "property"
+      ],
+      "observed_params": {
+        "property": [
+          "destinationId==<destination_id>"
+        ],
+        "limit": [
+          "5"
+        ]
+      },
+      "routes_seen": [
+        "SQL_PLUS_API_CHAIN"
+      ],
+      "source": "gold_examples+openapi",
+      "openapi": {
+        "summary": "List audiences",
+        "description": "",
+        "operation_id": "listAudiences",
+        "query_params": [
+          {
+            "name": "start",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "type": null,
+            "description": "A query parameter that specifies the starting offset for the audiences returned."
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "type": null,
+            "description": "A query parameter that specifies the total number of audiences returned per page."
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "A query parameter that specifies the field to sort the results by. This is written in the format `[attributeName]:[desc/asc]`"
+          },
+          {
+            "name": "property",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "A query parameter that specifies which audiences to return. The audiences returned must **exactly** match the attribute value given. This is written in the format `property=[attributeName]==[attributeValue]`."
+          },
+          {
+            "name": "name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "A query parameter that filters for audiences that contain the string in the name. This value is case **insensitive**."
+          },
+          {
+            "name": "description",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "A query parameter that filters for audiences that contain the string in the description. This value is case **insensitive**."
+          },
+          {
+            "name": "entityType",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "A query parameter that lets you filter the type of audience you're looking for."
+          }
+        ],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "All resources in Experience Platform are isolated to specific virtual sandboxes. Requests to Platform APIs require a header that specifies the name of the sandbox in which the operation will take place. See the [sandboxes overview](https://adobe.com/go/sandbox-overview-en) for more information."
+          }
+        ],
+        "query_param_names": [
+          "description",
+          "entityType",
+          "limit",
+          "name",
+          "property",
+          "sort",
+          "start"
+        ],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [],
+          "schema": {}
+        },
+        "response_codes": [
+          "200",
+          "403"
+        ],
+        "source_file": "segmentation.yaml"
+      }
+    },
+    {
+      "endpoint": "GET /data/foundation/flowservice/flows",
+      "method": "GET",
+      "path": "/data/foundation/flowservice/flows",
+      "domain": "segment",
+      "param_names": [
+        "filter",
+        "limit",
+        "property",
+        "sort"
+      ],
+      "observed_params": {
+        "property": [
+          "inheritedAttributes.properties.isDestinationFlow==true"
+        ],
+        "limit": [
+          "5",
+          "50"
+        ],
+        "filter": [
+          "state eq 'failed'"
+        ],
+        "sort": [
+          "updatedTime:desc"
+        ]
+      },
+      "routes_seen": [
+        "SQL_PLUS_API_CHAIN",
+        "SQL_PLUS_API"
+      ],
+      "source": "gold_examples+openapi",
+      "openapi": {
+        "summary": "List flows",
+        "description": "Retrieve a list of flows in your organization by making a GET request to the `/flows` endpoint.",
+        "operation_id": "listFlows",
+        "query_params": [
+          {
+            "name": "property",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "type": null,
+            "description": "A comma-separated list of top-level object properties to be returned in the response. This parameter is used to filter the response data based on the properties provided. For example, `property=lastRunDetails.startedAtUTC>=1670880253121` returns only the flows whos last run iterations were started during or after the specified epoch time in milliseconds. This parameter is also used to cut down the amount of data returned in the response body. For example, `property=state==enabled&orderby=createdAt` returns only base connections that have a status of `enabled` in the order of their creation, in ascending order."
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "type": null,
+            "description": "Restrict the maximum number of items returned for a given request. For example, adding a parameter of `limit=10` in a request to retrieve all base connections returns only a maximum of 10 base connections. When used to query the API, the returned response automatically includes a `continuationToken` that can be used to fetch records that were not returned due to the limits applied by the parameter."
+          },
+          {
+            "name": "orderby",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Sort the listed resources by specified fields. For example, `orderby=name` sorts results by name in ascending order (A-Z). Adding a dash (`-`) before the field name (`orderby=-name`) sorts the results in descending order (Z-A)."
+          },
+          {
+            "name": "continuationToken",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "An auto-generated string token that is appended to a returned response when there are more results to be read beyond the maximum count of items that can be returned."
+          },
+          {
+            "name": "count",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "type": null,
+            "description": "A boolean value specifying if the count of resources should be returned. By default the count is not returned (`count=false`)"
+          }
+        ],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with 'Bearer '. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "All resources in Experience Platform are isolated to specific virtual sandboxes. Requests to Platform APIs require a header that specifies the name of the sandbox in which the operation will take place."
+          }
+        ],
+        "query_param_names": [
+          "continuationToken",
+          "count",
+          "limit",
+          "orderby",
+          "property"
+        ],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [],
+          "schema": {}
+        },
+        "response_codes": [
+          "200",
+          "400",
+          "401",
+          "500"
+        ],
+        "source_file": "flow-service.yaml"
+      }
+    },
+    {
+      "endpoint": "GET /data/foundation/audit/events",
+      "method": "GET",
+      "path": "/data/foundation/audit/events",
+      "domain": "segment",
+      "param_names": [
+        "limit",
+        "property"
+      ],
+      "observed_params": {
+        "property": [
+          "assetType==destination",
+          "action==create"
+        ],
+        "limit": [
+          "3",
+          "20"
+        ]
+      },
+      "routes_seen": [
+        "SQL_PLUS_API"
+      ],
+      "source": "gold_examples",
+      "openapi": null
+    },
+    {
+      "endpoint": "POST /data/core/ups/audiences",
+      "method": "POST",
+      "path": "/data/core/ups/audiences",
+      "domain": "segment",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "Create an audience",
+        "description": "",
+        "operation_id": "createAudience",
+        "query_params": [],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The type of content being sent in the body of the request. Should be 'application/json'."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "All resources in Experience Platform are isolated to specific virtual sandboxes. Requests to Platform APIs require a header that specifies the name of the sandbox in which the operation will take place. See the [sandboxes overview](https://adobe.com/go/sandbox-overview-en) for more information."
+          }
+        ],
+        "query_param_names": [],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [
+            "application/json"
+          ],
+          "schema": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CreatePlatformAudienceRequestBody"
+              }
+            ]
+          }
+        },
+        "response_codes": [
+          "201",
+          "400"
+        ],
+        "source_file": "segmentation.yaml"
+      }
+    },
+    {
+      "endpoint": "POST /data/core/ups/audiences/bulk-get",
+      "method": "POST",
+      "path": "/data/core/ups/audiences/bulk-get",
+      "domain": "segment",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "Retrieve multiple audiences",
+        "description": "",
+        "operation_id": "bulkGetAudiences",
+        "query_params": [],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The type of content being sent in the body of the request. Should be 'application/json'."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "All resources in Experience Platform are isolated to specific virtual sandboxes. Requests to Platform APIs require a header that specifies the name of the sandbox in which the operation will take place. See the [sandboxes overview](https://adobe.com/go/sandbox-overview-en) for more information."
+          }
+        ],
+        "query_param_names": [],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": true,
+          "content_types": [
+            "application/json"
+          ],
+          "schema": {
+            "type": "object",
+            "properties": {
+              "ids": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "72c393ea-caed-441a-9eb6-5f66bb1bd6cd"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "response_codes": [
+          "207",
+          "400",
+          "404"
+        ],
+        "source_file": "segmentation.yaml"
+      }
+    }
+  ],
+  "similar_examples": [
+    {
+      "query": "List all segment audiences connected to the destination named 'SMS Opt-In', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
+      "route": "SQL_PLUS_API_CHAIN",
+      "domain": "segment",
+      "intent": "count",
+      "score": 1.7763,
+      "retrieval_sources": [
+        "original_query",
+        "subquery_1",
+        "subquery_2"
+      ],
+      "matched_subqueries": [
+        {
+          "subquery": "Retrieve the profile count, evaluation type, and rule definition for the audience 'Gender: Female'",
+          "purpose": "detail_lookup",
+          "score": 0.5999509692192078
+        },
+        {
+          "subquery": "Count the number of audiences that share the same rule definition as the audience 'Gender: Female'",
+          "purpose": "count_lookup",
+          "score": 0.5924343466758728
+        }
+      ],
+      "sql_tables": [
+        "dim_segment",
+        "dim_target",
+        "hkg_br_segment_target"
+      ],
+      "api_endpoints": [
+        "GET /data/core/ups/audiences",
+        "GET /data/foundation/flowservice/flows"
+      ],
+      "api_params": [
+        "limit",
+        "property"
+      ],
+      "gold_sql": "SELECT \n    a.segmentid AS segment_id,\n    a.name AS segment_name,\n    a.totalmembers AS total_profiles,\n    a.createdTime AS created_time,\n    a.updatedTime AS updated_time\nFROM dim_segment a\nJOIN hkg_br_segment_target ad ON a.segmentid = ad.segmentid\nJOIN dim_target d ON ad.targetId = d.targetId\nWHERE d.dataflowName = 'SMS Opt-In'\nORDER BY a.name",
+      "gold_api": [
+        "GET /data/core/ups/audiences?property=destinationId==<destination_id>&limit=5",
+        "GET /data/foundation/flowservice/flows?property=inheritedAttributes.properties.isDestinationFlow==true&limit=5"
+      ]
+    },
+    {
+      "query": "Count the number of XDM Experience Event schemas that are enabled for profile.",
+      "route": "SQL_PLUS_API",
+      "domain": "schema",
+      "intent": "count",
+      "score": 0.9754,
+      "retrieval_sources": [
+        "subquery_1",
+        "subquery_2"
+      ],
+      "matched_subqueries": [
+        {
+          "subquery": "Retrieve the profile count, evaluation type, and rule definition for the audience 'Gender: Female'",
+          "purpose": "detail_lookup",
+          "score": 0.46749722957611084
+        },
+        {
+          "subquery": "Count the number of audiences that share the same rule definition as the audience 'Gender: Female'",
+          "purpose": "count_lookup",
+          "score": 0.5078826546669006
+        }
+      ],
+      "sql_tables": [
+        "dim_blueprint"
+      ],
+      "api_endpoints": [
+        "GET /data/foundation/schemaregistry/tenant/schemas"
+      ],
+      "api_params": [
+        "filter",
+        "limit"
+      ],
+      "gold_sql": "SELECT COUNT(DISTINCT S.BLUEPRINTID) AS num_experience_event_profile_enabled_blueprints\nFROM DIM_BLUEPRINT AS S\nWHERE LOWER(S.CLASS) LIKE LOWER('%download%')\n  AND S.ISPROFILEENABLED = TRUE",
+      "gold_api": [
+        "GET /data/foundation/schemaregistry/tenant/schemas?limit=25&filter=class==ExperienceEvent;isProfileEnabled==true"
+      ]
+    },
+    {
+      "query": "How many segment definitions exist in this sandbox?",
+      "route": "API_ONLY",
+      "domain": "segment_definition",
+      "intent": "count",
+      "score": 0.4618,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /data/core/ups/segment/definitions"
+      ],
+      "api_params": [
+        "limit"
+      ],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /data/core/ups/segment/definitions?limit=100"
+      ]
+    },
+    {
+      "query": "How many datasets have been ingested using the same schema in the prod sandbox?",
+      "route": "SQL_PLUS_API_CHAIN",
+      "domain": "schema",
+      "intent": "count",
+      "score": 0.4615,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [
+        "dim_blueprint",
+        "dim_collection",
+        "hkg_br_blueprint_collection"
+      ],
+      "api_endpoints": [
+        "GET /data/foundation/catalog/dataSets",
+        "GET /data/foundation/schemaregistry/tenant/schemas/{schema_id}"
+      ],
+      "api_params": [
+        "limit",
+        "property"
+      ],
+      "gold_sql": "SELECT S.blueprintid AS blueprint_id,\n       S.name AS blueprint_name,\n       COUNT(DISTINCT DS.collectionid) AS collection_count\nFROM dim_collection AS D\nJOIN hkg_br_blueprint_collection AS DS ON D.collectionid = DS.collectionid\nJOIN dim_blueprint AS S ON DS.blueprintid = S.blueprintid\nGROUP BY S.blueprintid,\n         S.name\nHAVING COUNT(DISTINCT DS.collectionid) > 1",
+      "gold_api": [
+        "GET /data/foundation/catalog/dataSets?limit=25&property=schema.name",
+        "GET /data/foundation/schemaregistry/tenant/schemas/{schema_id}"
+      ]
+    }
+  ],
+  "tool_budget": {
+    "max_sql_calls": 2,
+    "max_api_calls": 2,
+    "expected_steps": [
+      "sql_query",
+      "api_call"
+    ]
+  },
+  "answer_constraints": [
+    "Use only verified SQL/API outputs as evidence.",
+    "Do not invent IDs, timestamps, counts, statuses, or names.",
+    "If SQL and API disagree, mention the discrepancy clearly.",
+    "For count questions, prefer explicit total/count fields when available.",
+    "If API returns an error or empty result, state that clearly."
+  ]
+}

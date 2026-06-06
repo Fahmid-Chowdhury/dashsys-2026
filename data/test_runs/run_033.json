@@ -1,0 +1,949 @@
+{
+  "query": "For the audience 'Gender: Female', what is its profile count, is it batch or streaming, and how many audiences share the same rule definition?",
+  "trace": [
+    {
+      "step": 1,
+      "action": "sql_query",
+      "sql": "SELECT NAME, TOTALMEMBERS, ISBATCH, ISSTREAMING, DEFINITION, DEFINITIONHASH, (SELECT COUNT(*) FROM dim_segment s2 WHERE s2.DEFINITION = s1.DEFINITION) AS shared_def_count, (SELECT COUNT(*) FROM dim_segment s3 WHERE s3.DEFINITIONHASH = s1.DEFINITIONHASH) AS shared_hash_count FROM dim_segment s1 WHERE s1.NAME = 'Gender: Female'",
+      "results": [
+        {
+          "NAME": "Gender: Female",
+          "TOTALMEMBERS": 5896,
+          "ISBATCH": true,
+          "ISSTREAMING": false,
+          "DEFINITION": "{\"nodeType\":\"fnApply\",\"fnName\":\"in\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"gender\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"person\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}},{\"literalType\":\"List\",\"nodeType\":\"literal\",\"value\":[\"female\"]}]}",
+          "DEFINITIONHASH": 4044831472,
+          "shared_def_count": 1,
+          "shared_hash_count": 1
+        }
+      ],
+      "status": "success",
+      "warnings": [
+        "Skipped hkg_br_property_property.parquet: Invalid Input Error: Failed to read Parquet file 'DBSnapshot/hkg_br_property_property.parquet': Need at least one non-root column in the file"
+      ],
+      "error": null
+    },
+    {
+      "step": 2,
+      "action": "api_call",
+      "api_call": {
+        "method": "GET",
+        "url": "/data/core/ups/audiences",
+        "params": {
+          "limit": "10"
+        },
+        "status": "success",
+        "status_code": 200,
+        "result_preview": {
+          "_page": {
+            "totalCount": 82,
+            "totalPages": 9,
+            "pageSize": 10,
+            "limit": 10,
+            "start": "0",
+            "next": "1",
+            "pageOffset": "0"
+          },
+          "children": [
+            {
+              "id": "706ddcd9-12e2-4036-861b-6d58bebc4fa2",
+              "sandbox": {
+                "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                "sandboxName": "external-benchmarking",
+                "type": "production",
+                "default": false
+              },
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "schema": {
+                "name": "_xdm.context.profile"
+              },
+              "ttlInDays": 30,
+              "profileInstanceId": "ups",
+              "name": "Very High Loyalty Enrollment Target — Apr16v7",
+              "description": "Top-tier propensity for loyalty program enrollment above 0.8. Tests propensityForLoyaltyProgram at a higher threshold.",
+              "expression": {
+                "type": "PQL",
+                "format": "pql/json",
+                "value": "{\"nodeType\":\"fnApply\",\"fnName\":\">\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"propensityForLoyaltyProgram\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"retailStorePropensities\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"_adobepeakprogram\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}}},{\"nodeType\":\"literal\",\"literalType\":\"Double\",\"value\":0.8}]}"
+              },
+              "mergePolicyId": "22a941a9-e598-45f8-846b-c9a8889f5035",
+              "evaluationInfo": {
+                "batch": {
+                  "enabled": true
+                },
+                "continuous": {
+                  "enabled": false
+                },
+                "synchronous": {
+                  "enabled": false
+                }
+              },
+              "ansibleUiEnabled": false,
+              "dataGovernancePolicy": {
+                "excludeOptOut": true
+              },
+              "creationTime": 1776395696590,
+              "createEpoch": 1776395696,
+              "updateTime": 1776395696590,
+              "updateEpoch": 1776395696,
+              "dependents": [],
+              "definedOn": [
+                {
+                  "$ref": "https://ns.adobe.com/xdm/context/profile__union",
+                  "meta:containerId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                  "meta:resourceType": "unions"
+                }
+              ],
+              "dependencies": [],
+              "type": "SegmentDefinition",
+              "dataRefPaths": {
+                "_xdm.context.profile": [
+                  "_adobepeakprogram.retailStorePropensities.propensityForLoyaltyProgram"
+                ]
+              },
+              "overridePerformanceWarnings": false,
+              "labels": [],
+              "createdBy": "2E57262769D5626E0A495FBD@8ac11fe266602de4495fc7.e",
+              "lastModifiedBy": "2E57262769D5626E0A495FBD@8ac11fe266602de4495fc7.e",
+              "namespace": "AEPSegments",
+              "audienceId": "706ddcd9-12e2-4036-861b-6d58bebc4fa2",
+              "isSystem": false,
+              "saveSegmentMembership": true,
+              "metrics": {
+                "id": "706ddcd9-12e2-4036-861b-6d58bebc4fa2",
+                "jobId": "15501707",
+                "type": "export",
+                "data": {
+                  "totalProfiles": 12189,
+                  "totalProfilesByStatus": {
+                    "realized": 12189
+                  }
+                },
+                "updateEpoch": 1780488968
+              },
+              "tags": [],
+              "lifecycleState": "published",
+              "lifecycle": "published",
+              "originName": "REAL_TIME_CUSTOMER_PROFILE",
+              "relationalExpression": false,
+              "mergePolicies": {
+                "_xdm.context.profile": "22a941a9-e598-45f8-846b-c9a8889f5035"
+              },
+              "_etag": "c8047a2e-3bd4-4d48-87a0-bcfab986f660"
+            },
+            {
+              "id": "4c29991f-e517-4968-978c-1d70367cf145",
+              "sandbox": {
+                "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                "sandboxName": "external-benchmarking",
+                "type": "production",
+                "default": false
+              },
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "schema": {
+                "name": "_xdm.context.profile"
+              },
+              "ttlInDays": 30,
+              "profileInstanceId": "ups",
+              "name": "Fully Profiled Color and Advisor — Apr16v7",
+              "description": "Has both color preference and advisor ID set. Tests IS NOT NULL on two different field groups.",
+              "expression": {
+                "type": "PQL",
+                "format": "pql/json",
+                "value": "{\"nodeType\":\"fnApply\",\"fnName\":\"and\",\"params\":[{\"nodeType\":\"fnApply\",\"fnName\":\"!=\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"prefColor\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"retailStoreAccountDetails\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"_adobepeakprogram\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}}},{\"nodeType\":\"literal\",\"literalType\":\"Null\",\"value\":\"null\"}]},{\"nodeType\":\"fnApply\",\"fnName\":\"!=\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"advisorID\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"retailStoreAdditionalIdentities\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"_adobepeakprogram\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}}},{\"nodeType\":\"literal\",\"literalType\":\"Null\",\"value\":\"null\"}]}]}"
+              },
+              "mergePolicyId": "22a941a9-e598-45f8-846b-c9a8889f5035",
+              "evaluationInfo": {
+                "batch": {
+                  "enabled": true
+                },
+                "continuous": {
+                  "enabled": false
+                },
+                "synchronous": {
+                  "enabled": false
+                }
+              },
+              "ansibleUiEnabled": false,
+              "dataGovernancePolicy": {
+                "excludeOptOut": true
+              },
+              "creationTime": 1776395575749,
+              "createEpoch": 1776395575,
+              "updateTime": 1776395575749,
+              "updateEpoch": 1776395575,
+              "dependents": [],
+              "definedOn": [
+                {
+                  "$ref": "https://ns.adobe.com/xdm/context/profile__union",
+                  "meta:containerId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                  "meta:resourceType": "unions"
+                }
+              ],
+              "dependencies": [],
+              "type": "SegmentDefinition",
+              "dataRefPaths": {
+                "_xdm.context.profile": [
+                  "_adobepeakprogram.retailStoreAccountDetails.prefColor",
+                  "_adobepeakprogram.retailStoreAdditionalIdentities.advisorID"
+                ]
+              },
+              "overridePerformanceWarnings": false,
+              "labels": [],
+              "createdBy": "0949264B69D65A7C0A495FD1@8ac11fe266602de4495fc7.e",
+              "lastModifiedBy": "0949264B69D65A7C0A495FD1@8ac11fe266602de4495fc7.e",
+              "namespace": "AEPSegments",
+              "audienceId": "4c29991f-e517-4968-978c-1d70367cf145",
+              "isSystem": false,
+              "saveSegmentMembership": true,
+              "metrics": {
+                "id": "4c29991f-e517-4968-978c-1d70367cf145",
+                "jobId": "15501707",
+                "type": "export",
+                "data": {
+                  "totalProfiles": 0
+                },
+                "updateEpoch": 1780488968
+              },
+              "tags": [],
+              "lifecycleState": "published",
+              "lifecycle": "published",
+              "originName": "REAL_TIME_CUSTOMER_PROFILE",
+              "relationalExpression": false,
+              "mergePolicies": {
+                "_xdm.context.profile": "22a941a9-e598-45f8-846b-c9a8889f5035"
+              },
+              "_etag": "2c8c1602-c379-4813-b6aa-af8cea3fe09e"
+            },
+            {
+              "id": "c0960179-0a51-4df6-84d7-5040eccaadaa",
+              "sandbox": {
+                "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                "sandboxName": "external-benchmarking",
+                "type": "production",
+                "default": false
+              },
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "schema": {
+                "name": "_xdm.context.profile"
+              },
+              "ttlInDays": 30,
+              "profileInstanceId": "ups",
+              "name": "Size Preference M or L — Apr16v7",
+              "description": "Profiles who prefer size M or L clothing. Tests prefSize with IN list.",
+              "expression": {
+                "type": "PQL",
+                "format": "pql/json",
+                "value": "{\"nodeType\":\"fnApply\",\"fnName\":\"in\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"prefSize\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"retailStoreAccountDetails\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"_adobepeakprogram\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}}},{\"nodeType\":\"literal\",\"literalType\":\"List\",\"value\":[\"M\",\"L\"]}]}"
+              },
+              "mergePolicyId": "22a941a9-e598-45f8-846b-c9a8889f5035",
+              "evaluationInfo": {
+                "batch": {
+                  "enabled": true
+                },
+                "continuous": {
+                  "enabled": false
+                },
+                "synchronous": {
+                  "enabled": false
+                }
+              },
+              "ansibleUiEnabled": false,
+              "dataGovernancePolicy": {
+                "excludeOptOut": true
+              },
+              "creationTime": 1776395456184,
+              "createEpoch": 1776395456,
+              "updateTime": 1776395456184,
+              "updateEpoch": 1776395456,
+              "dependents": [],
+              "definedOn": [
+                {
+                  "$ref": "https://ns.adobe.com/xdm/context/profile__union",
+                  "meta:containerId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                  "meta:resourceType": "unions"
+                }
+              ],
+              "dependencies": [],
+              "type": "SegmentDefinition",
+              "dataRefPaths": {
+                "_xdm.context.profile": [
+                  "_adobepeakprogram.retailStoreAccountDetails.prefSize"
+                ]
+              },
+              "overridePerformanceWarnings": false,
+              "labels": [],
+              "createdBy": "097326D269D65A7E0A495EC6@8ac11fe266602de4495fc7.e",
+              "lastModifiedBy": "097326D269D65A7E0A495EC6@8ac11fe266602de4495fc7.e",
+              "namespace": "AEPSegments",
+              "audienceId": "c0960179-0a51-4df6-84d7-5040eccaadaa",
+              "isSystem": false,
+              "saveSegmentMembership": true,
+              "metrics": {
+                "id": "c0960179-0a51-4df6-84d7-5040eccaadaa",
+                "jobId": "15501707",
+                "type": "export",
+                "data": {
+                  "totalProfiles": 0
+                },
+                "updateEpoch": 1780488968
+              },
+              "tags": [],
+              "lifecycleState": "published",
+              "lifecycle": "published",
+              "originName": "REAL_TIME_CUSTOMER_PROFILE",
+              "relationalExpression": false,
+              "mergePolicies": {
+                "_xdm.context.profile": "22a941a9-e598-45f8-846b-c9a8889f5035"
+              },
+              "_etag": "37f967fb-9368-475d-9d7e-2e8e238b55ba"
+            },
+            {
+              "id": "eb5f1e31-7b0a-41fa-8802-26a4a05a5b0d",
+              "sandbox": {
+                "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                "sandboxName": "external-benchmarking",
+                "type": "production",
+                "default": false
+              },
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "schema": {
+                "name": "_xdm.context.profile"
+              },
+              "ttlInDays": 30,
+              "profileInstanceId": "ups",
+              "name": "High Average Order Value — Apr16v7",
+              "description": "Profiles with average order value above 150. Tests recentOrderAmountAvg numeric field.",
+              "expression": {
+                "type": "PQL",
+                "format": "pql/json",
+                "value": "{\"nodeType\":\"fnApply\",\"fnName\":\">\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"recentOrderAmountAvg\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"retailStoreRecentOrder\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"_adobepeakprogram\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}}},{\"nodeType\":\"literal\",\"literalType\":\"Integer\",\"value\":150}]}"
+              },
+              "mergePolicyId": "22a941a9-e598-45f8-846b-c9a8889f5035",
+              "evaluationInfo": {
+                "batch": {
+                  "enabled": false
+                },
+                "continuous": {
+                  "enabled": false
+                },
+                "synchronous": {
+                  "enabled": true
+                }
+              },
+              "ansibleUiEnabled": false,
+              "dataGovernancePolicy": {
+                "excludeOptOut": true
+              },
+              "creationTime": 1776395336142,
+              "createEpoch": 1776395336,
+              "updateTime": 1776395336142,
+              "updateEpoch": 1776395336,
+              "dependents": [],
+              "definedOn": [
+                {
+                  "$ref": "https://ns.adobe.com/xdm/context/profile__union",
+                  "meta:containerId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                  "meta:resourceType": "unions"
+                }
+              ],
+              "dependencies": [],
+              "type": "SegmentDefinition",
+              "dataRefPaths": {
+                "_xdm.context.profile": [
+                  "_adobepeakprogram.retailStoreRecentOrder.recentOrderAmountAvg"
+                ]
+              },
+              "overridePerformanceWarnings": false,
+              "labels": [],
+              "createdBy": "0934263C69D65A810A495F8C@8ac11fe266602de4495fc7.e",
+              "lastModifiedBy": "0934263C69D65A810A495F8C@8ac11fe266602de4495fc7.e",
+              "namespace": "AEPSegments",
+              "audienceId": "eb5f1e31-7b0a-41fa-8802-26a4a05a5b0d",
+              "isSystem": false,
+              "saveSegmentMembership": true,
+              "metrics": {
+                "id": "eb5f1e31-7b0a-41fa-8802-26a4a05a5b0d",
+                "jobId": "15501707",
+                "type": "export",
+                "data": {
+                  "totalProfiles": 0
+                },
+                "updateEpoch": 1780488968
+              },
+              "tags": [],
+              "lifecycleState": "published",
+              "lifecycle": "published",
+              "originName": "REAL_TIME_CUSTOMER_PROFILE",
+              "relationalExpression": false,
+              "mergePolicies": {
+                "_xdm.context.profile": "22a941a9-e598-45f8-846b-c9a8889f5035"
+              },
+              "_etag": "e3e7753e-05e9-4934-a369-3d03b6abdd6c"
+            },
+            {
+              "id": "3e58d729-0b0e-4b7f-8f2a-89b8047c0635",
+              "sandbox": {
+                "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                "sandboxName": "external-benchmarking",
+                "type": "production",
+                "default": false
+              },
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "schema": {
+                "name": "_xdm.context.profile"
+              },
+              "ttlInDays": 30,
+              "profileInstanceId": "ups",
+              "name": "Offer Engager 2 Plus — Apr16v7",
+              "description": "Profiles who redeemed more than 2 offers in the last 6 months. Tests offersRedeemedLast6Months field.",
+              "expression": {
+                "type": "PQL",
+                "format": "pql/json",
+                "value": "{\"nodeType\":\"fnApply\",\"fnName\":\">\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"offersRedeemedLast6Months\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"retailStoreOffers\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"_adobepeakprogram\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}}},{\"nodeType\":\"literal\",\"literalType\":\"Integer\",\"value\":2}]}"
+              },
+              "mergePolicyId": "22a941a9-e598-45f8-846b-c9a8889f5035",
+              "evaluationInfo": {
+                "batch": {
+                  "enabled": false
+                },
+                "continuous": {
+                  "enabled": false
+                },
+                "synchronous": {
+                  "enabled": true
+                }
+              },
+              "ansibleUiEnabled": false,
+              "dataGovernancePolicy": {
+                "excludeOptOut": true
+              },
+              "creationTime": 1776395215788,
+              "createEpoch": 1776395215,
+              "updateTime": 1776395215788,
+              "updateEpoch": 1776395215,
+              "dependents": [],
+              "definedOn": [
+                {
+                  "$ref": "https://ns.adobe.com/xdm/context/profile__union",
+                  "meta:containerId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                  "meta:resourceType": "unions"
+                }
+              ],
+              "dependencies": [],
+              "type": "SegmentDefinition",
+              "dataRefPaths": {
+                "_xdm.context.profile": [
+                  "_adobepeakprogram.retailStoreOffers.offersRedeemedLast6Months"
+                ]
+              },
+              "overridePerformanceWarnings": false,
+              "labels": [],
+              "createdBy": "2E57262769D5626E0A495FBD@8ac11fe266602de4495fc7.e",
+              "lastModifiedBy": "2E57262769D5626E0A495FBD@8ac11fe266602de4495fc7.e",
+              "namespace": "AEPSegments",
+              "audienceId": "3e58d729-0b0e-4b7f-8f2a-89b8047c0635",
+              "isSystem": false,
+              "saveSegmentMembership": true,
+              "metrics": {
+                "id": "3e58d729-0b0e-4b7f-8f2a-89b8047c0635",
+                "jobId": "15501707",
+                "type": "export",
+                "data": {
+                  "totalProfiles": 6134,
+                  "totalProfilesByStatus": {
+                    "realized": 6134
+                  }
+                },
+                "updateEpoch": 1780488968
+              },
+              "tags": [],
+              "lifecycleState": "published",
+              "lifecycle": "published",
+              "originName": "REAL_TIME_CUSTOMER_PROFILE",
+              "relationalExpression": false,
+              "mergePolicies": {
+                "_xdm.context.profile": "22a941a9-e598-45f8-846b-c9a8889f5035"
+              },
+              "_etag": "32055e48-9be9-4fb9-9467-3a00106433a4"
+            },
+            {
+              "id": "b95a47d2-b7c3-46a5-aae7-a178f64ea2a5",
+              "sandbox": {
+                "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                "sandboxName": "external-benchmarking",
+                "type": "production",
+                "default": false
+              },
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "schema": {
+                "name": "_xdm.context.profile"
+              },
+              "ttlInDays": 30,
+              "profileInstanceId": "ups",
+              "name": "Active Buyer Gold Tier — Apr16v7",
+              "description": "Gold members with more than 3 YTD orders. Tests ordersYTD numeric + tier equality together.",
+              "expression": {
+                "type": "PQL",
+                "format": "pql/json",
+                "value": "{\"nodeType\":\"fnApply\",\"fnName\":\"and\",\"params\":[{\"nodeType\":\"fnApply\",\"fnName\":\">\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"ordersYTD\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"retailStoreLoyaltyStatus\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"_adobepeakprogram\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}}},{\"nodeType\":\"literal\",\"literalType\":\"Integer\",\"value\":3}]},{\"nodeType\":\"fnApply\",\"fnName\":\"=\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"loyaltyTier\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"retailStoreLoyaltyStatus\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"_adobepeakprogram\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}}},{\"nodeType\":\"literal\",\"literalType\":\"String\",\"value\":\"gold\"}]}]}"
+              },
+              "mergePolicyId": "22a941a9-e598-45f8-846b-c9a8889f5035",
+              "evaluationInfo": {
+                "batch": {
+                  "enabled": false
+                },
+                "continuous": {
+                  "enabled": false
+                },
+                "synchronous": {
+                  "enabled": true
+                }
+              },
+              "ansibleUiEnabled": false,
+              "dataGovernancePolicy": {
+                "excludeOptOut": true
+              },
+              "creationTime": 1776395096226,
+              "createEpoch": 1776395096,
+              "updateTime": 1776395096226,
+              "updateEpoch": 1776395096,
+              "dependents": [],
+              "definedOn": [
+                {
+                  "$ref": "https://ns.adobe.com/xdm/context/profile__union",
+                  "meta:containerId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                  "meta:resourceType": "unions"
+                }
+              ],
+              "dependencies": [],
+              "type": "SegmentDefinition",
+              "dataRefPaths": {
+                "_xdm.context.profile": [
+                  "_adobepeakprogram.retailStoreLoyaltyStatus.ordersYTD",
+                  "_adobepeakprogram.retailStoreLoyaltyStatus.loyaltyTier"
+                ]
+              },
+              "overridePerformanceWarnings": false,
+              "labels": [],
+              "createdBy": "0949264B69D65A7C0A495FD1@8ac11fe266602de4495fc7.e",
+              "lastModifiedBy": "0949264B69D65A7C0A495FD1@8ac11fe266602de4495fc7.e",
+              "namespace": "AEPSegments",
+              "audienceId": "b95a47d2-b7c3-46a5-aae7-a178f64ea2a5",
+              "isSystem": false,
+              "saveSegmentMembership": true,
+              "metrics": {
+                "id": "b95a47d2-b7c3-46a5-aae7-a178f64ea2a5",
+                "jobId": "15501707",
+                "type": "export",
+                "data": {
+                  "totalProfiles": 2929,
+                  "totalProfilesByStatus": {
+                    "realized": 2929
+                  }
+                },
+                "updateEpoch": 1780488968
+              },
+              "tags": [],
+              "lifecycleState": "published",
+              "lifecycle": "published",
+              "originName": "REAL_TIME_CUSTOMER_PROFILE",
+              "relationalExpression": false,
+              "mergePolicies": {
+                "_xdm.context.profile": "22a941a9-e598-45f8-846b-c9a8889f5035"
+              },
+              "_etag": "0ddbab2a-dcdf-4a5e-9926-4e8747bc2ecc"
+            },
+            {
+              "id": "7f78f1ad-a3ad-413f-a365-23af1efa6271",
+              "sandbox": {
+                "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                "sandboxName": "external-benchmarking",
+                "type": "production",
+                "default": false
+              },
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "schema": {
+                "name": "_xdm.context.profile"
+              },
+              "ttlInDays": 30,
+              "profileInstanceId": "ups",
+              "name": "Mid Upgrade Propensity — Apr16v7",
+              "description": "Loyalty upgrade propensity between 0.5 and 0.7 — the middle bucket. Tests range with two comparisons.",
+              "expression": {
+                "type": "PQL",
+                "format": "pql/json",
+                "value": "{\"nodeType\":\"fnApply\",\"fnName\":\"and\",\"params\":[{\"nodeType\":\"fnApply\",\"fnName\":\">\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"propensityForLoyaltyStatusUpgrade\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"retailStorePropensities\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"_adobepeakprogram\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}}},{\"nodeType\":\"literal\",\"literalType\":\"Double\",\"value\":0.5}]},{\"nodeType\":\"fnApply\",\"fnName\":\"<=\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"propensityForLoyaltyStatusUpgrade\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"retailStorePropensities\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"_adobepeakprogram\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}}},{\"nodeType\":\"literal\",\"literalType\":\"Double\",\"value\":0.7}]}]}"
+              },
+              "mergePolicyId": "22a941a9-e598-45f8-846b-c9a8889f5035",
+              "evaluationInfo": {
+                "batch": {
+                  "enabled": false
+                },
+                "continuous": {
+                  "enabled": true
+                },
+                "synchronous": {
+                  "enabled": false
+                }
+              },
+              "ansibleUiEnabled": false,
+              "dataGovernancePolicy": {
+                "excludeOptOut": true
+              },
+              "creationTime": 1776394975989,
+              "createEpoch": 1776394975,
+              "updateTime": 1776394975989,
+              "updateEpoch": 1776394975,
+              "dependents": [],
+              "definedOn": [
+                {
+                  "$ref": "https://ns.adobe.com/xdm/context/profile__union",
+                  "meta:containerId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                  "meta:resourceType": "unions"
+                }
+              ],
+              "dependencies": [],
+              "type": "SegmentDefinition",
+              "dataRefPaths": {
+                "_xdm.context.profile": [
+                  "_adobepeakprogram.retailStorePropensities.propensityForLoyaltyStatusUpgrade"
+                ]
+              },
+              "overridePerformanceWarnings": false,
+              "labels": [],
+              "createdBy": "097326D269D65A7E0A495EC6@8ac11fe266602de4495fc7.e",
+              "lastModifiedBy": "097326D269D65A7E0A495EC6@8ac11fe266602de4495fc7.e",
+              "namespace": "AEPSegments",
+              "audienceId": "7f78f1ad-a3ad-413f-a365-23af1efa6271",
+              "isSystem": false,
+              "saveSegmentMembership": true,
+              "metrics": {
+                "id": "7f78f1ad-a3ad-413f-a365-23af1efa6271",
+                "jobId": "15501707",
+                "type": "export",
+                "data": {
+                  "totalProfiles": 0
+                },
+                "updateEpoch": 1780488968
+              },
+              "tags": [],
+              "lifecycleState": "published",
+              "lifecycle": "published",
+              "originName": "REAL_TIME_CUSTOMER_PROFILE",
+              "relationalExpression": false,
+              "mergePolicies": {
+                "_xdm.context.profile": "22a941a9-e598-45f8-846b-c9a8889f5035"
+              },
+              "_etag": "5de717b9-2a16-424a-b85d-0e60ec011be6"
+            },
+            {
+              "id": "a07311bc-0301-4afd-81df-fbaf342bc6e2",
+              "sandbox": {
+                "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                "sandboxName": "external-benchmarking",
+                "type": "production",
+                "default": false
+              },
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "schema": {
+                "name": "_xdm.context.profile"
+              },
+              "ttlInDays": 30,
+              "profileInstanceId": "ups",
+              "name": "Points Elite Gold Platinum — Apr16v7",
+              "description": "5000+ loyalty points AND gold or platinum tier. Tests numeric comparison + IN list on two fields.",
+              "expression": {
+                "type": "PQL",
+                "format": "pql/json",
+                "value": "{\"nodeType\":\"fnApply\",\"fnName\":\"and\",\"params\":[{\"nodeType\":\"fnApply\",\"fnName\":\">\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"loyaltyPoints\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"retailStoreLoyaltyStatus\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"_adobepeakprogram\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}}},{\"nodeType\":\"literal\",\"literalType\":\"Integer\",\"value\":5000}]},{\"nodeType\":\"fnApply\",\"fnName\":\"in\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"loyaltyTier\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"retailStoreLoyaltyStatus\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"_adobepeakprogram\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}}},{\"nodeType\":\"literal\",\"literalType\":\"List\",\"value\":[\"gold\",\"platinum\"]}]}]}"
+              },
+              "mergePolicyId": "22a941a9-e598-45f8-846b-c9a8889f5035",
+              "evaluationInfo": {
+                "batch": {
+                  "enabled": false
+                },
+                "continuous": {
+                  "enabled": true
+                },
+                "synchronous": {
+                  "enabled": false
+                }
+              },
+              "ansibleUiEnabled": false,
+              "dataGovernancePolicy": {
+                "excludeOptOut": true
+              },
+              "creationTime": 1776394855973,
+              "createEpoch": 1776394855,
+              "updateTime": 1776394855973,
+              "updateEpoch": 1776394855,
+              "dependents": [],
+              "definedOn": [
+                {
+                  "$ref": "https://ns.adobe.com/xdm/context/profile__union",
+                  "meta:containerId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                  "meta:resourceType": "unions"
+                }
+              ],
+              "dependencies": [],
+              "type": "SegmentDefinition",
+              "dataRefPaths": {
+                "_xdm.context.profile": [
+                  "_adobepeakprogram.retailStoreLoyaltyStatus.loyaltyPoints",
+                  "_adobepeakprogram.retailStoreLoyaltyStatus.loyaltyTier"
+                ]
+              },
+              "overridePerformanceWarnings": false,
+              "labels": [],
+              "createdBy": "0934263C69D65A810A495F8C@8ac11fe266602de4495fc7.e",
+              "lastModifiedBy": "0934263C69D65A810A495F8C@8ac11fe266602de4495fc7.e",
+              "namespace": "AEPSegments",
+              "audienceId": "a07311bc-0301-4afd-81df-fbaf342bc6e2",
+              "isSystem": false,
+              "saveSegmentMembership": true,
+              "metrics": {
+                "id": "a07311bc-0301-4afd-81df-fbaf342bc6e2",
+                "jobId": "15501707",
+                "type": "export",
+                "data": {
+                  "totalProfiles": 6124,
+                  "totalProfilesByStatus": {
+                    "realized": 6124
+                  }
+                },
+                "updateEpoch": 1780488968
+              },
+              "tags": [],
+              "lifecycleState": "published",
+              "lifecycle": "published",
+              "originName": "REAL_TIME_CUSTOMER_PROFILE",
+              "relationalExpression": false,
+              "mergePolicies": {
+                "_xdm.context.profile": "22a941a9-e598-45f8-846b-c9a8889f5035"
+              },
+              "_etag": "d580fbac-6fe1-4fe0-be9e-93d202c0145f"
+            },
+            {
+              "id": "9d6c6bc5-f8c4-45be-9c24-dd7e3224c407",
+              "sandbox": {
+                "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                "sandboxName": "external-benchmarking",
+                "type": "production",
+                "default": false
+              },
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "schema": {
+                "name": "_xdm.context.profile"
+              },
+              "ttlInDays": 30,
+              "profileInstanceId": "ups",
+              "name": "Gold Loyalty Tier — Apr16v7",
+              "description": "Profiles with gold loyalty tier. Simplest possible equality check. Streaming so it evaluates quickly.",
+              "expression": {
+                "type": "PQL",
+                "format": "pql/json",
+                "value": "{\"nodeType\":\"fnApply\",\"fnName\":\"=\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"loyaltyTier\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"retailStoreLoyaltyStatus\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"_adobepeakprogram\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}}},{\"nodeType\":\"literal\",\"literalType\":\"String\",\"value\":\"gold\"}]}"
+              },
+              "mergePolicyId": "22a941a9-e598-45f8-846b-c9a8889f5035",
+              "evaluationInfo": {
+                "batch": {
+                  "enabled": false
+                },
+                "continuous": {
+                  "enabled": true
+                },
+                "synchronous": {
+                  "enabled": false
+                }
+              },
+              "ansibleUiEnabled": false,
+              "dataGovernancePolicy": {
+                "excludeOptOut": true
+              },
+              "creationTime": 1776394736056,
+              "createEpoch": 1776394736,
+              "updateTime": 1776394736056,
+              "updateEpoch": 1776394736,
+              "dependents": [],
+              "definedOn": [
+                {
+                  "$ref": "https://ns.adobe.com/xdm/context/profile__union",
+                  "meta:containerId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                  "meta:resourceType": "unions"
+                }
+              ],
+              "dependencies": [],
+              "type": "SegmentDefinition",
+              "dataRefPaths": {
+                "_xdm.context.profile": [
+                  "_adobepeakprogram.retailStoreLoyaltyStatus.loyaltyTier"
+                ]
+              },
+              "overridePerformanceWarnings": false,
+              "labels": [],
+              "createdBy": "2E57262769D5626E0A495FBD@8ac11fe266602de4495fc7.e",
+              "lastModifiedBy": "2E57262769D5626E0A495FBD@8ac11fe266602de4495fc7.e",
+              "namespace": "AEPSegments",
+              "audienceId": "9d6c6bc5-f8c4-45be-9c24-dd7e3224c407",
+              "isSystem": false,
+              "saveSegmentMembership": true,
+              "metrics": {
+                "id": "9d6c6bc5-f8c4-45be-9c24-dd7e3224c407",
+                "jobId": "15501707",
+                "type": "export",
+                "data": {
+                  "totalProfiles": 3045,
+                  "totalProfilesByStatus": {
+                    "realized": 3045
+                  }
+                },
+                "updateEpoch": 1780488968
+              },
+              "tags": [],
+              "lifecycleState": "published",
+              "lifecycle": "published",
+              "originName": "REAL_TIME_CUSTOMER_PROFILE",
+              "relationalExpression": false,
+              "mergePolicies": {
+                "_xdm.context.profile": "22a941a9-e598-45f8-846b-c9a8889f5035"
+              },
+              "_etag": "b38a0ba9-336f-4f7a-ad70-46aa43b7e85f"
+            },
+            {
+              "id": "e86d2c94-16ff-4a1a-9993-b6539457e146",
+              "sandbox": {
+                "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                "sandboxName": "external-benchmarking",
+                "type": "production",
+                "default": false
+              },
+              "imsOrgId": "87891E4066602D250A495F91@AdobeOrg",
+              "schema": {
+                "name": "_xdm.context.profile"
+              },
+              "ttlInDays": 30,
+              "profileInstanceId": "ups",
+              "name": "Very High Loyalty Enrollment Target — Apr16 v6",
+              "description": "Top-tier propensity for loyalty program enrollment above 0.8. Tests propensityForLoyaltyProgram at a higher threshold.",
+              "expression": {
+                "type": "PQL",
+                "format": "pql/json",
+                "value": "{\"nodeType\":\"fnApply\",\"fnName\":\">\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"propensityForLoyaltyProgram\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"retailStorePropensities\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"_adobepeakprogram\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}}},{\"nodeType\":\"literal\",\"literalType\":\"Double\",\"value\":0.8}]}"
+              },
+              "mergePolicyId": "22a941a9-e598-45f8-846b-c9a8889f5035",
+              "evaluationInfo": {
+                "batch": {
+                  "enabled": true
+                },
+                "continuous": {
+                  "enabled": false
+                },
+                "synchronous": {
+                  "enabled": false
+                }
+              },
+              "ansibleUiEnabled": false,
+              "dataGovernancePolicy": {
+                "excludeOptOut": true
+              },
+              "creationTime": 1776388209392,
+              "createEpoch": 1776388209,
+              "updateTime": 1776388209392,
+              "updateEpoch": 1776388209,
+              "dependents": [],
+              "definedOn": [
+                {
+                  "$ref": "https://ns.adobe.com/xdm/context/profile__union",
+                  "meta:containerId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+                  "meta:resourceType": "unions"
+                }
+              ],
+              "dependencies": [],
+              "type": "SegmentDefinition",
+              "dataRefPaths": {
+                "_xdm.context.profile": [
+                  "_adobepeakprogram.retailStorePropensities.propensityForLoyaltyProgram"
+                ]
+              },
+              "overridePerformanceWarnings": false,
+              "labels": [],
+              "createdBy": "0655262E69DE3A0F0A495C09@techacct.adobe.com",
+              "lastModifiedBy": "0655262E69DE3A0F0A495C09@techacct.adobe.com",
+              "namespace": "AEPSegments",
+              "audienceId": "e86d2c94-16ff-4a1a-9993-b6539457e146",
+              "isSystem": false,
+              "saveSegmentMembership": true,
+              "metrics": {
+                "id": "e86d2c94-16ff-4a1a-9993-b6539457e146",
+                "jobId": "15501707",
+                "type": "export",
+                "data": {
+                  "totalProfiles": 12189,
+                  "totalProfilesByStatus": {
+                    "realized": 12189
+                  }
+                },
+                "updateEpoch": 1780488968
+              },
+              "tags": [],
+              "lifecycleState": "published",
+              "lifecycle": "published",
+              "originName": "REAL_TIME_CUSTOMER_PROFILE",
+              "relationalExpression": false,
+              "mergePolicies": {
+                "_xdm.context.profile": "22a941a9-e598-45f8-846b-c9a8889f5035"
+              },
+              "_etag": "78f363d4-788c-43d9-a16c-3a95bec88eb0"
+            }
+          ],
+          "_links": {
+            "next": {
+              "href": "@/audiences?start=1&limit=10&totalCount=82"
+            }
+          }
+        },
+        "error": null
+      }
+    }
+  ],
+  "answer": "For the audience 'Gender: Female', the profile count is 5,896. It is a batch audience (Batch: True, Streaming: False). There is only 1 audience (itself) that shares this exact rule definition.",
+  "status": "success",
+  "debug_events": [
+    {
+      "step": 1,
+      "event": "llm_output",
+      "raw_output": "{\n  \"action\": \"sql_query\",\n  \"sql\": \"SELECT NAME, TOTALMEMBERS, ISBATCH, ISSTREAMING, DEFINITION, DEFINITIONHASH, (SELECT COUNT(*) FROM dim_segment s2 WHERE s2.DEFINITION = s1.DEFINITION) AS shared_def_count, (SELECT COUNT(*) FROM dim_segment s3 WHERE s3.DEFINITIONHASH = s1.DEFINITIONHASH) AS shared_hash_count FROM dim_segment s1 WHERE s1.NAME = 'Gender: Female'\"\n}"
+    },
+    {
+      "step": 1,
+      "event": "tool_executed",
+      "action": "sql_query",
+      "status": "success"
+    },
+    {
+      "step": 2,
+      "event": "llm_output",
+      "raw_output": "{\n  \"action\": \"api_call\",\n  \"method\": \"GET\",\n  \"url\": \"/data/core/ups/audiences\",\n  \"params\": {\n    \"limit\": \"10\"\n  }\n}"
+    },
+    {
+      "step": 2,
+      "event": "tool_executed",
+      "action": "api_call",
+      "status": "success"
+    },
+    {
+      "step": 3,
+      "event": "llm_output",
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"For the audience 'Gender: Female', the profile count is 5,896. Its evaluation type is batch (batch is enabled, streaming is disabled). There is only 1 audience in total that has this exact rule definition (meaning 0 other audiences share it).\"\n}"
+    },
+    {
+      "event": "answer_agent_output",
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"For the audience 'Gender: Female', the profile count is 5,896. It is a batch audience (Batch: True, Streaming: False). There is only 1 audience (itself) that shares this exact rule definition.\"\n}",
+      "parsed": {
+        "action": "final_answer",
+        "answer": "For the audience 'Gender: Female', the profile count is 5,896. It is a batch audience (Batch: True, Streaming: False). There is only 1 audience (itself) that shares this exact rule definition."
+      }
+    }
+  ]
+}

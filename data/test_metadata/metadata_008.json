@@ -3,8 +3,8 @@
   "normalized_query": "List all datasets that use the schema 'weRetail: Customer Actions'.",
   "query_analysis": {
     "complexity": "simple",
-    "confidence": 1.0,
-    "reason": "The request asks for a single piece of information (datasets) based on one criterion (schema name). This can be handled by a single lookup.",
+    "confidence": 0.95,
+    "reason": "The query is a straightforward lookup of datasets associated with a specific schema name, requiring only a single retrieval step.",
     "subqueries": [
       {
         "query": "List all datasets that use the schema 'weRetail: Customer Actions'.",

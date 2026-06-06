@@ -1,0 +1,1416 @@
+{
+  "query": "What are the daily 'timeseries.ingestion.dataset.size' values between '2026-02-01' and '2026-04-14'?",
+  "trace": [
+    {
+      "step": 1,
+      "action": "sql_query",
+      "sql": "SELECT COLLECTIONID, NAME, STORAGESIZEINBYTES, CREATEDTIME, UPDATEDTIME FROM dim_collection WHERE CREATEDTIME >= '2026-02-01' AND CREATEDTIME <= '2026-04-14' LIMIT 100",
+      "results": [
+        {
+          "COLLECTIONID": "69c9e92176c73d7f59fdbc55",
+          "NAME": "BR_Namespace_Destination",
+          "STORAGESIZEINBYTES": 27519,
+          "CREATEDTIME": "2026-03-30T03:08:17.000+00:00",
+          "UPDATEDTIME": "2026-04-14T13:21:12.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c9e8db2efff9048a54dd92",
+          "NAME": "BR_Segment_Destination",
+          "STORAGESIZEINBYTES": 94714,
+          "CREATEDTIME": "2026-03-30T03:07:07.000+00:00",
+          "UPDATEDTIME": "2026-04-14T13:29:41.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c9e8c280780d73541f8a38",
+          "NAME": "DIM_Destination",
+          "STORAGESIZEINBYTES": 109143,
+          "CREATEDTIME": "2026-03-30T03:06:42.000+00:00",
+          "UPDATEDTIME": "2026-04-14T13:29:28.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c8db5194a54c8d91aa2ddc",
+          "NAME": "profile_dim_date",
+          "STORAGESIZEINBYTES": 638641,
+          "CREATEDTIME": "2026-03-29T07:57:05.000+00:00",
+          "UPDATEDTIME": "2026-04-05T20:21:30.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c8dad4aa7a59818543461a",
+          "NAME": "hkg_adls_profile_count_history",
+          "STORAGESIZEINBYTES": 158073,
+          "CREATEDTIME": "2026-03-29T07:55:00.000+00:00",
+          "UPDATEDTIME": "2026-04-14T21:08:43.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c8dab73a32a2f0b3544b0e",
+          "NAME": "Profile Export For Destination - Merge Policy - 22a941a9-e598-45f8-846b-c9a8889f5035",
+          "STORAGESIZEINBYTES": 302577,
+          "CREATEDTIME": "2026-03-29T07:54:31.000+00:00",
+          "UPDATEDTIME": "2026-04-14T20:38:53.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c8d9e7cba5deaa7974b00b",
+          "NAME": "weRetail: Customer Actions",
+          "STORAGESIZEINBYTES": 50132375,
+          "CREATEDTIME": "2026-03-29T07:51:03.000+00:00",
+          "UPDATEDTIME": "2026-04-14T01:28:17.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c8d9c5c58ebc1ebef442e3",
+          "NAME": "weRetail: CRM",
+          "STORAGESIZEINBYTES": 10161091,
+          "CREATEDTIME": "2026-03-29T07:50:29.000+00:00",
+          "UPDATEDTIME": "2026-04-14T01:33:47.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c8d9c4e592a9df81deb244",
+          "NAME": "hkg_adls_segment_profile_history",
+          "STORAGESIZEINBYTES": 168286,
+          "CREATEDTIME": "2026-03-29T07:50:28.000+00:00",
+          "UPDATEDTIME": "2026-04-14T21:08:54.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c8d7f58165a08f151dc7d3",
+          "NAME": "Journey Inbound",
+          "STORAGESIZEINBYTES": 0,
+          "CREATEDTIME": "2026-03-29T07:42:45.000+00:00",
+          "UPDATEDTIME": "2026-03-29T07:42:47.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c8d7f391a3acd741e7cab8",
+          "NAME": "AJO Live Activities Feedback Event Dataset",
+          "STORAGESIZEINBYTES": 0,
+          "CREATEDTIME": "2026-03-29T07:42:43.000+00:00",
+          "UPDATEDTIME": "2026-03-29T07:42:43.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c8d7ef85b23d11eb7b904f",
+          "NAME": "AJO ExD Decision Event Dataset",
+          "STORAGESIZEINBYTES": 0,
+          "CREATEDTIME": "2026-03-29T07:42:39.000+00:00",
+          "UPDATEDTIME": "2026-03-29T07:42:39.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c8d7eb85b23d11eb7b904e",
+          "NAME": "AJO Surfaces Dataset",
+          "STORAGESIZEINBYTES": 0,
+          "CREATEDTIME": "2026-03-29T07:42:35.000+00:00",
+          "UPDATEDTIME": "2026-03-30T15:11:14.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c8d7eac4958bffeece5513",
+          "NAME": "AJO Inbound Activity Event Dataset",
+          "STORAGESIZEINBYTES": 0,
+          "CREATEDTIME": "2026-03-29T07:42:34.000+00:00",
+          "UPDATEDTIME": "2026-03-30T15:11:16.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c8d7e9d780f4fae2346a56",
+          "NAME": "AJO STO Summary Dataset",
+          "STORAGESIZEINBYTES": 0,
+          "CREATEDTIME": "2026-03-29T07:42:33.000+00:00",
+          "UPDATEDTIME": "2026-03-29T07:42:33.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c8d7e7c4958bffeece5512",
+          "NAME": "AJO Interactive Messaging Profile Dataset",
+          "STORAGESIZEINBYTES": 0,
+          "CREATEDTIME": "2026-03-29T07:42:31.000+00:00",
+          "UPDATEDTIME": "2026-03-29T07:42:32.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c8d7e6b9966265fc8e4ea8",
+          "NAME": "AJO Entity Dataset",
+          "STORAGESIZEINBYTES": 0,
+          "CREATEDTIME": "2026-03-29T07:42:30.000+00:00",
+          "UPDATEDTIME": "2026-03-29T07:42:30.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c8d7e510c39fb1068f65bd",
+          "NAME": "AJO BCC Feedback Event Dataset",
+          "STORAGESIZEINBYTES": 0,
+          "CREATEDTIME": "2026-03-29T07:42:29.000+00:00",
+          "UPDATEDTIME": "2026-03-30T15:11:15.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c8d7e48fb1e0b006f5db06",
+          "NAME": "AJO Profile Counters Extension",
+          "STORAGESIZEINBYTES": 0,
+          "CREATEDTIME": "2026-03-29T07:42:28.000+00:00",
+          "UPDATEDTIME": "2026-03-29T07:42:31.000+00:00"
+        },
+        {
+          "COLLECTIONID": "69c8d7e46a9c8527e93c0a15",
+          "NAME": "AJO Classification Dataset",
+          "STORAGESIZEINBYTES": 0,
+          "CREATEDTIME": "2026-03-29T07:42:28.000+00:00",
+          "UPDATEDTIME": "2026-03-29T07:42:28.000+00:00"
+        }
+      ],
+      "status": "success",
+      "warnings": [
+        "Skipped hkg_br_property_property.parquet: Invalid Input Error: Failed to read Parquet file 'DBSnapshot/hkg_br_property_property.parquet': Need at least one non-root column in the file"
+      ],
+      "error": null
+    },
+    {
+      "step": 2,
+      "action": "api_call",
+      "api_call": {
+        "method": "GET",
+        "url": "/data/foundation/catalog/datasets",
+        "params": {
+          "limit": "20"
+        },
+        "status": "success",
+        "status_code": 200,
+        "result_preview": {
+          "69c8d6b0494ee9dc83b67874": {
+            "id": "69c8d6b0494ee9dc83b67874",
+            "version": "2.0.0",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774769840999,
+            "updated": 1774769840999,
+            "createdClient": "acp-decisioning-ors",
+            "createdUser": "acp-decisioning-ors@AdobeID",
+            "updatedUser": "acp-decisioning-ors@AdobeID",
+            "name": "Decision Object Repository - Fallback Offers",
+            "description": "Autogenerated Dataset for Fallback Offers",
+            "tags": {
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "adobe/pqs/table": [
+                "decision_object_repository_fallback_offers"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/experience/offer-management/fallback-content-offer",
+              "contentType": "application/vnd.adobe.xed+json;version=1"
+            },
+            "viewId": "69c8d6b0494ee9dc83b67874",
+            "classification": {
+              "dataBehavior": "record",
+              "managedBy": "SYSTEM"
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d6b0494ee9dc83b67874",
+            "fileDescription": {},
+            "ingestionType": "append",
+            "dataIngested": false,
+            "serviceOwner": "acp-decisioning-ors"
+          },
+          "69c8d6b094a54c8d91aa2dca": {
+            "id": "69c8d6b094a54c8d91aa2dca",
+            "version": "2.0.0",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774769840967,
+            "updated": 1774769840967,
+            "createdClient": "acp-decisioning-ors",
+            "createdUser": "acp-decisioning-ors@AdobeID",
+            "updatedUser": "acp-decisioning-ors@AdobeID",
+            "name": "Decision Object Repository - Placements",
+            "description": "Autogenerated Dataset for Decision Content Placements",
+            "tags": {
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "adobe/pqs/table": [
+                "decision_object_repository_placements"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/experience/offer-management/offer-placement",
+              "contentType": "application/vnd.adobe.xed+json;version=1"
+            },
+            "viewId": "69c8d6b094a54c8d91aa2dca",
+            "classification": {
+              "dataBehavior": "record",
+              "managedBy": "SYSTEM"
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d6b094a54c8d91aa2dca",
+            "fileDescription": {},
+            "ingestionType": "append",
+            "dataIngested": false,
+            "serviceOwner": "acp-decisioning-ors"
+          },
+          "69c8d6b0d780f4fae2346a55": {
+            "id": "69c8d6b0d780f4fae2346a55",
+            "version": "2.0.0",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774769840988,
+            "updated": 1774769840988,
+            "createdClient": "acp-decisioning-ors",
+            "createdUser": "acp-decisioning-ors@AdobeID",
+            "updatedUser": "acp-decisioning-ors@AdobeID",
+            "name": "Decision Object Repository - Personalized Offers",
+            "description": "Autogenerated Dataset for Personalized Content Offers",
+            "tags": {
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "adobe/pqs/table": [
+                "decision_object_repository_personalized_offers"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/experience/offer-management/personalized-content-offer",
+              "contentType": "application/vnd.adobe.xed+json;version=1"
+            },
+            "viewId": "69c8d6b0d780f4fae2346a55",
+            "classification": {
+              "dataBehavior": "record",
+              "managedBy": "SYSTEM"
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d6b0d780f4fae2346a55",
+            "fileDescription": {},
+            "ingestionType": "append",
+            "dataIngested": false,
+            "serviceOwner": "acp-decisioning-ors"
+          },
+          "69c8d6b185b23d11eb7b904a": {
+            "id": "69c8d6b185b23d11eb7b904a",
+            "version": "2.0.0",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774769841102,
+            "updated": 1774769841102,
+            "createdClient": "acp-decisioning-ors",
+            "createdUser": "acp-decisioning-ors@AdobeID",
+            "updatedUser": "acp-decisioning-ors@AdobeID",
+            "name": "Decision Object Repository - Activities",
+            "description": "Autogenerated Dataset for Decision Activities",
+            "tags": {
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "adobe/pqs/table": [
+                "decision_object_repository_activities"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/experience/offer-management/offer-activity",
+              "contentType": "application/vnd.adobe.xed+json;version=1"
+            },
+            "viewId": "69c8d6b185b23d11eb7b904a",
+            "classification": {
+              "dataBehavior": "record",
+              "managedBy": "SYSTEM"
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d6b185b23d11eb7b904a",
+            "fileDescription": {},
+            "ingestionType": "append",
+            "dataIngested": false,
+            "serviceOwner": "acp-decisioning-ors"
+          },
+          "69c8d6b361abc6f187f9f8f5": {
+            "id": "69c8d6b361abc6f187f9f8f5",
+            "version": "2.0.0",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774769843266,
+            "updated": 1774769843266,
+            "createdClient": "acp-decisioning-ors",
+            "createdUser": "acp-decisioning-ors@AdobeID",
+            "updatedUser": "acp-decisioning-ors@AdobeID",
+            "name": "Experience Decisioning Object Repository - Personalized Offer Items",
+            "description": "Autogenerated Dataset for Personalized Offer Items - Experience Decisioning",
+            "tags": {
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "adobe/pqs/table": [
+                "experience_decisioning_object_repository_personalized_offer_item"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/adobepeakprogram/schemas/281952b8224ac00f4df4fe9fbfa48a983de8897204790344",
+              "contentType": "application/vnd.adobe.xed+json;version=1"
+            },
+            "viewId": "69c8d6b361abc6f187f9f8f5",
+            "classification": {
+              "dataBehavior": "record",
+              "managedBy": "SYSTEM"
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d6b361abc6f187f9f8f5",
+            "fileDescription": {},
+            "ingestionType": "append",
+            "dataIngested": false,
+            "serviceOwner": "acp-decisioning-ors"
+          },
+          "69c8d6b5494ee9dc83b67875": {
+            "id": "69c8d6b5494ee9dc83b67875",
+            "version": "2.0.0",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774769845387,
+            "updated": 1774769845387,
+            "createdClient": "acp-decisioning-ors",
+            "createdUser": "acp-decisioning-ors@AdobeID",
+            "updatedUser": "acp-decisioning-ors@AdobeID",
+            "name": "ODE DecisionEvents - external-benchmarking decisioning",
+            "description": "Autogenerated data set for ODE DecisionEvents for container external-benchmarking decisioning",
+            "tags": {
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "adobe/pqs/table": [
+                "ode_decisionevents_external_benchmarking_decisioning"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/adobepeakprogram/schemas/3ce04a46aaffba7384ac234e3bb84b6d89bff08c58138e03",
+              "contentType": "application/vnd.adobe.xed-full+json;version=1.0"
+            },
+            "viewId": "69c8d6b5494ee9dc83b67875",
+            "classification": {
+              "dataBehavior": "time-series",
+              "managedBy": "SYSTEM"
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d6b5494ee9dc83b67875",
+            "fileDescription": {},
+            "ingestionType": "append",
+            "dataIngested": false,
+            "serviceOwner": "acp-decisioning-ors"
+          },
+          "69c8d6c05a734aa755eb63cc": {
+            "id": "69c8d6c05a734aa755eb63cc",
+            "version": "2.0.21",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774769856720,
+            "updated": 1780762842858,
+            "createdClient": "bso_core_services",
+            "createdUser": "bso_core_services@AdobeID",
+            "updatedUser": "acp_foundation_dataTracker@AdobeID",
+            "name": "Journey Step Events",
+            "description": "Journey step event that is tied to a Journey Metadata.",
+            "tags": {
+              "adobe/siphon/partition/definition": [
+                "day(timestamp, _ACP_DATE)",
+                "identity(_ACP_BATCHID)"
+              ],
+              "adobe/siphon/meta": [
+                "acpBufferedFlag::false"
+              ],
+              "aep/siphon/partitions": [
+                "_ACP_DATE",
+                "_ACP_BATCHID"
+              ],
+              "acp_granular_plugin_validation_flags": [
+                "identity:enabled",
+                "profile:disabled"
+              ],
+              "acp_granular_validation_flags": [
+                "requiredFieldCheck:enabled"
+              ],
+              "acp_validationContext": [
+                "enabled"
+              ],
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "unifiedProfile": [
+                "enabled:false"
+              ],
+              "unifiedIdentity": [
+                "enabled:false"
+              ],
+              "adobe/pqs/table": [
+                "journey_step_events"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/adobepeakprogram/schemas/68859482af23852399eca157c8911a676a576474d3426e49",
+              "contentType": "application/vnd.adobe.xed-full-notext+json; version=1.0"
+            },
+            "viewId": "69c8d6c05a734aa755eb63cc",
+            "classification": {
+              "dataBehavior": "time-series",
+              "managedBy": "SYSTEM"
+            },
+            "extensions": {
+              "adobe_lakeHouse": {
+                "rowExpiration": {
+                  "ttlValue": "P13M",
+                  "nextScheduledDate": "2026-06-28",
+                  "lastCompleted": 1780111595197
+                },
+                "metrics": {
+                  "storageSize": 205966,
+                  "rowCount": 1,
+                  "asOf": 1780762842348
+                },
+                "eventDistributionMetrics": {
+                  "distributions": [
+                    {
+                      "timeWindow": "0D-30D",
+                      "count": 0
+                    },
+                    {
+                      "timeWindow": "180D-365D",
+                      "count": 0
+                    },
+                    {
+                      "timeWindow": "60D-90D",
+                      "count": 0
+                    },
+                    {
+                      "timeWindow": "365D-730D",
+                      "count": 0
+                    },
+                    {
+                      "timeWindow": "90D-180D",
+                      "count": 0
+                    },
+                    {
+                      "timeWindow": "30D-60D",
+                      "count": 1
+                    }
+                  ],
+                  "asOf": 1780762842348
+                }
+              }
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d6c05a734aa755eb63cc",
+            "fileDescription": {
+              "format": "parquet"
+            },
+            "ingestionType": "append",
+            "dataIngested": true,
+            "serviceOwner": "bso_core_services"
+          },
+          "69c8d6c06a9c8527e93c0a0b": {
+            "id": "69c8d6c06a9c8527e93c0a0b",
+            "version": "2.0.7",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774769856166,
+            "updated": 1776711371727,
+            "createdClient": "bso_core_services",
+            "createdUser": "bso_core_services@AdobeID",
+            "updatedUser": "acp_foundation_dataTracker@AdobeID",
+            "name": "Journeys",
+            "description": "Journey Metadata to describe Journeys.",
+            "tags": {
+              "adobe/siphon/partition/definition": [
+                "identity(_ACP_BATCHID)"
+              ],
+              "adobe/siphon/meta": [
+                "acpBufferedFlag::false"
+              ],
+              "aep/siphon/partitions": [
+                "_ACP_BATCHID"
+              ],
+              "acp_granular_plugin_validation_flags": [
+                "identity:enabled",
+                "profile:disabled"
+              ],
+              "acp_granular_validation_flags": [
+                "requiredFieldCheck:enabled"
+              ],
+              "acp_validationContext": [
+                "enabled"
+              ],
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "unifiedProfile": [
+                "enabled:false"
+              ],
+              "unifiedIdentity": [
+                "enabled:false"
+              ],
+              "adobe/pqs/table": [
+                "journeys"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/adobepeakprogram/schemas/7d8fadd777ec103ec2f3f9ca7dd59e495ee45691d893028",
+              "contentType": "application/vnd.adobe.xed-full-notext+json; version=1.0"
+            },
+            "viewId": "69c8d6c06a9c8527e93c0a0b",
+            "classification": {
+              "dataBehavior": "record",
+              "managedBy": "SYSTEM"
+            },
+            "extensions": {
+              "adobe_lakeHouse": {
+                "metrics": {
+                  "storageSize": 26704,
+                  "rowCount": 2,
+                  "asOf": 1776711371527
+                },
+                "eventDistributionMetrics": {
+                  "distributions": [
+                    {
+                      "timeWindow": "NO_DATE_PARTITION_FOUND",
+                      "count": 0
+                    }
+                  ],
+                  "asOf": 1776711371527
+                }
+              }
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d6c06a9c8527e93c0a0b",
+            "fileDescription": {
+              "format": "parquet"
+            },
+            "ingestionType": "append",
+            "dataIngested": true,
+            "serviceOwner": "bso_core_services"
+          },
+          "69c8d6c10ea0107706fbc09c": {
+            "id": "69c8d6c10ea0107706fbc09c",
+            "version": "2.0.1",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774769857289,
+            "updated": 1774769860394,
+            "createdClient": "bso_core_services",
+            "createdUser": "bso_core_services@AdobeID",
+            "updatedUser": "acp_core_ups_ingest_controller@AdobeService",
+            "name": "Journey Inbound",
+            "description": "",
+            "tags": {
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "unifiedIdentity": [
+                "enabled:true"
+              ],
+              "unifiedProfile": [
+                "enabled:true",
+                "enabledAt:2026-03-29 07:37:40"
+              ],
+              "adobe/pqs/table": [
+                "journey_inbound"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/adobepeakprogram/schemas/b591e935cfb3d52d3dc0c9e551e927d067b35d4b4b8af8bf",
+              "contentType": "application/vnd.adobe.xed-full-notext+json; version=1.0"
+            },
+            "viewId": "69c8d6c10ea0107706fbc09c",
+            "classification": {
+              "dataBehavior": "record",
+              "managedBy": "SYSTEM"
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d6c10ea0107706fbc09c",
+            "fileDescription": {
+              "format": "parquet"
+            },
+            "ingestionType": "append",
+            "dataIngested": false,
+            "serviceOwner": "bso_core_services"
+          },
+          "69c8d6c810c39fb1068f65b5": {
+            "id": "69c8d6c810c39fb1068f65b5",
+            "version": "2.0.83",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774769864675,
+            "updated": 1780532798014,
+            "createdClient": "aep_core_profile_snapshot",
+            "createdUser": "aep_core_profile_snapshot@AdobeID",
+            "updatedUser": "acp_foundation_dataTracker@AdobeID",
+            "name": "Profile-Snapshot-Export-486e2a5e-dc46-4ab6-ad5f-9cdd16db869d",
+            "tags": {
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "adobe/siphon/partition/definition": [
+                "identity(_ACP_BATCHID)"
+              ],
+              "adobe/gdprbroker/skip-dataset": [
+                "true"
+              ],
+              "acp_validationContext": [
+                "disabled"
+              ],
+              "unifiedProfile": [
+                "enabled:false",
+                "mergePolicyId:22a941a9-e598-45f8-846b-c9a8889f5035",
+                "ups_snapshot_type:cardinal:full-attr"
+              ],
+              "adobe/pqs/table": [
+                "profile_snapshot_export_486e2a5e_dc46_4ab6_ad5f_9cdd16db869d"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/xdm/context/profile__union",
+              "contentType": "application/vnd.adobe.xed-full-notext+json; version=1"
+            },
+            "viewId": "69c8d6c810c39fb1068f65b5",
+            "classification": {
+              "dataBehavior": "record",
+              "managedBy": "SYSTEM"
+            },
+            "extensions": {
+              "adobe_lakeHouse": {
+                "metrics": {
+                  "storageSize": 11674509,
+                  "rowCount": 12189,
+                  "asOf": 1780532797888
+                },
+                "eventDistributionMetrics": {
+                  "distributions": [
+                    {
+                      "timeWindow": "NO_DATE_PARTITION_FOUND",
+                      "count": 0
+                    }
+                  ],
+                  "asOf": 1780532797888
+                }
+              }
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d6c810c39fb1068f65b5",
+            "fileDescription": {
+              "format": "parquet"
+            },
+            "ingestionType": "append",
+            "dataIngested": true,
+            "serviceOwner": "aep_core_profile_snapshot"
+          },
+          "69c8d6c9b9966265fc8e4ea4": {
+            "id": "69c8d6c9b9966265fc8e4ea4",
+            "version": "2.0.81",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774769865279,
+            "updated": 1780544736732,
+            "createdClient": "aep_core_profile_snapshot",
+            "createdUser": "aep_core_profile_snapshot@AdobeID",
+            "updatedUser": "acp_foundation_dataTracker@AdobeID",
+            "name": "Segmentdefinition-Snapshot-Export-3405afd1-7c78-4aff-84e6-d2136ffcea93",
+            "tags": {
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "adobe/siphon/partition/definition": [
+                "identity(_ACP_BATCHID)"
+              ],
+              "adobe/gdprbroker/skip-dataset": [
+                "true"
+              ],
+              "acp_validationContext": [
+                "disabled"
+              ],
+              "unifiedProfile": [
+                "enabled:false",
+                "mergePolicyId:544a2f53-0bec-48d2-8d6f-6beffdcbf8d8",
+                "ups_snapshot_type:cardinal:full-attr"
+              ],
+              "adobe/pqs/table": [
+                "segmentdefinition_snapshot_export_3405afd1_7c78_4aff_84e6_d2136f"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/xdm/context/segmentdefinition__union",
+              "contentType": "application/vnd.adobe.xed-full-notext+json; version=1"
+            },
+            "viewId": "69c8d6c9b9966265fc8e4ea4",
+            "classification": {
+              "dataBehavior": "record",
+              "managedBy": "SYSTEM"
+            },
+            "extensions": {
+              "adobe_lakeHouse": {
+                "metrics": {
+                  "storageSize": 3013761,
+                  "rowCount": 82,
+                  "asOf": 1780544736588
+                },
+                "eventDistributionMetrics": {
+                  "distributions": [
+                    {
+                      "timeWindow": "NO_DATE_PARTITION_FOUND",
+                      "count": 0
+                    }
+                  ],
+                  "asOf": 1780544736588
+                }
+              }
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d6c9b9966265fc8e4ea4",
+            "fileDescription": {
+              "format": "parquet"
+            },
+            "ingestionType": "append",
+            "dataIngested": true,
+            "serviceOwner": "aep_core_profile_snapshot"
+          },
+          "69c8d7de7fb08b6f7f037df0": {
+            "id": "69c8d7de7fb08b6f7f037df0",
+            "version": "2.0.5",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774770142833,
+            "updated": 1780111587906,
+            "createdClient": "cjm_provisioning_services",
+            "createdUser": "cjm_provisioning_services@AdobeID",
+            "updatedUser": "aep-lakehouse-ttl@AdobeID",
+            "name": "AJO Message Feedback Event Dataset",
+            "description": "Dataset for ingesting email and push application feedback events from AJO. Created through SDK.",
+            "tags": {
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "eventType": [
+                "cjm.email.feedback",
+                "cjm.push.feedback"
+              ],
+              "adobe_dx_ajo_provisioning": [
+                "messageFeedbackEvent"
+              ],
+              "unifiedProfile": [
+                "enabled:true",
+                "enabledAt:2026-03-29 07:42:25"
+              ],
+              "unifiedIdentity": [
+                "enabled:true"
+              ],
+              "adobe/pqs/table": [
+                "ajo_message_feedback_event_dataset"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/adobepeakprogram/schemas/b05db87874ccf066f4fc0fe55f71ceaecb92bab0ec7596f1",
+              "contentType": "application/vnd.adobe.xed-full+json;version=1"
+            },
+            "enableErrorDiagnostics": true,
+            "viewId": "69c8d7de7fb08b6f7f037df0",
+            "classification": {
+              "dataBehavior": "time-series",
+              "managedBy": "SYSTEM"
+            },
+            "extensions": {
+              "adobe_lakeHouse": {
+                "rowExpiration": {
+                  "ttlValue": "P30D",
+                  "nextScheduledDate": "2026-06-28",
+                  "lastCompleted": 1780111587782
+                }
+              },
+              "adobe_unifiedProfile": {
+                "rowExpiration": {
+                  "ttlValue": "P14D",
+                  "lastCompleted": 1774770145315
+                }
+              }
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d7de7fb08b6f7f037df0",
+            "fileDescription": {
+              "format": "parquet"
+            },
+            "ingestionType": "append",
+            "dataIngested": false,
+            "serviceOwner": "cjm_provisioning_services"
+          },
+          "69c8d7df34e6e84bcbe48031": {
+            "id": "69c8d7df34e6e84bcbe48031",
+            "version": "2.0.5",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774770143988,
+            "updated": 1780111585938,
+            "createdClient": "cjm_provisioning_services",
+            "createdUser": "cjm_provisioning_services@AdobeID",
+            "updatedUser": "aep-lakehouse-ttl@AdobeID",
+            "name": "AJO Push Tracking Experience Event Dataset",
+            "description": "Dataset for ingesting push tracking experience events from AJO. Created through SDK.",
+            "tags": {
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "eventType": [
+                "cjm.push.tracking"
+              ],
+              "adobe_dx_ajo_provisioning": [
+                "pushTrackingEvent"
+              ],
+              "unifiedProfile": [
+                "enabled:true",
+                "enabledAt:2026-03-29 07:42:27"
+              ],
+              "unifiedIdentity": [
+                "enabled:true"
+              ],
+              "adobe/pqs/table": [
+                "ajo_push_tracking_experience_event_dataset"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/adobepeakprogram/schemas/d3027a7cc9c5f816643abb6557b39620630d05ee24723425",
+              "contentType": "application/vnd.adobe.xed-full+json;version=1"
+            },
+            "enableErrorDiagnostics": true,
+            "viewId": "69c8d7df34e6e84bcbe48031",
+            "classification": {
+              "dataBehavior": "time-series",
+              "managedBy": "SYSTEM"
+            },
+            "extensions": {
+              "adobe_lakeHouse": {
+                "rowExpiration": {
+                  "ttlValue": "P30D",
+                  "nextScheduledDate": "2026-06-28",
+                  "lastCompleted": 1780111585773
+                }
+              },
+              "adobe_unifiedProfile": {
+                "rowExpiration": {
+                  "ttlValue": "P14D",
+                  "lastCompleted": 1774770147170
+                }
+              }
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d7df34e6e84bcbe48031",
+            "fileDescription": {
+              "format": "parquet"
+            },
+            "ingestionType": "append",
+            "dataIngested": false,
+            "serviceOwner": "cjm_provisioning_services"
+          },
+          "69c8d7e185b23d11eb7b904d": {
+            "id": "69c8d7e185b23d11eb7b904d",
+            "version": "2.0.1",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774770145471,
+            "updated": 1774770147989,
+            "createdClient": "cjm_provisioning_services",
+            "createdUser": "cjm_provisioning_services@AdobeID",
+            "updatedUser": "acp_core_ups_ingest_controller@AdobeService",
+            "name": "AJO Push Profile Dataset",
+            "description": "Dataset for ingesting push profiles from AJO. Created through SDK.",
+            "tags": {
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "eventType": [
+                "cjm.push.profile"
+              ],
+              "adobe_dx_ajo_provisioning": [
+                "pushProfile"
+              ],
+              "unifiedProfile": [
+                "enabled:true",
+                "enabledAt:2026-03-29 07:42:27"
+              ],
+              "unifiedIdentity": [
+                "enabled:true"
+              ],
+              "adobe/pqs/table": [
+                "ajo_push_profile_dataset"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/adobepeakprogram/schemas/76c40d5409e1431858a8661d2d9da27f194bb0559c9e6962",
+              "contentType": "application/vnd.adobe.xed-full+json;version=1"
+            },
+            "enableErrorDiagnostics": true,
+            "viewId": "69c8d7e185b23d11eb7b904d",
+            "classification": {
+              "dataBehavior": "record",
+              "managedBy": "SYSTEM"
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d7e185b23d11eb7b904d",
+            "fileDescription": {
+              "format": "parquet"
+            },
+            "ingestionType": "append",
+            "dataIngested": false,
+            "serviceOwner": "cjm_provisioning_services"
+          },
+          "69c8d7e26a9c8527e93c0a14": {
+            "id": "69c8d7e26a9c8527e93c0a14",
+            "version": "2.0.1",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774770146239,
+            "updated": 1774770149817,
+            "createdClient": "cjm_provisioning_services",
+            "createdUser": "cjm_provisioning_services@AdobeID",
+            "updatedUser": "acp_core_ups_ingest_controller@AdobeService",
+            "name": "AJO Consent Service Dataset",
+            "description": "Dataset for AJO Consent service UPS Ingest (Provisioned) ID Level.",
+            "tags": {
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "cjm_service_dataset": [
+                "consent_service_ingest_id_level"
+              ],
+              "adobe_dx_ajo_provisioning": [
+                "consentService"
+              ],
+              "unifiedProfile": [
+                "enabled:true",
+                "enabledAt:2026-03-29 07:42:29"
+              ],
+              "unifiedIdentity": [
+                "enabled:true"
+              ],
+              "adobe/pqs/table": [
+                "ajo_consent_service_dataset"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/adobepeakprogram/schemas/5d83782405caad7e84f827d9e3867234d2f4129c26cc2551",
+              "contentType": "application/vnd.adobe.xed-full+json;version=1"
+            },
+            "enableErrorDiagnostics": true,
+            "viewId": "69c8d7e26a9c8527e93c0a14",
+            "classification": {
+              "dataBehavior": "record",
+              "managedBy": "SYSTEM"
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d7e26a9c8527e93c0a14",
+            "fileDescription": {
+              "format": "parquet"
+            },
+            "ingestionType": "append",
+            "dataIngested": false,
+            "serviceOwner": "cjm_provisioning_services"
+          },
+          "69c8d7e30ea0107706fbc09f": {
+            "id": "69c8d7e30ea0107706fbc09f",
+            "version": "2.0.5",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774770147099,
+            "updated": 1780111586428,
+            "createdClient": "cjm_provisioning_services",
+            "createdUser": "cjm_provisioning_services@AdobeID",
+            "updatedUser": "aep-lakehouse-ttl@AdobeID",
+            "name": "AJO Email Tracking Experience Event Dataset",
+            "description": "Dataset for ingesting email tracking experience events from AJO. Created through SDK.",
+            "tags": {
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "eventType": [
+                "cjm.email.tracking"
+              ],
+              "adobe_dx_ajo_provisioning": [
+                "emailTrackingEvent"
+              ],
+              "unifiedProfile": [
+                "enabled:true",
+                "enabledAt:2026-03-29 07:42:30"
+              ],
+              "unifiedIdentity": [
+                "enabled:true"
+              ],
+              "adobe/pqs/table": [
+                "ajo_email_tracking_experience_event_dataset"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/adobepeakprogram/schemas/cd050406b33cd4235fbcac713a7c69ae7e38a9e1a7665aad",
+              "contentType": "application/vnd.adobe.xed-full+json;version=1"
+            },
+            "enableErrorDiagnostics": true,
+            "viewId": "69c8d7e30ea0107706fbc09f",
+            "classification": {
+              "dataBehavior": "time-series",
+              "managedBy": "SYSTEM"
+            },
+            "extensions": {
+              "adobe_lakeHouse": {
+                "rowExpiration": {
+                  "ttlValue": "P30D",
+                  "nextScheduledDate": "2026-06-28",
+                  "lastCompleted": 1780111586277
+                }
+              },
+              "adobe_unifiedProfile": {
+                "rowExpiration": {
+                  "ttlValue": "P14D",
+                  "lastCompleted": 1774770150701
+                }
+              }
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d7e30ea0107706fbc09f",
+            "fileDescription": {
+              "format": "parquet"
+            },
+            "ingestionType": "append",
+            "dataIngested": false,
+            "serviceOwner": "cjm_provisioning_services"
+          },
+          "69c8d7e46a9c8527e93c0a15": {
+            "id": "69c8d7e46a9c8527e93c0a15",
+            "version": "2.0.9",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774770148022,
+            "updated": 1777321467205,
+            "createdClient": "cjm_provisioning_services",
+            "createdUser": "cjm_provisioning_services@AdobeID",
+            "updatedUser": "acp_foundation_dataTracker@AdobeID",
+            "name": "AJO Classification Dataset",
+            "description": "Dataset for ingesting email and push application feedback events from AJO. Created through SDK.",
+            "tags": {
+              "eventType": [
+                "cjm.profile.classification"
+              ],
+              "adobe/siphon/partition/definition": [
+                "identity(_ACP_BATCHID)"
+              ],
+              "adobe/siphon/meta": [
+                "acpBufferedFlag::false"
+              ],
+              "aep/siphon/partitions": [
+                "_ACP_BATCHID"
+              ],
+              "acp_granular_plugin_validation_flags": [
+                "identity:enabled",
+                "profile:disabled"
+              ],
+              "acp_granular_validation_flags": [
+                "requiredFieldCheck:enabled"
+              ],
+              "adobe_dx_ajo_provisioning": [
+                "ajoClassificationRecord"
+              ],
+              "acp_validationContext": [
+                "enabled"
+              ],
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "adobe/pqs/table": [
+                "ajo_classification_dataset"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/adobepeakprogram/schemas/af93a91a5bb70fb356c9e3201270d677cf1e15be8944e3b",
+              "contentType": "application/vnd.adobe.xed-full+json;version=1"
+            },
+            "enableErrorDiagnostics": true,
+            "viewId": "69c8d7e46a9c8527e93c0a15",
+            "classification": {
+              "dataBehavior": "record",
+              "managedBy": "SYSTEM"
+            },
+            "extensions": {
+              "adobe_lakeHouse": {
+                "metrics": {
+                  "storageSize": 82688,
+                  "rowCount": 10,
+                  "asOf": 1777321467040
+                },
+                "eventDistributionMetrics": {
+                  "distributions": [
+                    {
+                      "timeWindow": "NO_DATE_PARTITION_FOUND",
+                      "count": 0
+                    }
+                  ],
+                  "asOf": 1777321467040
+                }
+              }
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d7e46a9c8527e93c0a15",
+            "fileDescription": {
+              "format": "parquet"
+            },
+            "ingestionType": "append",
+            "dataIngested": true,
+            "serviceOwner": "cjm_provisioning_services"
+          },
+          "69c8d7e48fb1e0b006f5db06": {
+            "id": "69c8d7e48fb1e0b006f5db06",
+            "version": "2.0.1",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774770148904,
+            "updated": 1774770151660,
+            "createdClient": "cjm_provisioning_services",
+            "createdUser": "cjm_provisioning_services@AdobeID",
+            "updatedUser": "acp_core_ups_ingest_controller@AdobeService",
+            "name": "AJO Profile Counters Extension",
+            "description": "Holds a map of objects containing counter_value and expiryDate, keyed by counter_id",
+            "tags": {
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "eventType": [
+                "cjm.profile.counters"
+              ],
+              "adobe_dx_ajo_provisioning": [
+                "distCounterService"
+              ],
+              "unifiedProfile": [
+                "enabled:true",
+                "enabledAt:2026-03-29 07:42:31"
+              ],
+              "unifiedIdentity": [
+                "enabled:true"
+              ],
+              "adobe/pqs/table": [
+                "ajo_profile_counters_extension"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/adobepeakprogram/schemas/83693ac5ccc4a5271a0b1aaf0e378b9c0a477e67a60e92b1",
+              "contentType": "application/vnd.adobe.xed-full+json;version=1"
+            },
+            "enableErrorDiagnostics": true,
+            "viewId": "69c8d7e48fb1e0b006f5db06",
+            "classification": {
+              "dataBehavior": "record",
+              "managedBy": "SYSTEM"
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d7e48fb1e0b006f5db06",
+            "fileDescription": {
+              "format": "parquet"
+            },
+            "ingestionType": "append",
+            "dataIngested": false,
+            "serviceOwner": "cjm_provisioning_services"
+          },
+          "69c8d7e510c39fb1068f65bd": {
+            "id": "69c8d7e510c39fb1068f65bd",
+            "version": "2.0.5",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774770149920,
+            "updated": 1780565037591,
+            "createdClient": "cjm_provisioning_services",
+            "createdUser": "cjm_provisioning_services@AdobeID",
+            "updatedUser": "cjm_provisioning_services@AdobeID",
+            "name": "AJO Secondary Recipient Feedback Event Dataset",
+            "description": "Dataset for ingesting secondary recipients feedback events.",
+            "tags": {
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "adobe_dx_ajo_provisioning": [
+                "messageBCCFeedbackEvent"
+              ],
+              "eventType": [
+                "ajo.bcc.feedback"
+              ],
+              "adobe/pqs/table": [
+                "ajo_bcc_feedback_event_dataset"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/adobepeakprogram/schemas/64f1a449c730516d056aab88bb1f814b743ddaf364ad11e8",
+              "contentType": "application/vnd.adobe.xed-full+json;version=1"
+            },
+            "enableErrorDiagnostics": true,
+            "viewId": "69c8d7e510c39fb1068f65bd",
+            "classification": {
+              "dataBehavior": "time-series",
+              "managedBy": "SYSTEM"
+            },
+            "extensions": {
+              "adobe_lakeHouse": {
+                "rowExpiration": {
+                  "ttlValue": "P30D",
+                  "nextScheduledDate": "2026-06-28",
+                  "lastCompleted": 1780111587317
+                }
+              }
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d7e510c39fb1068f65bd",
+            "fileDescription": {
+              "format": "parquet"
+            },
+            "ingestionType": "append",
+            "dataIngested": false,
+            "serviceOwner": "cjm_provisioning_services"
+          },
+          "69c8d7e6b9966265fc8e4ea8": {
+            "id": "69c8d7e6b9966265fc8e4ea8",
+            "version": "2.0.7",
+            "imsOrg": "87891E4066602D250A495F91@AdobeOrg",
+            "sandboxId": "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd",
+            "created": 1774770150880,
+            "updated": 1776711828653,
+            "createdClient": "cjm_provisioning_services",
+            "createdUser": "cjm_provisioning_services@AdobeID",
+            "updatedUser": "acp_foundation_dataTracker@AdobeID",
+            "name": "AJO Entity Dataset",
+            "description": "Dataset for ingesting AJO entities which are related to message sent to profile",
+            "tags": {
+              "eventType": [
+                "ajo.entities"
+              ],
+              "adobe/siphon/partition/definition": [
+                "identity(_ACP_BATCHID)"
+              ],
+              "adobe/siphon/meta": [
+                "acpBufferedFlag::false"
+              ],
+              "aep/siphon/partitions": [
+                "_ACP_BATCHID"
+              ],
+              "acp_granular_plugin_validation_flags": [
+                "identity:enabled",
+                "profile:disabled"
+              ],
+              "acp_granular_validation_flags": [
+                "requiredFieldCheck:enabled"
+              ],
+              "adobe_dx_ajo_provisioning": [
+                "ajoEntityRecord"
+              ],
+              "acp_validationContext": [
+                "enabled"
+              ],
+              "adobe/siphon/table/format": [
+                "delta"
+              ],
+              "adobe/pqs/table": [
+                "ajo_entity_dataset"
+              ]
+            },
+            "systemLabels": [
+              "user_no_write"
+            ],
+            "schemaRef": {
+              "id": "https://ns.adobe.com/adobepeakprogram/schemas/7c7bebffd198418bfe39f9a2622a71bd8d5e389d199917b2",
+              "contentType": "application/vnd.adobe.xed-full+json;version=1"
+            },
+            "enableErrorDiagnostics": true,
+            "viewId": "69c8d7e6b9966265fc8e4ea8",
+            "classification": {
+              "dataBehavior": "record",
+              "managedBy": "SYSTEM"
+            },
+            "extensions": {
+              "adobe_lakeHouse": {
+                "metrics": {
+                  "storageSize": 75533,
+                  "rowCount": 19,
+                  "asOf": 1776711828462
+                },
+                "eventDistributionMetrics": {
+                  "distributions": [
+                    {
+                      "timeWindow": "NO_DATE_PARTITION_FOUND",
+                      "count": 0
+                    }
+                  ],
+                  "asOf": 1776711828462
+                }
+              }
+            },
+            "files": "@/dataSetFiles?dataSetId=69c8d7e6b9966265fc8e4ea8",
+            "fileDescription": {
+              "format": "parquet"
+            },
+            "ingestionType": "append",
+            "dataIngested": true,
+            "serviceOwner": "cjm_provisioning_services"
+          }
+        },
+        "error": null
+      }
+    }
+  ],
+  "answer": "The daily 'timeseries.ingestion.dataset.size' values between '2026-02-01' and '2026-04-14' are not available in the provided evidence. The retrieved data only contains collection storage sizes from the database (such as 'weRetail: Customer Actions' with 50,132,375 bytes and 'weRetail: CRM' with 10,161,091 bytes) and general dataset catalog metadata from the API, but no daily timeseries ingestion metrics.",
+  "status": "success",
+  "debug_events": [
+    {
+      "step": 1,
+      "event": "llm_output",
+      "raw_output": "{\n  \"action\": \"sql_query\",\n  \"sql\": \"SELECT COLLECTIONID, NAME, STORAGESIZEINBYTES, CREATEDTIME, UPDATEDTIME FROM dim_collection WHERE CREATEDTIME >= '2026-02-01' AND CREATEDTIME <= '2026-04-14' LIMIT 100\"\n}"
+    },
+    {
+      "step": 1,
+      "event": "tool_executed",
+      "action": "sql_query",
+      "status": "success"
+    },
+    {
+      "step": 2,
+      "event": "llm_output",
+      "raw_output": "{\n  \"action\": \"api_call\",\n  \"method\": \"GET\",\n  \"url\": \"/data/foundation/catalog/datasets\",\n  \"params\": {\n    \"limit\": \"20\"\n  }\n}"
+    },
+    {
+      "step": 2,
+      "event": "tool_executed",
+      "action": "api_call",
+      "status": "success"
+    },
+    {
+      "step": 3,
+      "event": "llm_output",
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"Based on the verified tool results, the daily 'timeseries.ingestion.dataset.size' values between '2026-02-01' and '2026-04-14' cannot be retrieved. The observability metrics API endpoint required to fetch timeseries metrics is not available in the allowed endpoints, and the local database tables (such as dim_collection) only provide static storage size information (STORAGESIZEINBYTES) rather than daily timeseries metrics.\"\n}"
+    },
+    {
+      "event": "answer_agent_output",
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"The daily 'timeseries.ingestion.dataset.size' values between '2026-02-01' and '2026-04-14' are not available in the provided evidence. The retrieved data only contains collection storage sizes from the database (such as 'weRetail: Customer Actions' with 50,132,375 bytes and 'weRetail: CRM' with 10,161,091 bytes) and general dataset catalog metadata from the API, but no daily timeseries ingestion metrics.\"\n}",
+      "parsed": {
+        "action": "final_answer",
+        "answer": "The daily 'timeseries.ingestion.dataset.size' values between '2026-02-01' and '2026-04-14' are not available in the provided evidence. The retrieved data only contains collection storage sizes from the database (such as 'weRetail: Customer Actions' with 50,132,375 bytes and 'weRetail: CRM' with 10,161,091 bytes) and general dataset catalog metadata from the API, but no daily timeseries ingestion metrics."
+      }
+    }
+  ]
+}

@@ -3,8 +3,8 @@
   "normalized_query": "show me the field for Email Opt-In",
   "query_analysis": {
     "complexity": "simple",
-    "confidence": 1.0,
-    "reason": "The user is asking for a single piece of information (a field name) which can be retrieved with one simple lookup.",
+    "confidence": 0.95,
+    "reason": "The query is a straightforward request to find a specific field related to 'Email Opt-In' and does not require joining multiple sources or complex multi-step logic.",
     "subqueries": [
       {
         "query": "show me the field for Email Opt-In",

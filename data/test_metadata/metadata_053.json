@@ -1,0 +1,658 @@
+{
+  "query": "Show failed files for batch 01KP69BPA5ZKFB7HCDYPE4GN6F.",
+  "normalized_query": "Show failed files for batch 01KP69BPA5ZKFB7HCDYPE4GN6F.",
+  "query_analysis": {
+    "complexity": "simple",
+    "confidence": 0.95,
+    "reason": "The query is a straightforward lookup of files with a 'failed' status associated with a specific batch ID.",
+    "subqueries": [
+      {
+        "query": "Show failed files for batch 01KP69BPA5ZKFB7HCDYPE4GN6F.",
+        "purpose": "other"
+      }
+    ]
+  },
+  "intent": "status_lookup",
+  "entities": [],
+  "filters": {
+    "status_or_state": "failed"
+  },
+  "route": {
+    "selected": "API_ONLY",
+    "votes": {
+      "API_ONLY": 1.0
+    },
+    "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides."
+  },
+  "domain": {
+    "selected": "batch",
+    "votes": {
+      "batch": 1.0
+    },
+    "reason": "Selected from top retrieved examples and domain votes."
+  },
+  "allowed_tables": {},
+  "join_candidates": [],
+  "allowed_api_endpoints": [
+    {
+      "endpoint": "GET /data/foundation/export/batches/01KP6MNQ3X71RP6MNH6FHWGHVE/failed",
+      "method": "GET",
+      "path": "/data/foundation/export/batches/01KP6MNQ3X71RP6MNH6FHWGHVE/failed",
+      "domain": "batch",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [
+        "API_ONLY"
+      ],
+      "source": "gold_examples",
+      "openapi": null
+    },
+    {
+      "endpoint": "GET /data/foundation/catalog/batches/01KP69BPA5ZKFB7HCDYPE4GN6F",
+      "method": "GET",
+      "path": "/data/foundation/catalog/batches/01KP69BPA5ZKFB7HCDYPE4GN6F",
+      "domain": "batch",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [
+        "API_ONLY"
+      ],
+      "source": "gold_examples",
+      "openapi": null
+    },
+    {
+      "endpoint": "GET /data/foundation/export/batches/69de8a0e0cc6102b5d11f01e/files",
+      "method": "GET",
+      "path": "/data/foundation/export/batches/69de8a0e0cc6102b5d11f01e/files",
+      "domain": "batch",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [
+        "API_ONLY"
+      ],
+      "source": "gold_examples",
+      "openapi": null
+    },
+    {
+      "endpoint": "GET /data/foundation/catalog/batches",
+      "method": "GET",
+      "path": "/data/foundation/catalog/batches",
+      "domain": "batch",
+      "param_names": [
+        "limit",
+        "orderBy",
+        "status"
+      ],
+      "observed_params": {
+        "limit": [
+          "100",
+          "10"
+        ],
+        "orderBy": [
+          "desc:created"
+        ],
+        "status": [
+          "success"
+        ]
+      },
+      "routes_seen": [
+        "API_ONLY"
+      ],
+      "source": "gold_examples+openapi",
+      "openapi": {
+        "summary": "Retrieve a list of batches",
+        "description": "This request retrieves a list of batches for operations and applications that have been performed on objects tracked by the system.",
+        "operation_id": "listBatches",
+        "query_params": [
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "type": null,
+            "description": "Limit response to a specified positive number of objects. The maximum number of objects that can be returned is 100."
+          },
+          {
+            "name": "createdAfter",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "type": null,
+            "description": "Exclusively filter records created after this timestamp."
+          },
+          {
+            "name": "createdBefore",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "type": null,
+            "description": "Exclusively filter records created before this timestamp."
+          },
+          {
+            "name": "created",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "type": null,
+            "description": "Filter by the Unix timestamp (in milliseconds) when this object was persisted."
+          },
+          {
+            "name": "createdClient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Filter by the ID of the IMS client that created this object."
+          },
+          {
+            "name": "updated",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "type": null,
+            "description": "Filter by the Unix timestamp (in milliseconds) for the time of last modification."
+          },
+          {
+            "name": "createdUser",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Filter by the ID of the user who created this object."
+          },
+          {
+            "name": "updatedUser",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Filter by the ID of the user who changed this object."
+          },
+          {
+            "name": "version",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Filter by Semantic version of the account. Updated when the object is modified."
+          },
+          {
+            "name": "tags",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Filter response by the specified tags."
+          },
+          {
+            "name": "status",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Filter by the current (mutable) status of the batch."
+          },
+          {
+            "name": "recordCount",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "type": null,
+            "description": "Filter by the total number of data records (rows or documents) processed in the batch."
+          },
+          {
+            "name": "failedRecordCount",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "type": null,
+            "description": "Filter by the number of records that could **not** be processed in the batch."
+          },
+          {
+            "name": "size",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "type": null,
+            "description": "The number of bytes processed in the batch."
+          },
+          {
+            "name": "started",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "type": null,
+            "description": "Filter by the Unix timestamp (in milliseconds) when the batch processing action was started. Subtracting \"started\" from \"completed\" will yield the total processing time."
+          },
+          {
+            "name": "completed",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "type": null,
+            "description": "Filter by the Unix timestamp (in milliseconds) when the batch processing action was completed. Subtracting \"started\" from \"completed\" will yield the total processing time."
+          },
+          {
+            "name": "startAfter",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "type": null,
+            "description": "Filter for batches with availability dates that start after the specified timestamp."
+          },
+          {
+            "name": "startBefore",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "type": null,
+            "description": "Filter for batches with availability dates that start before the specified timestamp."
+          },
+          {
+            "name": "endAfter",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "type": null,
+            "description": "Filter for batches with availability dates that end after the specified timestamp."
+          },
+          {
+            "name": "endBefore",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "type": null,
+            "description": "Filter for batches with availability dates that end before the specified timestamp."
+          },
+          {
+            "name": "batch",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Filter on the ID of the batch."
+          },
+          {
+            "name": "externalId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Filter on the ID of the external object."
+          },
+          {
+            "name": "dataSet",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Filter on the ID of the dataset."
+          },
+          {
+            "name": "orderBy",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Sort parameter and direction for sorting the response. Ex. orderBy=asc:created,updated. This was previously called sort."
+          },
+          {
+            "name": "start",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "type": null,
+            "description": "Specifies the offset of the pages of results. To get the first page of results, set the value to `start=0`."
+          },
+          {
+            "name": "property",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Regex used to filter objects in the response."
+          },
+          {
+            "name": "properties",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "A comma separated allowlist of top-level object properties to be returned in the response. Used to cut down the number of properties and amount of data returned in the response bodies."
+          }
+        ],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer\". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The name of the sandbox in which the operation will take place. See the [sandboxes overview documentation](https://adobe.com/go/sandbox-overview-en) for more information."
+          },
+          {
+            "name": "accept-encoding",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Used to signal the intent to consume compressed response bodies. Supported encodings: gzip."
+          }
+        ],
+        "query_param_names": [
+          "batch",
+          "completed",
+          "created",
+          "createdAfter",
+          "createdBefore",
+          "createdClient",
+          "createdUser",
+          "dataSet",
+          "endAfter",
+          "endBefore",
+          "externalId",
+          "failedRecordCount",
+          "limit",
+          "orderBy",
+          "properties",
+          "property",
+          "recordCount",
+          "size",
+          "start",
+          "startAfter",
+          "startBefore",
+          "started",
+          "status",
+          "tags",
+          "updated",
+          "updatedUser",
+          "version"
+        ],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "accept-encoding",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [],
+          "schema": {}
+        },
+        "response_codes": [
+          "200",
+          "400",
+          "403",
+          "404",
+          "500",
+          "default"
+        ],
+        "source_file": "catalog.yaml"
+      }
+    },
+    {
+      "endpoint": "POST /data/foundation/catalog/batches",
+      "method": "POST",
+      "path": "/data/foundation/catalog/batches",
+      "domain": "batch",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "Create a new batch",
+        "description": "This request creates a new batch for operations and applications that have been performed on objects tracked by the system.",
+        "operation_id": "createBatch",
+        "query_params": [],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer\". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The name of the sandbox in which the operation will take place. See the [sandboxes overview documentation](https://adobe.com/go/sandbox-overview-en) for more information."
+          },
+          {
+            "name": "accept-encoding",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Used to signal the intent to consume compressed response bodies. Supported encodings: gzip."
+          },
+          {
+            "name": "content-type",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/json"
+              ]
+            },
+            "type": null,
+            "description": "Specifies the media type of the request body. Required for requests with a payload, such as POST, PUT, and PATCH. When sending a JSON payload, this must be set to `application/json`."
+          }
+        ],
+        "query_param_names": [],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "accept-encoding",
+          "content-type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "content-type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": true,
+          "content_types": [
+            "application/json"
+          ],
+          "schema": {
+            "$ref": "#/components/schemas/batchRequest"
+          }
+        },
+        "response_codes": [
+          "201",
+          "400",
+          "403",
+          "500",
+          "default"
+        ],
+        "source_file": "catalog.yaml"
+      }
+    }
+  ],
+  "similar_examples": [
+    {
+      "query": "Show failed files for batch 01KP6MNQ3X71RP6MNH6FHWGHVE.",
+      "route": "API_ONLY",
+      "domain": "batch",
+      "intent": "status_lookup",
+      "score": 0.8316,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /data/foundation/export/batches/01KP6MNQ3X71RP6MNH6FHWGHVE/failed"
+      ],
+      "api_params": [],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /data/foundation/export/batches/01KP6MNQ3X71RP6MNH6FHWGHVE/failed"
+      ]
+    },
+    {
+      "query": "Show the details of batch 01KP69BPA5ZKFB7HCDYPE4GN6F.",
+      "route": "API_ONLY",
+      "domain": "batch",
+      "intent": "list",
+      "score": 0.6317,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /data/foundation/catalog/batches/01KP69BPA5ZKFB7HCDYPE4GN6F"
+      ],
+      "api_params": [],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /data/foundation/catalog/batches/01KP69BPA5ZKFB7HCDYPE4GN6F"
+      ]
+    },
+    {
+      "query": "Which files are available for download in batch 69de8a0e0cc6102b5d11f01e?",
+      "route": "API_ONLY",
+      "domain": "batch",
+      "intent": "list",
+      "score": 0.5727,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /data/foundation/export/batches/69de8a0e0cc6102b5d11f01e/files"
+      ],
+      "api_params": [],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /data/foundation/export/batches/69de8a0e0cc6102b5d11f01e/files"
+      ]
+    }
+  ],
+  "tool_budget": {
+    "max_sql_calls": 0,
+    "max_api_calls": 1,
+    "expected_steps": [
+      "api_call"
+    ]
+  },
+  "answer_constraints": [
+    "Use only verified SQL/API outputs as evidence.",
+    "Do not invent IDs, timestamps, counts, statuses, or names.",
+    "If SQL and API disagree, mention the discrepancy clearly.",
+    "If API returns an error or empty result, state that clearly."
+  ]
+}

@@ -29,7 +29,7 @@
       }
     }
   ],
-  "answer": "The local SQL snapshot returned no schema records.\n\nThe live API call to GET /data/foundation/catalog/dataSets succeeded with HTTP 200 and returned 0 preview item(s).",
+  "answer": "No datasets using the schema 'Journey Inbound' were found in either the database or the API catalog.",
   "status": "success",
   "debug_events": [
     {
@@ -86,6 +86,14 @@
       "step": 4,
       "event": "llm_output",
       "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"Based on the database query and API results, no datasets were found that use the schema 'Journey Inbound'.\"\n}"
+    },
+    {
+      "event": "answer_agent_output",
+      "raw_output": "{\n  \"action\": \"final_answer\",\n  \"answer\": \"No datasets using the schema 'Journey Inbound' were found in either the database or the API catalog.\"\n}",
+      "parsed": {
+        "action": "final_answer",
+        "answer": "No datasets using the schema 'Journey Inbound' were found in either the database or the API catalog."
+      }
     }
   ]
 }

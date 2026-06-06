@@ -1,0 +1,772 @@
+{
+  "query": "Show all segment jobs with status 'PROCESSING'.",
+  "normalized_query": "Show all segment jobs with status 'PROCESSING'.",
+  "query_analysis": {
+    "complexity": "simple",
+    "confidence": 0.95,
+    "reason": "The query is a straightforward request to filter segment jobs by a specific status, requiring only a single retrieval step.",
+    "subqueries": [
+      {
+        "query": "Show all segment jobs with status 'PROCESSING'.",
+        "purpose": "other"
+      }
+    ]
+  },
+  "intent": "status_lookup",
+  "entities": [
+    "PROCESSING"
+  ],
+  "filters": {
+    "quoted_entities": [
+      "PROCESSING"
+    ]
+  },
+  "route": {
+    "selected": "API_ONLY",
+    "votes": {
+      "API_ONLY": 1.0
+    },
+    "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides."
+  },
+  "domain": {
+    "selected": "segment_job",
+    "votes": {
+      "segment_job": 1.0
+    },
+    "reason": "Selected from top retrieved examples and domain votes."
+  },
+  "allowed_tables": {},
+  "join_candidates": [],
+  "allowed_api_endpoints": [
+    {
+      "endpoint": "GET /data/core/ups/segment/jobs",
+      "method": "GET",
+      "path": "/data/core/ups/segment/jobs",
+      "domain": "segment_job",
+      "param_names": [
+        "limit"
+      ],
+      "observed_params": {
+        "limit": [
+          "3",
+          "20",
+          "10"
+        ]
+      },
+      "routes_seen": [
+        "API_ONLY"
+      ],
+      "source": "gold_examples+openapi",
+      "openapi": {
+        "summary": "List all segment job requests",
+        "description": "",
+        "operation_id": "listSegmentJobs",
+        "query_params": [
+          {
+            "name": "snapshot.name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The snapshot name."
+          },
+          {
+            "name": "start",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "type": null,
+            "description": "The page offset, as per the created time of the resource."
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "type": null,
+            "description": "The maximum number of segment jobs retrieved per page."
+          },
+          {
+            "name": "status",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The job status."
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Used to order the segment jobs. Is written in the format [attributeName]:[desc|asc]"
+          },
+          {
+            "name": "property",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Used to get exact matches within an attribute in the segment job. Is written in the format [arrayTypeAttributeName]~[objectKey]==[value]"
+          }
+        ],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "All resources in Experience Platform are isolated to specific virtual sandboxes. Requests to Platform APIs require a header that specifies the name of the sandbox in which the operation will take place. See the [sandboxes overview](https://adobe.com/go/sandbox-overview-en) for more information."
+          },
+          {
+            "name": "x-request-id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "A unique ID that can be used to track a request."
+          }
+        ],
+        "query_param_names": [
+          "limit",
+          "property",
+          "snapshot.name",
+          "sort",
+          "start",
+          "status"
+        ],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-request-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [],
+          "schema": {}
+        },
+        "response_codes": [
+          "200",
+          "403",
+          "500",
+          "503"
+        ],
+        "source_file": "segmentation.yaml"
+      }
+    },
+    {
+      "endpoint": "GET /data/core/ups/export/jobs",
+      "method": "GET",
+      "path": "/data/core/ups/export/jobs",
+      "domain": "segment_job",
+      "param_names": [
+        "limit",
+        "offset",
+        "status"
+      ],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "List export jobs",
+        "description": "",
+        "operation_id": "listExportJobs",
+        "query_params": [
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "type": null,
+            "description": "Limit the number of export jobs returned in the list."
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Offset the page of results returned, ordered by created time of resource."
+          },
+          {
+            "name": "status",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "NEW",
+                "SUCCEEDED",
+                "FAILED"
+              ]
+            },
+            "type": null,
+            "description": "Filter the export jobs returned by job status."
+          }
+        ],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "All resources in Experience Platform are isolated to specific virtual sandboxes. Requests to Platform APIs require a header that specifies the name of the sandbox in which the operation will take place. See the [sandboxes overview](https://adobe.com/go/sandbox-overview-en) for more information."
+          }
+        ],
+        "query_param_names": [
+          "limit",
+          "offset",
+          "status"
+        ],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [],
+          "schema": {}
+        },
+        "response_codes": [
+          "200",
+          "403",
+          "503"
+        ],
+        "source_file": "segmentation.yaml"
+      }
+    },
+    {
+      "endpoint": "GET /data/core/ups/system/jobs",
+      "method": "GET",
+      "path": "/data/core/ups/system/jobs",
+      "domain": "segment_job",
+      "param_names": [
+        "limit",
+        "page",
+        "sort",
+        "start"
+      ],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "List all delete requests (Profile System Jobs)",
+        "description": "Please note that the query parameters can **only** be used in Microsoft Azure instances of Adobe Experience Platform. To learn more about the supported Experience Platform infrastructure, see the [Experience Platform multi-cloud overview](https://experienceleague.adobe.com/en/docs/experience-platform/landing/multi-cloud).",
+        "operation_id": "listDeleteRequests",
+        "query_params": [
+          {
+            "name": "start",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "type": null,
+            "description": "Return results from a specific page offset. For example, `start=3`"
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "type": null,
+            "description": "Limit response to a specific number of objects. Must be a positive number. For example, `limit=10`"
+          },
+          {
+            "name": "page",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "type": null,
+            "description": "Return a specific page of results, as per the create time of the request. For example, `page=0`"
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Sort results by a specific field in ascending (`asc`) or descending (`desc`) order. The sort parameter does not work when returning multiple pages of results. For example, `sort=batchId:asc`"
+          }
+        ],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "All resources in Experience Platform are isolated to specific virtual sandboxes. Requests to Platform APIs require a header that specifies the name of the sandbox in which the operation will take place. See the [sandboxes overview](https://adobe.com/go/sandbox-overview-en) for more information."
+          },
+          {
+            "name": "x-sandbox-id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The ID of the sandbox you are using. If you are using Platform on Amazon Web Services (AWS), you **must** use this request header."
+          }
+        ],
+        "query_param_names": [
+          "limit",
+          "page",
+          "sort",
+          "start"
+        ],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [],
+          "schema": {}
+        },
+        "response_codes": [
+          "200",
+          "403",
+          "500",
+          "503"
+        ],
+        "source_file": "profile.yaml"
+      }
+    },
+    {
+      "endpoint": "POST /data/core/ups/export/jobs",
+      "method": "POST",
+      "path": "/data/core/ups/export/jobs",
+      "domain": "segment_job",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "Create an export job",
+        "description": "",
+        "operation_id": "createExportJob",
+        "query_params": [],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The type of content being sent in the body of the request. Should be 'application/json'."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "All resources in Experience Platform are isolated to specific virtual sandboxes. Requests to Platform APIs require a header that specifies the name of the sandbox in which the operation will take place. See the [sandboxes overview](https://adobe.com/go/sandbox-overview-en) for more information."
+          },
+          {
+            "name": "x-profile-instance-id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The ID of the profile instance. **Example**: `ups`"
+          }
+        ],
+        "query_param_names": [],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-profile-instance-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": true,
+          "content_types": [
+            "application/json"
+          ],
+          "schema": {
+            "$ref": "#/components/schemas/CreateExportJobRequest"
+          }
+        },
+        "response_codes": [
+          "200",
+          "403",
+          "503"
+        ],
+        "source_file": "segmentation.yaml"
+      }
+    },
+    {
+      "endpoint": "POST /data/core/ups/segment/jobs",
+      "method": "POST",
+      "path": "/data/core/ups/segment/jobs",
+      "domain": "segment_job",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "Create a segment job request",
+        "description": "",
+        "operation_id": "createSegmentJob",
+        "query_params": [],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The type of content being sent in the body of the request. Should be 'application/json'."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "All resources in Experience Platform are isolated to specific virtual sandboxes. Requests to Platform APIs require a header that specifies the name of the sandbox in which the operation will take place. See the [sandboxes overview](https://adobe.com/go/sandbox-overview-en) for more information."
+          },
+          {
+            "name": "x-profile-instance-id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The ID of the Profile Instance. **Example**: `ups`"
+          },
+          {
+            "name": "x-request-id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "A unique ID that can be used to track a request. **Example**: `q0gf6caRuRtX2s5khaN1Zgd1OoEXcPJA`"
+          }
+        ],
+        "query_param_names": [],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-profile-instance-id",
+          "x-request-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": true,
+          "content_types": [
+            "application/json"
+          ],
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SegmentJobRequest"
+            }
+          }
+        },
+        "response_codes": [
+          "200",
+          "400",
+          "403",
+          "429",
+          "500",
+          "503"
+        ],
+        "source_file": "segmentation.yaml"
+      }
+    }
+  ],
+  "similar_examples": [
+    {
+      "query": "Show all segment jobs with status 'QUEUED'.",
+      "route": "API_ONLY",
+      "domain": "segment_job",
+      "intent": "status_lookup",
+      "score": 0.8446,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /data/core/ups/segment/jobs"
+      ],
+      "api_params": [
+        "limit"
+      ],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /data/core/ups/segment/jobs?limit=10"
+      ]
+    },
+    {
+      "query": "How many segment jobs are currently processing?",
+      "route": "API_ONLY",
+      "domain": "segment_job",
+      "intent": "count",
+      "score": 0.6442,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /data/core/ups/segment/jobs"
+      ],
+      "api_params": [
+        "limit"
+      ],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /data/core/ups/segment/jobs?limit=20"
+      ]
+    },
+    {
+      "query": "List all segment evaluation jobs.",
+      "route": "API_ONLY",
+      "domain": "segment_job",
+      "intent": "list",
+      "score": 0.6207,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /data/core/ups/segment/jobs"
+      ],
+      "api_params": [
+        "limit"
+      ],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /data/core/ups/segment/jobs?limit=3"
+      ]
+    }
+  ],
+  "tool_budget": {
+    "max_sql_calls": 0,
+    "max_api_calls": 1,
+    "expected_steps": [
+      "api_call"
+    ]
+  },
+  "answer_constraints": [
+    "Use only verified SQL/API outputs as evidence.",
+    "Do not invent IDs, timestamps, counts, statuses, or names.",
+    "If SQL and API disagree, mention the discrepancy clearly.",
+    "If API returns an error or empty result, state that clearly."
+  ]
+}

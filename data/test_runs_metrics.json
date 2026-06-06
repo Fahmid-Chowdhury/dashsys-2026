@@ -1,30 +1,34 @@
 {
-  "total_queries": 7,
-  "success_count": 7,
-  "failure_count": 0,
-  "failure_rate": 0.0,
-  "success_rate": 1.0,
+  "total_queries": 60,
+  "success_count": 52,
+  "failure_count": 8,
+  "failure_rate": 0.1333,
+  "success_rate": 0.8667,
   "status_counts": {
-    "success": 7
+    "success": 52,
+    "failed": 8
   },
-  "failure_reason_counts": {},
+  "failure_reason_counts": {
+    "tool_failure_detected_before_final_answer": 6,
+    "route_policy_rejected": 2
+  },
   "wall_time": {
-    "batch_wall_time_seconds": 608.678,
-    "sum_query_elapsed_seconds": 608.647,
-    "avg_query_elapsed_seconds": 86.95,
-    "median_query_elapsed_seconds": 65.416,
-    "min_query_elapsed_seconds": 29.012,
-    "max_query_elapsed_seconds": 271.865
+    "batch_wall_time_seconds": 2716.539,
+    "sum_query_elapsed_seconds": 2715.112,
+    "avg_query_elapsed_seconds": 45.252,
+    "median_query_elapsed_seconds": 32.626,
+    "min_query_elapsed_seconds": 16.169,
+    "max_query_elapsed_seconds": 289.601
   },
   "budget": {
-    "within_tool_budget_count": 7,
+    "within_tool_budget_count": 60,
     "within_tool_budget_rate": 1.0,
-    "expected_tool_steps_satisfied_count": 7,
-    "expected_tool_steps_satisfied_rate": 1.0,
-    "avg_sql_calls_per_query": 1.571,
-    "avg_api_calls_per_query": 1.429,
-    "avg_total_tool_calls_per_query": 3,
-    "avg_trace_steps_per_query": 3
+    "expected_tool_steps_satisfied_count": 43,
+    "expected_tool_steps_satisfied_rate": 0.7167,
+    "avg_sql_calls_per_query": 0.917,
+    "avg_api_calls_per_query": 1.017,
+    "avg_total_tool_calls_per_query": 1.933,
+    "avg_trace_steps_per_query": 1.933
   },
   "per_query": [
     {
@@ -41,7 +45,8 @@
       "trace_steps": 2,
       "debug_event_counts": {
         "llm_output": 3,
-        "tool_executed": 2
+        "tool_executed": 2,
+        "answer_agent_output": 1
       },
       "per_query_budget": {
         "allowed": {
@@ -87,8 +92,8 @@
           "expected_tool_steps_satisfied": true
         }
       },
-      "answer_preview": "Based on the database records, the journey 'Gold Tier Welcome Email' has not been published yet. Its status is 'created' (created on 2026-03-31T15:35:12.042188843Z) and its last deployed time is null. Additionally, the API search for this journey returned no results.\n\nSQL returned 1 row(s):\n\n- Gold Tier Welcome Email — status/state: created\n\nAPI GET /ajo/journey returned HTTP 200 with totalCount=0",
-      "elapsed_seconds": 271.865,
+      "answer_preview": "The journey 'Gold Tier Welcome Email' has not been published yet. Its current state and status are 'created', and the last deployed time is not set (null).",
+      "elapsed_seconds": 42.663,
       "failure_reason": "none",
       "metadata_path": "data\\test_metadata\\metadata_001.json",
       "run_path": "data\\test_runs\\run_001.json"
@@ -107,7 +112,8 @@
       "trace_steps": 4,
       "debug_event_counts": {
         "llm_output": 5,
-        "tool_executed": 4
+        "tool_executed": 4,
+        "answer_agent_output": 1
       },
       "per_query_budget": {
         "allowed": {
@@ -153,8 +159,8 @@
           "expected_tool_steps_satisfied": true
         }
       },
-      "answer_preview": "The SQL snapshot returned 1 row(s).\n\nThe API call to GET /data/foundation/flowservice/flows returned 1 preview item(s).\n\nThe API call to GET /data/core/ups/audiences returned 2 preview item(s).",
-      "elapsed_seconds": 87.452,
+      "answer_preview": "No destination named 'Lives on East Coast' was found in the system. The only available destination in the database is 'amazon-s3' (Dataflow: 'Activate segments to S3 Feed'). Consequently, there are no segment audiences connected to a destination named 'Lives on East Coast'.",
+      "elapsed_seconds": 53.058,
       "failure_reason": "none",
       "metadata_path": "data\\test_metadata\\metadata_002.json",
       "run_path": "data\\test_runs\\run_002.json"
@@ -169,11 +175,146 @@
       "complexity": "complex",
       "subquery_count": 3,
       "sql_calls": 2,
+      "api_calls": 2,
+      "trace_steps": 4,
+      "debug_event_counts": {
+        "llm_output": 5,
+        "tool_executed": 4,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 3,
+          "max_total_tool_calls": 5,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 2,
+          "api_calls": 2,
+          "total_tool_calls": 4,
+          "successful_sql_calls": 2,
+          "successful_api_calls": 2,
+          "successful_total_tool_calls": 4,
+          "trace_steps": 4
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "agent_steps": 4
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 0.6667,
+          "total_tool_budget_used_ratio": 0.8,
+          "agent_step_used_ratio": 0.5
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "No segment audiences connected to the destination named 'Lives on West Coast' were found in the database or API results.",
+      "elapsed_seconds": 73.155,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_003.json",
+      "run_path": "data\\test_runs\\run_003.json"
+    },
+    {
+      "id": 4,
+      "query": "List all segment audiences connected to the destination named 'Person: Birthday today', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "segment",
+      "intent": "count",
+      "complexity": "complex",
+      "subquery_count": 4,
+      "sql_calls": 2,
+      "api_calls": 2,
+      "trace_steps": 4,
+      "debug_event_counts": {
+        "llm_output": 5,
+        "tool_executed": 4,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 3,
+          "max_total_tool_calls": 5,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 2,
+          "api_calls": 2,
+          "total_tool_calls": 4,
+          "successful_sql_calls": 2,
+          "successful_api_calls": 2,
+          "successful_total_tool_calls": 4,
+          "trace_steps": 4
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "agent_steps": 4
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 0.6667,
+          "total_tool_budget_used_ratio": 0.8,
+          "agent_step_used_ratio": 0.5
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "No segment audiences connected to the destination named 'Person: Birthday today' were found in the database or API results.",
+      "elapsed_seconds": 61.941,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_004.json",
+      "run_path": "data\\test_runs\\run_004.json"
+    },
+    {
+      "id": 5,
+      "query": "List all segment audiences connected to the destination named 'Person: Birthday within 7 days', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "segment",
+      "intent": "count",
+      "complexity": "complex",
+      "subquery_count": 3,
+      "sql_calls": 2,
       "api_calls": 1,
       "trace_steps": 3,
       "debug_event_counts": {
         "llm_output": 4,
-        "tool_executed": 3
+        "tool_executed": 3,
+        "answer_agent_output": 1
       },
       "per_query_budget": {
         "allowed": {
@@ -219,140 +360,8 @@
           "expected_tool_steps_satisfied": true
         }
       },
-      "answer_preview": "The SQL snapshot returned no rows.\n\nThe API call to GET /data/foundation/flowservice/flows returned 35 preview item(s).",
-      "elapsed_seconds": 56.139,
-      "failure_reason": "none",
-      "metadata_path": "data\\test_metadata\\metadata_003.json",
-      "run_path": "data\\test_runs\\run_003.json"
-    },
-    {
-      "id": 4,
-      "query": "List all segment audiences connected to the destination named 'Person: Birthday today', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
-      "status": "success",
-      "route": "SQL_PLUS_API",
-      "domain": "segment",
-      "intent": "count",
-      "complexity": "complex",
-      "subquery_count": 4,
-      "sql_calls": 2,
-      "api_calls": 2,
-      "trace_steps": 4,
-      "debug_event_counts": {
-        "llm_output": 5,
-        "tool_executed": 4
-      },
-      "per_query_budget": {
-        "allowed": {
-          "max_sql_calls": 2,
-          "max_api_calls": 3,
-          "max_total_tool_calls": 5,
-          "max_agent_steps": 8,
-          "max_repair_attempts": 3,
-          "expected_steps": [
-            "sql_query",
-            "api_call"
-          ],
-          "expected_sql_calls": 1,
-          "expected_api_calls": 1
-        },
-        "used": {
-          "sql_calls": 2,
-          "api_calls": 2,
-          "total_tool_calls": 4,
-          "successful_sql_calls": 2,
-          "successful_api_calls": 2,
-          "successful_total_tool_calls": 4,
-          "trace_steps": 4
-        },
-        "remaining": {
-          "sql_calls": 0,
-          "api_calls": 1,
-          "total_tool_calls": 1,
-          "agent_steps": 4
-        },
-        "ratios": {
-          "sql_budget_used_ratio": 1.0,
-          "api_budget_used_ratio": 0.6667,
-          "total_tool_budget_used_ratio": 0.8,
-          "agent_step_used_ratio": 0.5
-        },
-        "flags": {
-          "within_sql_budget": true,
-          "within_api_budget": true,
-          "within_total_tool_budget": true,
-          "expected_sql_satisfied": true,
-          "expected_api_satisfied": true,
-          "expected_tool_steps_satisfied": true
-        }
-      },
-      "answer_preview": "The SQL snapshot returned no rows.\n\nThe API call to GET /data/foundation/flowservice/flows returned 35 preview item(s).\n\nThe API call to GET /data/core/ups/audiences returned 2 preview item(s).",
-      "elapsed_seconds": 66.217,
-      "failure_reason": "none",
-      "metadata_path": "data\\test_metadata\\metadata_004.json",
-      "run_path": "data\\test_runs\\run_004.json"
-    },
-    {
-      "id": 5,
-      "query": "List all segment audiences connected to the destination named 'Person: Birthday within 7 days', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
-      "status": "success",
-      "route": "SQL_PLUS_API",
-      "domain": "segment",
-      "intent": "count",
-      "complexity": "complex",
-      "subquery_count": 3,
-      "sql_calls": 2,
-      "api_calls": 2,
-      "trace_steps": 4,
-      "debug_event_counts": {
-        "llm_output": 5,
-        "tool_executed": 4
-      },
-      "per_query_budget": {
-        "allowed": {
-          "max_sql_calls": 2,
-          "max_api_calls": 3,
-          "max_total_tool_calls": 5,
-          "max_agent_steps": 8,
-          "max_repair_attempts": 3,
-          "expected_steps": [
-            "sql_query",
-            "api_call"
-          ],
-          "expected_sql_calls": 1,
-          "expected_api_calls": 1
-        },
-        "used": {
-          "sql_calls": 2,
-          "api_calls": 2,
-          "total_tool_calls": 4,
-          "successful_sql_calls": 2,
-          "successful_api_calls": 2,
-          "successful_total_tool_calls": 4,
-          "trace_steps": 4
-        },
-        "remaining": {
-          "sql_calls": 0,
-          "api_calls": 1,
-          "total_tool_calls": 1,
-          "agent_steps": 4
-        },
-        "ratios": {
-          "sql_budget_used_ratio": 1.0,
-          "api_budget_used_ratio": 0.6667,
-          "total_tool_budget_used_ratio": 0.8,
-          "agent_step_used_ratio": 0.5
-        },
-        "flags": {
-          "within_sql_budget": true,
-          "within_api_budget": true,
-          "within_total_tool_budget": true,
-          "expected_sql_satisfied": true,
-          "expected_api_satisfied": true,
-          "expected_tool_steps_satisfied": true
-        }
-      },
-      "answer_preview": "The SQL snapshot returned no rows.\n\nThe API call to GET /data/foundation/flowservice/flows returned 1 preview item(s).\n\nThe API call to GET /data/core/ups/audiences returned 2 preview item(s).",
-      "elapsed_seconds": 65.416,
+      "answer_preview": "No segment audiences connected to the destination named 'Person: Birthday within 7 days' were found in the database or API records.",
+      "elapsed_seconds": 44.499,
       "failure_reason": "none",
       "metadata_path": "data\\test_metadata\\metadata_005.json",
       "run_path": "data\\test_runs\\run_005.json"
@@ -372,7 +381,8 @@
       "debug_event_counts": {
         "llm_output": 4,
         "tool_executed": 2,
-        "verifier_rejected": 1
+        "verifier_rejected": 1,
+        "answer_agent_output": 1
       },
       "per_query_budget": {
         "allowed": {
@@ -418,8 +428,8 @@
           "expected_tool_steps_satisfied": true
         }
       },
-      "answer_preview": "The local SQL snapshot returned no schema records.\n\nThe live API call to GET /data/foundation/catalog/dataSets succeeded with HTTP 200 and returned 0 preview item(s).",
-      "elapsed_seconds": 29.012,
+      "answer_preview": "No datasets using the schema 'Journey Inbound' were found in either the database or the API catalog.",
+      "elapsed_seconds": 32.011,
       "failure_reason": "none",
       "metadata_path": "data\\test_metadata\\metadata_006.json",
       "run_path": "data\\test_runs\\run_006.json"
@@ -438,7 +448,8 @@
       "trace_steps": 2,
       "debug_event_counts": {
         "llm_output": 3,
-        "tool_executed": 2
+        "tool_executed": 2,
+        "answer_agent_output": 1
       },
       "per_query_budget": {
         "allowed": {
@@ -484,11 +495,3561 @@
           "expected_tool_steps_satisfied": true
         }
       },
-      "answer_preview": "From the local SQL snapshot, I found 1 dataset record(s):\n\n- weRetail: CRM\n\nThe live API call to GET /data/foundation/catalog/datasets succeeded with HTTP 200 and returned 38 preview item(s).\n\nAPI preview items:\n\n- Decision Object Repository - Fallback Offers — ID: 69c8d6b0494ee9dc83b67874\n- Decision Object Repository - Placements — ID: 69c8d6b094a54c8d91aa2dca\n- Decision Object Repository - Perso",
-      "elapsed_seconds": 32.546,
+      "answer_preview": "Based on the catalog data, there is 1 dataset that uses the 'weRetail: CRM' schema:\n\n* **Name**: weRetail: CRM\n* **ID**: 69c8d9c5c58ebc1ebef442e3\n* **Schema Reference ID**: `https://ns.adobe.com/adobepeakprogram/schemas/69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af`",
+      "elapsed_seconds": 61.113,
       "failure_reason": "none",
       "metadata_path": "data\\test_metadata\\metadata_007.json",
       "run_path": "data\\test_runs\\run_007.json"
+    },
+    {
+      "id": 8,
+      "query": "List all datasets that use the schema 'weRetail: Customer Actions'.",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "schema",
+      "intent": "list",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 1,
+      "api_calls": 1,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 4,
+        "tool_executed": 2,
+        "verifier_rejected": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 2,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "Based on the database records, the dataset that uses the schema 'weRetail: Customer Actions' is:\n\n* **Dataset Name**: weRetail: Customer Actions\n* **Dataset ID**: 69c8d9e7cba5deaa7974b00b",
+      "elapsed_seconds": 38.853,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_008.json",
+      "run_path": "data\\test_runs\\run_008.json"
+    },
+    {
+      "id": 9,
+      "query": "List all datasets that use the schema 'hkg_adls_segment_profile_history'.",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "dataset",
+      "intent": "list",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 1,
+      "api_calls": 1,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 2,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "Based on the database records, there is one collection/dataset associated with 'hkg_adls_segment_profile_history':\n\n* **Name:** hkg_adls_segment_profile_history\n* **ID:** 69c8d9c4e592a9df81deb244\n\nNote: The API query filtering for datasets with the schema 'hkg_adls_segment_profile_history' did not return any matching datasets (returning unrelated system and AJO datasets instead).",
+      "elapsed_seconds": 41.587,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_009.json",
+      "run_path": "data\\test_runs\\run_009.json"
+    },
+    {
+      "id": 10,
+      "query": "show me the field for Person: Birthday today",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "dataset",
+      "intent": "field_lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 1,
+      "api_calls": 1,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 2,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "The field for the segment \"Person: Birthday today\" is `person.birthDate`.",
+      "elapsed_seconds": 29.434,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_010.json",
+      "run_path": "data\\test_runs\\run_010.json"
+    },
+    {
+      "id": 11,
+      "query": "show me the field for Campaign: 25% Off Purchase Offer Reminder",
+      "status": "failed",
+      "route": "SQL_PLUS_API",
+      "domain": "journey",
+      "intent": "field_lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 1,
+      "api_calls": 1,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1,
+        "tool_failure_detected_before_final_answer": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 0,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": false,
+          "expected_tool_steps_satisfied": false
+        }
+      },
+      "answer_preview": "I was unable to find any information for the campaign \"25% Off Purchase Offer Reminder\". The database query returned no results, and the API request to retrieve the journey details failed with a 500 Internal Server Error.",
+      "elapsed_seconds": 20.416,
+      "failure_reason": "tool_failure_detected_before_final_answer",
+      "metadata_path": "data\\test_metadata\\metadata_011.json",
+      "run_path": "data\\test_runs\\run_011.json"
+    },
+    {
+      "id": 12,
+      "query": "show me the field for SMS Opt-In",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "dataset",
+      "intent": "field_lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 1,
+      "api_calls": 0,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 2,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 0,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 0,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 0.0,
+          "total_tool_budget_used_ratio": 0.5,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": false,
+          "expected_tool_steps_satisfied": false
+        }
+      },
+      "answer_preview": "The field for 'SMS Opt-In' is consents.marketing.sms.val.",
+      "elapsed_seconds": 16.169,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_012.json",
+      "run_path": "data\\test_runs\\run_012.json"
+    },
+    {
+      "id": 13,
+      "query": "show me the field for Email Opt-In",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "dataset",
+      "intent": "field_lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 1,
+      "api_calls": 1,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 2,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "The field for \"Email Opt-In\" is `consents.marketing.email.val`.",
+      "elapsed_seconds": 26.954,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_013.json",
+      "run_path": "data\\test_runs\\run_013.json"
+    },
+    {
+      "id": 14,
+      "query": "Provide more details for the schema 'Journey schema with Journey Fields for Journey Orchestration'",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "journey",
+      "intent": "field_lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 1,
+      "api_calls": 1,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 2,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "No details could be found for the schema 'Journey schema with Journey Fields for Journey Orchestration'. Both the database query and the API request returned no results.",
+      "elapsed_seconds": 23.434,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_014.json",
+      "run_path": "data\\test_runs\\run_014.json"
+    },
+    {
+      "id": 15,
+      "query": "Provide more details for the schema 'weRetail: CRM'",
+      "status": "failed",
+      "route": "SQL_PLUS_API",
+      "domain": "schema",
+      "intent": "lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 1,
+      "api_calls": 1,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1,
+        "tool_failure_detected_before_final_answer": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 0,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": false,
+          "expected_tool_steps_satisfied": false
+        }
+      },
+      "answer_preview": "Here are the details for the schema 'weRetail: CRM':\n\n- **Blueprint ID**: 69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af\n- **Class**: https://ns.adobe.com/xdm/context/profile\n- **Profile Enabled**: Yes (true)\n- **Updated Time**: 2026-03-29T07:50:21.000+00:00\n- **Required Fields**: None\n- **Collection Count**: 1\n- **Property Count**: 21\n\n*(Note: An API request to fetch schema details returned a 4",
+      "elapsed_seconds": 27.109,
+      "failure_reason": "tool_failure_detected_before_final_answer",
+      "metadata_path": "data\\test_metadata\\metadata_015.json",
+      "run_path": "data\\test_runs\\run_015.json"
+    },
+    {
+      "id": 16,
+      "query": "Show me all entities created by fiber",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "dataset",
+      "intent": "time_lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 1,
+      "api_calls": 1,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 2,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "No entities created by \"fiber\" were found. The database query returned no matching collections, and the retrieved audit events did not contain any creation actions associated with \"fiber\".",
+      "elapsed_seconds": 32.628,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_016.json",
+      "run_path": "data\\test_runs\\run_016.json"
+    },
+    {
+      "id": 17,
+      "query": "Show me all entities created by bandwidth",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "dataset",
+      "intent": "time_lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 1,
+      "api_calls": 1,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 2,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "No entities created by \"bandwidth\" were found. The database query for collections created by \"bandwidth\" returned no results, and no matching creators were found in the retrieved audit events.",
+      "elapsed_seconds": 30.92,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_017.json",
+      "run_path": "data\\test_runs\\run_017.json"
+    },
+    {
+      "id": 18,
+      "query": "Show me pairs or clusters of audiences that have identical rule definitions.",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "segment",
+      "intent": "list",
+      "complexity": "complex",
+      "subquery_count": 2,
+      "sql_calls": 1,
+      "api_calls": 0,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 2,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 2,
+          "max_total_tool_calls": 4,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 0,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 0,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 1,
+          "api_calls": 2,
+          "total_tool_calls": 3,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.5,
+          "api_budget_used_ratio": 0.0,
+          "total_tool_budget_used_ratio": 0.25,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": false,
+          "expected_tool_steps_satisfied": false
+        }
+      },
+      "answer_preview": "There is one pair of audiences with identical rule definitions: \n\n1. **Person: Birthday Today 001** (ID: `2fdfefe1-04d0-46ce-9fbd-7611e311dd26`)\n2. **Person: Birthday today** (ID: `f2a200b1-5d0a-4c9b-9202-4d34326cd9df`)\n\nBoth audiences share the following rule definition which checks if the person's birth date (day and month) matches today's date:\n\n`{\"nodeType\":\"fnApply\",\"fnName\":\"and\",\"params\":[{",
+      "elapsed_seconds": 32.623,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_018.json",
+      "run_path": "data\\test_runs\\run_018.json"
+    },
+    {
+      "id": 19,
+      "query": "How many duplicate audiences do I have?",
+      "status": "success",
+      "route": "SQL_PLUS_API_CHAIN",
+      "domain": "segment",
+      "intent": "count",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 1,
+      "api_calls": 1,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 2,
+          "max_total_tool_calls": 3,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 2,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 0.5,
+          "total_tool_budget_used_ratio": 0.6667,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "Based on the database records, you have 0 duplicate audiences (no duplicate names were found in the segments table).",
+      "elapsed_seconds": 94.899,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_019.json",
+      "run_path": "data\\test_runs\\run_019.json"
+    },
+    {
+      "id": 20,
+      "query": "Do I have audiences with the same logic but different names?",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "segment",
+      "intent": "lookup",
+      "complexity": "complex",
+      "subquery_count": 2,
+      "sql_calls": 1,
+      "api_calls": 0,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 2,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 2,
+          "max_total_tool_calls": 4,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 0,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 0,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 1,
+          "api_calls": 2,
+          "total_tool_calls": 3,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.5,
+          "api_budget_used_ratio": 0.0,
+          "total_tool_budget_used_ratio": 0.25,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": false,
+          "expected_tool_steps_satisfied": false
+        }
+      },
+      "answer_preview": "Yes, you have audiences with the same logic (definition hash) but different names:\n\n* **Person: Birthday Today 001** (ID: `2fdfefe1-04d0-46ce-9fbd-7611e311dd26`)\n* **Person: Birthday today** (ID: `f2a200b1-5d0a-4c9b-9202-4d34326cd9df`)\n\nBoth share the definition hash `3983890829`.",
+      "elapsed_seconds": 25.006,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_020.json",
+      "run_path": "data\\test_runs\\run_020.json"
+    },
+    {
+      "id": 21,
+      "query": "Is the audience 'Person: Birthday in next 30 Days' referenced in more than one journey simultaneously?",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "journey",
+      "intent": "lookup",
+      "complexity": "complex",
+      "subquery_count": 3,
+      "sql_calls": 2,
+      "api_calls": 1,
+      "trace_steps": 3,
+      "debug_event_counts": {
+        "llm_output": 4,
+        "tool_executed": 3,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 3,
+          "max_total_tool_calls": 5,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 2,
+          "api_calls": 1,
+          "total_tool_calls": 3,
+          "successful_sql_calls": 2,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 3,
+          "trace_steps": 3
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 2,
+          "total_tool_calls": 2,
+          "agent_steps": 5
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 0.3333,
+          "total_tool_budget_used_ratio": 0.6,
+          "agent_step_used_ratio": 0.375
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "Based on the provided evidence, it cannot be verified if the audience 'Person: Birthday in next 30 Days' is referenced in more than one journey. The API call to retrieve journeys returned no results, and the SQL queries only retrieved campaign information ('Birthday Message' and 'Gold Tier Welcome Email') without any details regarding audience references or mappings.",
+      "elapsed_seconds": 42.644,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_021.json",
+      "run_path": "data\\test_runs\\run_021.json"
+    },
+    {
+      "id": 22,
+      "query": "Is the audience 'Gender: Male' referenced in more than one journey simultaneously?",
+      "status": "failed",
+      "route": "SQL_PLUS_API",
+      "domain": "journey",
+      "intent": "lookup",
+      "complexity": "complex",
+      "subquery_count": 3,
+      "sql_calls": 2,
+      "api_calls": 2,
+      "trace_steps": 4,
+      "debug_event_counts": {
+        "llm_output": 6,
+        "tool_executed": 4,
+        "route_policy_rejected": 1,
+        "answer_agent_output": 1,
+        "tool_failure_detected_before_final_answer": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 3,
+          "max_total_tool_calls": 5,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 2,
+          "api_calls": 2,
+          "total_tool_calls": 4,
+          "successful_sql_calls": 2,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 3,
+          "trace_steps": 4
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "agent_steps": 4
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 0.6667,
+          "total_tool_budget_used_ratio": 0.8,
+          "agent_step_used_ratio": 0.5
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "Based on the available data, it cannot be determined if the audience 'Gender: Male' is referenced in more than one journey. The API call to retrieve journeys (`/ajo/journey`) returned a 403 Forbidden error or returned no results, and SQL queries searching for 'gender' in campaigns returned no matching records.",
+      "elapsed_seconds": 51.54,
+      "failure_reason": "tool_failure_detected_before_final_answer",
+      "metadata_path": "data\\test_metadata\\metadata_022.json",
+      "run_path": "data\\test_runs\\run_022.json"
+    },
+    {
+      "id": 23,
+      "query": "Is the audience 'Email Opt-In' referenced in more than one journey simultaneously?",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "journey",
+      "intent": "lookup",
+      "complexity": "complex",
+      "subquery_count": 2,
+      "sql_calls": 2,
+      "api_calls": 1,
+      "trace_steps": 3,
+      "debug_event_counts": {
+        "llm_output": 4,
+        "tool_executed": 3,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 2,
+          "max_total_tool_calls": 4,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 2,
+          "api_calls": 1,
+          "total_tool_calls": 3,
+          "successful_sql_calls": 2,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 3,
+          "trace_steps": 3
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "agent_steps": 5
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 0.5,
+          "total_tool_budget_used_ratio": 0.75,
+          "agent_step_used_ratio": 0.375
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "Based on the provided data, the audience 'Email Opt-In' is not referenced in any journeys. The search for 'Email Opt-In' in the campaign records returned no results, and the journey API returned no active journeys. Therefore, it is not referenced in more than one journey simultaneously.",
+      "elapsed_seconds": 38.781,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_023.json",
+      "run_path": "data\\test_runs\\run_023.json"
+    },
+    {
+      "id": 24,
+      "query": "Is the audience 'Person: Birthday within 7 days' referenced in more than one journey simultaneously?",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "journey",
+      "intent": "lookup",
+      "complexity": "complex",
+      "subquery_count": 3,
+      "sql_calls": 1,
+      "api_calls": 1,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 3,
+          "max_total_tool_calls": 5,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 2,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 1,
+          "api_calls": 2,
+          "total_tool_calls": 3,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.5,
+          "api_budget_used_ratio": 0.3333,
+          "total_tool_budget_used_ratio": 0.4,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "Based on the provided data, it cannot be verified whether the audience 'Person: Birthday within 7 days' is referenced in more than one journey. The API call to retrieve journeys returned no results, and the SQL query only returned two campaigns ('Birthday Message' and 'Gold Tier Welcome Email') with no audience or segment reference details.",
+      "elapsed_seconds": 37.347,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_024.json",
+      "run_path": "data\\test_runs\\run_024.json"
+    },
+    {
+      "id": 25,
+      "query": "Is the audience 'Lives on East Coast' referenced in more than one journey simultaneously?",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "journey",
+      "intent": "lookup",
+      "complexity": "complex",
+      "subquery_count": 3,
+      "sql_calls": 2,
+      "api_calls": 1,
+      "trace_steps": 3,
+      "debug_event_counts": {
+        "llm_output": 4,
+        "tool_executed": 3,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 3,
+          "max_total_tool_calls": 5,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 2,
+          "api_calls": 1,
+          "total_tool_calls": 3,
+          "successful_sql_calls": 2,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 3,
+          "trace_steps": 3
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 2,
+          "total_tool_calls": 2,
+          "agent_steps": 5
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 0.3333,
+          "total_tool_budget_used_ratio": 0.6,
+          "agent_step_used_ratio": 0.375
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "Based on the provided data, there is no record of an audience named 'Lives on East Coast' or any journeys referencing it. Therefore, it cannot be verified if this audience is referenced in more than one journey.",
+      "elapsed_seconds": 39.106,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_025.json",
+      "run_path": "data\\test_runs\\run_025.json"
+    },
+    {
+      "id": 26,
+      "query": "List all audiences used by live journeys with 'streaming' in the journey name.",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "segment",
+      "intent": "list",
+      "complexity": "complex",
+      "subquery_count": 2,
+      "sql_calls": 2,
+      "api_calls": 1,
+      "trace_steps": 3,
+      "debug_event_counts": {
+        "llm_output": 4,
+        "tool_executed": 3,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 2,
+          "max_total_tool_calls": 4,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 2,
+          "api_calls": 1,
+          "total_tool_calls": 3,
+          "successful_sql_calls": 2,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 3,
+          "trace_steps": 3
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "agent_steps": 5
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 0.5,
+          "total_tool_budget_used_ratio": 0.75,
+          "agent_step_used_ratio": 0.375
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "Based on the retrieved data, no audiences could be verified as being used by live journeys with 'streaming' in their name. \n\n- The SQL query searching for targets/journeys with 'streaming' in the name or dataflow name (`dim_target`) returned no results.\n- The API retrieved three live (enabled) streaming-related flows: **\"Custom Events Streaming flow\"** (ID: `01445ce5-737c-4b28-a5d6-11dfde07e091`),",
+      "elapsed_seconds": 60.303,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_026.json",
+      "run_path": "data\\test_runs\\run_026.json"
+    },
+    {
+      "id": 27,
+      "query": "List all audiences used by live journeys with 'loyalty' in the journey name.",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "segment",
+      "intent": "list",
+      "complexity": "complex",
+      "subquery_count": 2,
+      "sql_calls": 1,
+      "api_calls": 1,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 2,
+          "max_total_tool_calls": 4,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 2,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.5,
+          "api_budget_used_ratio": 0.5,
+          "total_tool_budget_used_ratio": 0.5,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "No audiences were found that are used by live journeys with 'loyalty' in the journey name.",
+      "elapsed_seconds": 47.695,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_027.json",
+      "run_path": "data\\test_runs\\run_027.json"
+    },
+    {
+      "id": 28,
+      "query": "List all audiences used by live journeys with 'paid' in the journey name.",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "segment",
+      "intent": "list",
+      "complexity": "complex",
+      "subquery_count": 2,
+      "sql_calls": 1,
+      "api_calls": 1,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 2,
+          "max_total_tool_calls": 4,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 2,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.5,
+          "api_budget_used_ratio": 0.5,
+          "total_tool_budget_used_ratio": 0.5,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "No audiences were found that are used by live journeys with 'paid' in the journey name.",
+      "elapsed_seconds": 43.489,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_028.json",
+      "run_path": "data\\test_runs\\run_028.json"
+    },
+    {
+      "id": 29,
+      "query": "Show me audiences that are not mapped to any destination and not used in any journey.",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "segment",
+      "intent": "list",
+      "complexity": "complex",
+      "subquery_count": 3,
+      "sql_calls": 1,
+      "api_calls": 0,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 2,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 3,
+          "max_total_tool_calls": 5,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 0,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 0,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 1,
+          "api_calls": 3,
+          "total_tool_calls": 4,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.5,
+          "api_budget_used_ratio": 0.0,
+          "total_tool_budget_used_ratio": 0.2,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": false,
+          "expected_tool_steps_satisfied": false
+        }
+      },
+      "answer_preview": "Based on the available data, the following 12 audiences (segments) are not mapped to any destination target. Note that journey usage could not be verified due to a lack of journey data in the query results:\n\n1. **Person: Birthday Today 001** (ID: `2fdfefe1-04d0-46ce-9fbd-7611e311dd26`)\n2. **Campaign: 25% Off Purchase Offer Reminder** (ID: `574372f1-7b74-489c-b77f-139024b083a5`)\n3. **Campaign: New ",
+      "elapsed_seconds": 37.059,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_029.json",
+      "run_path": "data\\test_runs\\run_029.json"
+    },
+    {
+      "id": 30,
+      "query": "Which audiences are used in more than one journey?",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "segment",
+      "intent": "lookup",
+      "complexity": "complex",
+      "subquery_count": 2,
+      "sql_calls": 2,
+      "api_calls": 1,
+      "trace_steps": 3,
+      "debug_event_counts": {
+        "llm_output": 4,
+        "tool_executed": 3,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 2,
+          "max_total_tool_calls": 4,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 2,
+          "api_calls": 1,
+          "total_tool_calls": 3,
+          "successful_sql_calls": 2,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 3,
+          "trace_steps": 3
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "agent_steps": 5
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 0.5,
+          "total_tool_budget_used_ratio": 0.75,
+          "agent_step_used_ratio": 0.375
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "Based on the database records, there are no audiences (segments) used in more than one journey. The queries checking the segment-to-target mapping table returned no results for audiences associated with multiple journeys.",
+      "elapsed_seconds": 50.725,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_030.json",
+      "run_path": "data\\test_runs\\run_030.json"
+    },
+    {
+      "id": 31,
+      "query": "For the audience 'Person: Birthday today', what is its profile count, is it batch or streaming, and how many audiences share the same rule definition?",
+      "status": "success",
+      "route": "SQL_PLUS_API_CHAIN",
+      "domain": "segment",
+      "intent": "count",
+      "complexity": "complex",
+      "subquery_count": 2,
+      "sql_calls": 2,
+      "api_calls": 0,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 2,
+          "max_total_tool_calls": 4,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 2,
+          "api_calls": 0,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 2,
+          "successful_api_calls": 0,
+          "successful_total_tool_calls": 2,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 2,
+          "total_tool_calls": 2,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 0.0,
+          "total_tool_budget_used_ratio": 0.5,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": false,
+          "expected_tool_steps_satisfied": false
+        }
+      },
+      "answer_preview": "For the audience 'Person: Birthday today', the profile count is 0. It is a batch audience (Batch: true, Streaming: false). There are 2 audiences in total that share the same rule definition.",
+      "elapsed_seconds": 25.995,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_031.json",
+      "run_path": "data\\test_runs\\run_031.json"
+    },
+    {
+      "id": 32,
+      "query": "For the audience 'Person: Birthday Today 001', what is its profile count, is it batch or streaming, and how many audiences share the same rule definition?",
+      "status": "success",
+      "route": "API_ONLY",
+      "domain": "segment",
+      "intent": "count",
+      "complexity": "complex",
+      "subquery_count": 2,
+      "sql_calls": 0,
+      "api_calls": 2,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 0,
+          "max_api_calls": 2,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "api_call"
+          ],
+          "expected_sql_calls": 0,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 2,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 2,
+          "successful_total_tool_calls": 2,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "Based on the provided API responses, the actual audience details (such as profile count, evaluation type, or rule definition) for 'Person: Birthday Today 001' were not returned in the data. The API responses only contained pagination metadata. Therefore, it is not possible to determine the profile count, whether it is batch or streaming, or how many audiences share the same rule definition.",
+      "elapsed_seconds": 44.783,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_032.json",
+      "run_path": "data\\test_runs\\run_032.json"
+    },
+    {
+      "id": 33,
+      "query": "For the audience 'Gender: Female', what is its profile count, is it batch or streaming, and how many audiences share the same rule definition?",
+      "status": "success",
+      "route": "SQL_PLUS_API_CHAIN",
+      "domain": "segment",
+      "intent": "count",
+      "complexity": "complex",
+      "subquery_count": 2,
+      "sql_calls": 1,
+      "api_calls": 1,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 2,
+          "max_total_tool_calls": 4,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 2,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.5,
+          "api_budget_used_ratio": 0.5,
+          "total_tool_budget_used_ratio": 0.5,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "For the audience 'Gender: Female', the profile count is 5,896. It is a batch audience (Batch: True, Streaming: False). There is only 1 audience (itself) that shares this exact rule definition.",
+      "elapsed_seconds": 33.424,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_033.json",
+      "run_path": "data\\test_runs\\run_033.json"
+    },
+    {
+      "id": 34,
+      "query": "Which properties from the schema 'Initial Profile schema for Journeys' are used by audiences in live journeys?",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "segment",
+      "intent": "lookup",
+      "complexity": "complex",
+      "subquery_count": 3,
+      "sql_calls": 1,
+      "api_calls": 2,
+      "trace_steps": 3,
+      "debug_event_counts": {
+        "llm_output": 4,
+        "tool_executed": 3,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 3,
+          "max_total_tool_calls": 5,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 2,
+          "total_tool_calls": 3,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 2,
+          "successful_total_tool_calls": 3,
+          "trace_steps": 3
+        },
+        "remaining": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "agent_steps": 5
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.5,
+          "api_budget_used_ratio": 0.6667,
+          "total_tool_budget_used_ratio": 0.6,
+          "agent_step_used_ratio": 0.375
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "Based on the provided evidence, there is no data or API response detailing which journeys are currently live or which audiences are used within them. Therefore, it cannot be verified which properties are used by audiences in live journeys.\n\nHowever, the properties used by the retrieved audiences (segments) in the database include:\n- **person.birthDate** (used in birthday-related segments)\n- **pers",
+      "elapsed_seconds": 55.852,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_034.json",
+      "run_path": "data\\test_runs\\run_034.json"
+    },
+    {
+      "id": 35,
+      "query": "Which properties from the schema 'weRetail: CRM' are used by audiences in live journeys?",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "segment",
+      "intent": "lookup",
+      "complexity": "complex",
+      "subquery_count": 3,
+      "sql_calls": 2,
+      "api_calls": 2,
+      "trace_steps": 4,
+      "debug_event_counts": {
+        "llm_output": 5,
+        "tool_executed": 4,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 3,
+          "max_total_tool_calls": 5,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 2,
+          "api_calls": 2,
+          "total_tool_calls": 4,
+          "successful_sql_calls": 2,
+          "successful_api_calls": 2,
+          "successful_total_tool_calls": 4,
+          "trace_steps": 4
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "agent_steps": 4
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 0.6667,
+          "total_tool_budget_used_ratio": 0.8,
+          "agent_step_used_ratio": 0.5
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "Based on the active destination flow \"Activate segments to S3 Feed\" (ID: `139bece0-5266-46bd-8ed3-fc1dd5eb5dd4`), the audience currently being activated is \"Gender: Male\" (ID: `f6b93428-c021-4058-a1a2-77c277aab564`). \n\nThe property from the schema used by this audience in its definition is:\n- `person.gender`",
+      "elapsed_seconds": 289.601,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_035.json",
+      "run_path": "data\\test_runs\\run_035.json"
+    },
+    {
+      "id": 36,
+      "query": "Which properties from the schema 'weRetail: Customer Actions' are used by audiences in live journeys?",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "segment",
+      "intent": "lookup",
+      "complexity": "complex",
+      "subquery_count": 3,
+      "sql_calls": 2,
+      "api_calls": 3,
+      "trace_steps": 5,
+      "debug_event_counts": {
+        "llm_output": 6,
+        "tool_executed": 5,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 3,
+          "max_total_tool_calls": 5,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 2,
+          "api_calls": 3,
+          "total_tool_calls": 5,
+          "successful_sql_calls": 2,
+          "successful_api_calls": 3,
+          "successful_total_tool_calls": 5,
+          "trace_steps": 5
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 3
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.625
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "Based on the provided evidence, it is not possible to determine which properties from the 'weRetail: Customer Actions' schema are used by audiences in live journeys. The retrieved data contains segment definitions for 10 segments and flow service data for various dataflows, but it does not contain any information regarding live journeys (such as Journey Optimizer data) or which audiences are activ",
+      "elapsed_seconds": 269.575,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_036.json",
+      "run_path": "data\\test_runs\\run_036.json"
+    },
+    {
+      "id": 37,
+      "query": "Which properties from the schema 'Journey schema with Journey Fields for Journey Orchestration' are used by audiences in live journeys?",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "segment",
+      "intent": "field_lookup",
+      "complexity": "complex",
+      "subquery_count": 3,
+      "sql_calls": 2,
+      "api_calls": 2,
+      "trace_steps": 4,
+      "debug_event_counts": {
+        "llm_output": 5,
+        "tool_executed": 4,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 3,
+          "max_total_tool_calls": 5,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 2,
+          "api_calls": 2,
+          "total_tool_calls": 4,
+          "successful_sql_calls": 2,
+          "successful_api_calls": 2,
+          "successful_total_tool_calls": 4,
+          "trace_steps": 4
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "agent_steps": 4
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 0.6667,
+          "total_tool_budget_used_ratio": 0.8,
+          "agent_step_used_ratio": 0.5
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "Based on the provided evidence, there is no data or records regarding live journeys or a schema named 'Journey schema with Journey Fields for Journey Orchestration'. The retrieved segments (audiences) from the database do not contain any references to journeys in their definitions or names, so it is not possible to determine which properties from that schema are used.",
+      "elapsed_seconds": 66.487,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_037.json",
+      "run_path": "data\\test_runs\\run_037.json"
+    },
+    {
+      "id": 38,
+      "query": "List properties not referenced in any audience, journey, or destination.",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "journey",
+      "intent": "list",
+      "complexity": "complex",
+      "subquery_count": 4,
+      "sql_calls": 1,
+      "api_calls": 1,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 2,
+          "max_api_calls": 3,
+          "max_total_tool_calls": 5,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 2,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 1,
+          "api_calls": 2,
+          "total_tool_calls": 3,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.5,
+          "api_budget_used_ratio": 0.3333,
+          "total_tool_budget_used_ratio": 0.4,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "I am unable to list the properties not referenced in any audience, journey, or destination. The database query to retrieve properties failed because the properties table ('hkg_br_property_property.parquet') could not be read due to an invalid input error (no non-root columns found). Additionally, the API call to retrieve journeys returned no results.",
+      "elapsed_seconds": 39.338,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_038.json",
+      "run_path": "data\\test_runs\\run_038.json"
+    },
+    {
+      "id": 39,
+      "query": "Show me the details of the tag named 'AI-Generated'.",
+      "status": "failed",
+      "route": "API_ONLY",
+      "domain": "tag",
+      "intent": "list",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 0,
+      "api_calls": 1,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 2,
+        "tool_executed": 1,
+        "answer_agent_output": 1,
+        "tool_failure_detected_before_final_answer": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 0,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 1,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "api_call"
+          ],
+          "expected_sql_calls": 0,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 0,
+          "successful_total_tool_calls": 0,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": false,
+          "expected_tool_steps_satisfied": false
+        }
+      },
+      "answer_preview": "I was unable to retrieve the details for the tag 'AI-Generated' because the API request to fetch the tags (/unifiedtags/tags) failed with a 404 error.",
+      "elapsed_seconds": 17.441,
+      "failure_reason": "tool_failure_detected_before_final_answer",
+      "metadata_path": "data\\test_metadata\\metadata_039.json",
+      "run_path": "data\\test_runs\\run_039.json"
+    },
+    {
+      "id": 40,
+      "query": "Show me the details of the tag named 'test'.",
+      "status": "failed",
+      "route": "API_ONLY",
+      "domain": "tag",
+      "intent": "list",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 0,
+      "api_calls": 1,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 2,
+        "tool_executed": 1,
+        "answer_agent_output": 1,
+        "tool_failure_detected_before_final_answer": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 0,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 1,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "api_call"
+          ],
+          "expected_sql_calls": 0,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 0,
+          "successful_total_tool_calls": 0,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": false,
+          "expected_tool_steps_satisfied": false
+        }
+      },
+      "answer_preview": "I was unable to retrieve the details for the tag named 'test' because the API request to fetch tags failed with a 404 error.",
+      "elapsed_seconds": 24.641,
+      "failure_reason": "tool_failure_detected_before_final_answer",
+      "metadata_path": "data\\test_metadata\\metadata_040.json",
+      "run_path": "data\\test_runs\\run_040.json"
+    },
+    {
+      "id": 41,
+      "query": "Show the default merge policy for schema class '_xdm.context.experienceevent'.",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "merge_policy",
+      "intent": "list",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 0,
+      "api_calls": 1,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 2,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 1,
+          "api_calls": 0,
+          "total_tool_calls": 1,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 0.5,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": false,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": false
+        }
+      },
+      "answer_preview": "The default merge policy for the schema class '_xdm.context.experienceevent' could not be determined because the API response from `/data/core/ups/config/mergePolicies` only returned pagination and links metadata, and did not contain any merge policy details.",
+      "elapsed_seconds": 25.68,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_041.json",
+      "run_path": "data\\test_runs\\run_041.json"
+    },
+    {
+      "id": 42,
+      "query": "Show the default merge policy for schema class '_xdm.context.segmentdefinition'.",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "merge_policy",
+      "intent": "list",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 0,
+      "api_calls": 1,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 2,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 1,
+          "api_calls": 0,
+          "total_tool_calls": 1,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 0.5,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": false,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": false
+        }
+      },
+      "answer_preview": "The API response for the merge policies list did not contain any merge policy details or information regarding the schema class '_xdm.context.segmentdefinition' (it only returned pagination metadata). As a result, the default merge policy for this schema class could not be determined.",
+      "elapsed_seconds": 21.344,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_042.json",
+      "run_path": "data\\test_runs\\run_042.json"
+    },
+    {
+      "id": 43,
+      "query": "Show all segment jobs with status 'PROCESSING'.",
+      "status": "success",
+      "route": "API_ONLY",
+      "domain": "segment_job",
+      "intent": "status_lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 0,
+      "api_calls": 1,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 2,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 0,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 1,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "api_call"
+          ],
+          "expected_sql_calls": 0,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "Based on the provided API response, no segment jobs were returned in the data, only pagination metadata (totalCount: 69). Therefore, it is not possible to identify which segment jobs have the status 'PROCESSING'.",
+      "elapsed_seconds": 29.926,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_043.json",
+      "run_path": "data\\test_runs\\run_043.json"
+    },
+    {
+      "id": 44,
+      "query": "Show all segment jobs with status 'CANCELLED'.",
+      "status": "failed",
+      "route": "API_ONLY",
+      "domain": "segment_job",
+      "intent": "status_lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 0,
+      "api_calls": 1,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 2,
+        "tool_executed": 1,
+        "answer_agent_output": 1,
+        "tool_failure_detected_before_final_answer": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 0,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 1,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "api_call"
+          ],
+          "expected_sql_calls": 0,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 0,
+          "successful_total_tool_calls": 0,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": false,
+          "expected_tool_steps_satisfied": false
+        }
+      },
+      "answer_preview": "I was unable to retrieve the segment jobs because the API request to `/data/core/ups/segment/jobs` failed due to a connection error (IncompleteRead).",
+      "elapsed_seconds": 28.199,
+      "failure_reason": "tool_failure_detected_before_final_answer",
+      "metadata_path": "data\\test_metadata\\metadata_044.json",
+      "run_path": "data\\test_runs\\run_044.json"
+    },
+    {
+      "id": 45,
+      "query": "Show all segment jobs with status 'FAILED'.",
+      "status": "success",
+      "route": "API_ONLY",
+      "domain": "segment_job",
+      "intent": "status_lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 0,
+      "api_calls": 1,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 2,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 0,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 1,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "api_call"
+          ],
+          "expected_sql_calls": 0,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "The API response did not return any segment job records (only pagination metadata), so it is not possible to identify or list segment jobs with the status 'FAILED'.",
+      "elapsed_seconds": 28.291,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_045.json",
+      "run_path": "data\\test_runs\\run_045.json"
+    },
+    {
+      "id": 46,
+      "query": "Show the details of batch 69de8a0e0cc6102b5d11f01e.",
+      "status": "success",
+      "route": "API_ONLY",
+      "domain": "batch",
+      "intent": "list",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 0,
+      "api_calls": 1,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 2,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 0,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 1,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "api_call"
+          ],
+          "expected_sql_calls": 0,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "No details were found for batch 69de8a0e0cc6102b5d11f01e.",
+      "elapsed_seconds": 25.431,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_046.json",
+      "run_path": "data\\test_runs\\run_046.json"
+    },
+    {
+      "id": 47,
+      "query": "Show the details of batch 69de41036e08302b5cc7fd0c.",
+      "status": "success",
+      "route": "API_ONLY",
+      "domain": "batch",
+      "intent": "list",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 0,
+      "api_calls": 1,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "verifier_rejected": 1,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 0,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 1,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "api_call"
+          ],
+          "expected_sql_calls": 0,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "No details were found for batch 69de41036e08302b5cc7fd0c.",
+      "elapsed_seconds": 29.842,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_047.json",
+      "run_path": "data\\test_runs\\run_047.json"
+    },
+    {
+      "id": 48,
+      "query": "Show the details of batch 01KP6MNQ3X71RP6MNH6FHWGHVE.",
+      "status": "success",
+      "route": "API_ONLY",
+      "domain": "batch",
+      "intent": "list",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 0,
+      "api_calls": 1,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "verifier_rejected": 1,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 0,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 1,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "api_call"
+          ],
+          "expected_sql_calls": 0,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "The details for batch 01KP6MNQ3X71RP6MNH6FHWGHVE include two related ingestion records:\n\n1. **Identity Ingestion Record**\n   - **ID**: `01KP6MNQ3X71RP6MNH6FHWGHVE-87891E4066602D250A495F91-a30a9c4e-327a-4d60-8a9c-4e327a6d60dd-69c8d9e7cba5deaa7974b00b-INGEST`\n   - **Status**: success\n   - **IMS Org**: `87891E4066602D250A495F91@AdobeOrg`\n   - **Sandbox ID**: `a30a9c4e-327a-4d60-8a9c-4e327a6d60dd`\n   ",
+      "elapsed_seconds": 33.659,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_048.json",
+      "run_path": "data\\test_runs\\run_048.json"
+    },
+    {
+      "id": 49,
+      "query": "Which files are available for download in batch 01KP6MNQ3X71RP6MNH6FHWGHVE?",
+      "status": "success",
+      "route": "API_ONLY",
+      "domain": "batch",
+      "intent": "lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 0,
+      "api_calls": 1,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "verifier_rejected": 1,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 0,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 1,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "api_call"
+          ],
+          "expected_sql_calls": 0,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "Based on the retrieved metadata for batch 01KP6MNQ3X71RP6MNH6FHWGHVE, there are no files listed as available for download. The batch details contain status, metrics, and related objects (such as dataset 69c8d9e7cba5deaa7974b00b), but do not include specific file names or download paths.",
+      "elapsed_seconds": 29.404,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_049.json",
+      "run_path": "data\\test_runs\\run_049.json"
+    },
+    {
+      "id": 50,
+      "query": "Which files are available for download in batch 69de41036e08302b5cc7fd0c?",
+      "status": "success",
+      "route": "API_ONLY",
+      "domain": "batch",
+      "intent": "lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 0,
+      "api_calls": 1,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "verifier_rejected": 1,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 0,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 1,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "api_call"
+          ],
+          "expected_sql_calls": 0,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "No files were found or are available for download in batch 69de41036e08302b5cc7fd0c.",
+      "elapsed_seconds": 27.845,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_050.json",
+      "run_path": "data\\test_runs\\run_050.json"
+    },
+    {
+      "id": 51,
+      "query": "Show failed files for batch 69de41036e08302b5cc7fd0c.",
+      "status": "success",
+      "route": "API_ONLY",
+      "domain": "batch",
+      "intent": "status_lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 0,
+      "api_calls": 1,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "verifier_rejected": 1,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 0,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 1,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "api_call"
+          ],
+          "expected_sql_calls": 0,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "No files or batch information could be found for batch 69de41036e08302b5cc7fd0c.",
+      "elapsed_seconds": 28.922,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_051.json",
+      "run_path": "data\\test_runs\\run_051.json"
+    },
+    {
+      "id": 52,
+      "query": "Show failed files for batch 69de8a0e0cc6102b5d11f01e.",
+      "status": "success",
+      "route": "API_ONLY",
+      "domain": "batch",
+      "intent": "status_lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 0,
+      "api_calls": 1,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "verifier_rejected": 1,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 0,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 1,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "api_call"
+          ],
+          "expected_sql_calls": 0,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "No failed files were found for batch 69de8a0e0cc6102b5d11f01e. The API response for the batch's files only returned pagination metadata (limit: 100, count: 1, id: '_page') and did not list any file records.",
+      "elapsed_seconds": 31.628,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_052.json",
+      "run_path": "data\\test_runs\\run_052.json"
+    },
+    {
+      "id": 53,
+      "query": "Show failed files for batch 01KP69BPA5ZKFB7HCDYPE4GN6F.",
+      "status": "success",
+      "route": "API_ONLY",
+      "domain": "batch",
+      "intent": "status_lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 0,
+      "api_calls": 1,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "verifier_rejected": 1,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 0,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 1,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "api_call"
+          ],
+          "expected_sql_calls": 0,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "The batch 01KP69BPA5ZKFB7HCDYPE4GN6F has a status of \"inactive\" and completed with 10 files (13 output rows). The retrieved batch details do not contain any information or records regarding failed files.",
+      "elapsed_seconds": 30.531,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_053.json",
+      "run_path": "data\\test_runs\\run_053.json"
+    },
+    {
+      "id": 54,
+      "query": "What are the daily 'timeseries.ingestion.dataset.size' values between '2026-03-01' and '2026-12-31'?",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "dataset",
+      "intent": "lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 1,
+      "api_calls": 1,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 2,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "The daily 'timeseries.ingestion.dataset.size' values (represented by the total storage size in bytes) between '2026-03-01' and '2026-12-31' are:\n\n- **2026-03-29**: 70,559,441 bytes\n- **2026-03-30**: 231,376 bytes",
+      "elapsed_seconds": 30.649,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_054.json",
+      "run_path": "data\\test_runs\\run_054.json"
+    },
+    {
+      "id": 55,
+      "query": "What are the daily 'timeseries.ingestion.dataset.size' values between '2026-02-01' and '2026-04-14'?",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "dataset",
+      "intent": "lookup",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 1,
+      "api_calls": 1,
+      "trace_steps": 2,
+      "debug_event_counts": {
+        "llm_output": 3,
+        "tool_executed": 2,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 1,
+          "total_tool_calls": 2,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 2,
+          "trace_steps": 2
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "agent_steps": 6
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 1.0,
+          "agent_step_used_ratio": 0.25
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": true
+        }
+      },
+      "answer_preview": "The daily 'timeseries.ingestion.dataset.size' values between '2026-02-01' and '2026-04-14' are not available in the provided evidence. The retrieved data only contains collection storage sizes from the database (such as 'weRetail: Customer Actions' with 50,132,375 bytes and 'weRetail: CRM' with 10,161,091 bytes) and general dataset catalog metadata from the API, but no daily timeseries ingestion m",
+      "elapsed_seconds": 38.942,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_055.json",
+      "run_path": "data\\test_runs\\run_055.json"
+    },
+    {
+      "id": 56,
+      "query": "What are the daily 'timeseries.ingestion.dataset.batchsuccess.count' values between '2026-02-01' and '2026-03-31'?",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "batch",
+      "intent": "count",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 0,
+      "api_calls": 1,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 2,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 1,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 1,
+          "api_calls": 0,
+          "total_tool_calls": 1,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 1.0,
+          "total_tool_budget_used_ratio": 0.5,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": false,
+          "expected_api_satisfied": true,
+          "expected_tool_steps_satisfied": false
+        }
+      },
+      "answer_preview": "No successful batches were found between '2026-02-01' and '2026-03-31', so there are no daily values to report for 'timeseries.ingestion.dataset.batchsuccess.count' (the count is 0 or no data is available).",
+      "elapsed_seconds": 27.728,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_056.json",
+      "run_path": "data\\test_runs\\run_056.json"
+    },
+    {
+      "id": 57,
+      "query": "What are the daily 'timeseries.ingestion.dataset.recordsuccess.count' values between '2026-03-01' and '2026-03-31'?",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "dataset",
+      "intent": "count",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 1,
+      "api_calls": 0,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 2,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 0,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 0,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 0.0,
+          "total_tool_budget_used_ratio": 0.5,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": false,
+          "expected_tool_steps_satisfied": false
+        }
+      },
+      "answer_preview": "The provided evidence does not contain any data for the metric 'timeseries.ingestion.dataset.recordsuccess.count' or its daily values between '2026-03-01' and '2026-03-31'. The only available data is a list of collections from the 'dim_collection' table, such as 'BR_Namespace_Destination', 'BR_Segment_Destination', and 'DIM_Destination'.",
+      "elapsed_seconds": 32.007,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_057.json",
+      "run_path": "data\\test_runs\\run_057.json"
+    },
+    {
+      "id": 58,
+      "query": "What are the daily 'timeseries.ingestion.dataset.recordsuccess.count' values between '2026-03-15' and '2026-04-14'?",
+      "status": "success",
+      "route": "SQL_PLUS_API",
+      "domain": "dataset",
+      "intent": "count",
+      "complexity": "simple",
+      "subquery_count": 1,
+      "sql_calls": 1,
+      "api_calls": 0,
+      "trace_steps": 1,
+      "debug_event_counts": {
+        "llm_output": 2,
+        "tool_executed": 1,
+        "answer_agent_output": 1
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 1,
+          "max_api_calls": 1,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "sql_query",
+            "api_call"
+          ],
+          "expected_sql_calls": 1,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 1,
+          "api_calls": 0,
+          "total_tool_calls": 1,
+          "successful_sql_calls": 1,
+          "successful_api_calls": 0,
+          "successful_total_tool_calls": 1,
+          "trace_steps": 1
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 1,
+          "total_tool_calls": 1,
+          "agent_steps": 7
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 1.0,
+          "api_budget_used_ratio": 0.0,
+          "total_tool_budget_used_ratio": 0.5,
+          "agent_step_used_ratio": 0.125
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": false,
+          "expected_tool_steps_satisfied": false
+        }
+      },
+      "answer_preview": "The daily 'timeseries.ingestion.dataset.recordsuccess.count' values between '2026-03-15' and '2026-04-14' could not be retrieved. The available database evidence only contains metadata for collections (such as collection IDs, names, row counts, and creation times from 'dim_collection') and does not include the requested ingestion timeseries metric data.",
+      "elapsed_seconds": 24.439,
+      "failure_reason": "none",
+      "metadata_path": "data\\test_metadata\\metadata_058.json",
+      "run_path": "data\\test_runs\\run_058.json"
+    },
+    {
+      "id": 59,
+      "query": "Show ingestion record counts and batch success counts for the last 7 days.",
+      "status": "failed",
+      "route": "API_ONLY",
+      "domain": "metric",
+      "intent": "count",
+      "complexity": "complex",
+      "subquery_count": 2,
+      "sql_calls": 0,
+      "api_calls": 0,
+      "trace_steps": 0,
+      "debug_event_counts": {
+        "llm_output": 4,
+        "verifier_rejected": 2,
+        "route_policy_rejected": 2
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 0,
+          "max_api_calls": 2,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "api_call"
+          ],
+          "expected_sql_calls": 0,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 0,
+          "successful_total_tool_calls": 0,
+          "trace_steps": 0
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 2,
+          "total_tool_calls": 2,
+          "agent_steps": 8
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 0.0,
+          "total_tool_budget_used_ratio": 0.0,
+          "agent_step_used_ratio": 0.0
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": false,
+          "expected_tool_steps_satisfied": false
+        }
+      },
+      "answer_preview": "Unable to complete the query within the allowed agent steps.",
+      "elapsed_seconds": 32.14,
+      "failure_reason": "route_policy_rejected",
+      "metadata_path": "data\\test_metadata\\metadata_059.json",
+      "run_path": "data\\test_runs\\run_059.json"
+    },
+    {
+      "id": 60,
+      "query": "Show ingestion record counts and batch success counts for the last 60 days.",
+      "status": "failed",
+      "route": "API_ONLY",
+      "domain": "metric",
+      "intent": "count",
+      "complexity": "complex",
+      "subquery_count": 2,
+      "sql_calls": 0,
+      "api_calls": 0,
+      "trace_steps": 0,
+      "debug_event_counts": {
+        "llm_output": 4,
+        "verifier_rejected": 2,
+        "route_policy_rejected": 2
+      },
+      "per_query_budget": {
+        "allowed": {
+          "max_sql_calls": 0,
+          "max_api_calls": 2,
+          "max_total_tool_calls": 2,
+          "max_agent_steps": 8,
+          "max_repair_attempts": 3,
+          "expected_steps": [
+            "api_call"
+          ],
+          "expected_sql_calls": 0,
+          "expected_api_calls": 1
+        },
+        "used": {
+          "sql_calls": 0,
+          "api_calls": 0,
+          "total_tool_calls": 0,
+          "successful_sql_calls": 0,
+          "successful_api_calls": 0,
+          "successful_total_tool_calls": 0,
+          "trace_steps": 0
+        },
+        "remaining": {
+          "sql_calls": 0,
+          "api_calls": 2,
+          "total_tool_calls": 2,
+          "agent_steps": 8
+        },
+        "ratios": {
+          "sql_budget_used_ratio": 0.0,
+          "api_budget_used_ratio": 0.0,
+          "total_tool_budget_used_ratio": 0.0,
+          "agent_step_used_ratio": 0.0
+        },
+        "flags": {
+          "within_sql_budget": true,
+          "within_api_budget": true,
+          "within_total_tool_budget": true,
+          "expected_sql_satisfied": true,
+          "expected_api_satisfied": false,
+          "expected_tool_steps_satisfied": false
+        }
+      },
+      "answer_preview": "Unable to complete the query within the allowed agent steps.",
+      "elapsed_seconds": 34.207,
+      "failure_reason": "route_policy_rejected",
+      "metadata_path": "data\\test_metadata\\metadata_060.json",
+      "run_path": "data\\test_runs\\run_060.json"
     }
   ]
 }

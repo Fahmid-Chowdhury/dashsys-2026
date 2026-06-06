@@ -3,8 +3,8 @@
   "normalized_query": "show me the field for SMS Opt-In",
   "query_analysis": {
     "complexity": "simple",
-    "confidence": 1.0,
-    "reason": "The user is asking for a single piece of information (a field name) related to 'SMS Opt-In'. This can be treated as a direct lookup.",
+    "confidence": 0.95,
+    "reason": "The user is asking for a specific field name or metadata related to 'SMS Opt-In', which can be resolved in a single lookup.",
     "subqueries": [
       {
         "query": "show me the field for SMS Opt-In",
