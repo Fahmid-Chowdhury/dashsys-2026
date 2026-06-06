@@ -1,0 +1,1175 @@
+[
+  {
+    "query": "When was the journey 'Birthday Message' published?",
+    "route": "SQL_PLUS_API",
+    "intent": "time_lookup",
+    "domain": "journey",
+    "sql_tables": [
+      "dim_campaign"
+    ],
+    "api_calls": [
+      {
+        "raw": "GET /ajo/journey?filter=name==Birthday Message",
+        "method": "GET",
+        "path": "/ajo/journey",
+        "endpoint": "GET /ajo/journey",
+        "params": {
+          "filter": "name==Birthday Message"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /ajo/journey"
+    ],
+    "api_params": [
+      "filter"
+    ],
+    "gold_sql": "SELECT name AS campaign_name,\n       lastdeployedtime AS published_time\nFROM dim_campaign\nWHERE name IN ('Birthday Message', 'Gold Tier Welcome Email')\nLIMIT 50",
+    "gold_api": [
+      "GET /ajo/journey?filter=name==Birthday Message"
+    ],
+    "search_text": "When was the journey 'Birthday Message' published? route SQL_PLUS_API intent time_lookup domain journey tables dim_campaign endpoints GET /ajo/journey params filter"
+  },
+  {
+    "query": "Give me inactive journeys",
+    "route": "SQL_PLUS_API",
+    "intent": "status_lookup",
+    "domain": "journey",
+    "sql_tables": [
+      "dim_campaign"
+    ],
+    "api_calls": [
+      {
+        "raw": "GET /ajo/journey?filter=status!=live",
+        "method": "GET",
+        "path": "/ajo/journey",
+        "endpoint": "GET /ajo/journey",
+        "params": {
+          "filter": "status!=live"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /ajo/journey"
+    ],
+    "api_params": [
+      "filter"
+    ],
+    "gold_sql": "SELECT J.CAMPAIGNID AS campaign_id,\n       J.NAME AS campaign_name,\n       J.STATE AS campaign_state,\n       J.UPDATEDTIME AS updated_time\nFROM DIM_CAMPAIGN AS J\nWHERE LOWER(J.STATE) NOT IN ('deployed', 'redeployed')\nLIMIT 50",
+    "gold_api": [
+      "GET /ajo/journey?filter=status!=live"
+    ],
+    "search_text": "Give me inactive journeys route SQL_PLUS_API intent status_lookup domain journey tables dim_campaign endpoints GET /ajo/journey params filter"
+  },
+  {
+    "query": "List all journeys",
+    "route": "SQL_PLUS_API",
+    "intent": "list",
+    "domain": "journey",
+    "sql_tables": [
+      "dim_campaign"
+    ],
+    "api_calls": [
+      {
+        "raw": "GET /ajo/journey?pageSize=10",
+        "method": "GET",
+        "path": "/ajo/journey",
+        "endpoint": "GET /ajo/journey",
+        "params": {
+          "pageSize": "10"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /ajo/journey"
+    ],
+    "api_params": [
+      "pageSize"
+    ],
+    "gold_sql": "SELECT CAMPAIGN.NAME AS CAMPAIGNNAME,\n       CAMPAIGN.CAMPAIGNID\nFROM DIM_CAMPAIGN AS CAMPAIGN\nLIMIT 10",
+    "gold_api": [
+      "GET /ajo/journey?pageSize=10"
+    ],
+    "search_text": "List all journeys route SQL_PLUS_API intent list domain journey tables dim_campaign endpoints GET /ajo/journey params pageSize"
+  },
+  {
+    "query": "List all segment audiences connected to the destination named 'SMS Opt-In', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
+    "route": "SQL_PLUS_API_CHAIN",
+    "intent": "count",
+    "domain": "segment",
+    "sql_tables": [
+      "dim_segment",
+      "dim_target",
+      "hkg_br_segment_target"
+    ],
+    "api_calls": [
+      {
+        "raw": "GET /data/core/ups/audiences?property=destinationId==<destination_id>&limit=5",
+        "method": "GET",
+        "path": "/data/core/ups/audiences",
+        "endpoint": "GET /data/core/ups/audiences",
+        "params": {
+          "property": "destinationId==<destination_id>",
+          "limit": "5"
+        },
+        "body": null
+      },
+      {
+        "raw": "GET /data/foundation/flowservice/flows?property=inheritedAttributes.properties.isDestinationFlow==true&limit=5",
+        "method": "GET",
+        "path": "/data/foundation/flowservice/flows",
+        "endpoint": "GET /data/foundation/flowservice/flows",
+        "params": {
+          "property": "inheritedAttributes.properties.isDestinationFlow==true",
+          "limit": "5"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/core/ups/audiences",
+      "GET /data/foundation/flowservice/flows"
+    ],
+    "api_params": [
+      "limit",
+      "property"
+    ],
+    "gold_sql": "SELECT \n    a.segmentid AS segment_id,\n    a.name AS segment_name,\n    a.totalmembers AS total_profiles,\n    a.createdTime AS created_time,\n    a.updatedTime AS updated_time\nFROM dim_segment a\nJOIN hkg_br_segment_target ad ON a.segmentid = ad.segmentid\nJOIN dim_target d ON ad.targetId = d.targetId\nWHERE d.dataflowName = 'SMS Opt-In'\nORDER BY a.name",
+    "gold_api": [
+      "GET /data/core/ups/audiences?property=destinationId==<destination_id>&limit=5",
+      "GET /data/foundation/flowservice/flows?property=inheritedAttributes.properties.isDestinationFlow==true&limit=5"
+    ],
+    "search_text": "List all segment audiences connected to the destination named 'SMS Opt-In', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results. route SQL_PLUS_API_CHAIN intent count domain segment tables dim_segment dim_target hkg_br_segment_target endpoints GET /data/core/ups/audiences GET /data/foundation/flowservice/flows params limit property"
+  },
+  {
+    "query": "Show me the IDs of failed dataflow runs",
+    "route": "SQL_PLUS_API",
+    "intent": "status_lookup",
+    "domain": "dataflow",
+    "sql_tables": [
+      "dim_connector"
+    ],
+    "api_calls": [
+      {
+        "raw": "GET /data/foundation/flowservice/flows?filter=state eq 'failed'&limit=50",
+        "method": "GET",
+        "path": "/data/foundation/flowservice/flows",
+        "endpoint": "GET /data/foundation/flowservice/flows",
+        "params": {
+          "filter": "state eq 'failed'",
+          "limit": "50"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/foundation/flowservice/flows"
+    ],
+    "api_params": [
+      "filter",
+      "limit"
+    ],
+    "gold_sql": "SELECT DISTINCT S.DATAFLOWID AS dataflow_id\nFROM DIM_CONNECTOR AS S\nWHERE S.STATE ILIKE '%loyalty%'\nLIMIT 50",
+    "gold_api": [
+      "GET /data/foundation/flowservice/flows?filter=state eq 'failed'&limit=50"
+    ],
+    "search_text": "Show me the IDs of failed dataflow runs route SQL_PLUS_API intent status_lookup domain dataflow tables dim_connector endpoints GET /data/foundation/flowservice/flows params filter limit"
+  },
+  {
+    "query": "Export a list of all destinations in the b2b-prod sandbox, sorted by most recently modified, including all columns associated with each destination, and include the 'modified' column for validation.",
+    "route": "SQL_PLUS_API",
+    "intent": "time_lookup",
+    "domain": "destination",
+    "sql_tables": [
+      "dim_target"
+    ],
+    "api_calls": [
+      {
+        "raw": "GET /data/foundation/flowservice/flows?limit=50&sort=updatedTime:desc&property=inheritedAttributes.properties.isDestinationFlow==true",
+        "method": "GET",
+        "path": "/data/foundation/flowservice/flows",
+        "endpoint": "GET /data/foundation/flowservice/flows",
+        "params": {
+          "limit": "50",
+          "sort": "updatedTime:desc",
+          "property": "inheritedAttributes.properties.isDestinationFlow==true"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/foundation/flowservice/flows"
+    ],
+    "api_params": [
+      "limit",
+      "property",
+      "sort"
+    ],
+    "gold_sql": "SELECT D.targetId AS target_id,\n       D.dataflowName AS dataflow_name,\n       D.name AS target_name,\n       D.description,\n       D.state,\n       D.connectionSpecId AS connection_spec_id,\n       D.createdTime AS created_time,\n       D.updatedTime AS modified,\n       D.interval,\n       D.frequency\nFROM dim_target AS D\nORDER BY D.updatedTime DESC\nLIMIT 50",
+    "gold_api": [
+      "GET /data/foundation/flowservice/flows?limit=50&sort=updatedTime:desc&property=inheritedAttributes.properties.isDestinationFlow==true"
+    ],
+    "search_text": "Export a list of all destinations in the b2b-prod sandbox, sorted by most recently modified, including all columns associated with each destination, and include the 'modified' column for validation. route SQL_PLUS_API intent time_lookup domain destination tables dim_target endpoints GET /data/foundation/flowservice/flows params limit property sort"
+  },
+  {
+    "query": "How many datasets have been ingested using the same schema in the prod sandbox?",
+    "route": "SQL_PLUS_API_CHAIN",
+    "intent": "count",
+    "domain": "schema",
+    "sql_tables": [
+      "dim_blueprint",
+      "dim_collection",
+      "hkg_br_blueprint_collection"
+    ],
+    "api_calls": [
+      {
+        "raw": "GET /data/foundation/catalog/dataSets?limit=25&property=schema.name",
+        "method": "GET",
+        "path": "/data/foundation/catalog/dataSets",
+        "endpoint": "GET /data/foundation/catalog/dataSets",
+        "params": {
+          "limit": "25",
+          "property": "schema.name"
+        },
+        "body": null
+      },
+      {
+        "raw": "GET /data/foundation/schemaregistry/tenant/schemas/{schema_id}",
+        "method": "GET",
+        "path": "/data/foundation/schemaregistry/tenant/schemas/{schema_id}",
+        "endpoint": "GET /data/foundation/schemaregistry/tenant/schemas/{schema_id}",
+        "params": {},
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/foundation/catalog/dataSets",
+      "GET /data/foundation/schemaregistry/tenant/schemas/{schema_id}"
+    ],
+    "api_params": [
+      "limit",
+      "property"
+    ],
+    "gold_sql": "SELECT S.blueprintid AS blueprint_id,\n       S.name AS blueprint_name,\n       COUNT(DISTINCT DS.collectionid) AS collection_count\nFROM dim_collection AS D\nJOIN hkg_br_blueprint_collection AS DS ON D.collectionid = DS.collectionid\nJOIN dim_blueprint AS S ON DS.blueprintid = S.blueprintid\nGROUP BY S.blueprintid,\n         S.name\nHAVING COUNT(DISTINCT DS.collectionid) > 1",
+    "gold_api": [
+      "GET /data/foundation/catalog/dataSets?limit=25&property=schema.name",
+      "GET /data/foundation/schemaregistry/tenant/schemas/{schema_id}"
+    ],
+    "search_text": "How many datasets have been ingested using the same schema in the prod sandbox? route SQL_PLUS_API_CHAIN intent count domain schema tables dim_blueprint dim_collection hkg_br_blueprint_collection endpoints GET /data/foundation/catalog/dataSets GET /data/foundation/schemaregistry/tenant/schemas/{schema_id} params limit property"
+  },
+  {
+    "query": "List all datasets that use the schema 'hkg_adls_profile_count_history'.",
+    "route": "SQL_PLUS_API_CHAIN",
+    "intent": "list",
+    "domain": "schema",
+    "sql_tables": [
+      "dim_blueprint",
+      "dim_collection",
+      "hkg_br_blueprint_collection"
+    ],
+    "api_calls": [
+      {
+        "raw": "GET /data/foundation/catalog/dataSets?limit=3&filter=schemaName==\"WF HEMI Account Attribute Retail Fiserv Schema\"",
+        "method": "GET",
+        "path": "/data/foundation/catalog/dataSets",
+        "endpoint": "GET /data/foundation/catalog/dataSets",
+        "params": {
+          "limit": "3",
+          "filter": "schemaName==\"WF HEMI Account Attribute Retail Fiserv Schema\""
+        },
+        "body": null
+      },
+      {
+        "raw": "GET /data/foundation/schemaregistry/tenant/schemas/{schema_id}",
+        "method": "GET",
+        "path": "/data/foundation/schemaregistry/tenant/schemas/{schema_id}",
+        "endpoint": "GET /data/foundation/schemaregistry/tenant/schemas/{schema_id}",
+        "params": {},
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/foundation/catalog/dataSets",
+      "GET /data/foundation/schemaregistry/tenant/schemas/{schema_id}"
+    ],
+    "api_params": [
+      "filter",
+      "limit"
+    ],
+    "gold_sql": "SELECT DISTINCT D.collectionid AS collection_id,\n       D.name AS collection_name\nFROM hkg_br_blueprint_collection AS SD\nJOIN dim_collection AS D ON SD.collectionid = D.collectionid\nJOIN dim_blueprint AS S ON SD.blueprintid = S.blueprintid\nWHERE S.name = 'hkg_adls_profile_count_history'\nLIMIT 3",
+    "gold_api": [
+      "GET /data/foundation/catalog/dataSets?limit=3&filter=schemaName==\"WF HEMI Account Attribute Retail Fiserv Schema\"",
+      "GET /data/foundation/schemaregistry/tenant/schemas/{schema_id}"
+    ],
+    "search_text": "List all datasets that use the schema 'hkg_adls_profile_count_history'. route SQL_PLUS_API_CHAIN intent list domain schema tables dim_blueprint dim_collection hkg_br_blueprint_collection endpoints GET /data/foundation/catalog/dataSets GET /data/foundation/schemaregistry/tenant/schemas/{schema_id} params filter limit"
+  },
+  {
+    "query": "show me the field for Person: Birthday Today 001",
+    "route": "SQL_PLUS_API",
+    "intent": "field_lookup",
+    "domain": "dataset",
+    "sql_tables": [
+      "dim_segment",
+      "hkg_br_segment_property"
+    ],
+    "api_calls": [
+      {
+        "raw": "GET /data/foundation/catalog/datasets?limit=20&filter=name:SG AND name:non loyalty",
+        "method": "GET",
+        "path": "/data/foundation/catalog/datasets",
+        "endpoint": "GET /data/foundation/catalog/datasets",
+        "params": {
+          "limit": "20",
+          "filter": "name:SG AND name:non loyalty"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/foundation/catalog/datasets"
+    ],
+    "api_params": [
+      "filter",
+      "limit"
+    ],
+    "gold_sql": "SELECT DISTINCT aa.property AS property_name, a.name AS segment_name\nFROM hkg_br_segment_property aa\nJOIN dim_segment a ON aa.segmentid = a.segmentid\nWHERE a.name = 'Person: Birthday Today 001'\nLIMIT 20",
+    "gold_api": [
+      "GET /data/foundation/catalog/datasets?limit=20&filter=name:SG AND name:non loyalty"
+    ],
+    "search_text": "show me the field for Person: Birthday Today 001 route SQL_PLUS_API intent field_lookup domain dataset tables dim_segment hkg_br_segment_property endpoints GET /data/foundation/catalog/datasets params filter limit"
+  },
+  {
+    "query": "Provide more details for the schema 'weRetail: Customer Actions'",
+    "route": "SQL_PLUS_API",
+    "intent": "lookup",
+    "domain": "schema",
+    "sql_tables": [
+      "dim_blueprint",
+      "hkg_br_blueprint_collection",
+      "hkg_br_blueprint_property"
+    ],
+    "api_calls": [
+      {
+        "raw": "GET /schemas?limit=5&filter=name==weRetail: Customer Actions",
+        "method": "GET",
+        "path": "/schemas",
+        "endpoint": "GET /schemas",
+        "params": {
+          "limit": "5",
+          "filter": "name==weRetail: Customer Actions"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /schemas"
+    ],
+    "api_params": [
+      "filter",
+      "limit"
+    ],
+    "gold_sql": "SELECT S.BLUEPRINTID AS blueprint_id,\n       S.NAME,\n       S.CLASS,\n       S.ISPROFILEENABLED,\n       S.UPDATEDTIME AS updated_time,\n       S.REQUIREDFIELDS AS required_fields,\n       COUNT(DISTINCT SD.COLLECTIONID) AS collection_count,\n       COUNT(DISTINCT SA.PROPERTY) AS property_count\nFROM DIM_BLUEPRINT AS S\nLEFT JOIN HKG_BR_BLUEPRINT_COLLECTION AS SD ON S.BLUEPRINTID = SD.BLUEPRINTID\nLEFT JOIN HKG_BR_BLUEPRINT_PROPERTY AS SA ON S.BLUEPRINTID = SA.BLUEPRINTID\nWHERE LOWER(S.NAME) = LOWER('weRetail: Customer Actions')\nGROUP BY S.BLUEPRINTID,\n         S.NAME,\n         S.CLASS,\n         S.ISPROFILEENABLED,\n         S.UPDATEDTIME,\n         S.REQUIREDFIELDS\nLIMIT 3",
+    "gold_api": [
+      "GET /schemas?limit=5&filter=name==weRetail: Customer Actions"
+    ],
+    "search_text": "Provide more details for the schema 'weRetail: Customer Actions' route SQL_PLUS_API intent lookup domain schema tables dim_blueprint hkg_br_blueprint_collection hkg_br_blueprint_property endpoints GET /schemas params filter limit"
+  },
+  {
+    "query": "Count the number of XDM Experience Event schemas that are enabled for profile.",
+    "route": "SQL_PLUS_API",
+    "intent": "count",
+    "domain": "schema",
+    "sql_tables": [
+      "dim_blueprint"
+    ],
+    "api_calls": [
+      {
+        "raw": "GET /data/foundation/schemaregistry/tenant/schemas?limit=25&filter=class==ExperienceEvent;isProfileEnabled==true",
+        "method": "GET",
+        "path": "/data/foundation/schemaregistry/tenant/schemas",
+        "endpoint": "GET /data/foundation/schemaregistry/tenant/schemas",
+        "params": {
+          "limit": "25",
+          "filter": "class==ExperienceEvent;isProfileEnabled==true"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/foundation/schemaregistry/tenant/schemas"
+    ],
+    "api_params": [
+      "filter",
+      "limit"
+    ],
+    "gold_sql": "SELECT COUNT(DISTINCT S.BLUEPRINTID) AS num_experience_event_profile_enabled_blueprints\nFROM DIM_BLUEPRINT AS S\nWHERE LOWER(S.CLASS) LIKE LOWER('%download%')\n  AND S.ISPROFILEENABLED = TRUE",
+    "gold_api": [
+      "GET /data/foundation/schemaregistry/tenant/schemas?limit=25&filter=class==ExperienceEvent;isProfileEnabled==true"
+    ],
+    "search_text": "Count the number of XDM Experience Event schemas that are enabled for profile. route SQL_PLUS_API intent count domain schema tables dim_blueprint endpoints GET /data/foundation/schemaregistry/tenant/schemas params filter limit"
+  },
+  {
+    "query": "How many schemas do I have?",
+    "route": "SQL_PLUS_API",
+    "intent": "count",
+    "domain": "schema",
+    "sql_tables": [
+      "dim_blueprint"
+    ],
+    "api_calls": [
+      {
+        "raw": "GET /schemas?limit=25",
+        "method": "GET",
+        "path": "/schemas",
+        "endpoint": "GET /schemas",
+        "params": {
+          "limit": "25"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /schemas"
+    ],
+    "api_params": [
+      "limit"
+    ],
+    "gold_sql": "SELECT COUNT(DISTINCT S.blueprintid) AS blueprint_count\nFROM dim_blueprint AS S",
+    "gold_api": [
+      "GET /schemas?limit=25"
+    ],
+    "search_text": "How many schemas do I have? route SQL_PLUS_API intent count domain schema tables dim_blueprint endpoints GET /schemas params limit"
+  },
+  {
+    "query": "List all audiences in the sandbox that have been mapped to new destinations in the last 3 months.",
+    "route": "SQL_PLUS_API",
+    "intent": "list",
+    "domain": "segment",
+    "sql_tables": [
+      "dim_segment",
+      "dim_target",
+      "hkg_br_segment_target"
+    ],
+    "api_calls": [
+      {
+        "raw": "GET /data/foundation/audit/events?property=assetType==destination&limit=3",
+        "method": "GET",
+        "path": "/data/foundation/audit/events",
+        "endpoint": "GET /data/foundation/audit/events",
+        "params": {
+          "property": "assetType==destination",
+          "limit": "3"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/foundation/audit/events"
+    ],
+    "api_params": [
+      "limit",
+      "property"
+    ],
+    "gold_sql": "SELECT DISTINCT A.segmentid AS segment_id, A.name AS segment_name, D.targetId AS target_id, D.name AS target_name\nFROM dim_segment AS A\nJOIN hkg_br_segment_target AS AD ON A.segmentid = AD.segmentid\nJOIN dim_target AS D ON AD.targetId = D.targetId\nWHERE D.createdTime >= DATEADD(MONTH, -3, CURRENT_DATE)\nLIMIT 3",
+    "gold_api": [
+      "GET /data/foundation/audit/events?property=assetType==destination&limit=3"
+    ],
+    "search_text": "List all audiences in the sandbox that have been mapped to new destinations in the last 3 months. route SQL_PLUS_API intent list domain segment tables dim_segment dim_target hkg_br_segment_target endpoints GET /data/foundation/audit/events params limit property"
+  },
+  {
+    "query": "Show recent changes in datasets.",
+    "route": "SQL_PLUS_API",
+    "intent": "time_lookup",
+    "domain": "dataset",
+    "sql_tables": [
+      "dim_collection"
+    ],
+    "api_calls": [
+      {
+        "raw": "GET /audit/events?property=assetType==dataset&orderBy=-timestamp&limit=50",
+        "method": "GET",
+        "path": "/audit/events",
+        "endpoint": "GET /audit/events",
+        "params": {
+          "property": "assetType==dataset",
+          "orderBy": "-timestamp",
+          "limit": "50"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /audit/events"
+    ],
+    "api_params": [
+      "limit",
+      "orderBy",
+      "property"
+    ],
+    "gold_sql": "SELECT DISTINCT D.COLLECTIONID AS collection_id,\n       D.NAME AS collection_name,\n       D.UPDATEDTIME AS updated_time\nFROM DIM_COLLECTION AS D\nWHERE D.UPDATEDTIME >= DATEADD(DAY, -90, CURRENT_DATE)\nORDER BY D.UPDATEDTIME DESC\nLIMIT 50",
+    "gold_api": [
+      "GET /audit/events?property=assetType==dataset&orderBy=-timestamp&limit=50"
+    ],
+    "search_text": "Show recent changes in datasets. route SQL_PLUS_API intent time_lookup domain dataset tables dim_collection endpoints GET /audit/events params limit orderBy property"
+  },
+  {
+    "query": "Show me all entities created by download",
+    "route": "SQL_PLUS_API",
+    "intent": "time_lookup",
+    "domain": "dataset",
+    "sql_tables": [
+      "dim_collection"
+    ],
+    "api_calls": [
+      {
+        "raw": "GET /data/foundation/audit/events?property=action==create&limit=20",
+        "method": "GET",
+        "path": "/data/foundation/audit/events",
+        "endpoint": "GET /data/foundation/audit/events",
+        "params": {
+          "property": "action==create",
+          "limit": "20"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/foundation/audit/events"
+    ],
+    "api_params": [
+      "limit",
+      "property"
+    ],
+    "gold_sql": "SELECT DISTINCT collectionid AS collection_id, name AS collection_name, createdtime AS created_time\nFROM dim_collection\nWHERE createdby ILIKE '%download%'\nLIMIT 20",
+    "gold_api": [
+      "GET /data/foundation/audit/events?property=action==create&limit=20"
+    ],
+    "search_text": "Show me all entities created by download route SQL_PLUS_API intent time_lookup domain dataset tables dim_collection endpoints GET /data/foundation/audit/events params limit property"
+  },
+  {
+    "query": "How many tags exist in this sandbox?",
+    "route": "API_ONLY",
+    "intent": "count",
+    "domain": "tag",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /unifiedtags/tags?limit=20",
+        "method": "GET",
+        "path": "/unifiedtags/tags",
+        "endpoint": "GET /unifiedtags/tags",
+        "params": {
+          "limit": "20"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /unifiedtags/tags"
+    ],
+    "api_params": [
+      "limit"
+    ],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /unifiedtags/tags?limit=20"
+    ],
+    "search_text": "How many tags exist in this sandbox? route API_ONLY intent count domain tag tables  endpoints GET /unifiedtags/tags params limit"
+  },
+  {
+    "query": "List all tags in this sandbox.",
+    "route": "API_ONLY",
+    "intent": "list",
+    "domain": "tag",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /unifiedtags/tags?limit=25",
+        "method": "GET",
+        "path": "/unifiedtags/tags",
+        "endpoint": "GET /unifiedtags/tags",
+        "params": {
+          "limit": "25"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /unifiedtags/tags"
+    ],
+    "api_params": [
+      "limit"
+    ],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /unifiedtags/tags?limit=25"
+    ],
+    "search_text": "List all tags in this sandbox. route API_ONLY intent list domain tag tables  endpoints GET /unifiedtags/tags params limit"
+  },
+  {
+    "query": "Which tags belong to the category 'Uncategorized'?",
+    "route": "API_CHAIN",
+    "intent": "list",
+    "domain": "tag",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /unifiedtags/tagCategory?limit=100",
+        "method": "GET",
+        "path": "/unifiedtags/tagCategory",
+        "endpoint": "GET /unifiedtags/tagCategory",
+        "params": {
+          "limit": "100"
+        },
+        "body": null
+      },
+      {
+        "raw": "GET /unifiedtags/tags?limit=100&tagCategoryId=Uncategorized-87891E4066602D250A495F91@AdobeOrg",
+        "method": "GET",
+        "path": "/unifiedtags/tags",
+        "endpoint": "GET /unifiedtags/tags",
+        "params": {
+          "limit": "100",
+          "tagCategoryId": "Uncategorized-87891E4066602D250A495F91@AdobeOrg"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /unifiedtags/tagCategory",
+      "GET /unifiedtags/tags"
+    ],
+    "api_params": [
+      "limit",
+      "tagCategoryId"
+    ],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /unifiedtags/tagCategory?limit=100",
+      "GET /unifiedtags/tags?limit=100&tagCategoryId=Uncategorized-87891E4066602D250A495F91@AdobeOrg"
+    ],
+    "search_text": "Which tags belong to the category 'Uncategorized'? route API_CHAIN intent list domain tag tables  endpoints GET /unifiedtags/tagCategory GET /unifiedtags/tags params limit tagCategoryId"
+  },
+  {
+    "query": "Show me the details of the tag named 'cool'.",
+    "route": "API_ONLY",
+    "intent": "list",
+    "domain": "tag",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /unifiedtags/tags/51175a7f-aa60-4533-bef1-717b3cef7818",
+        "method": "GET",
+        "path": "/unifiedtags/tags/51175a7f-aa60-4533-bef1-717b3cef7818",
+        "endpoint": "GET /unifiedtags/tags/51175a7f-aa60-4533-bef1-717b3cef7818",
+        "params": {},
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /unifiedtags/tags/51175a7f-aa60-4533-bef1-717b3cef7818"
+    ],
+    "api_params": [],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /unifiedtags/tags/51175a7f-aa60-4533-bef1-717b3cef7818"
+    ],
+    "search_text": "Show me the details of the tag named 'cool'. route API_ONLY intent list domain tag tables  endpoints GET /unifiedtags/tags/51175a7f-aa60-4533-bef1-717b3cef7818 params "
+  },
+  {
+    "query": "List all merge policies in this sandbox.",
+    "route": "API_ONLY",
+    "intent": "list",
+    "domain": "merge_policy",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /data/core/ups/config/mergePolicies?limit=10",
+        "method": "GET",
+        "path": "/data/core/ups/config/mergePolicies",
+        "endpoint": "GET /data/core/ups/config/mergePolicies",
+        "params": {
+          "limit": "10"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/core/ups/config/mergePolicies"
+    ],
+    "api_params": [
+      "limit"
+    ],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /data/core/ups/config/mergePolicies?limit=10"
+    ],
+    "search_text": "List all merge policies in this sandbox. route API_ONLY intent list domain merge_policy tables  endpoints GET /data/core/ups/config/mergePolicies params limit"
+  },
+  {
+    "query": "How many merge policies are configured in this sandbox?",
+    "route": "API_ONLY",
+    "intent": "count",
+    "domain": "merge_policy",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /data/core/ups/config/mergePolicies?limit=10",
+        "method": "GET",
+        "path": "/data/core/ups/config/mergePolicies",
+        "endpoint": "GET /data/core/ups/config/mergePolicies",
+        "params": {
+          "limit": "10"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/core/ups/config/mergePolicies"
+    ],
+    "api_params": [
+      "limit"
+    ],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /data/core/ups/config/mergePolicies?limit=10"
+    ],
+    "search_text": "How many merge policies are configured in this sandbox? route API_ONLY intent count domain merge_policy tables  endpoints GET /data/core/ups/config/mergePolicies params limit"
+  },
+  {
+    "query": "Show the default merge policy for schema class '_xdm.context.profile'.",
+    "route": "API_ONLY",
+    "intent": "list",
+    "domain": "merge_policy",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /data/core/ups/config/mergePolicies?limit=5",
+        "method": "GET",
+        "path": "/data/core/ups/config/mergePolicies",
+        "endpoint": "GET /data/core/ups/config/mergePolicies",
+        "params": {
+          "limit": "5"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/core/ups/config/mergePolicies"
+    ],
+    "api_params": [
+      "limit"
+    ],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /data/core/ups/config/mergePolicies?limit=5"
+    ],
+    "search_text": "Show the default merge policy for schema class '_xdm.context.profile'. route API_ONLY intent list domain merge_policy tables  endpoints GET /data/core/ups/config/mergePolicies params limit"
+  },
+  {
+    "query": "How many segment definitions exist in this sandbox?",
+    "route": "API_ONLY",
+    "intent": "count",
+    "domain": "segment_definition",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /data/core/ups/segment/definitions?limit=100",
+        "method": "GET",
+        "path": "/data/core/ups/segment/definitions",
+        "endpoint": "GET /data/core/ups/segment/definitions",
+        "params": {
+          "limit": "100"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/core/ups/segment/definitions"
+    ],
+    "api_params": [
+      "limit"
+    ],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /data/core/ups/segment/definitions?limit=100"
+    ],
+    "search_text": "How many segment definitions exist in this sandbox? route API_ONLY intent count domain segment_definition tables  endpoints GET /data/core/ups/segment/definitions params limit"
+  },
+  {
+    "query": "List all segment definitions.",
+    "route": "API_ONLY",
+    "intent": "list",
+    "domain": "segment_definition",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /data/core/ups/segment/definitions?limit=10",
+        "method": "GET",
+        "path": "/data/core/ups/segment/definitions",
+        "endpoint": "GET /data/core/ups/segment/definitions",
+        "params": {
+          "limit": "10"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/core/ups/segment/definitions"
+    ],
+    "api_params": [
+      "limit"
+    ],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /data/core/ups/segment/definitions?limit=10"
+    ],
+    "search_text": "List all segment definitions. route API_ONLY intent list domain segment_definition tables  endpoints GET /data/core/ups/segment/definitions params limit"
+  },
+  {
+    "query": "Which segment definitions were updated most recently?",
+    "route": "API_ONLY",
+    "intent": "time_lookup",
+    "domain": "segment_definition",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /data/core/ups/segment/definitions?limit=3&orderBy=updateTime:desc",
+        "method": "GET",
+        "path": "/data/core/ups/segment/definitions",
+        "endpoint": "GET /data/core/ups/segment/definitions",
+        "params": {
+          "limit": "3",
+          "orderBy": "updateTime:desc"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/core/ups/segment/definitions"
+    ],
+    "api_params": [
+      "limit",
+      "orderBy"
+    ],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /data/core/ups/segment/definitions?limit=3&orderBy=updateTime:desc"
+    ],
+    "search_text": "Which segment definitions were updated most recently? route API_ONLY intent time_lookup domain segment_definition tables  endpoints GET /data/core/ups/segment/definitions params limit orderBy"
+  },
+  {
+    "query": "List all segment evaluation jobs.",
+    "route": "API_ONLY",
+    "intent": "list",
+    "domain": "segment_job",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /data/core/ups/segment/jobs?limit=3",
+        "method": "GET",
+        "path": "/data/core/ups/segment/jobs",
+        "endpoint": "GET /data/core/ups/segment/jobs",
+        "params": {
+          "limit": "3"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/core/ups/segment/jobs"
+    ],
+    "api_params": [
+      "limit"
+    ],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /data/core/ups/segment/jobs?limit=3"
+    ],
+    "search_text": "List all segment evaluation jobs. route API_ONLY intent list domain segment_job tables  endpoints GET /data/core/ups/segment/jobs params limit"
+  },
+  {
+    "query": "How many segment jobs are currently processing?",
+    "route": "API_ONLY",
+    "intent": "count",
+    "domain": "segment_job",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /data/core/ups/segment/jobs?limit=20",
+        "method": "GET",
+        "path": "/data/core/ups/segment/jobs",
+        "endpoint": "GET /data/core/ups/segment/jobs",
+        "params": {
+          "limit": "20"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/core/ups/segment/jobs"
+    ],
+    "api_params": [
+      "limit"
+    ],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /data/core/ups/segment/jobs?limit=20"
+    ],
+    "search_text": "How many segment jobs are currently processing? route API_ONLY intent count domain segment_job tables  endpoints GET /data/core/ups/segment/jobs params limit"
+  },
+  {
+    "query": "Show all segment jobs with status 'QUEUED'.",
+    "route": "API_ONLY",
+    "intent": "status_lookup",
+    "domain": "segment_job",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /data/core/ups/segment/jobs?limit=10",
+        "method": "GET",
+        "path": "/data/core/ups/segment/jobs",
+        "endpoint": "GET /data/core/ups/segment/jobs",
+        "params": {
+          "limit": "10"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/core/ups/segment/jobs"
+    ],
+    "api_params": [
+      "limit"
+    ],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /data/core/ups/segment/jobs?limit=10"
+    ],
+    "search_text": "Show all segment jobs with status 'QUEUED'. route API_ONLY intent status_lookup domain segment_job tables  endpoints GET /data/core/ups/segment/jobs params limit"
+  },
+  {
+    "query": "List the most recently created batches.",
+    "route": "API_ONLY",
+    "intent": "time_lookup",
+    "domain": "batch",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /data/foundation/catalog/batches?limit=100&orderBy=desc:created",
+        "method": "GET",
+        "path": "/data/foundation/catalog/batches",
+        "endpoint": "GET /data/foundation/catalog/batches",
+        "params": {
+          "limit": "100",
+          "orderBy": "desc:created"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/foundation/catalog/batches"
+    ],
+    "api_params": [
+      "limit",
+      "orderBy"
+    ],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /data/foundation/catalog/batches?limit=100&orderBy=desc:created"
+    ],
+    "search_text": "List the most recently created batches. route API_ONLY intent time_lookup domain batch tables  endpoints GET /data/foundation/catalog/batches params limit orderBy"
+  },
+  {
+    "query": "How many batches have status 'success'?",
+    "route": "API_ONLY",
+    "intent": "count",
+    "domain": "batch",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /data/foundation/catalog/batches?limit=10&status=success",
+        "method": "GET",
+        "path": "/data/foundation/catalog/batches",
+        "endpoint": "GET /data/foundation/catalog/batches",
+        "params": {
+          "limit": "10",
+          "status": "success"
+        },
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/foundation/catalog/batches"
+    ],
+    "api_params": [
+      "limit",
+      "status"
+    ],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /data/foundation/catalog/batches?limit=10&status=success"
+    ],
+    "search_text": "How many batches have status 'success'? route API_ONLY intent count domain batch tables  endpoints GET /data/foundation/catalog/batches params limit status"
+  },
+  {
+    "query": "Show the details of batch 01KP69BPA5ZKFB7HCDYPE4GN6F.",
+    "route": "API_ONLY",
+    "intent": "list",
+    "domain": "batch",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /data/foundation/catalog/batches/01KP69BPA5ZKFB7HCDYPE4GN6F",
+        "method": "GET",
+        "path": "/data/foundation/catalog/batches/01KP69BPA5ZKFB7HCDYPE4GN6F",
+        "endpoint": "GET /data/foundation/catalog/batches/01KP69BPA5ZKFB7HCDYPE4GN6F",
+        "params": {},
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/foundation/catalog/batches/01KP69BPA5ZKFB7HCDYPE4GN6F"
+    ],
+    "api_params": [],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /data/foundation/catalog/batches/01KP69BPA5ZKFB7HCDYPE4GN6F"
+    ],
+    "search_text": "Show the details of batch 01KP69BPA5ZKFB7HCDYPE4GN6F. route API_ONLY intent list domain batch tables  endpoints GET /data/foundation/catalog/batches/01KP69BPA5ZKFB7HCDYPE4GN6F params "
+  },
+  {
+    "query": "Which files are available for download in batch 69de8a0e0cc6102b5d11f01e?",
+    "route": "API_ONLY",
+    "intent": "list",
+    "domain": "batch",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /data/foundation/export/batches/69de8a0e0cc6102b5d11f01e/files",
+        "method": "GET",
+        "path": "/data/foundation/export/batches/69de8a0e0cc6102b5d11f01e/files",
+        "endpoint": "GET /data/foundation/export/batches/69de8a0e0cc6102b5d11f01e/files",
+        "params": {},
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/foundation/export/batches/69de8a0e0cc6102b5d11f01e/files"
+    ],
+    "api_params": [],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /data/foundation/export/batches/69de8a0e0cc6102b5d11f01e/files"
+    ],
+    "search_text": "Which files are available for download in batch 69de8a0e0cc6102b5d11f01e? route API_ONLY intent list domain batch tables  endpoints GET /data/foundation/export/batches/69de8a0e0cc6102b5d11f01e/files params "
+  },
+  {
+    "query": "Show failed files for batch 01KP6MNQ3X71RP6MNH6FHWGHVE.",
+    "route": "API_ONLY",
+    "intent": "status_lookup",
+    "domain": "batch",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "GET /data/foundation/export/batches/01KP6MNQ3X71RP6MNH6FHWGHVE/failed",
+        "method": "GET",
+        "path": "/data/foundation/export/batches/01KP6MNQ3X71RP6MNH6FHWGHVE/failed",
+        "endpoint": "GET /data/foundation/export/batches/01KP6MNQ3X71RP6MNH6FHWGHVE/failed",
+        "params": {},
+        "body": null
+      }
+    ],
+    "api_endpoints": [
+      "GET /data/foundation/export/batches/01KP6MNQ3X71RP6MNH6FHWGHVE/failed"
+    ],
+    "api_params": [],
+    "gold_sql": "",
+    "gold_api": [
+      "GET /data/foundation/export/batches/01KP6MNQ3X71RP6MNH6FHWGHVE/failed"
+    ],
+    "search_text": "Show failed files for batch 01KP6MNQ3X71RP6MNH6FHWGHVE. route API_ONLY intent status_lookup domain batch tables  endpoints GET /data/foundation/export/batches/01KP6MNQ3X71RP6MNH6FHWGHVE/failed params "
+  },
+  {
+    "query": "What are the daily 'timeseries.ingestion.dataset.recordsuccess.count' values between '2026-03-15' and '2026-03-31'?",
+    "route": "API_ONLY",
+    "intent": "count",
+    "domain": "metric",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "POST /data/infrastructure/observability/insights/metrics body={\"start\":\"2026-03-15T00:00:00.000Z\",\"end\":\"2026-03-31T23:59:59.000Z\",\"granularity\":\"day\",\"metrics\":[{\"name\":\"timeseries.ingestion.dataset.recordsuccess.count\",\"filters\":[],\"aggregator\":\"sum\"}]}",
+        "method": "POST",
+        "path": "/data/infrastructure/observability/insights/metrics",
+        "endpoint": "POST /data/infrastructure/observability/insights/metrics",
+        "params": {},
+        "body": {
+          "start": "2026-03-15T00:00:00.000Z",
+          "end": "2026-03-31T23:59:59.000Z",
+          "granularity": "day",
+          "metrics": [
+            {
+              "name": "timeseries.ingestion.dataset.recordsuccess.count",
+              "filters": [],
+              "aggregator": "sum"
+            }
+          ]
+        }
+      }
+    ],
+    "api_endpoints": [
+      "POST /data/infrastructure/observability/insights/metrics"
+    ],
+    "api_params": [],
+    "gold_sql": "",
+    "gold_api": [
+      "POST /data/infrastructure/observability/insights/metrics body={\"start\":\"2026-03-15T00:00:00.000Z\",\"end\":\"2026-03-31T23:59:59.000Z\",\"granularity\":\"day\",\"metrics\":[{\"name\":\"timeseries.ingestion.dataset.recordsuccess.count\",\"filters\":[],\"aggregator\":\"sum\"}]}"
+    ],
+    "search_text": "What are the daily 'timeseries.ingestion.dataset.recordsuccess.count' values between '2026-03-15' and '2026-03-31'? route API_ONLY intent count domain metric tables  endpoints POST /data/infrastructure/observability/insights/metrics params "
+  },
+  {
+    "query": "Show ingestion record counts and batch success counts for the last 90 days.",
+    "route": "API_ONLY",
+    "intent": "status_lookup",
+    "domain": "metric",
+    "sql_tables": [],
+    "api_calls": [
+      {
+        "raw": "POST /data/infrastructure/observability/insights/metrics body={\"start\":\"2026-03-01T00:00:00.000Z\",\"end\":\"2026-04-01T23:59:59.000Z\",\"granularity\":\"day\",\"metrics\":[{\"name\":\"timeseries.ingestion.dataset.recordsuccess.count\",\"filters\":[],\"aggregator\":\"sum\"},{\"name\":\"timeseries.ingestion.dataset.batchsuccess.count\",\"filters\":[],\"aggregator\":\"sum\"}]}",
+        "method": "POST",
+        "path": "/data/infrastructure/observability/insights/metrics",
+        "endpoint": "POST /data/infrastructure/observability/insights/metrics",
+        "params": {},
+        "body": {
+          "start": "2026-03-01T00:00:00.000Z",
+          "end": "2026-04-01T23:59:59.000Z",
+          "granularity": "day",
+          "metrics": [
+            {
+              "name": "timeseries.ingestion.dataset.recordsuccess.count",
+              "filters": [],
+              "aggregator": "sum"
+            },
+            {
+              "name": "timeseries.ingestion.dataset.batchsuccess.count",
+              "filters": [],
+              "aggregator": "sum"
+            }
+          ]
+        }
+      }
+    ],
+    "api_endpoints": [
+      "POST /data/infrastructure/observability/insights/metrics"
+    ],
+    "api_params": [],
+    "gold_sql": "",
+    "gold_api": [
+      "POST /data/infrastructure/observability/insights/metrics body={\"start\":\"2026-03-01T00:00:00.000Z\",\"end\":\"2026-04-01T23:59:59.000Z\",\"granularity\":\"day\",\"metrics\":[{\"name\":\"timeseries.ingestion.dataset.recordsuccess.count\",\"filters\":[],\"aggregator\":\"sum\"},{\"name\":\"timeseries.ingestion.dataset.batchsuccess.count\",\"filters\":[],\"aggregator\":\"sum\"}]}"
+    ],
+    "search_text": "Show ingestion record counts and batch success counts for the last 90 days. route API_ONLY intent status_lookup domain metric tables  endpoints POST /data/infrastructure/observability/insights/metrics params "
+  }
+]

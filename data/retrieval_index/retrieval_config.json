@@ -1,0 +1,7 @@
+{
+  "num_examples": 35,
+  "tfidf_enabled": true,
+  "dense_enabled": true,
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "description": "Hybrid retrieval index using TF-IDF, dense embeddings, and structured signals."
+}

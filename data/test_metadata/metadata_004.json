@@ -1,0 +1,977 @@
+{
+  "query": "List all segment audiences connected to the destination named 'Person: Birthday today', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
+  "normalized_query": "List all segment audiences connected to the destination named 'Person: Birthday today', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
+  "query_analysis": {
+    "complexity": "simple",
+    "confidence": 1.0,
+    "reason": "The query asks for a single set of attributes (audienceId, name, totalProfiles, createdTime, updatedTime, used in other audience count) related to a specific destination ('Person: Birthday today'). This can be handled by one focused lookup.",
+    "subqueries": [
+      {
+        "query": "List all segment audiences connected to the destination named 'Person: Birthday today', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
+        "purpose": "other"
+      }
+    ]
+  },
+  "intent": "count",
+  "entities": [
+    "Person: Birthday today"
+  ],
+  "filters": {
+    "quoted_entities": [
+      "Person: Birthday today"
+    ]
+  },
+  "route": {
+    "selected": "SQL_PLUS_API",
+    "votes": {
+      "SQL_PLUS_API": 0.5223,
+      "SQL_PLUS_API_CHAIN": 0.4777
+    },
+    "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides."
+  },
+  "domain": {
+    "selected": "segment",
+    "votes": {
+      "segment": 0.758,
+      "dataset": 0.242
+    },
+    "reason": "Selected from top retrieved examples and domain votes."
+  },
+  "allowed_tables": {
+    "dim_segment": {
+      "kind": "dimension",
+      "domain": "segment",
+      "row_count": 13,
+      "id_columns": [
+        "MERGEPOLICYID",
+        "SEGMENTID"
+      ],
+      "columns": [
+        {
+          "name": "DEFINITION",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "SEGMENTID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ISEDGE",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "TTLINDAYS",
+          "type": "BIGINT"
+        },
+        {
+          "name": "SEGMENTBLUEPRINTCLASS",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "DEFINITIONHASH",
+          "type": "BIGINT"
+        },
+        {
+          "name": "ISPEOPLESEGMENT",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "ISACCOUNTSEGMENT",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "NAME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "EVALUATIONCOMPLETEDTIME",
+          "type": "\"NULL\""
+        },
+        {
+          "name": "TOTALMEMBERS",
+          "type": "BIGINT"
+        },
+        {
+          "name": "LABELSSEGMENT",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ISSTREAMING",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "LIFECYCLESTATUS",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ISBATCH",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "TYPE",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "MERGEPOLICYID",
+          "type": "VARCHAR"
+        }
+      ]
+    },
+    "dim_target": {
+      "kind": "dimension",
+      "domain": "destination",
+      "row_count": 1,
+      "id_columns": [
+        "CONNECTIONSPECID",
+        "TARGETID"
+      ],
+      "columns": [
+        {
+          "name": "DATAFLOWNAME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "INTERVAL",
+          "type": "BIGINT"
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "DESCRIPTION",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "FREQUENCY",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LABELSTARGET",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "STATE",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "TARGETID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "CONNECTIONSPECID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "NAME",
+          "type": "VARCHAR"
+        }
+      ]
+    },
+    "hkg_br_segment_target": {
+      "kind": "bridge",
+      "domain": "segment",
+      "row_count": 1,
+      "id_columns": [
+        "SEGMENTID",
+        "TARGETID"
+      ],
+      "columns": [
+        {
+          "name": "SEGMENTID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LABELSSEGMENT",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LABELSTARGET",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "TARGETID",
+          "type": "VARCHAR"
+        }
+      ]
+    },
+    "hkg_br_base_segment_used_by_dependent_segment": {
+      "kind": "bridge",
+      "domain": "segment",
+      "row_count": 0,
+      "id_columns": [
+        "DEPENDENTSEGMENTID",
+        "SEGMENTID"
+      ],
+      "columns": [
+        {
+          "name": "SEGMENTID",
+          "type": "\"NULL\""
+        },
+        {
+          "name": "LABELSDEPENDENTSEGMENT",
+          "type": "\"NULL\""
+        },
+        {
+          "name": "LABELSSEGMENT",
+          "type": "\"NULL\""
+        },
+        {
+          "name": "DEPENDENTSEGMENTID",
+          "type": "\"NULL\""
+        }
+      ]
+    },
+    "hkg_br_collection_segment": {
+      "kind": "bridge",
+      "domain": "segment",
+      "row_count": 13,
+      "id_columns": [
+        "COLLECTIONID",
+        "SEGMENTID"
+      ],
+      "columns": [
+        {
+          "name": "SEGMENTID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "COLLECTIONID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LABELSSEGMENT",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LABELSCOLLECTION",
+          "type": "VARCHAR"
+        }
+      ]
+    }
+  },
+  "join_candidates": [
+    {
+      "left_table": "dim_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_base_segment_used_by_dependent_segment",
+      "right_column": "SEGMENTID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "dim_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_collection_segment",
+      "right_column": "SEGMENTID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "dim_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_segment_target",
+      "right_column": "SEGMENTID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "dim_target",
+      "left_column": "TARGETID",
+      "right_table": "hkg_br_segment_target",
+      "right_column": "TARGETID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "hkg_br_base_segment_used_by_dependent_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_collection_segment",
+      "right_column": "SEGMENTID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "hkg_br_base_segment_used_by_dependent_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_segment_target",
+      "right_column": "SEGMENTID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "hkg_br_collection_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_segment_target",
+      "right_column": "SEGMENTID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    }
+  ],
+  "allowed_api_endpoints": [
+    {
+      "endpoint": "GET /data/core/ups/audiences",
+      "method": "GET",
+      "path": "/data/core/ups/audiences",
+      "domain": "segment",
+      "param_names": [
+        "limit",
+        "property"
+      ],
+      "observed_params": {
+        "property": [
+          "destinationId==<destination_id>"
+        ],
+        "limit": [
+          "5"
+        ]
+      },
+      "routes_seen": [
+        "SQL_PLUS_API_CHAIN"
+      ],
+      "source": "gold_examples+openapi",
+      "openapi": {
+        "summary": "List audiences",
+        "description": "",
+        "operation_id": "listAudiences",
+        "query_params": [
+          {
+            "name": "start",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "type": null,
+            "description": "A query parameter that specifies the starting offset for the audiences returned."
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "type": null,
+            "description": "A query parameter that specifies the total number of audiences returned per page."
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "A query parameter that specifies the field to sort the results by. This is written in the format `[attributeName]:[desc/asc]`"
+          },
+          {
+            "name": "property",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "A query parameter that specifies which audiences to return. The audiences returned must **exactly** match the attribute value given. This is written in the format `property=[attributeName]==[attributeValue]`."
+          },
+          {
+            "name": "name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "A query parameter that filters for audiences that contain the string in the name. This value is case **insensitive**."
+          },
+          {
+            "name": "description",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "A query parameter that filters for audiences that contain the string in the description. This value is case **insensitive**."
+          },
+          {
+            "name": "entityType",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "A query parameter that lets you filter the type of audience you're looking for."
+          }
+        ],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "All resources in Experience Platform are isolated to specific virtual sandboxes. Requests to Platform APIs require a header that specifies the name of the sandbox in which the operation will take place. See the [sandboxes overview](https://adobe.com/go/sandbox-overview-en) for more information."
+          }
+        ],
+        "query_param_names": [
+          "description",
+          "entityType",
+          "limit",
+          "name",
+          "property",
+          "sort",
+          "start"
+        ],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [],
+          "schema": {}
+        },
+        "response_codes": [
+          "200",
+          "403"
+        ],
+        "source_file": "segmentation.yaml"
+      }
+    },
+    {
+      "endpoint": "GET /data/foundation/flowservice/flows",
+      "method": "GET",
+      "path": "/data/foundation/flowservice/flows",
+      "domain": "segment",
+      "param_names": [
+        "filter",
+        "limit",
+        "property",
+        "sort"
+      ],
+      "observed_params": {
+        "property": [
+          "inheritedAttributes.properties.isDestinationFlow==true"
+        ],
+        "limit": [
+          "5",
+          "50"
+        ],
+        "filter": [
+          "state eq 'failed'"
+        ],
+        "sort": [
+          "updatedTime:desc"
+        ]
+      },
+      "routes_seen": [
+        "SQL_PLUS_API_CHAIN",
+        "SQL_PLUS_API"
+      ],
+      "source": "gold_examples+openapi",
+      "openapi": {
+        "summary": "List flows",
+        "description": "Retrieve a list of flows in your organization by making a GET request to the `/flows` endpoint.",
+        "operation_id": "listFlows",
+        "query_params": [
+          {
+            "name": "property",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "type": null,
+            "description": "A comma-separated list of top-level object properties to be returned in the response. This parameter is used to filter the response data based on the properties provided. For example, `property=lastRunDetails.startedAtUTC>=1670880253121` returns only the flows whos last run iterations were started during or after the specified epoch time in milliseconds. This parameter is also used to cut down the amount of data returned in the response body. For example, `property=state==enabled&orderby=createdAt` returns only base connections that have a status of `enabled` in the order of their creation, in ascending order."
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "type": null,
+            "description": "Restrict the maximum number of items returned for a given request. For example, adding a parameter of `limit=10` in a request to retrieve all base connections returns only a maximum of 10 base connections. When used to query the API, the returned response automatically includes a `continuationToken` that can be used to fetch records that were not returned due to the limits applied by the parameter."
+          },
+          {
+            "name": "orderby",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "Sort the listed resources by specified fields. For example, `orderby=name` sorts results by name in ascending order (A-Z). Adding a dash (`-`) before the field name (`orderby=-name`) sorts the results in descending order (Z-A)."
+          },
+          {
+            "name": "continuationToken",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "An auto-generated string token that is appended to a returned response when there are more results to be read beyond the maximum count of items that can be returned."
+          },
+          {
+            "name": "count",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "type": null,
+            "description": "A boolean value specifying if the count of resources should be returned. By default the count is not returned (`count=false`)"
+          }
+        ],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with 'Bearer '. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "All resources in Experience Platform are isolated to specific virtual sandboxes. Requests to Platform APIs require a header that specifies the name of the sandbox in which the operation will take place."
+          }
+        ],
+        "query_param_names": [
+          "continuationToken",
+          "count",
+          "limit",
+          "orderby",
+          "property"
+        ],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "x-api-key",
+          "x-gw-ims-org-id"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [],
+          "schema": {}
+        },
+        "response_codes": [
+          "200",
+          "400",
+          "401",
+          "500"
+        ],
+        "source_file": "flow-service.yaml"
+      }
+    },
+    {
+      "endpoint": "GET /data/foundation/audit/events",
+      "method": "GET",
+      "path": "/data/foundation/audit/events",
+      "domain": "segment",
+      "param_names": [
+        "limit",
+        "property"
+      ],
+      "observed_params": {
+        "property": [
+          "assetType==destination",
+          "action==create"
+        ],
+        "limit": [
+          "3",
+          "20"
+        ]
+      },
+      "routes_seen": [
+        "SQL_PLUS_API"
+      ],
+      "source": "gold_examples",
+      "openapi": null
+    },
+    {
+      "endpoint": "POST /data/core/ups/audiences",
+      "method": "POST",
+      "path": "/data/core/ups/audiences",
+      "domain": "segment",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "Create an audience",
+        "description": "",
+        "operation_id": "createAudience",
+        "query_params": [],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The type of content being sent in the body of the request. Should be 'application/json'."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "All resources in Experience Platform are isolated to specific virtual sandboxes. Requests to Platform APIs require a header that specifies the name of the sandbox in which the operation will take place. See the [sandboxes overview](https://adobe.com/go/sandbox-overview-en) for more information."
+          }
+        ],
+        "query_param_names": [],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": false,
+          "content_types": [
+            "application/json"
+          ],
+          "schema": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CreatePlatformAudienceRequestBody"
+              }
+            ]
+          }
+        },
+        "response_codes": [
+          "201",
+          "400"
+        ],
+        "source_file": "segmentation.yaml"
+      }
+    },
+    {
+      "endpoint": "POST /data/core/ups/audiences/bulk-get",
+      "method": "POST",
+      "path": "/data/core/ups/audiences/bulk-get",
+      "domain": "segment",
+      "param_names": [],
+      "observed_params": {},
+      "routes_seen": [],
+      "source": "openapi",
+      "openapi": {
+        "summary": "Retrieve multiple audiences",
+        "description": "",
+        "operation_id": "bulkGetAudiences",
+        "query_params": [],
+        "path_params": [],
+        "header_params": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer \". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The type of content being sent in the body of the request. Should be 'application/json'."
+          },
+          {
+            "name": "x-api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+          },
+          {
+            "name": "x-sandbox-name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "type": null,
+            "description": "All resources in Experience Platform are isolated to specific virtual sandboxes. Requests to Platform APIs require a header that specifies the name of the sandbox in which the operation will take place. See the [sandboxes overview](https://adobe.com/go/sandbox-overview-en) for more information."
+          }
+        ],
+        "query_param_names": [],
+        "path_param_names": [],
+        "header_param_names": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "required_params": [
+          "Authorization",
+          "Content-Type",
+          "x-api-key",
+          "x-gw-ims-org-id",
+          "x-sandbox-name"
+        ],
+        "request_body": {
+          "required": true,
+          "content_types": [
+            "application/json"
+          ],
+          "schema": {
+            "type": "object",
+            "properties": {
+              "ids": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "72c393ea-caed-441a-9eb6-5f66bb1bd6cd"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "response_codes": [
+          "207",
+          "400",
+          "404"
+        ],
+        "source_file": "segmentation.yaml"
+      }
+    }
+  ],
+  "similar_examples": [
+    {
+      "query": "List all segment audiences connected to the destination named 'SMS Opt-In', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
+      "route": "SQL_PLUS_API_CHAIN",
+      "domain": "segment",
+      "intent": "count",
+      "score": 0.8632,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [
+        "dim_segment",
+        "dim_target",
+        "hkg_br_segment_target"
+      ],
+      "api_endpoints": [
+        "GET /data/core/ups/audiences",
+        "GET /data/foundation/flowservice/flows"
+      ],
+      "api_params": [
+        "limit",
+        "property"
+      ],
+      "gold_sql": "SELECT \n    a.segmentid AS segment_id,\n    a.name AS segment_name,\n    a.totalmembers AS total_profiles,\n    a.createdTime AS created_time,\n    a.updatedTime AS updated_time\nFROM dim_segment a\nJOIN hkg_br_segment_target ad ON a.segmentid = ad.segmentid\nJOIN dim_target d ON ad.targetId = d.targetId\nWHERE d.dataflowName = 'SMS Opt-In'\nORDER BY a.name",
+      "gold_api": [
+        "GET /data/core/ups/audiences?property=destinationId==<destination_id>&limit=5",
+        "GET /data/foundation/flowservice/flows?property=inheritedAttributes.properties.isDestinationFlow==true&limit=5"
+      ]
+    },
+    {
+      "query": "List all audiences in the sandbox that have been mapped to new destinations in the last 3 months.",
+      "route": "SQL_PLUS_API",
+      "domain": "segment",
+      "intent": "list",
+      "score": 0.5065,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [
+        "dim_segment",
+        "dim_target",
+        "hkg_br_segment_target"
+      ],
+      "api_endpoints": [
+        "GET /data/foundation/audit/events"
+      ],
+      "api_params": [
+        "limit",
+        "property"
+      ],
+      "gold_sql": "SELECT DISTINCT A.segmentid AS segment_id, A.name AS segment_name, D.targetId AS target_id, D.name AS target_name\nFROM dim_segment AS A\nJOIN hkg_br_segment_target AS AD ON A.segmentid = AD.segmentid\nJOIN dim_target AS D ON AD.targetId = D.targetId\nWHERE D.createdTime >= DATEADD(MONTH, -3, CURRENT_DATE)\nLIMIT 3",
+      "gold_api": [
+        "GET /data/foundation/audit/events?property=assetType==destination&limit=3"
+      ]
+    },
+    {
+      "query": "show me the field for Person: Birthday Today 001",
+      "route": "SQL_PLUS_API",
+      "domain": "dataset",
+      "intent": "field_lookup",
+      "score": 0.4373,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [
+        "dim_segment",
+        "hkg_br_segment_property"
+      ],
+      "api_endpoints": [
+        "GET /data/foundation/catalog/datasets"
+      ],
+      "api_params": [
+        "filter",
+        "limit"
+      ],
+      "gold_sql": "SELECT DISTINCT aa.property AS property_name, a.name AS segment_name\nFROM hkg_br_segment_property aa\nJOIN dim_segment a ON aa.segmentid = a.segmentid\nWHERE a.name = 'Person: Birthday Today 001'\nLIMIT 20",
+      "gold_api": [
+        "GET /data/foundation/catalog/datasets?limit=20&filter=name:SG AND name:non loyalty"
+      ]
+    }
+  ],
+  "tool_budget": {
+    "max_sql_calls": 1,
+    "max_api_calls": 1,
+    "expected_steps": [
+      "sql_query",
+      "api_call"
+    ]
+  },
+  "answer_constraints": [
+    "Use only verified SQL/API outputs as evidence.",
+    "Do not invent IDs, timestamps, counts, statuses, or names.",
+    "If SQL and API disagree, mention the discrepancy clearly.",
+    "For count questions, prefer explicit total/count fields when available.",
+    "If API returns an error or empty result, state that clearly."
+  ]
+}

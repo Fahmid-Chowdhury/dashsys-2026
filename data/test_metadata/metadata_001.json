@@ -1,0 +1,225 @@
+{
+  "query": "When was the journey 'Gold Tier Welcome Email' published?",
+  "normalized_query": "When was the journey 'Gold Tier Welcome Email' published?",
+  "query_analysis": {
+    "complexity": "simple",
+    "confidence": 1.0,
+    "reason": "The query asks for a single piece of information (publication date) related to one specific entity ('Gold Tier Welcome Email'). This can be retrieved with a single lookup.",
+    "subqueries": [
+      {
+        "query": "When was the journey 'Gold Tier Welcome Email' published?",
+        "purpose": "other"
+      }
+    ]
+  },
+  "intent": "time_lookup",
+  "entities": [
+    "Gold Tier Welcome Email"
+  ],
+  "filters": {
+    "status_or_state": "published",
+    "quoted_entities": [
+      "Gold Tier Welcome Email"
+    ]
+  },
+  "route": {
+    "selected": "SQL_ONLY",
+    "votes": {
+      "SQL_PLUS_API": 1.0
+    },
+    "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides. Forced to SQL_ONLY because query analysis indicates local KG evidence is sufficient."
+  },
+  "domain": {
+    "selected": "journey",
+    "votes": {
+      "journey": 1.0
+    },
+    "reason": "Selected from top retrieved examples and domain votes."
+  },
+  "allowed_tables": {
+    "dim_campaign": {
+      "kind": "dimension",
+      "domain": "journey",
+      "row_count": 2,
+      "id_columns": [
+        "CAMPAIGNID",
+        "IMSORGID",
+        "SANDBOXID"
+      ],
+      "columns": [
+        {
+          "name": "_ACP_SYSTEM_METADATA",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "STARTDATE",
+          "type": "\"NULL\""
+        },
+        {
+          "name": "LABELSCAMPAIGN",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "IMSORGID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "LASTDEPLOYEDTIME",
+          "type": "\"NULL\""
+        },
+        {
+          "name": "STATE",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "ISSCHEDULED",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "ISRECURRING",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "CAMPAIGNTYPE",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "STOPPEDTIME",
+          "type": "\"NULL\""
+        },
+        {
+          "name": "FINISHEDTIME",
+          "type": "\"NULL\""
+        },
+        {
+          "name": "SEMANTICLABELS",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "SANDBOXNAME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "NAME",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "SANDBOXID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "STATUS",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "INTEST",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "CAMPAIGNID",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "CAMPAIGNACTIVITYCOUNT",
+          "type": "BIGINT"
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR"
+        }
+      ]
+    }
+  },
+  "join_candidates": [],
+  "allowed_api_endpoints": [],
+  "similar_examples": [
+    {
+      "query": "When was the journey 'Birthday Message' published?",
+      "route": "SQL_PLUS_API",
+      "domain": "journey",
+      "intent": "time_lookup",
+      "score": 0.785,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [
+        "dim_campaign"
+      ],
+      "api_endpoints": [
+        "GET /ajo/journey"
+      ],
+      "api_params": [
+        "filter"
+      ],
+      "gold_sql": "SELECT name AS campaign_name,\n       lastdeployedtime AS published_time\nFROM dim_campaign\nWHERE name IN ('Birthday Message', 'Gold Tier Welcome Email')\nLIMIT 50",
+      "gold_api": [
+        "GET /ajo/journey?filter=name==Birthday Message"
+      ]
+    },
+    {
+      "query": "Give me inactive journeys",
+      "route": "SQL_PLUS_API",
+      "domain": "journey",
+      "intent": "status_lookup",
+      "score": 0.5361,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [
+        "dim_campaign"
+      ],
+      "api_endpoints": [
+        "GET /ajo/journey"
+      ],
+      "api_params": [
+        "filter"
+      ],
+      "gold_sql": "SELECT J.CAMPAIGNID AS campaign_id,\n       J.NAME AS campaign_name,\n       J.STATE AS campaign_state,\n       J.UPDATEDTIME AS updated_time\nFROM DIM_CAMPAIGN AS J\nWHERE LOWER(J.STATE) NOT IN ('deployed', 'redeployed')\nLIMIT 50",
+      "gold_api": [
+        "GET /ajo/journey?filter=status!=live"
+      ]
+    },
+    {
+      "query": "List all journeys",
+      "route": "SQL_PLUS_API",
+      "domain": "journey",
+      "intent": "list",
+      "score": 0.5221,
+      "retrieval_sources": [
+        "original_query"
+      ],
+      "matched_subqueries": [],
+      "sql_tables": [
+        "dim_campaign"
+      ],
+      "api_endpoints": [
+        "GET /ajo/journey"
+      ],
+      "api_params": [
+        "pageSize"
+      ],
+      "gold_sql": "SELECT CAMPAIGN.NAME AS CAMPAIGNNAME,\n       CAMPAIGN.CAMPAIGNID\nFROM DIM_CAMPAIGN AS CAMPAIGN\nLIMIT 10",
+      "gold_api": [
+        "GET /ajo/journey?pageSize=10"
+      ]
+    }
+  ],
+  "tool_budget": {
+    "max_sql_calls": 1,
+    "max_api_calls": 0,
+    "expected_steps": [
+      "sql_query"
+    ]
+  },
+  "answer_constraints": [
+    "Use only verified SQL/API outputs as evidence.",
+    "Do not invent IDs, timestamps, counts, statuses, or names.",
+    "If SQL and API disagree, mention the discrepancy clearly."
+  ]
+}

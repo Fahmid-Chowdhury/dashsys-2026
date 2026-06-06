@@ -1,0 +1,1998 @@
+{
+  "snapshot_dir": "DBSnapshot",
+  "table_count": 17,
+  "skipped_files": [
+    {
+      "file": "hkg_br_property_property.parquet",
+      "reason": "Invalid Input Error: Failed to read Parquet file 'DBSnapshot/hkg_br_property_property.parquet': Need at least one non-root column in the file"
+    }
+  ],
+  "tables": {
+    "br_campaign_segment": {
+      "table_name": "br_campaign_segment",
+      "kind": "bridge",
+      "domain": "journey",
+      "row_count": 3,
+      "columns": [
+        {
+          "name": "SEGMENTID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "8d1eda81-5df9-4d7a-ab48-56d49c4b1c8d",
+            "bd33fef0-c2d1-4e30-bb6a-a46e6b4579a8",
+            "2869d771-1546-4458-a2cd-fb7235a69c94"
+          ]
+        },
+        {
+          "name": "CAMPAIGNID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "9f4ebca4-2fdd-4873-95f5-8d66bab358c6"
+          ]
+        },
+        {
+          "name": "LABELSSEGMENT",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "LABELSCAMPAIGN",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        }
+      ],
+      "id_columns": [
+        "CAMPAIGNID",
+        "SEGMENTID"
+      ]
+    },
+    "dim_blueprint": {
+      "table_name": "dim_blueprint",
+      "kind": "dimension",
+      "domain": "schema",
+      "row_count": 74,
+      "columns": [
+        {
+          "name": "BLUEPRINTTYPE",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "object"
+          ]
+        },
+        {
+          "name": "EXTENDS",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[\"https://ns.adobe.com/xdm/data/time-series\", \"https://ns.adobe.com/xdm/context/identitymap\", \"https://ns.adobe.com/experience/customerJourneyManagement/surfaces\", \"https://ns.adobe.com/xdm/context/experienceevent\"]",
+            "[\"https://ns.adobe.com/xdm/data/time-series\", \"https://ns.adobe.com/xdm/context/identitymap\", \"https://ns.adobe.com/xdm/context/experienceevent\", \"https://ns.adobe.com/experience/campaign/orchestration/eventid\"]",
+            "[\"https://ns.adobe.com/xdm/data/time-series\", \"https://ns.adobe.com/experience/customerJourneyManagement/messageprofile\", \"https://ns.adobe.com/experience/customerJourneyManagement/messageexecution\", \"https://ns.adobe.com/xdm/context/identitymap\", \"https://ns.adobe.com/experience/customerJourneyManagement/secondaryRecipientDetail\", \"https://ns.adobe.com/experience/customerJourneyManagement/message-delivery-feedback\", \"https://ns.adobe.com/xdm/context/experienceevent\"]"
+          ]
+        },
+        {
+          "name": "UPDATEDCLIENTID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "acp_foundation_queryService"
+          ]
+        },
+        {
+          "name": "LABELSBLUEPRINT",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "2026-03-29T07:42:33.000+00:00",
+            "2026-03-29T07:42:32.000+00:00",
+            "2026-03-29T07:42:30.000+00:00"
+          ]
+        },
+        {
+          "name": "CLASS",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "https://ns.adobe.com/xdm/context/segmentdefinition",
+            "https://ns.adobe.com/experience/journeyOrchestration/stepEvents/journeyStepEvent",
+            "https://ns.adobe.com/experience/decisioning/offeritem"
+          ]
+        },
+        {
+          "name": "BLUEPRINTID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "f67782126866728013a531ae680c9e9bad9e22259d83fac9",
+            "e41c4edbceabe7d2567c92a8a302024af25faf748eadbe8a",
+            "3ce04a46aaffba7384ac234e3bb84b6d89bff08c58138e03"
+          ]
+        },
+        {
+          "name": "IMMUTABLETAGS",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[\"computedattribute\", \"union\"]",
+            "[\"union\"]",
+            "[]"
+          ]
+        },
+        {
+          "name": "TENANT",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "adobepeakprogram"
+          ]
+        },
+        {
+          "name": "ISPROFILEENABLED",
+          "type": "BOOLEAN",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            false,
+            true
+          ]
+        },
+        {
+          "name": "NAME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "AJO STO Summary Schema",
+            "AJO Consent Service Schema",
+            " XDM Schema for dataset qsaccel.profile_agg.adwh_lkup_process_delta_log. Random identifier: 5044463a-77e9-431a-b497-627cf5daeb1c"
+          ]
+        },
+        {
+          "name": "ISBEHAVIORTIMESERIESTYPE",
+          "type": "BOOLEAN",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            true,
+            false
+          ]
+        },
+        {
+          "name": "DESCRIPTION",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "This dataset represents an entire audience generated by the Lookalike Modeling scoring process.",
+            "Schema for meta data associated with the perforance measurement correlation id.",
+            "Out of the box Profile schema for Journey Orchestration"
+          ]
+        },
+        {
+          "name": "ETAG",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "78806569ea8777cbbab14101944b88c0c462cb80e0a8b4d30066bf3d614b84ca",
+            "725d0532611f2470d4ed178afe80becb915ad837fc0c1280ed2244cf2661e3a2",
+            "282cb2d7f47cd9779809fd31c5d75bdafb6762a926bd2f8fa0bc7a5fb9f784ce"
+          ]
+        },
+        {
+          "name": "REQUIREDFIELDS",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "ISBEHAVIORRECORDTYPE",
+          "type": "BOOLEAN",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            true,
+            false
+          ]
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "2026-03-29T07:42:33.000+00:00",
+            "2026-03-29T07:42:32.000+00:00",
+            "2026-03-29T07:42:30.000+00:00"
+          ]
+        },
+        {
+          "name": "UPDATEDBY",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "acp_foundation_queryService@AdobeID"
+          ]
+        },
+        {
+          "name": "CREATEDBY",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "acp_foundation_queryService@AdobeID"
+          ]
+        },
+        {
+          "name": "CREATEDCLIENTID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "acp_foundation_queryService"
+          ]
+        }
+      ],
+      "id_columns": [
+        "BLUEPRINTID",
+        "CREATEDCLIENTID",
+        "UPDATEDCLIENTID"
+      ]
+    },
+    "dim_campaign": {
+      "table_name": "dim_campaign",
+      "kind": "dimension",
+      "domain": "journey",
+      "row_count": 2,
+      "columns": [
+        {
+          "name": "_ACP_SYSTEM_METADATA",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "{\"acp_sourceBatchId\": null, \"commitBatchId\": null, \"trackingId\": \"3f277603-ac4d-4022-a993-8cbd3afc0d62\", \"rowId\": \"3f277603-ac4d-4022-a993-8cbd3afc0d62-0\", \"rowVersion\": 1, \"primaryIdentity\": null, \"ingestTime\": 1776236297744, \"isDeleted\": false}",
+            "{\"acp_sourceBatchId\": null, \"commitBatchId\": null, \"trackingId\": \"9f4ebca4-2fdd-4873-95f5-8d66bab358c6\", \"rowId\": \"9f4ebca4-2fdd-4873-95f5-8d66bab358c6-0\", \"rowVersion\": 1, \"primaryIdentity\": null, \"ingestTime\": 1776236297744, \"isDeleted\": false}"
+          ]
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "2026-03-31T15:35:12.042188843Z",
+            "2026-03-31T06:07:32.838462639Z"
+          ]
+        },
+        {
+          "name": "STARTDATE",
+          "type": "\"NULL\"",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": []
+        },
+        {
+          "name": "LABELSCAMPAIGN",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "IMSORGID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "87891E4066602D250A495F91@AdobeOrg"
+          ]
+        },
+        {
+          "name": "LASTDEPLOYEDTIME",
+          "type": "\"NULL\"",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": []
+        },
+        {
+          "name": "STATE",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "updated",
+            "created"
+          ]
+        },
+        {
+          "name": "ISSCHEDULED",
+          "type": "BOOLEAN",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            false,
+            true
+          ]
+        },
+        {
+          "name": "ISRECURRING",
+          "type": "BOOLEAN",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            false
+          ]
+        },
+        {
+          "name": "CAMPAIGNTYPE",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "READ_SEGMENT",
+            "TRIGGERED"
+          ]
+        },
+        {
+          "name": "STOPPEDTIME",
+          "type": "\"NULL\"",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": []
+        },
+        {
+          "name": "FINISHEDTIME",
+          "type": "\"NULL\"",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": []
+        },
+        {
+          "name": "SEMANTICLABELS",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "SANDBOXNAME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "external-benchmarking"
+          ]
+        },
+        {
+          "name": "NAME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "Birthday Message",
+            "Gold Tier Welcome Email"
+          ]
+        },
+        {
+          "name": "SANDBOXID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "a30a9c4e-327a-4d60-8a9c-4e327a6d60dd"
+          ]
+        },
+        {
+          "name": "STATUS",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "created",
+            "updated"
+          ]
+        },
+        {
+          "name": "INTEST",
+          "type": "BOOLEAN",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            false
+          ]
+        },
+        {
+          "name": "CAMPAIGNID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "3f277603-ac4d-4022-a993-8cbd3afc0d62",
+            "9f4ebca4-2fdd-4873-95f5-8d66bab358c6"
+          ]
+        },
+        {
+          "name": "CAMPAIGNACTIVITYCOUNT",
+          "type": "BIGINT",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            2,
+            8
+          ]
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "2026-03-31T15:35:12.042188843Z",
+            "2026-03-31T06:07:32.838462639Z"
+          ]
+        }
+      ],
+      "id_columns": [
+        "CAMPAIGNID",
+        "IMSORGID",
+        "SANDBOXID"
+      ]
+    },
+    "dim_collection": {
+      "table_name": "dim_collection",
+      "kind": "dimension",
+      "domain": "dataset",
+      "row_count": 37,
+      "columns": [
+        {
+          "name": "ISIDENTITYENABLED",
+          "type": "BOOLEAN",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            false,
+            true
+          ]
+        },
+        {
+          "name": "ROWCOUNT",
+          "type": "BIGINT",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            0,
+            16,
+            351
+          ]
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "2026-04-14T20:38:53.000+00:00",
+            "2026-03-30T15:11:16.000+00:00",
+            "2026-03-29T07:42:47.000+00:00"
+          ]
+        },
+        {
+          "name": "STORAGESIZEINBYTES",
+          "type": "BIGINT",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            0,
+            10161091,
+            94714
+          ]
+        },
+        {
+          "name": "ISPROFILEENABLED",
+          "type": "BOOLEAN",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            false
+          ]
+        },
+        {
+          "name": "NAME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "weRetail: CRM",
+            "Journey Step Events",
+            "Decision Object Repository - Personalized Offers"
+          ]
+        },
+        {
+          "name": "COLLECTIONID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "69c9e8db2efff9048a54dd92",
+            "69c8d7e7c4958bffeece5512",
+            "87891E4066602D250A495F91_a30a9c4e-327a-4d60-8a9c-4e327a6d60dd_ups_1774769859000_segment_definition_ingestion"
+          ]
+        },
+        {
+          "name": "ISSYSTEM",
+          "type": "BOOLEAN",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            true,
+            false
+          ]
+        },
+        {
+          "name": "STORAGESIZEINMEGABYTES",
+          "type": "DOUBLE",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            0.15075016021728516,
+            0.024840354919433594,
+            0.1604900360107422
+          ]
+        },
+        {
+          "name": "ISTTLSET",
+          "type": "BOOLEAN",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            false,
+            true
+          ]
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "2026-03-30T03:08:17.000+00:00",
+            "2026-03-29T07:50:28.000+00:00",
+            "2026-03-29T07:42:43.000+00:00"
+          ]
+        },
+        {
+          "name": "UPDATEDBY",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "aep-lakehouse-ttl@AdobeID",
+            "cjm_provisioning_services@AdobeID",
+            "acp_core_ups_ingest_controller@AdobeService"
+          ]
+        },
+        {
+          "name": "TTLVALUE",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "P30D",
+            "",
+            "P13M"
+          ]
+        },
+        {
+          "name": "CREATEDBY",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "aep_insights_enablement@AdobeID",
+            "acp-decisioning-ors@AdobeID",
+            "acp_core_ups_hades@AdobeID"
+          ]
+        },
+        {
+          "name": "CREATEDCLIENTID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "bso_core_services",
+            "aep_reporting_destinations",
+            "6c4ddfb5459c477ba86b3790550fa592"
+          ]
+        },
+        {
+          "name": "LABELSCOLLECTION",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        }
+      ],
+      "id_columns": [
+        "COLLECTIONID",
+        "CREATEDCLIENTID"
+      ]
+    },
+    "dim_connector": {
+      "table_name": "dim_connector",
+      "kind": "dimension",
+      "domain": "connector",
+      "row_count": 16,
+      "columns": [
+        {
+          "name": "DATAFLOWNAME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "CRM Streaming flow",
+            "weRetail Events - Mar 2026",
+            "Dataflow for Actions Computed Data via AWS S3 - 2026"
+          ]
+        },
+        {
+          "name": "INTERVAL",
+          "type": "BIGINT",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            15,
+            0
+          ]
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "2026-04-14T23:27:21.000+00:00",
+            "2026-04-14T23:12:54.000+00:00",
+            "2026-04-14T23:27:33.000+00:00"
+          ]
+        },
+        {
+          "name": "CONNECTIONSPECNAME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "amazon-s3",
+            "Unknown",
+            "Streaming Connection"
+          ]
+        },
+        {
+          "name": "STATE",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "enabled"
+          ]
+        },
+        {
+          "name": "SOURCEID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "96dbf952-6ecd-4728-ab92-188a2e77abb0",
+            "5a776f0c-3e68-45de-a14e-1713df4ab980",
+            "ad0f30ac-1d5b-45bb-88db-7ce357b59dc0"
+          ]
+        },
+        {
+          "name": "LABELSSOURCE",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "NAME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "Unknown",
+            "Streaming Connection",
+            "amazon-s3"
+          ]
+        },
+        {
+          "name": "DATAFLOWID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "f971dedc-8837-4234-94c9-8074f372636e",
+            "5a161a32-2af2-455a-80b8-64e3d4316dc7",
+            "70bad5c9-87b3-4c85-a0eb-8f2e830eb439"
+          ]
+        },
+        {
+          "name": "DESCRIPTION",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "Custom Events Streaming flow description",
+            "",
+            "CRM Streaming flow description"
+          ]
+        },
+        {
+          "name": "CATEGORY",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "cloudStorage",
+            "streaming",
+            "batch"
+          ]
+        },
+        {
+          "name": "FREQUENCY",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "minute",
+            ""
+          ]
+        },
+        {
+          "name": "SOURCEACCOUNTNAME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "Unknown",
+            "XSC Team AWS S3 Storage v2",
+            "CRM - Base connection to HTTP API"
+          ]
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "2026-03-29T07:57:07.000+00:00",
+            "2026-03-30T18:35:14.000+00:00",
+            "2026-03-29T07:56:03.000+00:00"
+          ]
+        }
+      ],
+      "id_columns": [
+        "DATAFLOWID",
+        "SOURCEID"
+      ]
+    },
+    "dim_property": {
+      "table_name": "dim_property",
+      "kind": "dimension",
+      "domain": "property",
+      "row_count": 27,
+      "columns": [
+        {
+          "name": "PROPERTY",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "homeAddress.postalCode",
+            "identityMap.ECID",
+            "_adobepeakprogram.retailStoreOffers.eligibleOffers"
+          ]
+        },
+        {
+          "name": "ALTDISPLAYDESC",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            ""
+          ]
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "2026-03-29T00:37:00.000+00:00"
+          ]
+        },
+        {
+          "name": "PARENTARTIFACTID",
+          "type": "\"NULL\"",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": []
+        },
+        {
+          "name": "DESCRIPTION",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "The name of the government-administered territory. Other than `xdm:countryCode`, this is a free-form field that can have the country name in any language.",
+            "The technical address, for example, 'name@domain.com' as commonly defined in RFC2822 and subsequent standards.",
+            ""
+          ]
+        },
+        {
+          "name": "ALTDISPLAYTITLE",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            ""
+          ]
+        },
+        {
+          "name": "AUGMENTEDDESC",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            ""
+          ]
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "2026-03-29T00:37:00.000+00:00"
+          ]
+        },
+        {
+          "name": "PROPERTYID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af:homeAddress.postalCode",
+            "69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af:identityMap.Email",
+            "d4327cfe6472e58dd10c532840541e66b09a0c1a636e1e0f:xEvent"
+          ]
+        },
+        {
+          "name": "LABELSPROPERTY",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "AUGMENTEDALIASES",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            ""
+          ]
+        },
+        {
+          "name": "TYPE",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "string",
+            "number",
+            "boolean"
+          ]
+        }
+      ],
+      "id_columns": [
+        "PARENTARTIFACTID",
+        "PROPERTYID"
+      ]
+    },
+    "dim_segment": {
+      "table_name": "dim_segment",
+      "kind": "dimension",
+      "domain": "segment",
+      "row_count": 13,
+      "columns": [
+        {
+          "name": "DEFINITION",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "{\"nodeType\":\"fnApply\",\"fnName\":\"and\",\"params\":[{\"nodeType\":\"fnApply\",\"fnName\":\"=\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"cobrandedCreditCardHolder\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"retailStoreUserProfile\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"_adobepeakprogram\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}}},{\"literalType\":\"Boolean\",\"nodeType\":\"literal\",\"value\":false}]},{\"nodeType\":\"fnApply\",\"fnName\":\">=\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"propensityForCobrandedCreditCardSignUp\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"retailStorePropensities\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"_adobepeakprogram\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}}},{\"literalType\":\"Double\",\"nodeType\":\"literal\",\"value\":65}]}]}",
+            "{\"nodeType\":\"fnApply\",\"fnName\":\"in\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"gender\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"person\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}},{\"literalType\":\"List\",\"nodeType\":\"literal\",\"value\":[\"male\"]}]}",
+            "{\"nodeType\":\"fnApply\",\"fnName\":\"or\",\"params\":[{\"nodeType\":\"fnApply\",\"fnName\":\"equals\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"state\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"homeAddress\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}},{\"literalType\":\"String\",\"nodeType\":\"literal\",\"value\":\"CT\"},{\"nodeType\":\"literal\",\"literalType\":\"Boolean\",\"value\":false}]},{\"nodeType\":\"fnApply\",\"fnName\":\"equals\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"state\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"homeAddress\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}},{\"literalType\":\"String\",\"nodeType\":\"literal\",\"value\":\"DC\"},{\"nodeType\":\"literal\",\"literalType\":\"Boolean\",\"value\":false}]},{\"nodeType\":\"fnApply\",\"fnName\":\"equals\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"state\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"homeAddress\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}},{\"literalType\":\"String\",\"nodeType\":\"literal\",\"value\":\"NY\"},{\"nodeType\":\"literal\",\"literalType\":\"Boolean\",\"value\":false}]},{\"nodeType\":\"fnApply\",\"fnName\":\"equals\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"state\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"homeAddress\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}},{\"literalType\":\"String\",\"nodeType\":\"literal\",\"value\":\"PA\"},{\"nodeType\":\"literal\",\"literalType\":\"Boolean\",\"value\":false}]},{\"nodeType\":\"fnApply\",\"fnName\":\"equals\",\"params\":[{\"nodeType\":\"fieldLookup\",\"fieldName\":\"state\",\"object\":{\"nodeType\":\"fieldLookup\",\"fieldName\":\"homeAddress\",\"object\":{\"nodeType\":\"parameterReference\",\"position\":1}}},{\"literalType\":\"String\",\"nodeType\":\"literal\",\"value\":\"VA\"},{\"nodeType\":\"literal\",\"literalType\":\"Boolean\",\"value\":false}]}]}"
+          ]
+        },
+        {
+          "name": "SEGMENTID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "f2a200b1-5d0a-4c9b-9202-4d34326cd9df",
+            "78acb3db-39ef-4be9-aa24-b62d82293136",
+            "7e7b3d71-ae29-4c97-8b24-99905ea6bf68"
+          ]
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "2026-03-29T07:52:17.000+00:00",
+            "2026-03-29T07:51:32.000+00:00",
+            "2026-03-29T07:52:08.000+00:00"
+          ]
+        },
+        {
+          "name": "ISEDGE",
+          "type": "BOOLEAN",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            false
+          ]
+        },
+        {
+          "name": "TTLINDAYS",
+          "type": "BIGINT",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            30
+          ]
+        },
+        {
+          "name": "SEGMENTBLUEPRINTCLASS",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "_xdm.context.profile"
+          ]
+        },
+        {
+          "name": "DEFINITIONHASH",
+          "type": "BIGINT",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            264965327,
+            3951898269,
+            4044831472
+          ]
+        },
+        {
+          "name": "ISPEOPLESEGMENT",
+          "type": "BOOLEAN",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            true
+          ]
+        },
+        {
+          "name": "ISACCOUNTSEGMENT",
+          "type": "BOOLEAN",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            false
+          ]
+        },
+        {
+          "name": "NAME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "Person: Birthday within 7 days",
+            "Campaign: 25% Off Purchase Offer Reminder",
+            "SMS Opt-In"
+          ]
+        },
+        {
+          "name": "EVALUATIONCOMPLETEDTIME",
+          "type": "\"NULL\"",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": []
+        },
+        {
+          "name": "TOTALMEMBERS",
+          "type": "BIGINT",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            0,
+            5873,
+            5896
+          ]
+        },
+        {
+          "name": "LABELSSEGMENT",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "ISSTREAMING",
+          "type": "BOOLEAN",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            false
+          ]
+        },
+        {
+          "name": "LIFECYCLESTATUS",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "published"
+          ]
+        },
+        {
+          "name": "ISBATCH",
+          "type": "BOOLEAN",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            true
+          ]
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "2026-03-29T07:52:25.000+00:00",
+            "2026-03-29T07:51:53.000+00:00",
+            "2026-03-29T07:51:23.000+00:00"
+          ]
+        },
+        {
+          "name": "TYPE",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "people"
+          ]
+        },
+        {
+          "name": "MERGEPOLICYID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "22a941a9-e598-45f8-846b-c9a8889f5035"
+          ]
+        }
+      ],
+      "id_columns": [
+        "MERGEPOLICYID",
+        "SEGMENTID"
+      ]
+    },
+    "dim_target": {
+      "table_name": "dim_target",
+      "kind": "dimension",
+      "domain": "destination",
+      "row_count": 1,
+      "columns": [
+        {
+          "name": "DATAFLOWNAME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "Activate segments to S3 Feed"
+          ]
+        },
+        {
+          "name": "INTERVAL",
+          "type": "BIGINT",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            0
+          ]
+        },
+        {
+          "name": "UPDATEDTIME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "2026-04-14T16:15:03.000+00:00"
+          ]
+        },
+        {
+          "name": "DESCRIPTION",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "This operation creates a dataflow S3 Feed"
+          ]
+        },
+        {
+          "name": "FREQUENCY",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "DAILY"
+          ]
+        },
+        {
+          "name": "LABELSTARGET",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "STATE",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "enabled"
+          ]
+        },
+        {
+          "name": "TARGETID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "139bece0-5266-46bd-8ed3-fc1dd5eb5dd4"
+          ]
+        },
+        {
+          "name": "CREATEDTIME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "2026-03-29T07:54:13.000+00:00"
+          ]
+        },
+        {
+          "name": "CONNECTIONSPECID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "4890fc95-5a1f-4983-94bb-e060c08e3f81"
+          ]
+        },
+        {
+          "name": "NAME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "amazon-s3"
+          ]
+        }
+      ],
+      "id_columns": [
+        "CONNECTIONSPECID",
+        "TARGETID"
+      ]
+    },
+    "hkg_br_base_segment_used_by_dependent_segment": {
+      "table_name": "hkg_br_base_segment_used_by_dependent_segment",
+      "kind": "bridge",
+      "domain": "segment",
+      "row_count": 0,
+      "columns": [
+        {
+          "name": "SEGMENTID",
+          "type": "\"NULL\"",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": []
+        },
+        {
+          "name": "LABELSDEPENDENTSEGMENT",
+          "type": "\"NULL\"",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": []
+        },
+        {
+          "name": "LABELSSEGMENT",
+          "type": "\"NULL\"",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": []
+        },
+        {
+          "name": "DEPENDENTSEGMENTID",
+          "type": "\"NULL\"",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": []
+        }
+      ],
+      "id_columns": [
+        "DEPENDENTSEGMENTID",
+        "SEGMENTID"
+      ]
+    },
+    "hkg_br_blueprint_collection": {
+      "table_name": "hkg_br_blueprint_collection",
+      "kind": "bridge",
+      "domain": "dataset",
+      "row_count": 27,
+      "columns": [
+        {
+          "name": "COLLECTIONID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "69c8d7e6b9966265fc8e4ea8",
+            "69c8d7e30ea0107706fbc09f",
+            "69c8d6b5494ee9dc83b67875"
+          ]
+        },
+        {
+          "name": "LABELSBLUEPRINT",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "BLUEPRINTID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "a9872c304e1fd04ff6dd0c81168e91b2e8f733f641008d4b",
+            "7d8fadd777ec103ec2f3f9ca7dd59e495ee45691d893028",
+            "76c67653e0972afbe5736e7955f3ab52eef458496ba3376d"
+          ]
+        },
+        {
+          "name": "LABELSCOLLECTION",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        }
+      ],
+      "id_columns": [
+        "BLUEPRINTID",
+        "COLLECTIONID"
+      ]
+    },
+    "hkg_br_blueprint_property": {
+      "table_name": "hkg_br_blueprint_property",
+      "kind": "bridge",
+      "domain": "schema",
+      "row_count": 27,
+      "columns": [
+        {
+          "name": "LABELSBLUEPRINT",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "PROPERTY",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "_adobepeakprogram.retailStorePropensities.propensityForCobrandedCreditCardSignUp",
+            "_adobepeakprogram.retailStoreUserProfile.cobrandedCreditCardHolder",
+            "_adobepeakprogram.retailStoreEnrolledPromotions.promotionType"
+          ]
+        },
+        {
+          "name": "BLUEPRINTID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "d4327cfe6472e58dd10c532840541e66b09a0c1a636e1e0f",
+            "69ab9581a7558e3516b0080f232b56ebeb2993b2a7b363af"
+          ]
+        },
+        {
+          "name": "LABELSPROPERTY",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        }
+      ],
+      "id_columns": [
+        "BLUEPRINTID"
+      ]
+    },
+    "hkg_br_collection_property": {
+      "table_name": "hkg_br_collection_property",
+      "kind": "bridge",
+      "domain": "dataset",
+      "row_count": 27,
+      "columns": [
+        {
+          "name": "COLLECTIONID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "69c8d9c5c58ebc1ebef442e3",
+            "69c8d9e7cba5deaa7974b00b"
+          ]
+        },
+        {
+          "name": "PROPERTY",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "person.birthDate",
+            "_adobepeakprogram.retailStoreActionDetailsEE.actionName",
+            "identityMap.Email"
+          ]
+        },
+        {
+          "name": "LABELSPROPERTY",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "LABELSCOLLECTION",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        }
+      ],
+      "id_columns": [
+        "COLLECTIONID"
+      ]
+    },
+    "hkg_br_collection_segment": {
+      "table_name": "hkg_br_collection_segment",
+      "kind": "bridge",
+      "domain": "segment",
+      "row_count": 13,
+      "columns": [
+        {
+          "name": "SEGMENTID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "78acb3db-39ef-4be9-aa24-b62d82293136",
+            "c6691f4b-ba38-4308-8364-593d23a6a09f",
+            "f6b93428-c021-4058-a1a2-77c277aab564"
+          ]
+        },
+        {
+          "name": "COLLECTIONID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "69c8d9c5c58ebc1ebef442e3"
+          ]
+        },
+        {
+          "name": "LABELSSEGMENT",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "LABELSCOLLECTION",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        }
+      ],
+      "id_columns": [
+        "COLLECTIONID",
+        "SEGMENTID"
+      ]
+    },
+    "hkg_br_segment_property": {
+      "table_name": "hkg_br_segment_property",
+      "kind": "bridge",
+      "domain": "segment",
+      "row_count": 19,
+      "columns": [
+        {
+          "name": "SEGMENTID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "f2a200b1-5d0a-4c9b-9202-4d34326cd9df",
+            "78acb3db-39ef-4be9-aa24-b62d82293136",
+            "7e7b3d71-ae29-4c97-8b24-99905ea6bf68"
+          ]
+        },
+        {
+          "name": "PROPERTY",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "_adobepeakprogram.retailStoreOffers.eligibleOffers",
+            "xEvent",
+            "consents.marketing.sms.val"
+          ]
+        },
+        {
+          "name": "LABELSSEGMENT",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "LABELSPROPERTY",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        }
+      ],
+      "id_columns": [
+        "SEGMENTID"
+      ]
+    },
+    "hkg_br_segment_target": {
+      "table_name": "hkg_br_segment_target",
+      "kind": "bridge",
+      "domain": "segment",
+      "row_count": 1,
+      "columns": [
+        {
+          "name": "SEGMENTID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "f6b93428-c021-4058-a1a2-77c277aab564"
+          ]
+        },
+        {
+          "name": "LABELSSEGMENT",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "LABELSTARGET",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "TARGETID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "139bece0-5266-46bd-8ed3-fc1dd5eb5dd4"
+          ]
+        }
+      ],
+      "id_columns": [
+        "SEGMENTID",
+        "TARGETID"
+      ]
+    },
+    "hkg_br_source_collection": {
+      "table_name": "hkg_br_source_collection",
+      "kind": "bridge",
+      "domain": "dataset",
+      "row_count": 15,
+      "columns": [
+        {
+          "name": "DATAFLOWNAME",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "weRetail Events - Apr 2026",
+            "CRM Streaming flow",
+            "Dataflow for Actions Computed Data via AWS S3 - 2026"
+          ]
+        },
+        {
+          "name": "COLLECTIONID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "69c8d9e7cba5deaa7974b00b",
+            "69c8d9c5c58ebc1ebef442e3"
+          ]
+        },
+        {
+          "name": "DATAFLOWID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "5a161a32-2af2-455a-80b8-64e3d4316dc7",
+            "70bad5c9-87b3-4c85-a0eb-8f2e830eb439",
+            "96dbf952-6ecd-4728-ab92-188a2e77abb0"
+          ]
+        },
+        {
+          "name": "SOURCEID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "5a161a32-2af2-455a-80b8-64e3d4316dc7",
+            "70bad5c9-87b3-4c85-a0eb-8f2e830eb439",
+            "f971dedc-8837-4234-94c9-8074f372636e"
+          ]
+        },
+        {
+          "name": "LABELSSOURCE",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "LABELSCOLLECTION",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        }
+      ],
+      "id_columns": [
+        "COLLECTIONID",
+        "DATAFLOWID",
+        "SOURCEID"
+      ]
+    },
+    "hkg_br_target_property": {
+      "table_name": "hkg_br_target_property",
+      "kind": "bridge",
+      "domain": "destination",
+      "row_count": 2,
+      "columns": [
+        {
+          "name": "PROPERTY",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "personalEmail.address",
+            "person.name.firstName"
+          ]
+        },
+        {
+          "name": "LABELSTARGET",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        {
+          "name": "TARGETID",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "139bece0-5266-46bd-8ed3-fc1dd5eb5dd4"
+          ]
+        },
+        {
+          "name": "LABELSPROPERTY",
+          "type": "VARCHAR",
+          "not_null": false,
+          "primary_key": false,
+          "sample_values": [
+            "[]"
+          ]
+        }
+      ],
+      "id_columns": [
+        "TARGETID"
+      ]
+    }
+  },
+  "join_candidates": [
+    {
+      "left_table": "br_campaign_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "dim_segment",
+      "right_column": "SEGMENTID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "br_campaign_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_base_segment_used_by_dependent_segment",
+      "right_column": "SEGMENTID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "br_campaign_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_collection_segment",
+      "right_column": "SEGMENTID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "br_campaign_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_segment_property",
+      "right_column": "SEGMENTID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "br_campaign_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_segment_target",
+      "right_column": "SEGMENTID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "dim_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_base_segment_used_by_dependent_segment",
+      "right_column": "SEGMENTID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "dim_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_collection_segment",
+      "right_column": "SEGMENTID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "dim_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_segment_property",
+      "right_column": "SEGMENTID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "dim_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_segment_target",
+      "right_column": "SEGMENTID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "hkg_br_base_segment_used_by_dependent_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_collection_segment",
+      "right_column": "SEGMENTID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "hkg_br_base_segment_used_by_dependent_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_segment_property",
+      "right_column": "SEGMENTID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "hkg_br_base_segment_used_by_dependent_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_segment_target",
+      "right_column": "SEGMENTID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "hkg_br_collection_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_segment_property",
+      "right_column": "SEGMENTID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "hkg_br_collection_segment",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_segment_target",
+      "right_column": "SEGMENTID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "hkg_br_segment_property",
+      "left_column": "SEGMENTID",
+      "right_table": "hkg_br_segment_target",
+      "right_column": "SEGMENTID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "br_campaign_segment",
+      "left_column": "CAMPAIGNID",
+      "right_table": "dim_campaign",
+      "right_column": "CAMPAIGNID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "dim_blueprint",
+      "left_column": "BLUEPRINTID",
+      "right_table": "hkg_br_blueprint_collection",
+      "right_column": "BLUEPRINTID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "dim_blueprint",
+      "left_column": "BLUEPRINTID",
+      "right_table": "hkg_br_blueprint_property",
+      "right_column": "BLUEPRINTID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "hkg_br_blueprint_collection",
+      "left_column": "BLUEPRINTID",
+      "right_table": "hkg_br_blueprint_property",
+      "right_column": "BLUEPRINTID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "dim_blueprint",
+      "left_column": "CREATEDCLIENTID",
+      "right_table": "dim_collection",
+      "right_column": "CREATEDCLIENTID",
+      "confidence": "medium",
+      "reason": "same ID-like column name"
+    },
+    {
+      "left_table": "dim_collection",
+      "left_column": "COLLECTIONID",
+      "right_table": "hkg_br_blueprint_collection",
+      "right_column": "COLLECTIONID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "dim_collection",
+      "left_column": "COLLECTIONID",
+      "right_table": "hkg_br_collection_property",
+      "right_column": "COLLECTIONID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "dim_collection",
+      "left_column": "COLLECTIONID",
+      "right_table": "hkg_br_collection_segment",
+      "right_column": "COLLECTIONID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "dim_collection",
+      "left_column": "COLLECTIONID",
+      "right_table": "hkg_br_source_collection",
+      "right_column": "COLLECTIONID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "hkg_br_blueprint_collection",
+      "left_column": "COLLECTIONID",
+      "right_table": "hkg_br_collection_property",
+      "right_column": "COLLECTIONID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "hkg_br_blueprint_collection",
+      "left_column": "COLLECTIONID",
+      "right_table": "hkg_br_collection_segment",
+      "right_column": "COLLECTIONID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "hkg_br_blueprint_collection",
+      "left_column": "COLLECTIONID",
+      "right_table": "hkg_br_source_collection",
+      "right_column": "COLLECTIONID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "hkg_br_collection_property",
+      "left_column": "COLLECTIONID",
+      "right_table": "hkg_br_collection_segment",
+      "right_column": "COLLECTIONID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "hkg_br_collection_property",
+      "left_column": "COLLECTIONID",
+      "right_table": "hkg_br_source_collection",
+      "right_column": "COLLECTIONID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "hkg_br_collection_segment",
+      "left_column": "COLLECTIONID",
+      "right_table": "hkg_br_source_collection",
+      "right_column": "COLLECTIONID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "dim_connector",
+      "left_column": "SOURCEID",
+      "right_table": "hkg_br_source_collection",
+      "right_column": "SOURCEID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "dim_connector",
+      "left_column": "DATAFLOWID",
+      "right_table": "hkg_br_source_collection",
+      "right_column": "DATAFLOWID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "dim_target",
+      "left_column": "TARGETID",
+      "right_table": "hkg_br_segment_target",
+      "right_column": "TARGETID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "dim_target",
+      "left_column": "TARGETID",
+      "right_table": "hkg_br_target_property",
+      "right_column": "TARGETID",
+      "confidence": "high",
+      "reason": "dimension-to-bridge join using same ID column"
+    },
+    {
+      "left_table": "hkg_br_segment_target",
+      "left_column": "TARGETID",
+      "right_table": "hkg_br_target_property",
+      "right_column": "TARGETID",
+      "confidence": "medium",
+      "reason": "bridge-to-bridge join using same ID column"
+    }
+  ]
+}

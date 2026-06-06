@@ -1,0 +1,88 @@
+[
+  {
+    "id": 1,
+    "query": "When was the journey 'Gold Tier Welcome Email' published?",
+    "status": "success",
+    "route": "SQL_ONLY",
+    "domain": "journey",
+    "intent": "time_lookup",
+    "complexity": "simple",
+    "subquery_count": 1,
+    "sql_calls": 1,
+    "api_calls": 0,
+    "trace_steps": 1,
+    "debug_event_counts": {
+      "llm_output": 2,
+      "tool_executed": 1
+    },
+    "answer_preview": "The last deployed time for the journey 'Gold Tier Welcome Email' is null.\n\nSQL returned 1 row(s):\n\n- LASTDEPLOYEDTIME: None",
+    "elapsed_seconds": 76.568,
+    "metadata_path": "data\\test_metadata\\metadata_001.json",
+    "run_path": "data\\test_runs\\run_001.json"
+  },
+  {
+    "id": 2,
+    "query": "List all segment audiences connected to the destination named 'Lives on East Coast', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
+    "status": "success",
+    "route": "SQL_PLUS_API_CHAIN",
+    "domain": "segment",
+    "intent": "count",
+    "complexity": "simple",
+    "subquery_count": 1,
+    "sql_calls": 1,
+    "api_calls": 0,
+    "trace_steps": 1,
+    "debug_event_counts": {
+      "llm_output": 2,
+      "tool_executed": 1
+    },
+    "answer_preview": "The SQL snapshot returned no rows.",
+    "elapsed_seconds": 34.363,
+    "metadata_path": "data\\test_metadata\\metadata_002.json",
+    "run_path": "data\\test_runs\\run_002.json"
+  },
+  {
+    "id": 3,
+    "query": "List all segment audiences connected to the destination named 'Lives on West Coast', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
+    "status": "success",
+    "route": "SQL_PLUS_API_CHAIN",
+    "domain": "segment",
+    "intent": "count",
+    "complexity": "simple",
+    "subquery_count": 1,
+    "sql_calls": 1,
+    "api_calls": 0,
+    "trace_steps": 1,
+    "debug_event_counts": {
+      "llm_output": 3,
+      "verifier_rejected": 1,
+      "tool_executed": 1
+    },
+    "answer_preview": "The SQL snapshot returned no rows.",
+    "elapsed_seconds": 36.205,
+    "metadata_path": "data\\test_metadata\\metadata_003.json",
+    "run_path": "data\\test_runs\\run_003.json"
+  },
+  {
+    "id": 4,
+    "query": "List all segment audiences connected to the destination named 'Person: Birthday today', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results.",
+    "status": "success",
+    "route": "SQL_PLUS_API",
+    "domain": "segment",
+    "intent": "count",
+    "complexity": "simple",
+    "subquery_count": 1,
+    "sql_calls": 1,
+    "api_calls": 0,
+    "trace_steps": 1,
+    "debug_event_counts": {
+      "llm_output": 3,
+      "verifier_rejected": 1,
+      "tool_executed": 1
+    },
+    "answer_preview": "The SQL snapshot returned no rows.",
+    "elapsed_seconds": 60.414,
+    "metadata_path": "data\\test_metadata\\metadata_004.json",
+    "run_path": "data\\test_runs\\run_004.json"
+  }
+]

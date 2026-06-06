@@ -1,0 +1,119 @@
+{
+  "query": "Which segment evaluation jobs are queued?",
+  "normalized_query": "Which segment evaluation jobs are queued?",
+  "intent": "status_lookup",
+  "entities": [],
+  "filters": {
+    "status_or_state": "queued"
+  },
+  "route": {
+    "selected": "API_ONLY",
+    "votes": {
+      "API_ONLY": 0.8505,
+      "SQL_PLUS_API": 0.1495
+    },
+    "reason": "Selected from hybrid retrieval route votes with conservative domain keyword overrides."
+  },
+  "domain": {
+    "selected": "segment_job",
+    "votes": {
+      "segment_job": 0.6941,
+      "segment_definition": 0.1563,
+      "journey": 0.1495
+    },
+    "reason": "Selected from top retrieved examples and domain votes."
+  },
+  "allowed_tables": {},
+  "join_candidates": [],
+  "allowed_api_endpoints": [
+    {
+      "endpoint": "GET /data/core/ups/segment/jobs",
+      "method": "GET",
+      "path": "/data/core/ups/segment/jobs",
+      "domain": "segment_job",
+      "param_names": [
+        "limit"
+      ],
+      "observed_params": {
+        "limit": [
+          "3",
+          "20",
+          "10"
+        ]
+      },
+      "routes_seen": [
+        "API_ONLY"
+      ],
+      "source": "gold_examples"
+    }
+  ],
+  "similar_examples": [
+    {
+      "query": "Show all segment jobs with status 'QUEUED'.",
+      "route": "API_ONLY",
+      "domain": "segment_job",
+      "intent": "status_lookup",
+      "score": 0.7268,
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /data/core/ups/segment/jobs"
+      ],
+      "api_params": [
+        "limit"
+      ],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /data/core/ups/segment/jobs?limit=10"
+      ]
+    },
+    {
+      "query": "List all segment evaluation jobs.",
+      "route": "API_ONLY",
+      "domain": "segment_job",
+      "intent": "list",
+      "score": 0.6615,
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /data/core/ups/segment/jobs"
+      ],
+      "api_params": [
+        "limit"
+      ],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /data/core/ups/segment/jobs?limit=3"
+      ]
+    },
+    {
+      "query": "How many segment jobs are currently processing?",
+      "route": "API_ONLY",
+      "domain": "segment_job",
+      "intent": "count",
+      "score": 0.6231,
+      "sql_tables": [],
+      "api_endpoints": [
+        "GET /data/core/ups/segment/jobs"
+      ],
+      "api_params": [
+        "limit"
+      ],
+      "gold_sql": "",
+      "gold_api": [
+        "GET /data/core/ups/segment/jobs?limit=20"
+      ]
+    }
+  ],
+  "tool_budget": {
+    "max_sql_calls": 0,
+    "max_api_calls": 1,
+    "expected_steps": [
+      "api_call"
+    ]
+  },
+  "answer_constraints": [
+    "Use only verified SQL/API outputs as evidence.",
+    "Do not invent IDs, timestamps, counts, statuses, or names.",
+    "If SQL and API disagree, mention the discrepancy clearly.",
+    "If API returns an error or empty result, state that clearly."
+  ]
+}

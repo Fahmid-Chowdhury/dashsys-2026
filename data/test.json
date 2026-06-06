@@ -1,0 +1,182 @@
+[
+  {
+    "query": "When was the journey 'Gold Tier Welcome Email' published?"
+  },
+  {
+    "query": "List all segment audiences connected to the destination named 'Lives on East Coast', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results."
+  },
+  {
+    "query": "List all segment audiences connected to the destination named 'Lives on West Coast', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results."
+  },
+  {
+    "query": "List all segment audiences connected to the destination named 'Person: Birthday today', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results."
+  },
+  {
+    "query": "List all segment audiences connected to the destination named 'Person: Birthday within 7 days', showing audienceId, name, totalProfiles, createdTime, updatedTime, and used in other audience count for each audience. Remove any row limit from the results."
+  },
+  {
+    "query": "List all datasets that use the schema 'Journey Inbound'."
+  },
+  {
+    "query": "List all datasets that use the schema 'weRetail: CRM'."
+  },
+  {
+    "query": "List all datasets that use the schema 'weRetail: Customer Actions'."
+  },
+  {
+    "query": "List all datasets that use the schema 'hkg_adls_segment_profile_history'."
+  },
+  {
+    "query": "show me the field for Person: Birthday today"
+  },
+  {
+    "query": "show me the field for Campaign: 25% Off Purchase Offer Reminder"
+  },
+  {
+    "query": "show me the field for SMS Opt-In"
+  },
+  {
+    "query": "show me the field for Email Opt-In"
+  },
+  {
+    "query": "Provide more details for the schema 'Journey schema with Journey Fields for Journey Orchestration'"
+  },
+  {
+    "query": "Provide more details for the schema 'weRetail: CRM'"
+  },
+  {
+    "query": "Show me all entities created by fiber"
+  },
+  {
+    "query": "Show me all entities created by bandwidth"
+  },
+  {
+    "query": "Show me pairs or clusters of audiences that have identical rule definitions."
+  },
+  {
+    "query": "How many duplicate audiences do I have?"
+  },
+  {
+    "query": "Do I have audiences with the same logic but different names?"
+  },
+  {
+    "query": "Is the audience 'Person: Birthday in next 30 Days' referenced in more than one journey simultaneously?"
+  },
+  {
+    "query": "Is the audience 'Gender: Male' referenced in more than one journey simultaneously?"
+  },
+  {
+    "query": "Is the audience 'Email Opt-In' referenced in more than one journey simultaneously?"
+  },
+  {
+    "query": "Is the audience 'Person: Birthday within 7 days' referenced in more than one journey simultaneously?"
+  },
+  {
+    "query": "Is the audience 'Lives on East Coast' referenced in more than one journey simultaneously?"
+  },
+  {
+    "query": "List all audiences used by live journeys with 'streaming' in the journey name."
+  },
+  {
+    "query": "List all audiences used by live journeys with 'loyalty' in the journey name."
+  },
+  {
+    "query": "List all audiences used by live journeys with 'paid' in the journey name."
+  },
+  {
+    "query": "Show me audiences that are not mapped to any destination and not used in any journey."
+  },
+  {
+    "query": "Which audiences are used in more than one journey?"
+  },
+  {
+    "query": "For the audience 'Person: Birthday today', what is its profile count, is it batch or streaming, and how many audiences share the same rule definition?"
+  },
+  {
+    "query": "For the audience 'Person: Birthday Today 001', what is its profile count, is it batch or streaming, and how many audiences share the same rule definition?"
+  },
+  {
+    "query": "For the audience 'Gender: Female', what is its profile count, is it batch or streaming, and how many audiences share the same rule definition?"
+  },
+  {
+    "query": "Which properties from the schema 'Initial Profile schema for Journeys' are used by audiences in live journeys?"
+  },
+  {
+    "query": "Which properties from the schema 'weRetail: CRM' are used by audiences in live journeys?"
+  },
+  {
+    "query": "Which properties from the schema 'weRetail: Customer Actions' are used by audiences in live journeys?"
+  },
+  {
+    "query": "Which properties from the schema 'Journey schema with Journey Fields for Journey Orchestration' are used by audiences in live journeys?"
+  },
+  {
+    "query": "List properties not referenced in any audience, journey, or destination."
+  },
+  {
+    "query": "Show me the details of the tag named 'AI-Generated'."
+  },
+  {
+    "query": "Show me the details of the tag named 'test'."
+  },
+  {
+    "query": "Show the default merge policy for schema class '_xdm.context.experienceevent'."
+  },
+  {
+    "query": "Show the default merge policy for schema class '_xdm.context.segmentdefinition'."
+  },
+  {
+    "query": "Show all segment jobs with status 'PROCESSING'."
+  },
+  {
+    "query": "Show all segment jobs with status 'CANCELLED'."
+  },
+  {
+    "query": "Show all segment jobs with status 'FAILED'."
+  },
+  {
+    "query": "Show the details of batch 69de8a0e0cc6102b5d11f01e."
+  },
+  {
+    "query": "Show the details of batch 69de41036e08302b5cc7fd0c."
+  },
+  {
+    "query": "Show the details of batch 01KP6MNQ3X71RP6MNH6FHWGHVE."
+  },
+  {
+    "query": "Which files are available for download in batch 01KP6MNQ3X71RP6MNH6FHWGHVE?"
+  },
+  {
+    "query": "Which files are available for download in batch 69de41036e08302b5cc7fd0c?"
+  },
+  {
+    "query": "Show failed files for batch 69de41036e08302b5cc7fd0c."
+  },
+  {
+    "query": "Show failed files for batch 69de8a0e0cc6102b5d11f01e."
+  },
+  {
+    "query": "Show failed files for batch 01KP69BPA5ZKFB7HCDYPE4GN6F."
+  },
+  {
+    "query": "What are the daily 'timeseries.ingestion.dataset.size' values between '2026-03-01' and '2026-12-31'?"
+  },
+  {
+    "query": "What are the daily 'timeseries.ingestion.dataset.size' values between '2026-02-01' and '2026-04-14'?"
+  },
+  {
+    "query": "What are the daily 'timeseries.ingestion.dataset.batchsuccess.count' values between '2026-02-01' and '2026-03-31'?"
+  },
+  {
+    "query": "What are the daily 'timeseries.ingestion.dataset.recordsuccess.count' values between '2026-03-01' and '2026-03-31'?"
+  },
+  {
+    "query": "What are the daily 'timeseries.ingestion.dataset.recordsuccess.count' values between '2026-03-15' and '2026-04-14'?"
+  },
+  {
+    "query": "Show ingestion record counts and batch success counts for the last 7 days."
+  },
+  {
+    "query": "Show ingestion record counts and batch success counts for the last 60 days."
+  }
+]
