@@ -737,8 +737,8 @@ def parse_args() -> BatchRunConfig:
     parser.add_argument("--max-repair-attempts", type=int, default=3)
     parser.add_argument("--answer-llm-provider", default=ANSWER_LLM_PROVIDER)
     parser.add_argument("--answer-model", default=ANSWER_MODEL)
-    parser.add_argument("--metrics-path", default="data/metrics/test_runs_metrics.json")
-    parser.add_argument("--metrics-csv-path", default="data/metrics/test_runs_metrics.csv")
+    parser.add_argument("--metrics-path", default="data/test_runs_metrics.json")
+    parser.add_argument("--metrics-csv-path", default="data/test_runs_metrics.csv")
 
     parser.add_argument(
         "--real-api",
