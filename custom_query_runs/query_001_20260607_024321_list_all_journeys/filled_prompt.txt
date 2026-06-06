@@ -1,0 +1,208 @@
+
+
+====================================================================================================[SYSTEM]
+You are a metadata-grounded SQL/API planning agent.
+
+Your job is to answer user queries by choosing the next valid action.
+
+You have access to two tools:
+1. sql_query: runs read-only SQL over the local knowledge graph snapshot.
+2. api_call: calls an Adobe API endpoint.
+
+You must follow the provided metadata strictly.
+
+Important behavior:
+- Use only allowed tables.
+- Use only allowed columns.
+- Use only allowed API endpoints.
+- Use only allowed query parameters.
+- Use similar examples only as guidance, not as facts.
+- Use verified tool results as the only evidence for the final answer.
+- If SQL and API results disagree, mention the discrepancy in the final answer.
+- Prefer the minimum number of tool calls.
+- Never repeat the exact same SQL query or API call.
+- If a tool result is empty, either change strategy, use another allowed tool, or return final_answer if enough evidence exists.
+- Tool budget is dynamic: every executed SQL/API call consumes one budget slot.
+- For list questions, return concise items with relevant IDs.
+- For count questions, return the count clearly.
+- For status/time questions, return the exact status/time if available.
+- User-requested output names may not match actual SQL column names.
+- Always use the exact column names shown in ALLOWED SQL TABLES.
+- You may alias real columns to user-friendly names, but never select non-existent columns.
+- Example: if the user asks for audienceId but the table has segmentid, select segmentid AS audienceId.
+- Never call an API endpoint containing {placeholder} or <placeholder> unless you can fully replace it with a verified value from SQL/API results.
+- If required evidence is already collected and no safe API call exists, return final_answer from verified SQL results.
+
+[USER]
+USER QUERY
+List all journeys
+
+SELECTED METADATA
+Route: SQL_PLUS_API
+Domain: journey
+Intent: list
+Tool budget: {"max_sql_calls": 1, "max_api_calls": 1, "expected_steps": ["sql_query", "api_call"]}
+
+QUERY ANALYSIS
+Complexity: simple
+Confidence: 1.0
+Reason: The query is a straightforward request to list all entities of a specific type (journeys) and does not require decomposition.
+Subqueries:
+1. [other] List all journeys
+
+ROUTE-AWARE TOOL POLICY
+Selected route: SQL_PLUS_API
+Route confidence: selected_score=1.0000, second_score=0.0000, margin=1.0000, confident=True
+Executed tool actions: {}
+Completed successful tool actions: {}
+Remaining tool budget: {'max_sql_calls': 1, 'used_sql_calls': 0, 'remaining_sql_calls': 1, 'max_api_calls': 1, 'used_api_calls': 0, 'remaining_api_calls': 1}
+Allowed tool actions: ['sql_query', 'api_call']
+Allowed next actions now: ['sql_query', 'api_call']
+Required evidence before final_answer: {'sql_query': 1, 'api_call': 1}
+Missing required evidence: ['sql_query', 'api_call']
+You may choose any missing required tool action next. Do not return final_answer yet.
+
+ALLOWED SQL TABLES
+- Table: dim_campaign
+  Domain: journey
+  Kind: dimension
+  ID columns: ['CAMPAIGNID', 'IMSORGID', 'SANDBOXID']
+  Columns:
+    - _ACP_SYSTEM_METADATA (VARCHAR)
+    - UPDATEDTIME (VARCHAR)
+    - STARTDATE ("NULL")
+    - LABELSCAMPAIGN (VARCHAR)
+    - IMSORGID (VARCHAR)
+    - LASTDEPLOYEDTIME ("NULL")
+    - STATE (VARCHAR)
+    - ISSCHEDULED (BOOLEAN)
+    - ISRECURRING (BOOLEAN)
+    - CAMPAIGNTYPE (VARCHAR)
+    - STOPPEDTIME ("NULL")
+    - FINISHEDTIME ("NULL")
+    - SEMANTICLABELS (VARCHAR)
+    - SANDBOXNAME (VARCHAR)
+    - NAME (VARCHAR)
+    - SANDBOXID (VARCHAR)
+    - STATUS (VARCHAR)
+    - INTEST (BOOLEAN)
+    - CAMPAIGNID (VARCHAR)
+    - CAMPAIGNACTIVITYCOUNT (BIGINT)
+    - CREATEDTIME (VARCHAR)
+
+ALLOWED JOIN CANDIDATES
+No joins are required or allowed unless clearly necessary.
+
+ALLOWED API ENDPOINTS
+- Endpoint: GET /ajo/journey
+  Method: GET
+  Path: /ajo/journey
+  Domain: journey
+  Allowed query params: ['filter', 'pageSize']
+  Observed param examples:
+    - filter: ['name==Birthday Message', 'status!=live']
+    - pageSize: ['10']
+  OpenAPI query params: ['fields', 'filter', 'page', 'pageSize', 'sort']
+  Required params: ['x-api-key', 'x-gw-ims-org-id', 'x-sandbox-name']
+
+SIMILAR EXAMPLES
+Example 1:
+- Query: List all journeys
+- Route: SQL_PLUS_API
+- Domain: journey
+- Intent: list
+- SQL tables: ['dim_campaign']
+- API endpoints: ['GET /ajo/journey']
+- Retrieval sources: ['original_query']
+- Example SQL:
+SELECT CAMPAIGN.NAME AS CAMPAIGNNAME,
+       CAMPAIGN.CAMPAIGNID
+FROM DIM_CAMPAIGN AS CAMPAIGN
+LIMIT 10
+- Example API: ['GET /ajo/journey?pageSize=10']
+
+Example 2:
+- Query: Give me inactive journeys
+- Route: SQL_PLUS_API
+- Domain: journey
+- Intent: status_lookup
+- SQL tables: ['dim_campaign']
+- API endpoints: ['GET /ajo/journey']
+- Retrieval sources: ['original_query']
+- Example SQL:
+SELECT J.CAMPAIGNID AS campaign_id,
+       J.NAME AS campaign_name,
+       J.STATE AS campaign_state,
+       J.UPDATEDTIME AS updated_time
+FROM DIM_CAMPAIGN AS J
+WHERE LOWER(J.STATE) NOT IN ('deployed', 'redeployed')
+LIMIT 50
+- Example API: ['GET /ajo/journey?filter=status!=live']
+
+Example 3:
+- Query: When was the journey 'Birthday Message' published?
+- Route: SQL_PLUS_API
+- Domain: journey
+- Intent: time_lookup
+- SQL tables: ['dim_campaign']
+- API endpoints: ['GET /ajo/journey']
+- Retrieval sources: ['original_query']
+- Example SQL:
+SELECT name AS campaign_name,
+       lastdeployedtime AS published_time
+FROM dim_campaign
+WHERE name IN ('Birthday Message', 'Gold Tier Welcome Email')
+LIMIT 50
+- Example API: ['GET /ajo/journey?filter=name==Birthday Message']
+
+CURRENT VERIFIED TOOL RESULTS
+No tool results yet.
+
+ANSWER CONSTRAINTS
+- Use only verified SQL/API outputs as evidence.
+- Do not invent IDs, timestamps, counts, statuses, or names.
+- If SQL and API disagree, mention the discrepancy clearly.
+- For list questions, return concise rows/items with relevant identifiers.
+- If API returns an error or empty result, state that clearly.
+
+OUTPUT FORMAT
+You must return ONLY one valid JSON object.
+
+Allowed next actions right now:
+['sql_query', 'api_call']
+
+If the allowed next action is sql_query, return:
+{
+  "action": "sql_query",
+  "sql": "SELECT ..."
+}
+
+If the allowed next action is api_call, return:
+{
+  "action": "api_call",
+  "method": "GET",
+  "url": "/path",
+  "params": {}
+}
+
+If the allowed next action is final_answer, return:
+{
+  "action": "final_answer",
+  "answer": "..."
+}
+
+Rules:
+- Return only JSON.
+- Do not use markdown.
+- Do not explain outside JSON.
+- Do not call tools not allowed by the route.
+- Do not exceed the tool budget.
+- Do not repeat any SQL/API call already shown in CURRENT VERIFIED TOOL RESULTS.
+- If a previous SQL returned empty rows, do not retry the exact same SQL.
+- If a previous API call returned empty/error, do not retry the exact same API call.
+- A second SQL/API call is allowed only if it is meaningfully different.
+- Do not invent table names.
+- Do not invent column names.
+- Do not invent API endpoints.
+- Do not leave placeholders like {schema_id} or <destination_id>.
+- If required evidence is missing, call one of the allowed tool actions first.

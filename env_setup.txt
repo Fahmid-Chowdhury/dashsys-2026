@@ -1,0 +1,26 @@
+ADOBE_CLIENT_ID=
+ADOBE_CLIENT_SECRET=
+ADOBE_ORG_ID=
+ADOBE_SANDBOX_NAME=external-benchmarking
+ADOBE_SCOPES=openid,AdobeID,read_organizations,additional_info.projectedProductContext,session
+ADOBE_IMS_TOKEN_URL=https://ims-na1.adobelogin.com/ims/token/v3
+ADOBE_API_BASE_URL=https://platform.adobe.io
+
+ROUTE_CONFIDENCE_MIN_SCORE=0.50
+
+# LLM_PROVIDER=ollama
+# MODEL=gemma4:12b
+
+# ANSWER_LLM_PROVIDER=ollama
+# ANSWER_MODEL=gemma4:latest
+
+EMBEDDING_MODEL_NAME=BAAI/bge-small-en-v1.5
+
+# When using Gemini:
+LLM_PROVIDER=gemini
+MODEL=gemini-3.5-flash
+
+ANSWER_LLM_PROVIDER=gemini
+ANSWER_MODEL=gemini-3.5-flash
+
+GEMINI_API_KEY=

@@ -1,0 +1,6 @@
+Based on the database records, the following campaigns (journeys) were found:
+
+1. **Birthday Message** (ID: 9f4ebca4-2fdd-4873-95f5-8d66bab358c6, State: updated)
+2. **Gold Tier Welcome Email** (ID: 3f277603-ac4d-4022-a993-8cbd3afc0d62, State: created)
+
+Note: The API call to retrieve journeys (/ajo/journey) returned no results.

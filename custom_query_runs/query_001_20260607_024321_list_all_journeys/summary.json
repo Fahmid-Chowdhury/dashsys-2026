@@ -1,0 +1,23 @@
+{
+  "query": "List all journeys",
+  "status": "success",
+  "route": "SQL_PLUS_API",
+  "domain": "journey",
+  "intent": "list",
+  "sql_calls": 1,
+  "api_calls": 1,
+  "trace_steps": 2,
+  "elapsed_seconds": 44.309,
+  "answer": "Based on the database records, the following campaigns (journeys) were found:\n\n1. **Birthday Message** (ID: 9f4ebca4-2fdd-4873-95f5-8d66bab358c6, State: updated)\n2. **Gold Tier Welcome Email** (ID: 3f277603-ac4d-4022-a993-8cbd3afc0d62, State: created)\n\nNote: The API call to retrieve journeys (/ajo/journey) returned no results.",
+  "folder": "custom_query_runs\\query_001_20260607_024321_list_all_journeys",
+  "files": {
+    "metadata": "custom_query_runs\\query_001_20260607_024321_list_all_journeys\\metadata.json",
+    "filled_prompt_messages": "custom_query_runs\\query_001_20260607_024321_list_all_journeys\\filled_prompt_messages.json",
+    "filled_prompt_text": "custom_query_runs\\query_001_20260607_024321_list_all_journeys\\filled_prompt.txt",
+    "agent_output_trajectory": "custom_query_runs\\query_001_20260607_024321_list_all_journeys\\agent_output_trajectory.json",
+    "trace_only": "custom_query_runs\\query_001_20260607_024321_list_all_journeys\\trace_only.json",
+    "answer": "custom_query_runs\\query_001_20260607_024321_list_all_journeys\\answer.txt",
+    "summary": "custom_query_runs\\query_001_20260607_024321_list_all_journeys\\summary.json",
+    "step_prompts": "custom_query_runs\\query_001_20260607_024321_list_all_journeys\\step_prompts"
+  }
+}
